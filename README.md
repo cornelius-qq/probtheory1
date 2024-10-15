@@ -6,7 +6,7 @@ Fehler, Verbesserungsvorschläge und Ergänzungen bitte ich an
 ```corneliush99@univie.ac.at``` zu senden oder gleich hier zu committen.
 
 ### Es fehlt noch:
-- nichts
+- 
 
 ### Änderungen
 Die Kapitelgliederung entspricht jener der VO, die Abschnittsgliederung habe ich leicht verändert. 

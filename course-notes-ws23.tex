@@ -1723,7 +1723,13 @@ $$\Pp\left(|X-\E X|\geq c\right)\leq c^{-2}\cdot\Var(X)$$
 \section*{H\"older-Ljapunov-Minkowski}
 \addcontentsline{toc}{section}{H\"older-Ljapunov-Minkowski}
 
-\paragraph{6.11. Lemma (Young-Ungleichung):} folgt % Habe ich leider nicht in meinen Notizen!
+\paragraph{6.11. Lemma (Young-Ungleichung):} Es sei $p\in(1,\infty)$ und $\frac{1}{p}+\frac{1}{q}=1$. Für $a,b\geq0$ gilt
+$$ab\leq\dfrac{a^p}{p}+\dfrac{b^q}{q}$$
+mit Gleichheit genau dann, wenn $a^p=b^q$.
+
+\paragraph{Beweis:}Falls $a=0$ oder $b=0$ gilt die Ungleichung trivial. Es gelte also $a,b>0$. Setze $t:=p^{-1}$ und damit $1-t=q^{-1}$. Da $x\mapsto \log x$ konkav ist gilt
+$$\log\left(ta^p+(1-t)b^q\right)\geq t\log\left(a^p\right)+(1-t)\log\left(b^q\right)=\log(ab)$$
+und die Ungleichung folgt mit Anwendung von $\exp$ auf beiden Seiten. \qed
 
 \paragraph{6.12. Satz (H\"older-Ungleichung):} Sei nun $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $f,g\in\mathcal{L}(\mu)$. Sei $p\in(1,\infty)$ und $q$ der konjugierte (duale) Index zu $p$, i.e. $\dfrac{1}{p}+\dfrac{1}{q}=1$. Dann gilt 
 $$\int |fg|\ d\mu\leq\left(\int |f|^p\ d\mu\right)^{1/p}\cdot\left(\int |g|^q\ d\mu\right)^{1/q}$$
@@ -1869,11 +1875,11 @@ wobei die letze Gleichung aus der (bedingten) Konvergenz folgt (Cauchy-Folge). \
 
 \paragraph{7.9. Lemma (II. Borel\textendash Cantelli Lemma)}Betrachte einen Wahrscheinlichkeitsraum $\pspace$ und $A_n\in\A,n\geq1$ unabh\"angig, sodass $\displaystyle\sum_{n\geq1}\Pp(A_n)=\infty$. Dann ist $\displaystyle\Pp\left(\limsup_{n\to\infty}A_n\right)=1$. 
 
-\paragraph{Beweis:}Beachte die Ungleichung (Beweis z.B. mit Mittelwertsatz oder 1. und 2. Ableitung)
+\paragraph{Beweis:}Betrachte die Ungleichung (Beweis z.B. mit Mittelwertsatz oder 1. und 2. Ableitung)
 $$1-x\leq e^{-x}\text{ f\"ur alle }x\geq0$$
 Laut Annahme gilt f\"ur alle $N\geq1:\displaystyle\sum_{n\geq N}\Pp(A_n)=\infty$ (einfache \"Uberlegung). Zeige nun $\displaystyle\Pp\left(\liminf_{n\to\infty}A_n^c\right)=\nobreak0$.
 \begin{align*}
-    \Pp\left(\liminf_{n\to\infty}A_n^c\right)&=\lim_{n\to\infty}\Pp\left(\bigcap_{m\geq n}A_m^c\right)\lim_{n\to\infty}\prod_{m\geq n}\Pp(A_m^c)\\
+    \Pp\left(\liminf_{n\to\infty}A_n^c\right)&=\lim_{n\to\infty}\Pp\left(\bigcap_{m\geq n}A_m^c\right)=\lim_{n\to\infty}\prod_{m\geq n}\Pp(A_m^c)\\
     &=\lim_{n\to\infty}\prod_{m\geq n}(1-\Pp(A_m))\leq\lim_{n\to\infty}\prod_{m\geq n}e^{-\Pp(A_m)}\\
     &=\lim_{n\to\infty}\exp\left(-\sum_{m\geq n}\Pp(A_m)\right)=\exp\left(-\lim_{n\to\infty}\sum_{m\geq n}\Pp(A_m)\right)=0
 \end{align*}

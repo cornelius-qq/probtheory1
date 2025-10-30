@@ -1,0 +1,531 @@
+ \chapter*{5. Lebesgue-Integral}
+ \addcontentsline{toc}{chapter}{5. Lebesgue-Integral}
+ 
+ Sei im folgenden Kapitel immer $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ messbar.
+ 
+  \section*{Konstruktion des Integrals}
+  \addcontentsline{toc}{section}{Konstruktion des Integrals}
+ 
+\paragraph{5.0. Definition (Informelle Definition des Integrals):}
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur $f=\sum_{i=1}^n \alpha_i\ind{A_i}$ einfach setzt man 
+    $$\displaystyle\int f\ d\mu:=\sum_{i=1}^n\alpha_i\mu(A_i)$$
+    \item F\"ur $f\geq0$ messbar w\"ahlt man einfache Funktionen mit $0\leq f_n\uparrow f$ und setzt
+    $$\displaystyle\int f\ d\mu:=\lim_{n\to\infty}\int f_n\ d\mu$$
+    \item F\"ur $f$ messbar definiert man $f^+:=f\cdot\ind{\{f\geq0\}}$ und $f^-:=f\cdot\ind{\{f< 0\}}$ und setzt
+    $$\displaystyle\int f\ d\mu:=\int f^+\ d\mu-\int f^-\ d\mu$$
+\end{enumerate}
+
+\paragraph{5.1. Lemma:}F\"ur eine einfache Funktion $f=\sum_{i=1}^n\alpha_i\ind{A_i}$ ist $\int f\ d\mu$ unabh\"angig von der Darstellung von $f$.
+
+% Achtung: Beweis hat einige Fehler!
+
+\paragraph{Beweis:}Sei $m:=|f(\Omega)|$, mit $f(\Omega)=\{\gamma_1,\hdots,\gamma_m\}$ und sei $G_\ell:=\{\omega\in\Omega:f(\omega)=\gamma_\ell\}$ f\"ur $\ell=1,\hdots,m$. Dann sind $G_\ell,\gamma_\ell$ unabh\"angig von der Darstellung von $f$ f\"ur $\ell=1,\hdots,m$. Zeige nun $\sum_{i=1}^n \alpha_i\mu(A_i)=\sum_{\ell=1}^m\gamma_\ell\mu(G_\ell)$. \newline
+F\"ur $j=(j_1,\dots,j_n)\in\{0,1\}^n$, sei 
+$$B_j:=\left(\bigcap_{i=1}^nA_{j_i}\right)\cap\left(\bigcap_{i=1}^nA_{j_i}^c\right)=\left(\bigcap_{i:j_i=1}A_i\right)\cap\left(\bigcap_{i:j_i=0}A_i^c\right)$$
+und $\beta_j:=\sum_{i=1}^n\alpha_i$. Dann sind die $B_j$ disjunkt und $A_i=\bigcup_{j:j_i=1}B_j$. Au\ss{}erdem gilt $\bigcup_{j\in\{0,1\}^n}B_j=\Omega$ und 
+\begin{align*}
+    A_i\cap B_j=
+    \begin{cases}
+        \emptyset&\text{ falls }j_i=0\\
+        B_j&\text{ falls }j_i=1
+    \end{cases}
+\end{align*}
+Es folgt 
+$$\int f\ d\mu=\sum_{i=1}^n\alpha_i\mu(A_i)=\sum_{i=1}^n\sum_{\substack{j\in\{0,1\}^n\\ j_i=1}}\mu(B_j)=\sum_{j\in\{0,1\}^n}\mu(B_j)\sum_{\substack{i\in\{1,\hdots,n\}\\ j_i=1}}\alpha_i=\sum_{j\in\{0,1\}^n}\beta_j\mu(B_j)$$
+\begin{itemize}
+    \item Falls $B_j=\emptyset$, dann wird $\beta_j$ "weggeworfen", i.e. setze $\beta_j:=0$.
+    \item Falls $\beta_j=\beta_{j'}$, dann werden $B_j$ und $B_{j'}$ vereinigt.
+\end{itemize}
+Schlie\ss{}lich erh\"alt man Werte $\{\beta_{j^{(1)}},\hdots,\beta_{j^{(m)}}\}=\{\gamma_1,\hdots,\gamma_m\}$ und f\"ur $\gamma_\ell=\beta_{j^{(k)}}$ ist 
+$$G_\ell=\{f=\gamma_\ell\}=\{f=\beta_{j^{(k)}}\}$$
+ Es folgt
+ $$\int f\ d\mu=\sum_{i=1}^n\alpha_i\mu(A_i)=\sum_{k=1}^m\beta_{j^{(k)}}\mu(B_k)=\sum_{\ell=1}^m\gamma_\ell\mu(G_\ell)$$
+ \qed
+ 
+ \paragraph{5.2. Definition:}Sei $f=\sum_{i=1}^n\alpha_i\ind{A_i}$ mit $\alpha_i\geq0$ und $A_i\in\A$ f\"ur $i=1,\hdots,n$ einfach. Das Lebesgue-Integral von $f$ bez\"uglich $\mu$ ist definiert als
+ $$\int f\ d\mu:=\sum_{i=1}^n\alpha_i\mu(A_i)\in[0,\infty]$$
+ Durch Lemma 5.1 ist der Ausdruck wohldefiniert.
+ 
+ \paragraph{5.3. Lemma:}Seien $f,g$ beide nicht-negative, einfache Funktionen sodas $\forall\omega\in\Omega:f(\omega)\leq g(\omega)$. Dann gilt (Monotonie des Integrals f\"ur einfache Funktionen)
+ $$\int f\ d\mu\leq\int g\ d\mu$$
+ 
+ \paragraph{Beweis:}Sei $f=\sum_{i=1}^n\alpha_i\ind{A_i}$ und $g=\sum_{j=1}^m\beta_j\ind{B_j}$ in kanonischer Darstellung ($A_i$ disjunkt f\"ur $i=1,\hdots,n$ und $B_j$ disjunkt f\"ur $j=1,\hdots,m$) und sei o.B.d.A. $\Omega=\bigcup_{i=1}^nA_i=\bigcup_{j=1}^mB_j$. Dann gilt 
+ \begin{align*}
+     f&=\sum_{i=1}^n\sum_{j=1}^m\alpha_i\ind{A_i\cap B_j}\\
+     g&=\sum_{i=1}^n\sum_{j=1}^m\beta_j\ind{A_i\cap B_j}
+ \end{align*}
+ Laut Annahme gilt f\"ur $\omega\in A_i\cap B_j\neq\emptyset$ daher $\alpha_i\leq\beta_j$ und damit
+ $$\int f\ d\mu=\sum_{i=1}^n\sum_{j=1}^m\alpha_i\mu(A_i\cap B_j)\leq\sum_{i=1}^n\sum_{j=1}^m\beta_j\mu(A_i\cap B_j)=\int g\ d\mu$$
+ \qed
+ 
+ \paragraph{5.4. Lemma:}Seien $f_n,n\geq1$ und $g$ nicht negative, einfache Funktionen sodass
+ $$0\leq f_1\leq\hdots\leq\lim_{n\to\infty}f_n\text{ und }g\leq\lim_{n\to\infty}f_n$$
+ Dann gilt $\lim_{n\to\infty}\int f_n\ d\mu\in\overline\R$ und $\int g \ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$.
+ 
+ \paragraph{Beweis:}Aus Lemma 5.3 folgt 
+ $$0\leq\int f_1\ d\mu\leq\int f_2\ d\mu\leq\hdots$$
+ Damit ist $\int f_n\ d\mu,n\geq1$ eine monoton nicht-fallende Folge in $\overline\R$ und damit $\lim_{n\to\infty}\int f_n\ d\mu\in\overline\R$. Es verbleibt zu zeigen, dass $\int g\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$. Sei $\alpha>1$ und definiere $A_n:=\{g\leq\alpha \cdot f_n\},n\geq1$. Dann gilt
+ $$A_1\subseteq A_2\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n=\Omega$$
+ da $f_1\leq f_2\leq\hdots$. Die letze Gleichheit folgt aus folgendem Argument: \newline\newline
+ Angenommen $\exists\omega\in\Omega\setminus\left(\bigcup_{n\geq1}A_n\right)=\bigcap_{n\geq1}A_n^c$. Dann gilt $\exists\omega\in\Omega,\forall n\geq1:g(\omega)\geq\alpha \cdot f_n(\omega)$ und damit f\"ur dieses $\omega\in\Omega$, dass $g(\omega)>\displaystyle\lim_{n\to\infty}f_n(\omega)$, ein Widerspruch zur Annahme.\newline\newline
+ Nun ist $g\cdot\ind{A_n}$ f\"ur $n\geq1$ einfach und messbar und $g\cdot\ind{A_n}\leq\alpha\cdot f_n$. Mit Lemma 5.3 folgt f\"ur $\alpha\searrow1$ f\"ur alle $n\geq1$
+ $$\int g\cdot\ind{A_n}\ d\mu\leq\int f_n\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$$
+ Sei $g=\sum_{i=1}^m\gamma_i\ind{G_i}$ und damit $g\cdot\ind{A_n}=\sum_{i=1}^m\gamma_i\ind{G_i\cap A_n}$. Weiters gilt f\"ur $i=1,\hdots,m$
+ $$G_i\cap A_1\subseteq G_i\cap A_2\subseteq\hdots\subseteq\bigcup_{n\geq1}(G_i\cap A_n)=G_i$$
+ und mit der Stetigkeit von unten (Satz 1.9) folgt $\displaystyle\lim_{n\to\infty}\mu(G_i\cap A_n)=\mu(G_i)$ und damit
+ \begin{align*}
+     \lim_{n\to\infty}\int g\cdot\ind{A_n}\ d\mu&=\lim_{n\to\infty}\sum_{i=1}^m\gamma_i\cdot\mu(G_i\cap A_n)\\&=\sum_{i=1}^m\gamma_i\cdot\left(\lim_{n\to\infty}\mu(G_i\cap A_n)\right)\\&=\sum_{i=1}^m\gamma_i\cdot\mu(G_i)=\int g\ d\mu
+ \end{align*}
+ Ebenfalls ist $\displaystyle\int g\cdot\ind{A_n}\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$ f\"ur alle $n\geq1$ und damit
+ $$\int g\ d\mu=\lim_{n\to\infty}\int g\cdot\ind{A_n}\ d\mu\leq\lim_{n\to\infty}\lim_{n\to\infty}\int f_n\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu$$
+ \qed
+ 
+ \paragraph{5.5. Korollar:}Betrachte eine nicht-negative, messbare Funktion $f$, sowie einfache Funktionen $f_n,n\geq1$ und $g_m,m\geq1$, sodass $0\leq f_n\uparrow f\text{ und }0\leq g_m\uparrow f$. Dann gilt 
+ $$\displaystyle\lim_{n\to\infty}\int f_n\ d\mu=\lim_{m\to\infty}\int g_m\ d\mu$$
+ Insbesondere ist damit die Wahl der approxmierenden Funktionen in der Definition des Lebesgue-Integrals sp\"ater egal.
+ 
+ \paragraph{Beweis:}Es gilt $\forall m\geq1:g_m\leq\displaystyle\lim_{n\to\infty}f_n$ und mit Lemma 5.4 $\forall m\geq1:\int g_m\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$. Es folgt 
+ $$\lim_{m\to\infty}\int g_m\ d\mu\leq\lim_{m\to\infty}\lim_{n\to\infty}\int f_n\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu$$
+ Ebenfalls gilt $\forall n\geq1:f_n\leq\lim_{m\to\infty}g_m$ und mit Lemma 5.4 $\forall n\geq1:\int f_n\ d\mu\leq\lim_{m\to\infty}\int g_m\ d\mu$. Wie oben folgt
+ $$\lim_{n\to\infty}\int f_n\ d\mu\leq\lim_{m\to\infty}\int g_m\ d\mu$$
+ \qed
+ 
+ \paragraph{5.6. Definition:}Sei $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ nicht-negativ und messbar und $f_n,n\geq1$ eine belibige Folge einfacher Funktionen, sodass $0\leq f_n\uparrow f$. Dann ist das Lebesgue-Integral von $f$ bez\"uglich $\mu$ definiert als
+ $$\int f\ d\mu:=\lim_{n\to\infty}\int f_n\ d\mu$$
+ Dieser Grenzwert ist wegen der Monotonie (Lemma 5.3) und der Unabh\"angigkeit von den approximierenden Funktionen (Korollar 5.5) wohldefiniert. 
+ 
+ \paragraph{5.7. Definition:}F\"ur eine Funktion $f:\Omega\to\overline\R$ werden der Positivteil $f^+$ und der Negativteil $f^-$ definiert als
+ $$f^+:=\max(f,0)\text{ und }f^-:=-\min(f,0)$$
+ Es gilt trivial $f=f^+-f^-$. Ist $f$ messbar, dann sind $f^+,f^-$ auch beide messbar, da $f^+=f\cdot\ind{\{f\geq0\}}$ und $f^-=f\cdot\ind{\{f<0\}}$.
+ 
+ \paragraph{5.8. Definition:}Sei $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ messbar.
+ \begin{enumerate}[label=(\roman*)]
+     \item Falls $\displaystyle\int f^+\ d\mu<\infty$ \underline{und} $\displaystyle\int f^-\ d\mu<\infty$, dann ist $f$ $\mu$-integrierbar.
+     \item Falls $\displaystyle\int f^+\ d\mu<\infty$ \underline{oder} $\displaystyle\int f^-\ d\mu<\infty$, dann ist $f$ $\mu$-quasi-integrierbar.
+     \item Falls $\displaystyle\int f^+\ d\mu=\displaystyle\int f^-\ d\mu=\infty$, dann ist $f$ nicht $\mu$-integrierbar.
+     \item Falls $f$ quasi-integrierbar bez\"uglich $\mu$ ist, dann ist das Lebesgue-Integral von $f$ definiert als 
+     $$\int f\ d\mu:=\int f^+\ d\mu-\int f^-\ d\mu$$
+ \end{enumerate}
+ 
+ \paragraph{5.9. Definition:}Definiere die folgenden beiden Funktionenr\"aume
+ \begin{align*}
+     \mathcal{L}^1(\Omega,\A,\mu)&:=\left\{f:(\Omega,\A)\to(\overline\R,\cB(\overline\R)):f\text{ integrierbar bez\"uglich } \mu \right\} \\
+     \mathcal{L}(\Omega,\A,\mu)&:=\left\{f:(\Omega,\A)\to(\overline\R,\cB(\overline\R)):f\text{ quasi-integrierbar bez\"uglich } \mu \right\}
+ \end{align*}
+ Falls der Ma\ss{}raum $(\Omega,\A,\mu)$ bzw. der messbare Raum $(\Omega,\A)$ beliebig oder aus dem Kontext bekannt sind, schreibt man oft kurz $\mathcal{L}^1$ bzw. $\mathcal{L}^1(\mu)$.
+ 
+ \paragraph{Bemerkung:}$\mathcal{L}^1(\Omega,\A,\mu)$ bildet mit skalarweiser Addition und Multiplikation einen Vektorraum und $\Vert f\Vert_1:=\int |f|\ d\mu$ bildet eine Halbnorm auf $\mathcal{L}^1(\Omega,\A,\mu)$. Beachte den Unterschied zwischen $\mathcal{L}^1(\Omega,\A,\mu)$ und dem Quotientenraum $L^1(\Omega,\A,\mu)$ (bzgl. \"Aquivalenz fast \"uberall, siehe Definition 5.12). Details siehe z.B. Teschl, G. (2024) \textit{Topics in Real Analysis}., pp. 73-74. 
+ 
+ \paragraph{5.10. Definition:}F\"ur $f\in\mathcal{L}(\Omega,\A,\mu)$ und $A\in\A$, dann wird das Integral von $f$ bez\"uglich $\mu$ \"uber $A$ definiert als
+ $$\int_A f\ d\mu:=\int f\cdot\ind{A}\ d\mu$$
+ 
+ \paragraph{5.11. Definition:}Ist $\pspace$ ein Wahrscheinlichkeitsraum und ist $X\in \mathcal{L}(\Pp)$, dann nennt man 
+ $$\E X:=\int X\ d\Pp$$
+ den Erwartungswert von $X$ unter $\Pp$. Falls zus\"atzlich $X\in\mathcal{L}^1(\Pp)$, dann nennt man
+ $$\operatorname{Var}(X):=\int (X-\E X)^2\ d\Pp$$
+ die Varianz von $X$ (unter $\Pp$).
+ 
+ \section*{Eigenschaften des Integrals}
+  \addcontentsline{toc}{section}{Eigenschaften des Integrals}
+  
+  \paragraph{5.12. Definition:}
+  \begin{itemize}
+      \item Eine Menge $A\in\A$ mit $\mu(A)=0$ nennt man $\mu$-Nullmenge.
+      \item Ist $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ messbar und $B\in\cB(\overline\R)$ mit $\mu\left(\{f\in B\}^c\right)=\mu(\{f\in B^c\})=0$, dann sagt man, dass das Ereignis $\{f\in B\}$ $\mu$-fast-\"uberall eintritt. Kurz: $f\in B$ f.\"u. (englisch \textit{a.e., almost everywhere}).
+      \item Sei $\Pp$ ein Wahrscheinlichkeitsma\ss{} und $X:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ eine Zufallsvariable. Ist $B\in\cB(\overline\R)$, sodass $X\in B$ $\Pp$-fast-\"uberall, dann sagt man auch dass $X\in B$ fast sicher. Kurz: $X\in B$ f.s. (englisch \textit{a.s., almost surely}).
+  \end{itemize}
+  
+  \paragraph{Bemerkung:}Die Vereinigung bis zu abz\"ahlbar vieler Nullmengen ist wegen der $\sigma$-Subadditivit\"at (Satz 1.7 (iii)) wieder eine Nullmenge. 
+  
+  \paragraph{5.13. Lemma:}Sei $f\geq0$ messbar. Dann gilt
+  $$\int f \ d\mu=0\iff f = 0\text{ a.e.}$$
+  
+  \paragraph{Beweis:}
+  \begin{enumerate}[label=\Roman*.]
+      \item $f$ einfach\newline
+      Sei $\int f\ d\mu=\sum_{i=1}^n\alpha_i\cdot\mu(A_i)=0$ in kanonischer Darstellung. Da $f\geq0$ gilt f\"ur $i=1,\hdots,n$, dass $\alpha_i=0$ oder $\mu(A_i)=0$. \goodbreak
+      Es gilt mit der $\sigma$-Additivit\"at
+      \begin{align*}
+          \mu\left(\{f>0\}
+          \right)=\mu\left(\bigcup_{\substack{i=1\\\alpha_i>0}}^n A_i\right)=\sum_{\substack{i=1\\ \alpha_i>0}}^n\mu(A_i)=0
+      \end{align*}
+      Sei $\mu(\{f>0\})=0$. Dann gilt wie im ersten Fall 
+      $$\sum_{\substack{i=1\\ \alpha_i>0}}^n\mu(A_i)=0\implies\int f\ d\mu=\sum_{i=1}^n\alpha_i\cdot\mu(A_i)=0$$
+      \item allgemeiner Fall\newline
+      Sei $\int f\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu=0$. Da $0\leq f_n\uparrow f$, gilt $\int f_n\ d\mu=0$ f\"ur alle $n\geq1$ und mit I. folgt $f_n=0$ a.e. Mit der Stetigkeit von unten folgt weiters
+      $$\mu(\{f>0\})=\lim_{n\to\infty}\mu(\{f_n>0\})=0$$
+      Sei nun $\mu(\{f>0\})=0$. Dann folgt wegen $f_n\leq f$ f\"ur alle $n\geq1$, dass $\mu(\{f_n>0\})=0$. Mit I. folgt $\int f_n\ d\mu=0$ und schlie\ss{}lich $\int f\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu=0$. \qed
+  \end{enumerate}
+  
+  \paragraph{5.14. Proposition:}Sei $f\in\mathcal{L}(\mu)$ und $g$ messbar, sodass $f=g$ a.e. Dann gilt $g\in\mathcal{L}(\mu)$ und
+  $$\int g\ d\mu=\int f\ d\mu$$
+  
+  \paragraph{Beweis:}
+  Seien $f_n,g_n,n\geq1$ wie im Beweis von Satz 3.22, sodass $0\leq f_n\uparrow f$ und $0\leq g_n\uparrow g$.
+  \begin{enumerate}[label=\Roman*.]
+      \item $f,g$ nicht-negativ\newline
+      Es gilt 
+      \begin{align*}
+          \forall B\in\cB(\overline\R):\mu(\{f\in A\})&=\mu(\{f\in A,f=g\}\cup\{f\in A,f\neq g\})\\
+          &=\mu(\{f\in A,f=g\})+\mu(\{f\in A,f\neq g\})\\
+          &=\mu(\{g\in A,f=g\})+0\\
+          &=\mu(\{g\in A,f=g\})+\mu(\{g\in A,f\neq g\})\\
+          &=\mu(\{g\in A\})
+      \end{align*}
+      Damit gilt per Konstruktion von $f_n,g_n$, dass $f_n=g_n$ a.e. f\"ur alle $n\geq1$ und damit 
+      $$\forall n\geq1:\displaystyle\int f_n\ d\mu=\int g_n\ d\mu$$
+      Es folgt 
+      $$\int f\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu=\lim_{n\to\infty}\int g_n\ d\mu=\int g\ d\mu$$
+      \item $f,g$ allgemein\newline
+      Sei $f=f^+-f^-$ und $g=g^+-g^-$. Es gilt $f^+,f^-,g^+,g^-\geq0$ und daher $f^+,f^-,g^+,g^-\in\mathcal{L}(\mu)$. Nun gilt $\{f^+\neq g^+\}=\{f\neq g,f\geq0,g\geq0\}\subseteq\{f\neq g\}$ und damit $f^+=g^+$ a.e. und $f^-=g^-$ a.e. Mit I. folgt
+      $$\int f^+\ d\mu=\int g^+\ d\mu\text{ und }\int f^-\ d\mu=\int g^-\ d\mu$$
+      Die gew\"unschte Aussage folgt mit der Konstruktion des Integrals. \qed
+  \end{enumerate}
+  
+  \paragraph{5.15. Proposition:}Ist $f\in\mathcal{L}^1(\mu)$, dann gilt $|f|<\infty$ a.e. Insbesondere gibt es eine reelwertige, messbare Funktion $g:(\Omega,\A)\to(\R,\borel)$, sodass $\int g\ d\mu=\int f\ d\mu$.
+  
+  \paragraph{Beweis:}
+  \begin{enumerate}[label=\Roman*.]
+      \item $f$ nicht-negativ\newline
+      Seien $f_n,n\geq1$ wie im Beweis von Satz 3.22. Dann gilt
+      $$\infty>\int f\ d\mu\geq\int f_n\ d\mu\geq n\cdot\mu(\{f\geq n\})$$
+      f\"ur alle $n\geq1$. F\"ur $n\to\infty$ muss also $\mu(\{f\geq n\})\to0$ gelten. Nun ist
+      $$\{f\geq1\}\supseteq\{f\geq2\}\supseteq\hdots\supseteq\bigcap_{n\geq1}\{f\geq n\}=\{f=\infty\}$$
+      und $\mu(\{f\geq1\})\cdot 1<\infty$ (s.o.). Mit der Stetigkeit von oben folgt also 
+      $$\mu(\{f=\infty\})=\lim_{n\to\infty}\mu(\{f\geq n\})=0$$
+      und die Aussage folgt mit $f=|f|$, da $f\geq 0$.
+      \item $f$ messbar\newline
+      Sei $f=f^+-f^-$. Dann gilt $f^+,f^-\geq0$ und $f^+,f^-\in\mathcal{L}^1(\mu)$. Mit I. folgt $|f^+|,|f^-|<\infty$ a.e. Die Aussage folgt mit $|f|=|f^+-f^-|\leq|f^+|+|f^-|$. Definiere nun $g:=f\cdot\ind{\{|f|<\infty\}}$. Dann ist $f=g$ a.e. mit $f\in\mathcal{L}^1(\mu)\subseteq\mathcal{L}(\mu)$ und $g$ messbar. Die Gleichheit der Integral folgt aus Proposition 5.14. \qed
+  \end{enumerate}
+  
+  \paragraph{5.16. Satz (Linearit\"at und Monotonie des Lebesgue-Integrals):}
+  \begin{enumerate}[label=(\roman*)]
+      \item Seien $f,g\in\mathcal{L}(\mu)$, sodass $\int f\ d\mu+\int g\ d\mu$ wohldefiniert ist (i.e. nicht $\infty-\infty$, z.B. wenn $f,g\in\mathcal{L}^1(\mu)$). Dann ist auch $(f+g)$ fast \"uberall wohldefiniert und 
+      $$\int(f+g)\ d\mu=\int f\ d\mu+\int g\ d\mu$$
+      \item Sei $f\in\mathcal{L}(\mu)$ und $\alpha\in\R$. Dann ist $(\alpha\cdot f)$ wohldefiniert, $(\alpha\cdot f)\in\mathcal{L}(\mu)$ und 
+      $$\int (\alpha\cdot f)\ d\mu=\alpha\cdot\int f\ d\mu$$
+      \item Seien $f,g\in\mathcal{L}(\mu)$, sodass $f\leq g$ a.e. Dann gilt
+      $$\int f\ d\mu\leq\int g\ d\mu$$
+  \end{enumerate}
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=(\roman*)]
+     \item
+     \begin{enumerate}[label=\Roman*.]
+        \item $f,g\geq 0$ einfach\newline
+        Seien $f=\sum_{i=1}^n\alpha_i\cdot\ind{A_i}$ und $g=\sum_{j=1}^m\beta_i\cdot\ind{B_i}$ in kanonischer Darstellung. Dann ist
+        $$(f+g)=\sum_{i=1}^n\sum_{j=1}^m(\alpha_i+\beta_j)\cdot\ind{A_i\cap B_j}$$
+        und 
+        $$\int (f+g)\ d\mu=\sum_{i=1}^n\sum_{j=1}^m(\alpha_i+\beta_j)\cdot\mu(A_i\cap B_j)$$
+        Nun gilt (Einschluss-Ausschluss) $\mu(A_i\cap B_j)=\mu(A_i)+\mu(B_j)-\mu(A_i\cup B_j)$. Au\ss{}erdem sind die $A_i,i=1,\hdots,n$ eine Partition von $\Omega$ ($B_j$ genauso) und damit  
+        $$\sum_{i=1}^n\mu(A_i\cap B_j)=\mu(B_j)\text{ und } \sum_{j=1}^m\mu(A_i\cap B_j)=\mu(A_i)$$
+        Es folgt 
+        $$\int(f+g)\ d\mu=\sum_{i=1}^n\sum_{j=1}^m(\alpha_i+\beta_j)\cdot\mu(A_i\cap B_j)=\sum_{i=1}^n\alpha_i\cdot\mu(A_i)+\sum_{j=1}^m\beta_j\cdot\mu(B_j)=\int f\ d \mu+\int g\ d\mu$$
+        \item $f,g$ nicht-negativ\newline
+        W\"ahle $f_n,g_n,n\geq1$ einfach mit $0\leq f_n\uparrow f$ und $0\leq g_n\uparrow g$. Dann gilt $0\leq f_n+g_n\uparrow f+g$, wobei $f+g$ nicht-negativ und messbar ist (Proposition 3.18). Wegen $f+g\geq0$ gilt auch $f+g\in\mathcal{L}(\mu)$. Mit I. folgt
+        $$\int (f+g)\ d\mu=\lim_{n\to\infty}\int (f_n+g_n)\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu+\lim_{n\to\infty}\int g_n\ d\mu=\int f\ d\mu+\int g\ d\mu$$
+        \item $f,g$ messbar\newline
+        Beachte, dass $\int f\ d\mu$ und $\int g\ d\mu$ wohldefiniert sind, da $f,g\in\mathcal{L}(\mu)$ und schreibe
+        \begin{align*}
+           \int f\ d\mu+\int g\ d\mu&=\int f^+\ d\mu-\int f^-\ d\mu+\int g^+\ d\mu -\int g^-\ d\mu\\
+           &=\left(\int f^+\ d\mu+\int g^+\ d\mu\right)-\left(\int f^-\ d\mu+\int g^-\ d\mu\right)\in\overline\R
+        \end{align*}
+        Damit ist $\left(\int f^+\ d\mu+\int g^+\ d\mu\right)=\left(\int f^-\ d\mu+\int g^-\ d\mu\right)=\infty$ nicht m\"oglich. Sei also o.B.d.A. $\left(\int f^+\ d\mu+\int g^+\ d\mu\right)<\infty$ (der andere Fall folgt \"ahnlich). Es sind $f^+,g^+\geq0$ und mit II. gilt 
+        $$\int f^+\ d\mu+\int g^+\ d\mu=\int(f^++g^+)\ d\mu\in[0,\infty)$$
+        Mit Proposition 5.15 folgt $|f^++g^+|=f^++g^+<\infty$ a.e. Definiere also f\"ur $\omega\in\Omega$
+        \begin{align*}
+            (f+g)(\omega):=
+            \begin{cases}
+                f(\omega)+g(\omega)&\text{ falls }f^+(\omega)+g^+(\omega)<\infty\\
+                0&\text{ sonst}
+            \end{cases}
+        \end{align*}
+        Dann ist $(f+g)$ wohldefiniert, messbar und $(f+g)=f+g$ a.e. Au\ss{}erdem gilt per Konstruktion $(f+g)^+\leq(f^++g^+)$ und mit (iii) folgt
+        $$\int (f+g)^+\ d\mu\leq\int (f^++g^+)\ d\mu=\int f^+\ d\mu+\int g^+\ d\mu<\infty$$
+        Damit gilt $(f+g)\in\mathcal{L}(\mu)$. Au\ss{}erdem gilt
+        $$(f+g)^+-(f+g)^-=(f+g)\overset{a.e.}{=}f+g=f^+-f^-+g^+-g^-$$
+        und damit 
+        $$(f+g)^++f^-+g^-\overset{a.e.}{=}(f+g)^-+f^++g^+$$
+        Mit Proposition 5.14 folgt 
+        $$\int(f+g)^++f^-+g^-\ d\mu=\int (f+g)^-+f^++g^+\ d\mu$$
+        und mit II. schlie\ss{}lich
+        $$\int(f+g)^+\ d\mu+\int f^-\ d\mu+\int g^-\ d\mu=\int (f+g)^-\ d\mu+\int f^+  d\mu+\int g^+\ d\mu$$
+        und schlie\ss{}lich
+        $$\int (f+g)\ d\mu=\int f\ d\mu+\int g\ d\mu$$
+     \end{enumerate}
+     \item 
+     \begin{enumerate}[label=\Roman*.]
+        \item $f\geq0$ einfach\newline
+        Hier gilt $\alpha\cdot f =\alpha\cdot \sum_{i=1}^n\beta_i\cdot\ind{B_i}=\sum_{i=1}^n(\alpha\cdot\beta_i)\cdot\ind{B_i}$ und damit
+        $$\int (\alpha\cdot f)\ d\mu=\sum_{i=1}^n(\alpha\cdot\beta_i)\cdot\mu(B_i)=\alpha\cdot\sum_{i=1}^n\beta_i\cdot\ind{B_i}=\alpha\cdot\int f\ d\mu$$
+        \item $f\geq0$ messbar, $\alpha\geq 0$\newline
+        W\"ahle $f_n$ einfach, sodass $0\leq f_n\uparrow f$. Dann gilt $0\leq(\alpha\cdot f_n)\uparrow (\alpha\cdot f)$ und 
+        \begin{align*}
+            \int (\alpha\cdot f)\ d\mu&=\lim_{n\to\infty}\int (\alpha\cdot f_n)\ d\mu\\&\overset{\text{I.}}{=}\lim_{n\to\infty}\alpha\cdot\int f_n\ d\mu\\&=\alpha\cdot\lim_{n\to\infty}\int f_n\ d\mu\\&=\alpha\cdot\int f\ d\mu
+        \end{align*}
+        \item $f$ messbar, $\alpha\in\R$\newline
+        Sei zuerst $\alpha\geq0$. Dann ist $(\alpha\cdot f)$ wohldefiniert, da $\alpha\neq\pm\infty$ und 
+        $$(\alpha\cdot f)=(\alpha\cdot f^+)-(\alpha \cdot f^-)=\alpha\cdot(f^+-f^-)$$
+        Mit II. gilt 
+        $$\int (\alpha\cdot f^+)\ d\mu=\alpha\cdot\int f^+\ d\mu\ \text{ und  }\ \int (\alpha\cdot f^-)\ d\mu=\alpha\cdot\int f^-\ d\mu$$
+        Da $f\in\mathcal{L}(\mu)$, muss eines der beiden Integrale endlich sein und $(\alpha\cdot f)\in\mathcal{L}(\mu)$. Damit ist
+        $$\int (\alpha\cdot f^+)\ d\mu-\int (\alpha\cdot f^-)\ d\mu$$
+        wohldefiniert und mit (i) folgt
+        \begin{align*}
+            \int(\alpha\cdot f)\ d\mu&=\int(\alpha\cdot f^+)-(\alpha\cdot f^-)\ d\mu\\
+            &=\int (\alpha\cdot f^+)\ d\mu-\int(\alpha\cdot f^-)\ d\mu\\
+            &=\alpha\cdot \int f^+\ d\mu-\alpha\cdot\int f^-\ d\mu\\
+            &=\alpha\cdot\left(\int f^+\ d\mu-\int f^-\ d\mu\right)\\
+            &=\alpha\cdot\int(f^+-f^-)\ d\mu\\
+            &=\alpha\cdot\int f\ d\mu
+        \end{align*}
+        Sei nun $\alpha <0$. Dann ist $(\alpha\cdot f)$ wohldefiniert und messbar und 
+        $$(\alpha \cdot f)=(-\alpha)(-f)$$
+        wobei $(-\alpha)>0$ und $(-f)\in\mathcal{L}(\mu)$. Dammit folgt (siehe oben)
+        \begin{align*}
+            \int (\alpha\cdot f)\ d\mu&=\int(-\alpha)(-f)\ d\mu\\
+            &=(-\alpha)\int (-f)\ d\mu\\
+            &=(-\alpha)\int (f^--f^+)\ d\mu\\
+            &=(-1)\cdot\alpha\cdot\left(\int f^-\ d\mu-\int f^+\ d\mu\right)\\
+            &=(-1)^2\cdot\alpha\cdot\left(\int f^+\ d\mu-\int f^-\ d\mu\right)\\
+            &=\alpha\cdot\int f\ d\mu
+        \end{align*}
+     \end{enumerate}
+     \item Betrachte hier $\max(f,g):=g\cdot\ind{\{f\leq g\}}+f\cdot\ind{\{f>g\}}$ messbar mit $f\leq\max(f,g)$ und $g=\max(f,g)$ a.e. Damit folgt $\int \max(f,g)\ d\mu=\int g\ d\mu$.
+     \begin{enumerate}[label=\Roman*.]
+        \item $f$ nicht-negativ\newline
+        Hier ist $0\leq f\leq \max(f,g)$. W\"ahle nun einfache Funktionen $f_n,m_n,n\geq1$, sodass $0\leq f_n\uparrow f$ und $0\leq m_n\uparrow\max(f,g)$. Dann gilt f\"ur alle $n\geq1$
+        $$0\leq f_n\leq \max(f,g)=\lim_{n\to\infty}m_n$$
+        und mit Lemma 5.4 folgt 
+        $$\forall n\geq 1:\int f_n\ d\mu\leq\lim_{n\to\infty}\int m_n\ d\mu=\int \max(f,g)\ d\mu=\int g\ d\mu$$
+        und damit
+        $$\int f\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu\leq\int g\ d\mu$$
+        \item $f$ messbar\newline
+        Trvial, wenn $\int g^+\ d\mu=\infty$ oder $\int f^-\ d\mu=-\infty$. Seien also $f^-,g^+\in\mathcal{L}^1(\mu)$. Wegen $f\leq\max(f,g)$ folgt $f^+\leq[\max(f,g)]^+$ und mit I. gilt 
+        $$\int f^+\ d\mu\leq \int [\max(f,g)]^+\ d\mu<\infty$$
+        Wegen $f\leq\max(f,g)$ gilt auch $f^-\geq[\max(f,g)]^-$ und mit I. folgt
+        $$\infty>\int f^-\ d\mu\geq\int [\max(f,g)]^-\ d\mu$$
+        Damit folgt 
+        $$\int f\ d\mu\leq\int [\max(f,g)]^+\ d\mu-\int [\max(f,g)]^-\ d\mu=\int \max(f,g)\ d\mu=\int g\ d\mu$$
+        \qed
+     \end{enumerate}
+ \end{enumerate}
+ 
+ \paragraph{5.17. Proposition:}Sei $f$ messbar. Dann sind folgende Aussagen \"aquivalent:
+ \begin{enumerate}[label=(\roman*)]
+     \item $f\in\mathcal{L}^1(\mu)$
+     \item $|f|\in\mathcal{L}^1(\mu)$
+     \item $\exists g\in\mathcal{L}^1(\mu):|f|\leq g$ a.e.
+     \item $\exists h_1,h_2\in\mathcal{L}^1(\mu):h_1,h_2\geq0,f=h_1-h_2$
+ \end{enumerate}
+ 
+ \paragraph{Beweis:}
+ \underline{(i)$\implies$(ii):} $f=f^+-f^-,|f|=f^++f^-$\newline
+ \underline{(ii)$\implies$(iii):} $g:=f$ \newline
+ \underline{(iii)$\implies$(iv):} $|f|\leq g\implies 0\leq f^+,f^-\leq g$ und mit Monotonie $\int f^+\ d\mu,\int f^-\ d\mu\leq \int g\ d\mu<\infty$. Es gilt also $f^+,f^-\in\mathcal{L}^1(\mu)$ mit $f^+,f^-\geq0$ \newline
+ \underline{(iv)$\implies$(i):} $\int f\ d\mu=\int (h_1-h_2)\ d\mu=\int h_1\ d\mu-\int h_2\ d\mu\in\R$, da $0\leq\int h_1\ d\mu,\int h_2\ d\mu<\infty$ \qed
+ 
+ \paragraph{5.18. Korollar:}Seien $f,g\in\mathcal{L}^1(\mu)$. Dann gilt auch $\max(f,g),\min(f,g)\in\mathcal{L}^1(\mu)$.
+  
+ \paragraph{Beweis:}Es gilt f\"ur $x,y\in\R$ (leicht nachzupr\"ufen)
+ $$\max(x,y)=\dfrac{x+y+|x-y|}{2}$$
+ und damit (zweimal Dreiecksungleichung und Monotonie)
+ \begin{align*}
+     \int |\max(f,g)|\ d\mu=\int \left|\dfrac{f+g+|f-g|}{2}\right|\ d\mu
+     \leq\dfrac{1}{2}\int2(|f|+|g|)\ d\mu=\int |f|\ d\mu+\int |g|\ d\mu<\infty 
+ \end{align*}
+ Die Aussage f\"ur das Minimum folgt mit $\min(x,y)=-\max(-x,-y)$. \qed
+ 
+ \paragraph{5.19. Korollar (Dreiecksungleichung f\"ur Integrale):}F\"ur $f\in\mathcal{L}(\mu)$ gilt
+ $$\left|\int f\ d\mu\right|\leq\int |f|\ d\mu$$
+ 
+ \paragraph{Beweis:}Es gilt $-|f|\leq f\leq |f|$ und mit der Monotonie $-\int |f|\ d\mu\leq\int f\ d\mu\leq \int |f|\ d\mu$. Die Aussage folgt aus $-y\leq x\leq y\implies |x|\leq y$. \qed
+  
+\paragraph{5.20. Definition:}Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raum, $(\Omega',\A')$ ein messbarer Raum und $f:(\Omega,\A)\to\nobreak(\Omega',\A')$ eine messbare Abbildung. Dann ist das Bildma\ss{} (Englisch \textit{pushforward}) von $\mu$ unter $f$ definiert als
+$$(f\#\mu)(A'):=\mu\left(f^{-1}(A')\right)\text{ f\"ur alle }A'\in\A'$$
+ 
+ \paragraph{5.21. Proposition:}Das Bildma\ss{} ist ein Ma\ss{} auf $(\Omega',\A')$ mit $(f\#\mu)(\Omega')=\mu(\Omega)$. Insbesondere gilt
+ \begin{align*}
+     \mu\text{ endlich }&\iff(f\#\mu)\text{ endlich}\\
+     \mu\text{ Wahrscheinlichkeitsma\ss{} }&\iff(f\#\mu)\text{ Wahrscheinlichkeitsma\ss{}}\\
+ \end{align*}
+ 
+ \paragraph{Beweis:}\"Ubung!
+ 
+ \paragraph{5.22. (Transformationssatz):}Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raumm $(\Omega',\A')$ ein messbarer Raum. Seien $f:(\Omega,\A)\to(\Omega',\A')$ und $g:(\Omega',\A')\to(\overline\R,\cB(\overline\R))$ messbar und $(f\#\mu)$ das entsprechende Bildma\ss{} auf $(\Omega',\A')$. Zusammenfassend
+ $$\left(\Omega,\A,\mu\right)\nto{f}{}\left(\Omega',\A',(f\#\mu)\right)\nto{g}{}\left(\overline\R,\cB(\overline\R)\right)$$
+ Dann gilt
+ $$\int_{\Omega}(g\circ f)\ d\mu=\int_{\Omega'}g\ d(f\#\mu)$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item $g=\ind{A'},A'\in\A'$ Indikatorfunktion\newline
+     Hier ist 
+     \begin{align*}
+         (g\circ f)(\omega)=\ind{A'}(f(\omega))=
+         \begin{cases}
+             1&\text{ falls }\omega\in f^{-1}(A')\\
+             0&\text{ sonst}
+         \end{cases}
+         =\ind{f^{-1}(A')}(\omega)
+     \end{align*}
+     Damit folgt
+     \begin{align*}
+         \int_{\Omega}(g\circ f)\ d\mu&=\int_{\Omega}\ind{f^{-1}(A')}\ d\mu\\
+         &=\mu\left(f^{-1}(A')\right)=(f\#\mu)(A')\\
+         &=\int_{\Omega'}\ind{A'}\ d(f\#\mu)=\int_{\Omega'}g\ d(f\#\mu)
+     \end{align*}
+     \item $g=\sum_{i=1}^n\gamma_i\cdot\ind{G_i'},G_i'\in\A',i=1\hdots,n$ einfach\newline
+     Hier gilt (wie in I.) 
+     $$(g\circ f)(\omega)=\sum_{i=1}^n\gamma_i\cdot\ind{f^{-1}(G_i')}(\omega)$$
+     und damit 
+     \begin{align*}
+         \int_{\Omega}(g\circ f)\ d\mu&=\int_{\Omega}\sum_{i=1}^n\gamma_i\cdot\ind{f^{-1}(G_i')}\ d\mu\\
+         &=\sum_{i=1}^n\gamma_i\cdot\int_{\Omega}\ind{f^{-1}(G_i')}\ d\mu\\
+         &=\sum_{i=1}^n\gamma_i\cdot\int_{\Omega}\left(\ind{G_i'}\circ f\right)\ d\mu\\
+         &\overset{\text{I.}}{=}\sum_{i=1}^n\gamma_i\cdot\int_{\Omega'}\ind{G_i'}\ d(f\#\mu)\\
+         &=\int_{\Omega'}\sum_{i=1}^n\gamma_i\cdot\ind{G_i'}\ d(f\#\mu)\\
+         &=\int_{\Omega'}g\ d(f\#\mu)
+     \end{align*}
+     \item $g\geq 0$ nicht-negativ, messbar\newline
+     W\"ahle $g_n:\Omega'\to\R,n\geq1$ einfach mit $0\leq g_n\uparrow g$. Dann ist f\"ur alle $n\geq1$ die Zusammensetzung $(g_n\circ f)$ einfach und messbar und insbesondere $0\leq (g_n\circ f)\uparrow (g\circ f)$. Es folgt
+     $$\int_\Omega (g\circ f)\ d\mu=\lim_{n\to\infty}\int_\Omega(g_n\circ f)\ d\mu\overset{\text{II.}}{=}\lim_{n\to\infty}\int_{\Omega'}g_n\ d(f\#\mu)=\int_{\Omega'}g\ d(f\#\mu)$$
+     \item $g$ allgemein (messbar)\newline
+     Schreibe $g=g^+-g^-$ und beachte, dass $(g\circ f)^+=(g^+\circ f)$ und $(g\circ f)^-=(g^-\circ f)$. Es folgt
+     \begin{align*}
+         \int_\Omega(g\circ f)\ d\mu&=\int_\Omega(g\circ f)^+-(g\circ f)^-\ d\mu\\
+         &=\int_\Omega(g^+\circ f)\ d \mu-\int_\Omega(g^-\circ f)\ d\mu\\
+         &\overset{\text{III.}}{=}\int_{\Omega'} g^+\ d(f\#\mu)-\int_{\Omega'}g^-\ d(f\#\mu)
+         =\int_{\Omega'}g\ d(f\#\mu)
+     \end{align*}
+     \qed
+ \end{enumerate}
+ 
+ \paragraph{5.23. Lemma:}Seien $f_n,n\geq1$ nicht-negativ und messbar, sodass $0\leq f_1\leq\hdots\leq\displaystyle\lim_{n\to\infty}f_n$. Sei $g$ einfach, sodass $0\leq g\leq\displaystyle\lim_{n\to\infty}f_n$. Dann gilt
+ $$\int g\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$$
+ 
+ \paragraph{Beweis:} folgt sofort aus Lemma 5.4. \qed
+ 
+ \paragraph{5.24. Satz:}Seien $f_n,n\geq1$ nicht-negativ und messbar, sodass $0\leq f_1\leq\hdots\leq\displaystyle\lim_{n\to\infty}f_n$. Dann gilt 
+ $$\lim_{n\to\infty}\int f_n\ d\mu=\int \left(\lim_{n\to\infty} f_n\right)\ d\mu$$
+ 
+ \paragraph{Beweis:}Es gilt $\forall n\geq1:f_n\leq\displaystyle\lim_{n\to\infty}f_n$ mit $\displaystyle\lim_{n\to\infty}f_n\geq0$ messbar. Damit folgt $\displaystyle\lim_{n\to\infty}f_n\in\mathcal{L}(\mu)$ und damit
+ $$\forall n\geq 1:\int f_n\ d\mu\leq\int\left(\lim_{n\to\infty}f_n\right)\ d\mu$$
+ Es folgt 
+ $$\lim_{n\to\infty}\int f_n\ d\mu\leq\int\left(\lim_{n\to\infty} f_n\right)\ d\mu$$
+ W\"ahle nun $g_k,k\geq1$, sodass $\displaystyle0\leq g_k\uparrow \lim_{n\to\infty}f_n$. Mit Lemma 5.23 folgt 
+ $$\forall k\geq1:\int g_k\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$$
+ und damit 
+ $$\lim_{k\to\infty}\int g_k\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu$$
+ Aber per Definition des Integrals gilt
+ $$\int\left(\lim_{n\to\infty}f_n\right)\ d\mu=\lim_{k\to\infty}\int g_k\ d\mu$$
+ und damit folgt 
+ $$\lim_{n\to\infty}\int f_n\ d\mu\geq\int\left(\lim_{n\to\infty} f_n\right)\ d\mu$$
+ \qed
+ 
+ \paragraph{5.25. Satz:}Seien $f_n,n\geq1$ und $g$ messbare Funktionen, sodass 
+ $$g\leq f_1\leq\hdots\leq\lim_{n\to\infty}f_n$$
+ Falls $\int g^-\ d\mu<\infty$, dann gilt
+ $$\lim_{n\to\infty}\int f_n\ d\mu=\int \left(\lim_{n\to\infty}f_n\right)\ d\mu$$
+ 
+ \paragraph{Beweis:} Es gilt $g\leq f_n$ und damit $f_n^-\leq g^-$ f\"ur alle $n\geq1$. Mit der Monotonie folgt
+ \begin{align*}
+     \forall n\geq1:\int f_n^-\ d\mu\leq \int g^-\ d\mu<\infty
+ \end{align*}
+ Au\ss{}erdem gilt $\displaystyle\left(\lim_{n\to\infty}f_n\right)^-\leq g^-$ und mit der Monotonie
+$$\int \left(\lim_{n\to\infty}f_n\right)^-\ d\mu\leq \int g^-\ d\mu$$
+Also sind $\displaystyle f_n,\left(\lim_{n\to\infty}f_n\right)\in\mathcal{L}(\mu)$. 
+ \begin{enumerate}[label=\Roman*.]
+     \item Sei $\lim_{n\to\infty}\int f_n\ d\mu=\infty$\newline
+     Mit der Monotonie gilt $\int f_n\ d\mu\leq \int\left(\lim_{n\to\infty}f_n\right)\ d\mu$ f\"ur alle $n\geq1$ und damit 
+     $$\lim_{n\to\infty}\int f_n\ d\mu\leq \int\left(\lim_{n\to\infty}f_n\right)\ d\mu$$
+     Nun ist $\lim_{n\to\infty}\int f_n\ d\mu=\infty$ und es gilt 
+     $$\lim_{n\to\infty}\int f_n\ d\mu=\int\left(\lim_{n\to\infty}f_n\right)\ d\mu=\infty$$
+     \item Sei $\lim_{n\to\infty}\int f_n\ d\mu<\infty$\newline
+     Laut Annahme gilt mit der Monotonie f\"ur alle $n\geq1$
+     $$\int g\ d\mu\leq\int f_n\ d\mu\leq\lim_{n\to\infty}\int f_n\ d\mu<\infty$$
+     Daher gilt $\displaystyle g,f_n,\left(\lim_{n\to\infty}f_n\right)\in\mathcal{L}^1(\mu)$ und mit Proposition 5.15 gilt $\displaystyle g,f_n,\left(\lim_{n\to\infty}f_n\right)\in\R$ a.e. Da es hier nur um die Werte der Integrale geht, seien also alle Funktionen reellwertig in $\Omega$. Dann gilt f\"ur alle $n\geq1$, dass $0\leq(f_n-g)\uparrow \displaystyle\lim_{n\to\infty}(f_n-g)$ und mit Satz 5.24 folgt
+     $$\lim_{n\to\infty}\int (f_n-g)\ d\mu=\int\left(\lim_{n\to\infty}(f_n-g)\right)\ d\mu$$ 
+     Die Aussage folgt schlie\ss{}lich aus der Linearit\"at des Integrals. \qed
+ \end{enumerate}
+ 
+ \paragraph{5.26. Proposition:}Sei $f:[a,b]\to\R$ messbar. Falls $f$ auf $[a,b]$ Riemann-integrierbar ist, dann ist $f$ auch Lebesgue-integrierbar (bzgl. dem Lebesgue-Ma\ss{} $\lambda=\operatorname{vol}$ auf $([a,b],\cB([a,b]))$) und
+ $$\int_a^b f(x)\ dx=\int\displaylimits_{[a,b]}f\ d\lambda$$
+ 
+ \paragraph{Beweis:}Seien $U_n,O_n,n\geq1$ Unter- bzw. Obersummen von $f$, sodass
+ $$\lim_{n\to\infty}U_n=\lim_{n\to\infty}O_n=\int_a^b f(x)\ dx$$
+ per Konstruktion des Riemann-Integrals. Insbesondere sind $U_n,O_n<\infty$ f\"ur alle $n\geq1$ und jede Unter- bzw. Obersumme entspricht dem Integral einer Treppenfunktion $u_n$ bzw $o_n$ f\"ur $n\geq1$, sodass $u_1\leq u_2\leq\hdots\leq f\leq\hdots\leq o_2\leq o_1$. 
+ auf $[a,b]$. Als Treppenfunktionen sind $u_n,o_n$ insbesondere einfach und damit messbar. Es folgt (einfach zu pr\"ufen)
+ $$U_n=\int u_n\ d\lambda\text{ und }O_n=\int o_n\ d\lambda$$ 
+ Da $f$ Riemman-integrierbar auf $[a,b]$ ist folgt $|U_1|,|O_1|<\infty$ und mit der Monotonie folgt
+ $$\forall n\geq1:U_n\leq\int\displaylimits_{[a,b]}f\ d\lambda\leq O_n$$
+ Die Aussage folgt nun aus $\int_a^b f(x)\ dx=\lim_{n\to\infty}U_n\leq\int_{[a,b]}f\ d\lambda\leq\lim_{n\to\infty}O_n=\int_a^b f(x)\ dx$. \qed
+ 
+ \paragraph{Bemerkung:}Sei $f$ Riemann-integrierbar auf $[a,b]$, aber nicht unbedingt messbar. Dann gilt f\"ur $f^*:=\displaystyle\lim_{n\to\infty}o_n$
+ \begin{itemize}
+     \item $f^*:[a,b]\to\R$ ist messbar.
+     \item $\displaystyle\int_a^b f(x)\ dx=\int\displaylimits_{[a,b]}f^*\ d\lambda$
+     \item $\left\{x\in[a,b]:f(x)\neq f^*(x)\right\}\subseteq N\in\borel$ mit $\mu(N)=0$
+ \end{itemize}
+ 
+ \paragraph{Korollar 5.27:} Sei $f:\R\to[0,\infty)$ messbar und (uneigentlich) Riemann-integrierbar auf $[0,\infty)$. Dann ist $f$ auch Lebesgue-integrierbar auf $[0,\infty)$ und die Integralbegriffe stimmen \"uberein.
+ 
+ \paragraph{Beweis:}Laut Annahme gilt
+ $$\lim_{t\to\infty}\int_0^tf(x)\ dx<\infty$$
+ und insbesondere ist $f$ damit Riemann-integrierbar auf $[0,t]$ f\"ur alle $t>0$. Es folgt
+ \begin{align*}
+     \int_0^\infty f(x)\ dx&=\lim_{t\to\infty}\int_0^tf(x)\ dx\\&\overset{5.26}{=}\lim_{t\to\infty}\int\displaylimits_{[0,t]}f\ d\lambda\\
+     &=\lim_{t\to\infty}\int f\cdot\ind{[0,t]}\ d\lambda\\
+     &\overset{5.24}{=}\int \lim_{t\to\infty}\left(f\cdot\ind{[0,t]}\right)\ d\lambda\\
+     &=\int\displaylimits_{[0,\infty)}f\ d\lambda
+ \end{align*} 
+ \qed
+ 
+ \paragraph{Bemerkung:}Die Bedingung $f\geq0$ ist notwendig! (Gegenbeispiel $\sin (x)/x$)
+ 
+ \paragraph{5.28. Beispiel:} % Hier war denke ich das sin x / x Beispiel
+ 
+ \paragraph{5.29. Proposition:}Sei $f:(\Omega,\A)\to(\R,\cB(\overline\R))$ nicht-negativ und messbar. Definiere f\"ur $A\in\A$ 
+ $$\nu(A):=\int\displaylimits_A f\ d\mu$$
+ Dann ist $\nu:\A\to[0,\infty]$ ein Ma\ss{} auf $(\Omega,\A)$ und f\"ur $f\in\mathcal{L}^1(\nu)$ gilt
+ $$\int g\ d\nu=\int fg\ d\mu$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item Zeige zun\"achst, dass $\nu$ ein Ma\ss{} ist.\newline
+     \begin{enumerate}[label=(\roman*)]
+        \item $ f\geq0\implies f\cdot\ind{A}\geq0\implies\int_A f\ d\mu\in[0,\infty]$, womit $\nu:\A\to[0,\infty]$ wohldefiniert ist.
+        \item $\nu(\emptyset)=\int_\emptyset f\ d\mu=\int f\cdot\ind{\emptyset}\ d\mu=\int 0 \ d\mu=0$
+        \item Seien $A_n\in\A,n\geq1$ disjunkt. Dann gilt
+        \begin{align*}
+            \nu\left(\bigcup_{n\geq1}A_n\right)&=\int\displaylimits_{\bigcup_{n\geq1}A_n}f\ d\mu=\int f\cdot\ind{\bigcup_{n\geq1}A_n}\ d\mu\\
+            &=\int f\cdot\left(\lim_{N\to\infty}\sum_{n=1}^N\ind{A_n}\right)\ d\mu\\
+            &\overset{5.24}{=}\lim_{N\to\infty}\int f\cdot\sum_{n=1}^N\ind{A_n}\ d\mu\\
+            &=\sum_{n\geq1}\int_{A_n} f\ d\mu=\sum_{n\geq1}\nu(A_n)
+        \end{align*}
+     \end{enumerate}
+     \item $g=\ind{A},A\in\A$ Indikatorfunktion\newline
+     Hier gilt
+     $$\int g\ d\nu=\int \ind{A}\ d\nu=\nu(A)=\int\displaylimits_{A} f\ d\mu=\int f\cdot\ind{A}\ d\mu=\int fg\ d\mu$$
+     \item $g=\sum_{i=1}^n\gamma_i\cdot\ind{G_i}$ einfach\newline
+     Hier gilt
+     \begin{align*}
+         \int g\ d\nu=\sum_{i=1}^n\gamma_i\cdot\nu(G_i)\overset{\text{II.}}{=}\sum_{i=1}^n\gamma_i\cdot\left(\int\displaylimits_{G_i}f\ d\mu\right)=\int f\cdot\left(\sum_{i=1}^n\gamma_i\cdot\ind{G_i}\right)\ d\mu=\int fg\ d\mu
+     \end{align*}
+     \item $g\geq0$ nicht-negativ, messbar\newline
+     W\"ahle $g_n,n\geq1$ einfach mit $0\leq g_n\uparrow g$. Wegen III. gilt $\displaystyle\int g_n\ d\nu=\int fg_n\ d\mu$ f\"ur alle $n\geq1$. Au\ss{}erdem gilt wegen $f\geq0$, dass $0\leq fg_n\uparrow fg$ und damit
+     $$\int g \ d\nu=\lim_{n\to\infty}\int g_n\ d\nu=\lim_{n\to\infty}\int fg_n\ d\mu\overset{5.24}{=}\int \lim_{n\to\infty}fg_n\ d\mu=\int fg\ d\mu$$
+     \item $g$ messbar\newline
+     Sei $g=g^+-g^-$. Wegen IV. gilt $\displaystyle\int g^+\ d\nu=\int fg^+\ d\mu$ und $\displaystyle\int g^-\ d\nu=\int fg^-\ d\mu$. Damit folgt
+     $$\int g\ d\nu=\int g^+\ d\nu-\int g^-\ d\nu=\int f(g^+-g^-)\ d\mu=\int fg\ d\mu$$
+     \qed
+ \end{enumerate}
+ 
+ \paragraph{Bemerkung:}$\nu$ erbt alle Nullmengen von $\mu$ (kann jedoch auch zus\"atzliche Nullmengen haben). Es gilt also 
+ $$\mu(A)=0\implies\nu(A)=0$$
+ 
+ \paragraph{5.30. Definition:}F\"ur $f$ und $\nu$ wie in Proposition 5.29 nennt man $f$ die Dichte von $\nu$ bez\"uglich $\mu$. Kurz $f={d\nu}/{d\mu}$. Ist $X$ eine reellwertige Zufallsvariable und $\Pp(X\in A)=\nu(A)$, dann nennt man $f$ auch die Dichte von $X$ bez\"uglich $\mu$. 
+ 
+ \paragraph{Bemerkung:}In Proposition 5.29 sind ein Ma\ss{} $\mu$ und eine Dichte $f$ gegeben. Falls zwei Ma\ss{}e $\mu,\nu$ gegeben sind, liefert der Satz von Radon\textendash Nikodym (cf. Wahrscheinlichkeitstheorie 2) Bedingungen an $\mu$ und $\nu$ f\"ur die Existenz einer Dichte $f$.
+ 

@@ -1,0 +1,195 @@
+\chapter*{13. Bedingte Erwartungswerte und Wahrscheinlichkeiten}
+     \addcontentsline{toc}{chapter}{13. Bedingte Erwartungswerte und Wahrscheinlichkeiten}
+     \paragraph{13.1. Definition:} Betrachte einen Wahrscheinlichkeitsraum $\pspace$ mit einer sub-$\sigma$-Algebra $\G\subseteq\A$ und eine Zufallsvariable $X\in L^1\pspace$, i.e. $\A$-messbar und integrierbar. F\"ur $G\in\G$ sei $\nu(G):=\int_G X\ d\Pp=\E\left[\ind{G}X\right]$ und $\Pp_\G(G):=\Pp(G)$. Dann ist $\nu$ ein signiertes Ma\ss{} auf $(\Omega,\G)$ und $\Pp_\G$ ist ein Wahrscheinlichkeitsma\ss{} (und damit endlich) auf $(\Omega,\G)$, sodass $\nu\ll\Pp_\G$. \newline
+     Der bedingte Erwartungswert von $X$ bez\"uglich $\G$ ist dann definiert als
+     $$\E[X\parallel \G]:=\dfrac{d\nu}{d\Pp_\G}$$
+     F\"ur eine weitere Zufallsvariable $Y$ auf $\pspace$, setzt man 
+     $$\E[X\parallel Y]:=\E[X\parallel\sigma(Y)]$$
+     F\"ur $A\in\A$ setzt man
+     $$\Pp(A\parallel\G):=\E[\ind{A}\parallel\G]$$
+     
+     \paragraph{Bemerkung:}$\E[X\parallel\G]$ ist fast sicher eindeutig, d.h. falls $Y$ eine $\G$-messbare Zufallsvariable ist und $\forall G\in\G:\E[Y\cdot\ind{G}]=\E[X\cdot\ind{G}]$, dann gilt $Y\overset{a.s.}{=}\E[X\parallel\G]$. Mit Satz kann man den bedingten Erwartungswert $\E[X\parallel\G]$ auch f\"ur quasiintegrierbare $X$ definieren (Details \"Ubung).
+
+     \paragraph{13.2. Beispiel:}Sei $\pspace$ ein Wahrscheinlichkeitsraum mit einer sub-$\sigma$-Algebra $\G\subseteq\A$. F\"ur $X=\ind{A}$ und $Y=\ind{B}$ mit $A,B\in\A$ mit $0<\Pp(B)<1$ ist
+     \begin{align*}
+         \Pp(A\parallel \ind{B})(\omega)=
+         \begin{cases}
+             \Pp(A\parallel B)(\omega)\ \ &\text{ wenn }\omega\in B \\
+             \Pp(A\parallel B^c)(\omega)&\text{ wenn }\omega\notin B
+         \end{cases}
+     \end{align*}
+     Weiters ist $\Omega\in\sigma(B)$, sodass f\"ur $\ind{\Omega}=1$ gilt:
+     \begin{align*}
+         \Pp(A)&=\E\ind{A}=\E[\ind{A}\cdot\ind{\Omega}]\\
+         &\overset{\text{Def.}}{=}\int_\Omega\E[\ind{A}\parallel\sigma(B)]\ d\Pp\\
+         &=\int_\Omega\Pp(A\parallel\ind{B})\ d\Pp \\
+         &\overset{\text{s.o.}}{=}\Pp(A\parallel B)\cdot\Pp(B)+\Pp(A\parallel B^c)
+     \end{align*}
+
+     \section*{Eigenschaften bedingter Erwartungswerte}
+     \addcontentsline{toc}{section}{Eigenschaften bedingter Erwartungswerte}
+
+     \paragraph{13.3. Proposition:}Sei $X\in L^1\pspace$ und $\G\subseteq\A$ eine sub-$\sigma$-Algebra.
+     \begin{enumerate}[label=(\roman*)]
+         \item Sind $\sigma(X)$ und $\G$ unabh\"angig, dann gilt $\E[X\parallel\G]\overset{a.s.}{=}\E [X]$.
+         \item Ist $X$ $\G\textendash\mathcal{B}(\R)$-messbar, dann ist $\E[X\parallel\G]\overset{a.s.}{=}X$
+     \end{enumerate}
+     
+     \paragraph{Beweis:}
+     \begin{enumerate}[label=(\roman*)]
+         \item Die konstante Zufallsvariable $\E [X]$ ist nat\"urlich $\G$-messbar und f\"ur $G\in\G$ sind $\ind{G}$ und $X$ unabh\"angig (per Definition), sodass
+         $$\E[\E[X]\cdot\ind{G}]=\E [X]\cdot\E[\ind G]\overset{\text{u.a.}}{=}\E[X\cdot\ind{G}]$$
+         \item Wenn $X$ $\G\textendash\mathcal{B}(\overline\R)$-messbar ist, ist $X$ eine Dichte gem\"a\ss{} Definition 13.1, da trivial
+         $$\E[X\cdot\ind{G}]=\E[X\cdot\ind{G}]$$
+     \end{enumerate}
+     \qed
+     
+     \paragraph{Bemerkung:}Damit gilt f\"ur $X\in L^1\pspace$ sofort
+     \begin{itemize}
+         \item $\E[X\parallel\{\emptyset,\Omega\}]\overset{a.s.}{=}\E[X]$
+         \item $\E[X\parallel\A]\overset{a.s.}{=}X$
+     \end{itemize}
+     
+     \paragraph{13.4. Proposition:}Sei $\pspace$ ein Wahrscheinlichkeitsraum mit einer sub-$\sigma$-Algebra $\G\subseteq\A$, $X_n,n\geq1$ eine Folge von $\pspace$-integrierbaren Zufallsvariablen und $X,Y$ $\pspace$-integrierbare Zufallsvariablen. Seien au\ss{}erdem $a,b\in\R$. Dann gilt
+     \begin{enumerate}[label=(\roman*)]
+         \item Ist $X\overset{a.s.}{=}a$, dann ist $\E[X\parallel \G]\overset{a.s.}{=}a$
+         \item $\E[aX+bY\parallel\G]\overset{a.s.}{=}a\cdot\E[X\parallel G]+b\cdot\E[Y\parallel\G]$ \textbf{(Linearit\"at)}
+         \item Ist $X\overset{a.s.}{\leq}Y$, dann ist $\E[X\parallel\G]\leq\E[Y\parallel\G]$ \textbf{(Monotonie)}
+         \item $\left|\E[X\parallel\G]\right|\overset{a.s.}{\leq}\E[|X|\parallel\G]$ \textbf{(Dreiecksungleichung)}
+         \item F\"ur $X_1\leq X_2\leq\hdots\leq\lim_{n\to\infty}X_n$ fast sicher, ist \textbf{(MONK)}
+         $$\lim_{n\to\infty}\E[X_n\parallel\G]\overset{a.s.}{=}\E\left[\lim_{n\to\infty}X_n\parallel\G\right]$$
+         \item Falls $\forall n\geq1:Y\overset{a.s.}{\leq} X_n$ und $\liminf_{n\to\infty}X_n\in L^1$, dann ist \textbf{(Fatou's Lemma)}
+         $$\E[\liminf_{n\to\infty}X_n\parallel\G]\overset{a.s.}{\leq}\liminf_{n\to\infty}\E[X_n\parallel\G]$$
+         \item Falls $X_n\nto{a.s.}{n\to\infty}X$ und $\forall n\geq1:|X_n|\overset{a.s.}{\leq}Y$, dann ist $X\in L^1$ und \textbf{(DOMK)}
+         $$\lim_{n\to\infty}\E[X_n\parallel\G]\overset{a.s.}{=}\E[X\parallel\G]$$
+     \end{enumerate}
+     
+     \paragraph{Beweis:}
+     \begin{enumerate}[label=(\roman*)]
+         \item folgt sofort aus Proposition 13.3 und der Tatsache, dass $X$ u.a. von jedem $\G$ ist.
+         \item $a\cdot\E[X\parallel\G]+b\cdot\E[Y\parallel\G]$ ist als Linearkombination $\G$-messbarer Funktionen wieder $\G$-messbar und f\"ur $G\in\G$ gilt:
+         \begin{align*}
+             \int_Ga\cdot\E[X\parallel\G]+b\cdot\E[Y\parallel\G]\ d\Pp&=a\int_G\E[X\parallel\G]\ d\Pp+b\int_G\E[Y\parallel\G]\ d\Pp\\
+             &=a\cdot\E[X\cdot\ind{G}]+b\cdot\E[Y\cdot\ind{G}]\\
+             &=\E\left[(aX+bY)\cdot\ind{G}\right]
+         \end{align*}
+         Die Aussage folgt mit Definition 13.1 und Satz 12.8.
+         \item Hier ist insbesondere $X_+\overset{a.s.}{\leq}Y_+$, sodass $0\overset{a.s.}{\leq} Y_+-X_+$. Sei $G:=\left\{\E[X_+\parallel\G]>\E[Y_+\parallel\G]\right\}$. Dann ist $G$ messbar und 
+         $$\int_G\E[X_+\parallel\G]-\E[Y_+\parallel\G]\ d\Pp\overset{\text{(ii)}}{=}\int_G\E[X_+-Y_+\parallel\G]\ d\Pp=\E[(X_+-Y_+)\cdot\ind{G}]$$
+         wobei das linke Integral nicht-negativ und das rechte Integral nicht-positiv ist, sodass $\Pp(G)=0$ folgt. Ein \"ahnliches Argument gilt f\"ur $X_-$ und $Y_-$, sodass folgt
+         $$\E[X\parallel\G]=\E[X_+\parallel\G]-\E[X_-\parallel\G]\leq\E[Y_+\parallel\G]-\E[Y_-\parallel\G]=\E[Y\parallel\G]$$
+         wobei alle Relationen fast sicher gelten. 
+         \item Aus $X\leq|X|$ folgt mit (iii), dass 
+         $$\E[X\parallel\G]\overset{a.s.}{\leq}\E[|X|\parallel\G]$$ 
+         Aus $-X\leq|X|$ folgt mit (ii) und (iii), dass 
+         $$-\E[X\parallel\G]\overset{a.s.}{=}\E[-X\parallel\G]\overset{a.s.}{\leq}\E[|X|\parallel\G]$$
+         womit die Aussage aus der Kombination beider F\"alle folgt.
+         \item Mit (iii) gilt $\E[X_1\parallel\G]\leq\E[X_2\parallel\G]\leq\hdots\leq\lim_{n\to\infty}\E[X_n\parallel\G]$. Damit ist $\lim_{n\to\infty}\E[X_n\parallel\G]$ als Grenzwert $\G$-messbarer Funktionen messbar. Mit (iv) ist $|\E[X_1\parallel\G]|\overset{a.s.}{\leq}\E[|X_1|\parallel\G]$, und damit $\E[X_1\parallel\G]\in L^1$. Mit MONK gilt f\"ur $G\in\G$
+         \begin{align*}
+             \int_G\lim_{n\to\infty}\E[X_n\parallel\G]\ d\Pp&=\lim_{n\to\infty}\int_G\E[X_n\parallel\G]\ d\Pp\\
+             &=\lim_{n\to\infty}\E[X_n\cdot\ind{G}]\\
+             &\overset{\text{MONK}}{=}\E[X\cdot\ind{G}]
+         \end{align*}
+         womit per Definition 13.1 die Aussage folgt.
+         \item F\"ur $Z_n:=\inf_{k\geq n}X_k$ gilt $Z_1\leq\hdots\leq\lim_{n\to\infty}Z_n=\liminf_{n\to\infty}X_n\in L^1$. Es gilt $Z_n\overset{a.s.}{\leq}X_k$ f\"ur alle $k\geq n$, sodass mit (iii)
+         $$\E[Z_n\parallel\G]\overset{a.s.}{\leq}\inf_{k\geq n}\E[X_k\parallel\G]$$
+         und damit
+         \begin{align*}
+             \E[\liminf_{n\to\infty}X_n\parallel\G]\overset{\text{(v)}}{=}\lim_{n\to\infty}\E[Z_n\parallel\G]\leq\lim_{n\to\infty}\inf_{k\geq n}\E[X_k\parallel\G]=\liminf_{n\to\infty}\E[X_n\parallel\G]
+         \end{align*} 
+         wobei in der letzten Ungleichung die ersten beiden Relationen als fast sicher zu verstehen sind.
+         \item Mit DOMK ist $X\in L^1$ und $\lim_{n\to\infty}\E[X_n]=\E[X]$. Mit (iii) und (iv) gilt 
+         $$|\E[X_n\parallel\G]|\overset{a.s.}{\leq}\E[|X_n|\parallel\G]\overset{a.s.}{\leq}\E[Y_n\parallel\G]$$
+         Mit (vi) gilt
+         $$\E[X\parallel\G]\overset{a.s.}{=}\E[\liminf_{n\to\infty}X_n\parallel\G]\overset{a.s.}{\leq}\liminf_{n\to\infty}\E[X_n\parallel\G]$$
+         wobei die letze Ungleichung folgt, da laut Annahme $\E[-Y\parallel\G]\leq\E[X_n\parallel\G]$ f\"ur alle $n\geq1$. Ebenfalls gilt
+         \begin{align*}
+             -\E[X\parallel\G]&\overset{a.s.}{=}\E[-X\parallel\G]\\
+             &\overset{a.s.}{=}\E[\liminf_{n\to\infty}(-X_n)\parallel\G]\\
+             &\overset{a.s.}{\leq}\liminf_{n\to\infty}\E[-X_n\parallel\G]\\
+             &\overset{a.s.}{=}-\limsup_{n\to\infty}\E[X_n\parallel\G]
+         \end{align*}
+         Damit gilt 
+         $$\limsup_{n\to\infty}\E[X_n\parallel\G]\overset{a.s.}{\leq}\E[X\parallel\G]\overset{a.s.}{\leq}\liminf_{n\to\infty}\E[X_n\parallel\G]$$
+         und damit folgt die Aussage. \qed
+     \end{enumerate}
+     
+     \paragraph{13.5. Proposition:}Sei $\G\subseteq\A$ eine sub-$\sigma$-Algebra und seien $X,U$ Zufallsvariablen, sodass $X,UX\in L^1$. Falls $U$ $\G-\borel$-messbar ist, dann gilt
+     $$\E[UX\parallel\G]\overset{a.s.}{=}U\cdot\E[X\parallel\G]$$
+     
+     \paragraph{Beweis:}$U\cdot\E[X\parallel\G]$ ist $\G$-messbar.
+     \begin{enumerate}[label=\Roman*.]
+         \item $U=\ind{H},H\in\G$\newline
+         $$\forall G\in\G:\int_GU\cdot\E[X\parallel\G]\ d\Pp=\int_{G\cap G}\E[X\parallel\G]\ d\Pp=\E[X\cdot\ind{G\cap H}]=\E[UX\cdot\ind{G}]$$
+         \item $U$ einfach\newline
+         folgt aus I. und der Linearit\"at des bedingten Erwartungswertes.
+         \item $U\geq0$\newline
+         W\"ahle $U_n,n\geq1$ einfach und $\G$-messbar mit $0\leq U_n\nearrow U$. Dann gilt $U_nX\to UX$ und $|U_nX|=|U_n||X|\leq|U||X|$. Es folgt
+         \begin{align*}
+             \E[UX\parallel\G]\overset{\text{DOMK}}{=}\lim_{n\to\infty}\E[U_n X\parallel{\G}]\overset{\text{II.}}{=}\lim_{n\to\infty}U_n\cdot\E[X\parallel\G]=U\cdot\E[X\parallel\G]
+         \end{align*}
+         \item $U$ allgemein\newline
+         Schreibe $U=U_+-U-$. Dann gilt
+         \begin{align*}
+             \E[UX\parallel\G]&=\E[(U_+-U_-)X\parallel\G]\\
+             &\overset{a.s.}{=}\E[U_+X\parallel\G]-\E[U_-X\parallel\G]\\
+             &\overset{a.s.}{=}(U_+)\cdot\E[X\parallel\G]-(U_-)\cdot\E[X\parallel\G]\\
+             &\overset{a.s.}{=}(U_+-U_-)\cdot\E[X\parallel\G]=U\cdot\E[X\parallel\G]
+         \end{align*}
+         \qed
+     \end{enumerate}
+     
+     \paragraph{13.6. Proposition:}Seien $\G$ und $\mathcal{H}$ sub-$\sigma$-Algebren, sodass $\mathcal{H}\subseteq\G\subseteq\A$. Sei $X\in L^1$. Dann gilt
+     $$\E[X\parallel\mathcal{H}]\overset{\text{(i)}}{=}\E[\E[X\parallel\mathcal{H}]\parallel\G]\overset{\text{(ii)}}{=}\E[\E[X\parallel\G]\parallel\mathcal{H}]$$
+     fast sicher.
+     
+     \paragraph{Beweis:}
+     \begin{enumerate}[label=(\roman*)]
+         \item folgt sofort, da $\E[X\parallel\mathcal{H}]$ $\mathcal{H}$-messbar und damit auch $\G$-messbar ist. Mit Proposition 13.3 gilt
+         $$\E[X\parallel\mathcal{H}]\overset{a.s.}{=}\E[\E[X\parallel\mathcal{H}]\parallel\G]$$
+         \item $\E[\E[X\parallel\G]\parallel\mathcal{H}]$ ist $\mathcal{H}$-messbar und damit auch $\G$-messbar. Es gilt
+         \begin{align*}
+             \forall H\in\mathcal{H}:\int_H\E[\E[X\parallel\G]\parallel\mathcal{H}]\ d\Pp&=\int_H\E[X\parallel\G]\ d\Pp\\
+             &=\int_H X\ d\Pp
+         \end{align*}
+         da $H\in\mathcal{H}\implies H\in\G$. Mit Definition 13.1 und Satz 12.8 folgt die Aussage. \qed
+    \end{enumerate}
+    
+    \section*{Bedingte Verteilungen}
+    \addcontentsline{toc}{section}{Bedingte Verteilungen}
+    
+    \paragraph{13.7. Satz:} Sei $\G\subseteq\A$ eine sub-$\sigma$-Algebra und sei $X$ eine reelwertige Zufallsvariable. Dann existiert eine Funktion $\mu:\borel\times\Omega\to[0,1]$ mit den folgenden Eigenschaften:
+    \begin{enumerate}[label=(\roman*)]
+        \item F\"ur $\omega\in\Omega$ fest ist $\mu(\cdotp,\omega):\borel\to[0,1]$ ein Wahrscheinlichkeitsmaß.
+        \item F\"ur $B\in\borel$ fest, gilt f\"ur $\mu(B,\cdotp):\Omega\to[0,1]$, dass $\mu(B,\cdotp)=\Pp(X\in B\parallel\G)$ fast sicher. 
+    \end{enumerate} 
+    Man nennt $\mu(\cdotp,\omega)$ die bedingte Verteilung von $X$ gegeben $\G$.
+    
+    \paragraph{Beweis:}F\"ur $q\in\mathbb{Q}$ sei $F(q,\omega):=\Pp(X\leq q\parallel\G)(\omega)$. F\"ur $q,r\in\mathbb{Q}$ mit $q\leq r$ gilt damit (Monotonie des bedingten Erwartungswertes, Proposition 13.4)
+    \begin{equation}
+        F(q,\omega)\leq F(r,\omega)
+    \end{equation}
+    f\"ur alle $w$ außerhalb einer $\Pp$-Nullmenge. Mit DOMK f\"ur bedingte Erwartungswerte (Proposition 13.4) gilt
+    \begin{equation}
+        \forall q\in\mathbb{Q}:F(q,\omega)=\lim_{n\to\infty}F\left(q+\frac{1}{n},\omega\right)
+    \end{equation}
+    f\"ur $\omega$ außerhalb einer $\Pp$-Nullmenge und (DOMK)
+    \begin{equation}
+        \lim_{n\to\infty}F(-n,\omega)=0\text{ und }\lim_{n\to\infty}F(n,\omega)=1
+    \end{equation}
+    außerhalb einer $\Pp$-Nullmenge. Sei $N$ die abz\"ahlbare Vereinigung der in (10), (11) und (12) auftretenden Nullmengen Dann ist $N$ wieder eine $\Pp$-Nullmenge und (10), (11), (12) gelten f\"ur jedes $\omega\in N^c$.\newline\newline
+    Sei nun $t\in\R$. F\"ur $\omega\in N^c$ setze
+    $$F(t,\omega):=\inf\left\{F(q,\omega):t\leq q,q\in\mathbb{Q}\right\}$$
+    und f\"ur $\omega\in N$ setze $F(t,\omega):=F(t)$ f\"ur eine beliebige fest cdf $F$. Mit (10), (11) und (12) ist $F(\cdotp,\omega)$ eine cdf f\"ur jedes $\omega\in\Omega$. F\"ur $\omega\in\Omega$ sei nun $\mu(\cdotp\omega)$ das durch $F(\cdotp.\omega)$ bestimmte Wahrscheinlichkeitsmaß auf $(\R,\borel)$. Damit gilt (i). \newline\newline
+    Die Mengenfamilie
+    $$\mathcal{L}:=\left\{B\in\borel:\mu(B,\cdotp)\text{ ist }\G\text{-messbar}\right\}$$
+    ist ein $\lambda$-System (leicht zu pr\"ufen) und enth\"alt das $\pi$-System $\mathcal{M}:=\left\{(-\infty,q]:q\in\mathcal{Q}\right\}$. Mit dem $\lambda\textendash\pi$-Theorem gilt
+    $$\borel=\sigma(\mathcal{M})=\lambda(\mathcal{M})\subseteq\mathcal{L}\subseteq\borel$$
+    Also gilt $\mathcal{L}=\borel$ und $\mu(B,\cdotp)$ ist f\"ur jedes $B\in\borel$ $\G$-messbar. \newline\newline
+    F\"ur $B=(-\infty,q]$ mit $q\in\mathbb{Q}$ ist $\mu(B,\cdotp)=\Pp(X\leq q\parallel\G)$ laut Konstruktion, sodass f\"ur $G\in\G$ gilt
+    \begin{equation}
+        \E[\ind{G}\cdot\mu(B,\cdotp)]=\Pp(G\cap\{X\in B\})
+    \end{equation}
+    F\"ur $G\in\G$ fest gilt (13) f\"ur jede Menge $B\in\mathcal{M}$. Sei nun 
+    $$\mathcal{Z}:=\left\{B\in\borel:\E[\ind{G}\cdot\mu(B,\cdotp)]=\Pp(G\cap\{X\in B\})\right\}$$
+    Nun sind in (14) beide Seiten der Gleichung endliche Maße, die auf dem $\pi$-System $\mathcal{M}$ \"ubereinstimmen. Mit Korollar 2.9 folgt, dass die beiden Maße auch auf $\sigma(\mathcal{M})=\borel$ \"ubereinstimmen. Also gilt (13) f\"ur alle $B\in\borel$. Mit Definition 13.1 folgt Aussage (ii). \qed

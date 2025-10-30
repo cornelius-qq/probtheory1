@@ -1,0 +1,817 @@
+\chapter*{11. Schwache Konvergenz}
+\addcontentsline{toc}{chapter}{11. Schwache Konvergenz}
+ Betrachte in diesem Kapitel einen Wahrscheinlichkeitsraum $\pspace$, reelwertige Zufallsvariablen $X, X_n, n\geq1$ mit entsprechenden cdfs $F,F_n,n\geq1$ bzw. den entsprechenden induzierten Wahrscheinlichkeitsma\ss{}en $\Pp, \Pp_n,n\geq 1$ auf $(\R, \borel)$.
+	
+
+\paragraph{11.1. Definition:} $\Pp_n,n\geq1$ konvergieren schwach/in Verteilung gegen $\Pp$, wenn 
+    $$\forall t\in\R\text{ mit } F(\cdot) \text{ stetig in t}: F_n(t)\nto{}{n\to\infty}F(t)$$ 
+Kurz: $\Pp_n\nto{d}{n\to\infty}\Pp$, oder $F_n\nto{d}{n\to\infty}F$, oder $X_n\nto{d}{n\to\infty}X$.
+
+\paragraph{11.2. Proposition:} $X_n\nto{P}{n\to\infty} X\implies X_n\nto{d}{n\to\infty} X$
+
+\paragraph{Beweis:} Sei $\varepsilon>0$ beliebig.
+\begin{align*}
+    F_n(t)&=\Pp(X_n\leq t)\\
+	&=\Pp(X_n\leq t, |X_n-X|\leq\varepsilon) + \Pp(X_n\leq t,|X_n-X|>\varepsilon) \\
+	&\leq\Pp(X-\varepsilon\leq t,|X_n-X|\leq\varepsilon)+\Pp(|X_n-X|>\varepsilon) \\
+	&\leq \Pp(X-\varepsilon\leq t)+\Pp(|X_n-X|>\varepsilon)
+\end{align*}
+Damit folgt $\forall t\in\R$: 
+    $$\limsup_{n\to\infty}F_n(t)\leq F(t+\varepsilon)$$
+Gleichzeitig gilt:
+\begin{align*}
+    F(t-\varepsilon)&=\Pp(X\leq t-\varepsilon) \\
+	&=\Pp(X\leq t-\varepsilon , |X_n-X|\leq\varepsilon)+\Pp(X\leq t-\varepsilon, |X_n-X|>\varepsilon) \\
+	&\leq\Pp(X_n-\varepsilon\leq t-\varepsilon,|X_n-X|\leq\varepsilon)+\Pp(|X_n-X|>\varepsilon) \\
+	&=\Pp(X_n\leq t)+\Pp(|X_n-X|>\varepsilon)
+\end{align*}
+Damit folgt 
+    $$\liminf_{n\to\infty}F_n(t)\geq F(t-\varepsilon)$$
+Wenn $F(\cdot)$ nun stetig im Punkt $t$ ist, dann gilt 
+    $$\lim_{\varepsilon\searrow0}F(t-\varepsilon)=\lim_{\varepsilon\searrow0}F(t+\varepsilon)=F(t)$$
+und damit 
+	$$F(t)\leq\liminf_{n\to\infty}F_n(t)\leq\limsup_{n\to\infty}F_n(t)\leq F(t)$$	
+und es folgt f\"ur alle $t\in\mathcal{C}(F)$:
+	$$F_n(t)\nto{}{n\to\infty}F(t)$$
+\qed
+
+
+\paragraph{11.3. Proposition:} Es gelte $X_n\nto{d}{n\to\infty}X$ mit $\Pp(X=c)=1$ f\"ur ein $c\in\R$. Dann folgt $X_n\nto{P}{n\to\infty}c$.
+
+\paragraph{Beweis:} 
+\begin{equation*}F(t)=
+	\begin{cases}
+	   1, \ \ \ \ \ \text{if }t\geq  c\\
+	   0, \ \ \ \ \ \text{if }t<  c
+	\end{cases}
+\end{equation*}
+ist stetig auf $\R \setminus\{c\}$ und damit stetig in $c\pm\varepsilon$ f\"ur alle $\varepsilon>0$. Also gilt
+\begin{align*}
+    \Pp(|X_n-X|>\varepsilon)&=\Pp(|X_n-c|>\varepsilon)\\
+    &=\Pp(X_n-c\notin[-\varepsilon,\varepsilon]) \\
+	&=1-\Pp(X_n-c\in[-\varepsilon,\varepsilon]) \\
+	&\leq1-F_n(c+\varepsilon)+F_n(c-\varepsilon) \nto{}{n\to\infty}1-F(c+\varepsilon)+F(c-\varepsilon)=0
+\end{align*}
+Damit folgt $X_n\nto{P}{n\to\infty}X\overset{a.s.}{=}c$. \qed
+
+
+\paragraph{11.4. Satz (von Glivenko\textendash Cantelli):} Seien $X_n, n\geq 1$ i.i.d.reellwertige Zufallsvariablen mit cdf $F$. Definiere die empirical cdf:
+    $$\hat{F}_n(t):=\dfrac{1}{n}\sum_{i=1}^n\ind{\{X_i\leq t\}}$$
+f\"ur alle $\omega\in\Omega$. Dann gilt:
+	$$\sup_{t\in\R}|\hat{F}_n(t)-F(t)|\nto{a.s.}{n\to\infty}0$$
+
+\paragraph{Beweis:} Zeige zuerst, dass $\sup_{t\in\R}|\hat{F}_n(t)-F(t)|$ messbar ist. W\"ahle dazu $t_k\in\R,k\geq 1$, sodass 
+	$$|\hat{F}_n(t_k)-F(t_k)|\geq\sup_{t\in\R}|\hat{F}_n(t)-F(t)|-\dfrac{1}{k}$$
+Beachte, dass $t_k$ von $\omega$ abh\"angt! W\"ahle nun $q_k\in\mathbb{Q},k\geq1$, sodass
+	$$|\hat{F}_n(q_k)-F(q_k)|\geq | \hat{F}_n(t_k)-F(t_k)|-\dfrac{1}{k}$$
+Dieser Schritt funktioniert wegen der rechtsseitigen Stetitgkeit von $F,\hat{F}_n,n\geq 1$. Nun folgt aber 
+	$$|\hat{F}_n(q_k)-F(q_k)|\geq\sup_{t\in\R}|\hat{F}_n(t)-F(t)|-\dfrac{2}{k}$$
+und damit 
+	$$|\hat{F}_n(q_k)-F(q_k)|\nto{}{k\to\infty}\sup_{t\in\R}|\hat{F}_n(t)-F(t)|$$
+Also 
+	$$\sup_{q\in\mathbb{Q}}|\hat{F}_n(q)-F(q)|=\sup_{t\in\R}|\hat{F}_n(t)-F(t)|$$
+wobei die linke Seite als abz\"ahlbares Supremem messbarer Funktionen messbar ist. \newline
+Setze nun $F(-\infty)=\hat{F}_n(-\infty)=0$ und $F(\infty)=\hat{F}_n(\infty)=1$ und w\"ahle ein Mesh$$-\infty=t_0<t_1<\hdots<t_{k-1}<t_k=+\infty$$
+sodass 
+\begin{equation}
+    F(t_{j-})-F(t_{j-1})\leq\varepsilon 
+\end{equation}
+f\"ur $1\leq j\leq k$. Dazu verf\"ahrt man folgenderma\ss{}en:\newline
+Beginne mit $t_0=-\infty$. Angenommen wir haben schon $j-1\geq 0$ Punkte gew\"ahlt, sodass (1) f\"ur alle $i\leq j-1$ gilt und $t_{j-1}<\infty$. Setze dann
+    $$t_j:=\sup \left\{ t>t_{j-1}:F(t_-)-F(t_{j-1})<\varepsilon\right\}$$
+Mit der Stetigkeit von oben gilt dann $F(t_-)-F(t_{j-1})=\Pp(t_{j-1}<X<t)\nto{}{t\searrow t_{j-1}}0$. Damit ist $t_j$ wohldefiniert. Falls $t_j=\infty$ sind wir fertig. Andernfalls wiederholt man die Prozedur f\"ur $j+1$. Wir haben am Schluss also Punkte $(t_j)_{0\leq j\leq k}$ f\"ur die gilt:
+\begin{align*}
+	F(t_{j-})-F(t_{j-1})\leq\varepsilon \\
+	F(t_j)-F(t_{j-1})\geq\varepsilon
+\end{align*}
+Da $F(\infty)-F(-\infty)=1$, gilt $k\varepsilon\leq 1$ und damit $k<\left\lfloor\frac{1}{\varepsilon}\right\rfloor$, also endet die Prozedur immer in endlich vielen Schritten.\newline
+Zeige nun, dass die empirische cdf gleichm\"a\ss{}ig in $t\in\R$ gegen die tats\"achliche cdf konvergiert. Mit dem SLLN gilt 
+\begin{align}
+    \hat{F}_n(t_j)&\nto{a.s.}{n\to\infty}F(t_j) \\
+	\hat{F}_n(t_{j-})&\nto{a.s.}{n\to\infty}F(t_{j-})
+\end{align}
+Sei also $N_\varepsilon$, so dass f\"ur alle $\omega\in N_\varepsilon^c$ (2) und (3) gelten. F\"ur jedes $t\in\R$ gibt es $1\leq j\leq k $, sodass $t\in[t_{j-1},t_j)$ und es gilt		
+\begin{align*}
+    \hat{F}_n(t)-F(t)&\stackrel{\text{Monotonie}}{\leq}\hat{F}_n(t_{j-})-F(t_{j-1}) =\\ 
+    &=\hat{F}_n(t_{j-})-F(t_{j-})+F(t_{j-})-F(t_{j-1})\leq \\
+    &\leq \hat{F}_n(t_{j-})-F(t_{j-})+\varepsilon
+\end{align*}
+und
+\begin{align*}
+    \hat{F}_n(t)-F(t)&\stackrel{\text{Monotonie}}{\geq}\hat{F}_n(t_{j-1})-F(t_{j-})= \\
+    &=\hat{F}_n(t_{j-1})-F(t_{j-1})+F(t_{j-1})-F(t_{j-})\geq \\
+    &\geq \hat{F}_n(t_{j-1})-F(t_{j-1})-\varepsilon
+\end{align*}
+
+Damit folgt
+\begin{align*}
+    &\limsup_{n\to\infty}\sup_{t\in\R}\left(
+    \hat{F}_n(t_{j-})-F(t)\right)\leq\limsup_{n\to\infty}\max\left\{\hat{F}_n(t_{j-1})-F(t_{j-1}\leq j\leq k)\right\}+\varepsilon \\
+    &\liminf_{n\to\infty}\inf_{t\in\R}\left(\hat{F}_n(t_{j-})-F(t)\right)\geq\liminf_{n\to\infty}\min\left\{\hat{F}_n(t_{j-1})-F(t_{j-1}\leq j\leq k)\right\}-\varepsilon
+\end{align*}
+Weil $\varepsilon>0$ beliebig war, folgt
+	$$\liminf_{n\to\infty}\inf_{t\in\R}\left(\hat{F}_n(t_{j-})-F(t)\right)=\limsup_{n\to\infty}\sup_{t\in\R}\left(\hat{F}_n(t_{j-})-F(t)\right)=0$$
+und damit
+	$$\lim_{n\to\infty}\sup_{t\in\R}|\hat{F}_n(t)-F(t)|=0$$
+f\"ur alle $\omega\in\displaystyle\bigcup_{\varepsilon>0}N_\varepsilon^c=\bigcup_{n\geq1}N_n^c$ mit
+Ma\ss{} 0. \qed
+\newline\newline
+
+\textbf{Bemerkung:} F\"ur eine Klasse von Funktionen $\mathcal{F}$, sei 
+\begin{align*}
+    \forall f\in\mathcal{F}:  \ \ &\hat{F}_n(f):=n^{-1}\sum_{i=1}^nf(X_i)\\
+    &F(f):=\E[f(X_1)]
+\end{align*}
+Im Fall von Satz 11.4 war z.B.$\mathcal{F}=\left\{\ind{(-\infty,t]}(\cdot),t\in\R\right\}$. Im allgemeinen Fall geben Glivenko-Cantelli Theoreme Bedinungen an die Klasse $\mathcal{F}$, sodass 
+    $$\sup_{f\in\mathcal{F}}|\hat{F}_n(f)-F(f)|\nto{a.e.}{n\to\infty}0$$
+
+
+\paragraph{11.5. Satz (Portemanteau Theorem 1):} Es gilt $X_n\nto{d}{n\to\infty}X$ genau dann, wenn eine der folgenden Bedingungen erf\"ullt ist:
+\begin{enumerate}[label=(\roman*)]
+    \item $\E f(X_n)\nto{}{n\to\infty}\E f(X)$ f\"ur alle $f$ stetig mit kompaktem Tr\"ager.
+    \item $\E f(X_n)\nto{}{n\to\infty}\E f(X)$ f\"ur alle $f$ stetig und beschr\"ankt.
+\end{enumerate}
+
+\textbf{Bemerkung:} Ist $f$ stetig und $\overline{\operatorname{supp}f}$ kompakt, dann ist $f$ auch beschr\"ankt. Damit gilt trivial (ii)$\implies $(i).
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*. ]
+    \item $X_n\nto{d}{n\to\infty}X\implies$(i) \newline
+    Sei $f$ wie in (i). Dann ist $f$ auf $\operatorname{supp}f$ auch gleichm\"a\ss{}ig stetig. F\"ur $\varepsilon>0$ w\"ahle ein Mesh    
+        $$a_0<a_1<\hdots<a_{k-1}<a_k$$
+		sodass 
+    \begin{align*}
+        \forall x\notin(a_0,a_k]:&f(x)=0 \\
+        \forall x\in(a_{i-1},a_i]:&|f(x)-f(a_i)|<\varepsilon \ \ \ \ \text{f\"ur } 1\leq i\leq k 
+	\end{align*}
+    und so, dass $a_o,\hdots,a_k$ alle Stetigkeitsstellen von $F$ sind (davon
+    gibt es h\"ochstens abz\"ahlbar viele, also ist das ohne Probleme m\"oglich).\newline
+	Definiere
+        $$g_\varepsilon(x):=\sum_{i=1}^kf(a_i)\ind{(a_{i-1},a_i]}(x)$$
+	sodass 
+    \begin{gather}
+        \sup_{x\in\R}|f(x)-g_\varepsilon(x)|\leq\varepsilon
+	\end{gather}
+	Dann gilt 
+    \begin{align*}
+	   \E g_\varepsilon(X_n)&=\sum_{i=1}^kf(a_i)\Pp(a_{i-1}<X_n\leq a_i)= \\
+        &=\sum_{i=1}^kf(a_i)(F_n(a_i)-F_n(a_{i-1}))\nto{}{n\to\infty}\sum_{i=1}^kf(a_i)(F(a_i)-F(a_{i-1}))=\E g_\varepsilon(X)
+    \end{align*}
+    und mit (4) folgt $\forall\varepsilon>0: f\leq g_\varepsilon+\varepsilon$ und $g_\varepsilon\leq f+\varepsilon$ und damit
+	\begin{gather*}
+        \limsup_{n\to\infty}\E f(X_n)\leq\limsup_{n\to\infty}\E g_\varepsilon(X_n)+\varepsilon=\E g_\varepsilon(X)+\varepsilon\leq\E f(X)+2\varepsilon \\
+		\liminf_{n\to\infty}\E f(X_n)\geq\limsup_{n\to\infty}\E g_\varepsilon(X_n)-\varepsilon=\E g_\varepsilon(X)-\varepsilon\geq\E f(X)-2\varepsilon
+    \end{gather*}
+    und f\"ur $\varepsilon\to0$ folgt, dass 
+        $$\E f(X_n)\nto{}{n\to\infty}\E f(X)$$
+    
+    \item (i)$\implies$(ii)\newline
+    Sei $f$ wie in (ii). F\"ur $M>1$ definiere eine stetige Funktion $g_M$ mit kompaktem Tr\"ager, wie folgt: \newline \newline
+    \begin{tikzpicture}[
+        declare function = {
+            func(\x)=(\x<=(-6)) * 0 +
+            and(\x>(-6), \x<=(-3)) * (1/3*\x+2) +
+            and(\x>(-3), \x<=3) * 1 +
+            and(\x>3, \x<=6) * ((-\x)/3+2) +
+            (\x>6) * 0;
+            }
+        ]
+        \begin{axis}[
+            axis lines = left,
+            xlabel = \(x\),
+            ylabel = {\(g_M(x)\)},
+            xtick = {-6,-3,3,6},
+            xticklabels = {$-(M+1)$,$-M$,$M$,$M+1$},
+            ytick = {0,1},
+            yticklabels = {0,1},
+            width = 14cm,
+            height = 5cm,
+            ymin = 0,
+            ymax = 1.1,
+            domain=-7:7
+            ]
+            \addplot[color = red, domain=-7:7, samples=100]{func(x)};
+        \end{axis}
+    \end{tikzpicture}
+    \newline
+    Also $g_M(x):=
+            \begin{cases}
+                0 \ \text{if } x\notin(-M-1,M+1]\\
+                1 \ \text{if } x\in(-M,M]\\
+                x+(M+1) \ \text{if } x\in(-M-1,-M]\\
+                (M+1)-x \ \text{if } x\in(M,M+1]
+            \end{cases}$
+    \newline\newline\newline
+    W\"ahle nun $M$ gro\ss{} genug, sodass $|1-\E g_M(X)|<\eps$ (m\"oglich wegen $g_M(x)\nto{}{M\to\infty}1$ und MONK). Die Funktion $f_M:=f\cdot g_M$ ist dann stetig, beschr\"ankt und hat kompakten Tr\"ager (einfache \"uberlegung). Weiters folgt
+    \begin{align*}
+        \big|\E f(X_n)-\E f(X)\big| &=\big| \E \left[f(X_n)-f_M(X_n)+f_M(X_n)-f_M(X)+f_M(X)-f(X)\right]\big| \leq \\
+        &\leq \big|\E f(X_n)-\E f_M(X_n)\big|+\big|\E f_M(X_n)-\E f_M(X)\big|+\big|\E f_M(X)-f(X)\big|
+    \end{align*}
+    Betrachte nun der Reihe nach alle drei Summanden
+    \begin{align*}
+        \big|\E f(X_n)-f_M(X_n)\big|&\leq\Vert f\Vert_\infty\big|\E[1-g_M(X_n)]\big|\nto{}{n\to\infty}\Vert f\Vert_\infty\big|\E[1-g_M(X)]\big|\leq\eps\cdot\Vert f\Vert_\infty
+    \end{align*}
+    \begin{align*}
+        \big|\E [f_M(X_n)-f_M(X)]\big|\nto{\text{Ann.}}{n\to\infty}0
+    \end{align*}
+    \begin{align*}
+        \big|\E f(X)-f_M(X)\big|\overset{\text{s.o.}}{\leq}\eps \cdot\Vert f\Vert_\infty
+    \end{align*}
+    Damit folgt
+    $$0\leq\limsup_{n\to\infty}\big|\E[f(X_n)-f(X)]\big|\leq2\eps$$
+    und da $\eps>0$ beliebig war auch die Aussage.
+
+    \item (ii)$\implies X_n\nto{d}{n\to\infty}X$\newline
+    F\"ur $t\in\R$ definiere stetige, beschr\"ankte Funktionen $f_\eps^-$ und $f_\eps^+$ wie folgt: \newline \newline
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = left,
+            xlabel = \(x\),
+            ylabel = {\(f_\eps^+(x),f_\eps^-(x)\)},
+            xtick = {0,3,6},
+            xticklabels = {$t-\eps$,$t$,$t+\eps$},
+            ytick = {0,1},
+            yticklabels = {0,1},
+            width = 14cm,
+            height = 5cm,
+            ymin = 0,
+            ymax = 1.1,
+            domain=-7:7
+            ]
+            \addplot[color = red, domain=-7:7, samples=100]{(\x<=3) * 1 +
+            and(\x>3, \x<=6) * ((-\x)/3+2) +
+            (\x>6) * 0};
+            \addplot[color = blue, domain=-7:7,samples=100]{(\x<=0) * 1 +
+            and(\x>0, \x<=3) * ((-\x)/3+1) +
+            (\x>3) * 0};
+            \legend{$f_\eps^+$,$f_\eps^-$};
+        \end{axis}
+    \end{tikzpicture}
+    \newline      
+    Dann ist $f_\eps^-\leq\ind{(-\infty,t]}\leq f_\eps^+$ und damit 
+    $$\E f_\eps^-(X_n)\leq F_n(t)\leq \E f_\eps^+(X_n)$$
+    f\"ur alle $n\geq1$. Es folgt mit DOMK 
+    $$\E f_\eps^-(X)\leq \liminf_{n\to\infty}F_n(t)\leq \limsup_{n\to\infty}F_n(t)\leq \E f_\eps^+(X)$$
+    Aber 
+    \begin{align*}
+        &\E f_\eps^-(X)\geq\E[\ind{(-\infty,t-\eps]}(X)]=F(t-\eps) \\
+        &\E f_\eps^-(X)\leq\E[\ind{(-\infty,t+\eps]}(X)]=F(t+\eps)
+    \end{align*}
+    Wenn $F$ also stetig im Punkt $t$ ist, folgt $F_n(t)\nto{}{n\to\infty}F(t)$. \qed
+\end{enumerate}
+
+\paragraph{11.6. Satz (Portemanteau Theorem 2):} Es gilt $X_n\nto{d}{n\to\infty}X$ genau dann, wenn eine der folgenden Bedingungen zutrifft:
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur $O\subseteq\R$ offen ist $\Pp(X\in O)\leq\displaystyle\liminf_{n\to\infty}\Pp(X_n\in O)$.
+    \item F\"upr $A\subseteq\R$ abgeschlossen ist $\Pp(X\in A)\geq\displaystyle\limsup_{n\to\infty}\Pp(X_n\in A)$.
+    \item F\"ur $B\in\borel$ mit $\Pp(X\in\partial B)=0$ gilt $\Pp(X_n\in B)\nto{}{n\to\infty}\Pp(X\in B)$.
+\end{enumerate}
+
+\paragraph{Beweis:} (i)$\iff$(ii) folgt sofort aus $O$ offen$\iff O^c$ abgeschlossen.
+\begin{enumerate}[label=\Roman*.]
+    \item $X_n\nto{}{n\to\infty}X\implies$(i)\newline
+    Sei $O\subseteq\R$ offen und w\"ahle stetige und beschr\"ankte Funktionen (einfache \"Uberlegung, Hinweis: Jede offene Teilmenge von $\R$ ist eine abz\"ahlbare Vereinigung offener Intervalle) $f_m, m\geq 1$, sodass
+    $$0\leq f_1\leq\hdots\leq\lim_{m\to\infty}f_m=\ind{O}$$
+    Es folgt mit Portemanteau 1 (Satz 11.5)
+    $$\forall m\geq1:\E f_m(X)=\lim_{n\to\infty}\E f_m(X_n)\leq\liminf_{n\to\infty}\Pp(X_n\in O)$$
+    und damit
+    $$\Pp(X\in O)=\E \ind{O}(X)\overset{\text{MONK}}{=}\lim_{m\to\infty}\E f_m(X)\overset{\text{s.o.}}{\leq}\lim_{m\to\infty}\liminf_{n\to\infty}\Pp(X_n\in O)=\liminf_{n\to\infty}\Pp(X_n\in O)$$
+   \item (i),(ii)$\implies$(iii)\newline
+   Sei $B\in\borel$ mit $\Pp(X\in\partial B)=0$. Dann ist
+   $$\Pp(X\in B\setminus\del B)=\Pp(X\in\text{int}(S))=\Pp(X\in\text{clos}(S))=\Pp(X\in S)$$
+   und damit
+   \begin{align*}
+       &\Pp(X\in B)=\Pp(X\in\text{clos}(B))\overset{\text{(ii)}}{\geq}\limsup_{n\to\infty}\Pp(X_n\in\text{clos}(B))\geq\limsup_{n\to\infty}\Pp(X_n\in B) \\
+       &\Pp(X\in B)=\Pp(X\in\text{int}(B))\overset{\text{(i)}}{\leq}\liminf_{n\to\infty}\Pp(X_n\in\text{int}(B))\leq\liminf_{n\to\infty}\Pp(X_n\in B) 
+   \end{align*}
+   und damit $$\Pp(X_n\in B)\nto{}{n\to\infty}\Pp(X\in B)$$
+   \item (iii)$\implies X_n\nto{d}{n\to\infty}X$\newline
+   F\"ur $B=(-\infty, t]$ ist $\Pp(X_n\in B)=F_n(t)$ und $\del B=\{t\}$. Wenn $F$ also stetig in $t$ ist, folgt die Aussage. \qed
+\end{enumerate}
+
+\paragraph{11.7. Satz (Slutsky's Theorem):} Wenn $X_n\nto{d}{n\to\infty}X$ und $Z_n\nto{d}{n\to\infty}Z$, mit $\Pp(Z=c)=1$, dann gilt:
+\begin{enumerate}[label=(\roman*)]
+    \item $X_n+Z_n\nto{d}{n\to\infty}X+c$
+    \item $X_nZ_b\nto{d}{n\to\infty}Xc$
+    \item Falls $c\neq0$: $\displaystyle\frac{X_n}{Z_n}\nto{d}{n\to\infty}\frac{X}{c}$
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Wenn $t$ Stetigkeitspunkt der Verteilung von $X+c$ ist, dann ist $t-c$ Stetigkeitspunkt der Verteilung von $X$, also 
+    $$\lim_{x\nearrow t}\Pp(X\leq x-c)=\lim_{x\nearrow c}\Pp(X+c\leq x)\overset{\text{Ann.}}{=}\Pp(X+c\leq t)=\Pp(X\leq t-c)$$
+    Damit folgt $X_n+c\nto{d}{n\to\infty}X+c$ f\"ur $c\in\R$. \newline
+    Sei also $f:\R\to\R$ stetig mit kompaktem Tr\"ager. Dann ist $f$ beschr\"ankt und gleichm\"a\ss{}g stetig. Sei $\eps>0$ und w\"ahle $\delta>0$, sodass
+    $$\forall x,y\in\R:|x-y|<\delta\implies|f(x)-f(y)|<\eps$$
+    Dann gilt
+    \begin{align*}
+        \big|\E f(X_n+Z_n)-\E f(X_n+c)\big|&\leq\E\big|f(X_n+Z_n)-f(X_n+c)\big|=\\
+        &=\E\left[\big|f(X_n+Z_n)-f(X_n+c)\big|\ind{|Z_n-c|\geq\delta}\right]\\&+\E\left[\big|f(X_n+Z_n)-f(X_n+c)\big|\ind{|Z_n-c|<\delta}\right]\leq\\
+        &\leq\eps+2\Vert f\Vert_\infty\cdot\Pp(|Z_n-c|\geq\delta)\nto{}{n\to\infty}\eps
+    \end{align*}
+    F\"ur $\eps\searrow 0$ und mit $X_n+c\nto{d}{n\to\infty}X+c$ folgt die Aussage mit Portememanteau 1 (Satz 11.5).
+    \item Zeige zuerst den Fall wo $c=0$: \newline 
+    Hier gen\"ugt es mit Proposition 11.3 zu zeigen, dass $X_nZ_n\nto{P}{n\to\infty}0$. F\"ur $\eps>0$ gilt
+    \begin{align*}
+        &\Pp(|X_nZ_n|>\eps)\\
+        &=\Pp(|X_nZ_n|>\eps,|Z_n|>\delta)+\Pp(|X_nZ_n|>\eps,|Z_n|\leq\delta)\\
+        &\leq\Pp(|X_nZ_n|>\eps,|Z_n|\leq\delta)+\Pp(|Z_n|>\delta)\\
+        &=\Pp(X_n<-\eps/\delta)+[1-\Pp(X_n\leq\eps/\delta)]+\Pp(|Z_n|>\delta) \\
+        &\leq F_n(-\eps/\delta)+1-F_n(\eps/\delta)+\Pp(|Z_n|>\delta)
+    \end{align*}
+    Wir k\"onnen nun $\delta>0$ so w\"ahlen, dass $F$ in den Punkten $\pm\eps/\delta$ stetig ist. Dann folgt
+    $$\limsup_{n\to\infty}\Pp(|X_nZ_n|>\eps)\leq F(-\eps/\delta)+[1-F(\eps/\delta)]$$
+    und f\"ur $\delta\searrow0$ folgt die gew\"unschte Aussage.\newline
+    Zeige nun den Fall wo $c\neq0$: \newline
+    Schreibe dazu $X_nZ_n=X_n(Z_n-c)+X_nc$. Es gilt $X_nc\nto{d}{n\to\infty}Xc$ (einfach zu pr\"ufen) und $(Z_n-c)\nto{P}{}0$. Mit dem ersten Fall folgt
+    $$X_n(Z_n-c)\nto{P/d}{}0$$
+    Mit (i) folgt also 
+    $$X_nZ_n=X_n(Z_n-c)+X_nc\nto{d}{n\to\infty}Xc$$
+    \item Die Abbildung $t\mapsto 1/t$ ist steig auf $\R\setminus \{0\}$ und damit gilt 
+    $$\frac{1}{Z_n}\nto{P}{n\to\infty}\frac{1}{c}$$
+    Mit (ii) folgt damit die Aussage. \qed
+\end{enumerate}
+
+\paragraph{11.8. Satz (Continuous Mapping Theorem, CMT):} Seien $X_n,n\geq 1$ und $X$ Zufallsvariablen, sodass $X_n\nto{d}{n\to\infty}X$ und sei $h:\R\to\R$ eine Abbildung, sodass es $H\in\borel$ gibt, mit $H\subseteq C(h)$ und $\Pp(X\in H)=1$. Dann folgt
+$$h(X_n)\nto{d}{n\to\infty}h(X)$$
+
+\paragraph{Beweis:} Sei $A\subseteq\R$ abgeschlossen. Dann gilt
+$$h^{-1}A\subseteq\text{clos}(h^{-1}A)\overset{\dag}{\subseteq}h^{-1}A\cup H^c$$
+$\dag$ folgt mit einer kurzen \"uberlegung aus der Tatsache, dass Urbilder abgeschlossener Mengen unter stetigen Funktionen wieder abgeschlossen sind. \newline\newline
+Damit folgt nun
+\begin{align*}
+    \limsup_{n\to\infty}\Pp(h(X_n)\in A)&=\limsup_{n\to\infty}\Pp(X_n\in h^{-1}A)\\
+    &\leq \limsup_{n\to\infty}\Pp(X_n\in\text{clos}(h^{-1}A))\\
+    &\overset{\text{PMT2}}{\leq}\Pp(X\in h^{-1}A) \\
+    &\leq\Pp(X\in h^{-1}A\cup H^c)\\
+    &\leq\Pp(X\in h^{-1}A)+\Pp(X\in H^c)\\
+    &=\Pp(X\in h^{-1}A)=\Pp(h(X)\in A)
+\end{align*}
+und da $A$ eine beliebige abgeschlossene Teilmenge von $\R$ war folgt mit PMT2 (Satz 11.6), dass
+$$h(X_n)\nto{d}{n\to\infty}h(X)$$
+\qed
+
+\paragraph{11.9. Proposition ($\delta$-Methode):} F\"ur eine Folge von Zufallsvariablen $X_n,n\geq1$ mit $$\sqrt{n}(X_n-\mu)\nto{d}{n\to\infty}\mathcal{N(0,\sigma^2)}$$
+und eine Abbildung $f:\R\to\R$, die stetig im Punkt $\mu$ ist, gilt
+$$\sqrt{n}(f(X_n)-f(\mu))\nto{d}{n\to\infty}\mathcal{N}(0,(f'(\mu))^2\sigma^2)$$
+Eine hinreichende Bedingung an die $X_n,n\geq1$ w\"are z.B., dass sie einen zentralen Grenzwertsatz (siehe S\"atze 11.25, 11.26, 11.27) erf\"ullen.
+
+\paragraph{Beweis:}Betrachte die Abbildung $g:\R\to\R$ mit 
+\begin{align*}
+    x\mapsto
+\begin{cases}
+    f'(\mu)-\dfrac{f(x)-f(\mu)}{x-\mu} &\text{ if }x\neq\mu \\
+    0 &\text{ if } x=\mu
+\end{cases}
+\end{align*}
+Da $f'(\mu)$ existiert ist $g$ stetig im Punkt $\mu$ (Definition der Ableitung). Dann gilt 
+$$f(x)-f(\mu)=f'(\mu)(x-\mu)-g(x)(x-\mu)$$
+und damit
+$$\sqrt{n}(f(X_n)-f(\mu))=f'(\mu)\sqrt{n}(X_n-\mu)-g(X_n)\sqrt{n}(X_n-\mu)=:A_n-B_n$$
+Mit Slutsky's Theorem (Satz 11.7. (ii)) und dem Reproduktionssatz folgt sofort $A_n\nto{d}{n\to\infty}\mathcal{N}(0,(f'(\mu))^2\sigma^2)$. Es gen\"ugt mit Slutky's Theorem (Satz 11.7. (i)) also zu zeigen, dass $B_n\nto{P}{n\to\infty}0$. \newline\newline
+Sei $Z\sim\mathcal{N}(0,\sigma^2)$. Dann gilt (einfache \"uberlegung) $X_n-Z\nto{P}{n\to\infty}0$. Da $g$ stetig in $\mu$ ist, gilt mit dem Continuous Mapping Theorem (Satz 11.8) $g(X_n)\nto{P}{n\to\infty}g(\mu)=0$. Dann folgt erneut mit Slutsky's Theorem $B_n\nto{P/d}{n\to\infty}0$ und damit die Behauptung. \qed
+
+\paragraph{11.10. Satz} Seien $X_n,n\geq 1$ gleichgradig integrierbar und $X_n\nto{d}{n\to\infty}X$. Dann folgt $X\in L^1$ und $\E X_n\nto{}{n\to\infty}\E X$.
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $X_n,n\geq0$ und $X$ alle nicht-negativ\newline 
+    Aus der gleichgradigen Integrierbarkeit folgt mit Lemma 9.2
+    $$\displaystyle\limsup_{n\to\infty}\E|X_n|=B<\infty$$
+    F\"ur alle $M>1$ definiere $g_M(\cdot)$ wie im Beweis von Satz 11.5 (PMT1, Teil II). Dann ist $g_M$ stetig, beschr\"ankt und hat kompakten Tr\"ager. Also ist die Abbildung mit $t\mapsto t\cdot g_M(t)$ stetig mit kompaktem Tr\"ager und es gilt $\forall m\geq1$
+    $$0\leq\E[Xg_M(X)]\overset{\text{PMT1}}{=}\lim_{n\to\infty}\E[X_ng_M(X_n)]\overset{g_M\leq1}{\leq}\limsup_{n\to\infty}\E X_n\leq\limsup_{n\to\infty}\E |X_n|=B<\infty$$
+    Gleichzeitig gilt aber
+    $$0\leq Xg_1(X)\leq\hdots\leq\lim_{M\to\infty}Xg_M(X)=X$$
+    und mit MONK % MONK ODER DOMK?
+    $$0\leq\E X=\lim_{M\to\infty}\E[Xg_M(X)]\leq B$$
+    und da $\E X=\E|X|$, folgt $X\in L^1.$ \newline\newline
+    Zeige nun die Konvergenz:
+    \begin{align*}
+        \big|\E X_n-\E X\big|&=\big|\E[X_ng_M(X_n)-X+X_n-X_ng_M(X_n)]\big|\\
+        &\leq\big|\E[X_ng_M(X_n)]-\E X\big|+\E|X_n|\big|1-g_M(X_n)\big| \\
+        &\leq\big|\E[X_ng_M(X_n)]-\E X\big|+\E|X_n|\cdot\ind{\{|X_n|\geq M\}}
+    \end{align*}
+    Damit folgt mit PMT1
+    $$\limsup_{n\to\infty}|\E X_n-\E X|\leq\big|\E[Xg_M(X)]-\E X\big|+\limsup_{n\to\infty}\E|X_n|\cdot\ind{\{|X_n|\geq M\}}$$
+    und f\"ur $M\to\infty$
+    $$\limsup_{n\to\infty}|\E X_n-\E X|\leq\limsup_{M\to\infty}\big|\E Xg_M(X)-\E X\big|+\limsup_{M\to\infty}\limsup_{n\to\infty}\E|X_n|\cdot\ind{\{|X_n|\geq M\}}=0$$
+    % MONK ODER DOMK?
+    wobei die letzte Gleichung mit MONK und der Def. von  gleichgradiger Integrierbarkeit folgt.
+    \item allgemeiner Fall\newline
+    Die Abbildung mit $t\mapsto\max(t,0)$ ist stetig auf $\R$, sodass mit dem Continuous Mapping Theorem (Satz 11.8) f\"ur $X^+:=\max(X,0)$ und $X_n^+:=\max(X_n,0)$ gilt
+    $$X_n^+\nto{d}{n\to\infty}X^+$$
+    Da $0\leq X_n^+\leq|X_n^+|$ und die $X_n,n\geq1$ gleichgradig integrierbar sind, sind auch die $X_n^+,n\geq1$ gleichgradig integrierbar. Mit dem I. Fall folgt 
+    $$\E X_n^+\nto{}{n\to\infty}\E X^+$$
+    Dasselbe gilt f\"ur den Negativteil und es folgt
+    $$\E X_n\nto{}{n\to\infty}\E X$$
+    mit den Rechenregeln f\"ur Konvergenz von Folgen reeler Zahlen. \qed
+\end{enumerate}
+
+\section*{Schwach konvergente Teilfolgen}
+\addcontentsline{toc}{section}{Schwach konvergente Teilfolgen}
+Erinnerung Analysis: Jede Folge reeller Zahlen $a_n,n\geq1$ enth\"alt eine Teilfolge $a_{n_i},i\geq1$, die gegen einen Grenzwert $\alpha\in\overline{\R}$ konvergiert, i.e. $\alpha=\lim_{i\to\infty}a_{n_i}\in\overline{\R}$. Falls $a_n,n\geq1$ zus\"atzlich beschr\"ankt ist, dann gilt $\alpha\in\R$. \"ahnliches gilt f\"ur Wahrscheinlichkeitsma\ss{}e. \newline
+Reimnder: $b_n,n\geq1$ ist eine Teilfolge von $a_n,n\geq1$, falls eine bijektive, streng monoton steigende Abbildung $f:\mathbb{N}\to\mathbb{N}$ existiert, sodass $b_n=a_{f(n)}$ f\"ur alle $n\geq1$.
+
+\paragraph{11.11. Satz (Helly's Selection Theorem):} Sei $F_n,n\geq1$ eine Folge von Verteilungsfunktionen (cdfs). Dann existiert eine Teilfolge $F_{n_i},i\geq1$ und eine monoton-nichtfallende rechtsstetige Funktion $F:\R\to\R$ mit linksseitigen Grenzwerten (cádlág), sodass 
+$$\forall t\in C(F):F_{n_i}(t)\nto{}{i\to\infty}F(t)$$
+Dabei ist aber \underline{nicht} garantiert, dass $F$ auch eine cdf ist (also $\displaystyle\lim_{t\to\infty}F(t)=1, \lim_{t\to-\infty}F(t)=0$)!
+
+\paragraph{Beweis:}Ordne $\mathbb{Q}=\{q_1,q_2,\hdots\}$ und w\"ahle aus der vollen Folge $n=1,2,3,\hdots$ eine erste Teilfolge $n_i(1),i\geq1$, sodass $F_{n_i(1)}(q_1)$ f\"ur $i\to\infty$ kovergiert (m\"oglich da $F_n\leq1$, cf. Anmerkung unter der Unter\"uberschrift). \newline
+W\"ahle nun eine weitere (Teil-)Teilfolge $n_i(2),i\geq1$, sodass $F_{n_i(2)}(q_2)$ f\"ur $i\to\infty$ konvergiert. \newline
+$\vdots$\newline
+F\"ur die $k$-te Teilfolge $n_i(k),i\geq1$ existieren dann die Grenzwerte 
+$$\lim_{i\to\infty}F_{n_i(k)}(q_\ell), \  \ell=1,\hdots,k$$
+Setze nun $n_i:=n_i(i)$ f\"ur $i\geq1$. Dann konvergiert $F_{n_i}(q_\ell)$ f\"ur jedes $\ell\geq1$, da $n_i$ ab dem Index $i=\ell$ eine Teilfolge von $n_\ell(\ell)$ ist.
+Setze nun f\"ur $q\in\mathbb{Q}$
+$$G(q):=\lim_{i\to\infty}F_{n_i}(q)$$
+Dann ist $G:\mathbb{Q}\to[0,1]$ monoton-nichtfallend auf $\mathbb{Q}$, da jedes Element der Folge $F_{n_i}(q)$ monoton-nichtfallend ist. F\"ur $t\in\R$ definiere nun
+$$F(t):=\inf\{G(q):q\geq t,q\in\mathbb{Q}\}$$ 
+Als infimum einer nichtleeren Menge ist $F(t)$ damit f\"ur alle $t\in\R$ wohldefiniert und 
+\begin{enumerate}
+    \item $F$ ist monoton-nichtfallend auf $\R$, da
+    $$s\leq t\implies\{G(q):q\geq s,q\in\mathbb{Q}\}\supseteq\{G(q):q\geq t,q\in\mathbb{Q}\}$$
+    \item F ist rechtsstetig auf $\R$:\newline
+    Sei $\eps>0,t\in\R$. Dann gibt es mit der Greatest Lower Bound Property $q\in\mathbb{Q},q\geq t$, sodass
+    $$F(t)\leq G(q)\leq F(t)+\eps$$
+    da $\mathbb{Q}$ dicht in $\R$ liegt. Damit gilt 
+    $$\forall s\in[t,q]:F(t)\leq F(s)\leq F(q)=G(q)\leq F(t)+\eps$$
+    und f\"ur $\eps\searrow0$ folgt die Aussage.
+    \item $F_{n_i}\nto{}{n\to\infty} F$ auf $C(F)$:\newline
+    Sei $F$ stetig in $t$, und sei $\eps>0$. W\"ahle nun $\delta>0$, sodass
+    $$|t-s|<\delta\implies|F(t)-F(s)|<\eps$$
+    W\"ahle nun $r,q\in\mathbb{Q}$, sodass
+    $$t-\delta<r<t<q<t+\delta$$
+    und somit 
+    $$F(t)-\eps<F(r)\leq F(t)\leq F(q)<F(t)+\eps$$
+    Mit der Definition von $G$ und $F$ folgt nun 
+    $$F_{n_i}(r)\leq F_{n_i}(t)\leq F_{n_i}(q)$$
+    wobei die linke und rechte Schranke gegen $G(r)$ bzw. $G(q)$ konvergieren, also
+    $$F(t)-\eps<G(r)\leq\liminf_{i\to\infty}F_{n_i}(t)\leq\limsup_{i\to\infty}F_{n_i}(t)\leq G(q)<F(t)+\varepsilon$$
+    und f\"ur $\eps\searrow0$ folgt die Aussage. \qed
+\end{enumerate}
+
+\paragraph{11.12. Definition:} Eine Folge von Zufallsvariablen $X_n,n\geq 1$ ist \textit{stochastisch beschr\"ankt}, wenn gilt:
+$$\sup_{n\geq1}\Pp(|X_n|> M)\nto{}{M\to\infty}0$$
+Die entsprechende Folge der Ma\ss{}e/cdfs nennt man dann \textit{straff}.
+
+\paragraph{11.13. Lemma:} $X_n,n\geq1$ ist genau dann stochastisch beschr\"ankt, wenn gilt:
+\begin{equation}
+    \forall\eps>0\exists g:\R\to[0,\infty)\text{ messbar}:\limsup_{n\to\infty}\E g(X_n)\leq\eps\cdot\liminf_{|t|\to\infty}g(t)
+\end{equation}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $\implies$ \newline
+    W\"ahle $a_0<a_1<\hdots$ mit $a_k\nto{}{k\to\infty}\infty$, sodass mit der stochastischen Beschr\"anktheit
+    $$\forall n\geq1:\Pp(|X_n|>a_k)<\left(\frac{1}{4}\right)^k$$
+    (Setze $\eps=4^{-k}$ und setze $a_k$ dann einfach gro\ss{} genug). Setze nun 
+    $$g(t):=\sum_{k\geq0}2^k\ind{(a_k,a_{k+1}]}(|t|)$$
+    Dann ist $g$ messbar (einfaches Argument) und $\displaystyle\liminf_{|t|\to\infty}g(t)=\infty$ (folgt z.B. aus $\liminf\geq\inf$). Weiters gilt
+    \begin{align*}
+        \forall n\geq1:\E g(X_n)&=\sum_{k\geq0}2^k\Pp(a_k<|X_n|\leq a_{k+1})\\
+        &\leq\sum_{k\geq0}2^k\Pp(|X_n|>a_k)\\
+        &\leq\sum_{k\geq0}2^k\frac{1}{4^k}=2<\infty
+    \end{align*}
+    Es gilt also $\forall\eps>0$
+    $$\limsup_{n\to\infty}\E g(X_n)\leq2\leq\infty=\eps\cdot\liminf_{|t|\to\infty}g(t)$$
+    \item $\impliedby$ \newline
+    Sei $\eps>0$ und w\"ahle $g$, sodass (5) gilt. 
+    $$\liminf_{|t|\to\infty}g(t)=\lim_{T\to\infty}\inf_{|t|>T}g(t)$$
+    wobei $\inf_{|t|>T}g(t)$ monoton nicht-fallend in $T$ ist. Mit der Annahme k\"onnen wir $T>0$ w\"ahlen, sodass
+    $$\limsup_{n\to\infty}\E g(X_n)\leq\eps\cdot\inf_{|t|>T}g(t)\leq\eps\cdot\liminf_{|t|\to\infty}g(t)$$
+    W\"ahle nun $c\in\R$, sodass 
+    $$\limsup_{n\to\infty}\E g(X_n)<c<\leq\eps\cdot\inf_{|t|>T}g(t)\leq\eps\cdot\liminf_{|t|\to\infty}g(t)$$
+    F\"ur $|t|>T$ ist dann $c<\eps g(t)$, bzw. $1<\eps g(t)/c$ und damit
+    \begin{align*}
+        \limsup_{n\to\infty}\Pp(|X_n|>T)&=\limsup_{n\to\infty}\E\left[1\cdot\ind{\{|X_n|>T\}}\right]\\
+        &\leq\limsup_{n\to\infty}\E\left[\dfrac{\eps g(X_n)}{c}\ind{\{|X_n|>T\}}\right]\\
+        &\leq\dfrac{\eps}{c}\cdot\limsup_{n\to\infty}\E g(X_n)<\eps
+    \end{align*}
+    Damit gibt es ein $n_0\in\mathbb{N}$, sodass f\"ur $n\geq n_0: \Pp(|X_n|>T)<\eps$. W\"ahle nun $S>0$ gro\ss{} genug, sodass f\"ur $n=1,\hdots,n_0-1: \Pp(|X_n|>S)<\eps$ und setze $M:=\max(S,T)$. Damit gibt es f\"ur jedes $\eps>0$ ein $M>0$, sodass
+    $$\forall n\geq1: \Pp(|X_n|>M)<\eps$$
+    und insbesondere $\displaystyle\sup_{n\geq1}\Pp(|X_n|>M)\nto{}{M\to\infty}0$.\qed
+\end{enumerate}
+
+\paragraph{11.14. Satz (Prokorov Theorem):} Betrachte eine Folge von cdfs $F_n,n\geq1$. Dann sind folgende Aussagen \"aquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item Die $F_n,n\geq1$ sind straff.
+    \item Jede Teilfolge $F_{n_i},i\geq1$ enth\"alt eine weitere Teilfolge $F_{n_{i_k}},k\geq1$, sodass 
+        $$F_{n_{i_k}}\nto{d}{k\to\infty}F$$
+        f\"ur eine cdf $F$.
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item (i)$\implies$(ii)\newline
+    Helly's Selection Theorem (Satz 11.11) liefert uns eine Teilfolge $F_{n_{i_k}},k\geq1$ und eine monoton nicht-fallende cádlág Funktion $F$, sodass $F_{n_{i_k}}\nto{d}{k\to\infty}F$. Zeige also 
+    $$F(t)\nto{}{t\to\infty}1\text{ und }F(t)\nto{}{t\to-\infty}0$$
+    Da die $F_n,n\geq1$ straff sind, kann man $M_\ell,\ell\geq1$ w\"ahlen, sodass
+    $$\sup_{n\geq1}\left[F_n(-M_\ell)+1-F_n(M_\ell)\right]\leq\sup_{n\geq1}\Pp(|X_n|>M_\ell)<\dfrac{1}{\ell}$$
+    O.B.d.A. seien $\pm M_\ell$ Stetigskeitspunkte und $M_\ell+1<M_{\ell+1}\nto{}{\ell\to\infty}\infty$ f\"ur alle $\ell\geq1$. Dann gilt $F_{n_{i_k}}(M_\ell)=1-[1-F_{n_{i_k}}(M_\ell)]>1-1/\ell$
+    und damit
+    $$\lim_{t\to\infty}F_n(t)=\lim_{\ell\to\infty}F(M_\ell)=\lim_{\ell\to\infty}\left(\lim_{k\to\infty}F_{n_{i_k}}(M_\ell)\right)\geq1$$
+    Da aber f\"ur alle $k\geq1$ $F_{n_{i_k}}(M_\ell)\leq1$ sind, folgt
+    $$\lim_{t\to\infty}F(t)=1$$
+    Ein \"ahnliches Argument funktionert f\"ur $\lim_{t\to-\infty}F(t)$.
+    \item (ii)$\implies$(i)\newline
+    Angenommen die $F_n,n\geq1$ sind nicht straff
+    \begin{equation}
+        \implies\exists\eps>0\forall M>0:\sup_{n\geq1}\Pp(|X_n|>M)\geq\eps
+    \end{equation}
+    W\"ahle nun $n_i,i\geq1$ so, dass
+    $$F_{n_i}(-i)+1-F_{n_i}(i)>\dfrac{\eps}{2}$$
+    Wegen (6) k\"onnen die $n_i,i\geq1$ monoton steigend gew\"ahlt werden. Laut Voraussetzung existiert nun eine weitere Teilfolge $F_{n_{i_k}},k\geq1$ und eine cdf $F$, sodass
+    $$F_{n_{i_k}}\nto{d}{k\to\infty}F$$
+    Weil $F$ eine cdf ist, gibt es $M>0$, sodass
+    $$F(-M)+1-F(M)<\dfrac{\eps}{2}$$
+    Seien o.B.d.A. $\pm M$ Stetigkeitspunkte von $F$. Dann gilt
+    $$F(-M)+1-F(M)=\lim_{k\to\infty}\left[F_{n_{i_k}}(-M)+1-F_{n_{i_K}}(M)\right]<\dfrac{\eps}{2}$$
+    Da aber 
+    $$F_{n_{i_k}}(-M)+1-F_{n_{i_k}}(M)\geq F_{n_{i_k}}(-i_k)+1-F_{n_{i_k}}(i_k)\geq\eps>\dfrac{\eps}{2}$$
+    f\"ur hinreichend gro\ss{}e $k$ (sodass $i_k\geq M$) ergibt sich hier ein Widerspruch zur Annahme (6). \qed
+\end{enumerate}
+
+\section*{Charakteristische Funktionen}
+\addcontentsline{toc}{section}{Charakteristische Funktionen}
+$(\C=\{a+ib\:a,b\in\R\},d_{|\cdot|})$ und $(\R^2,d_{\Vert\cdot\Vert})$ sind als metrische R\"aume via $\mathbb{C}\ni z=a+ib\mapsto(a,b)\in\R^2$ isometrisch isomoprh. Damit ergibt sich eine \"ahnliche Korrespondenz zwischen Borelmengen in $\mathcal{C}$ und $\R^2$. Eine Funktion $f:\Omega\to\mathbb{C}$ ist also genau dann messbar, wenn ihr Realteil und ihr Imagin\"arteil messbar sind, analog zur koordinatenweise Messbarkeit von $\R^2$-wertigen Funktionen.  In diesem Kapitel sei $\pspace$ wieder ein generischer Wahrscheinlichkeitsraum.
+
+\paragraph{11.15. Definition:} Sei $X:\Omega\to\C$ eine Zufallsvariable und schreibe $X=\Re(X)+i\Im(X)$ ($\Re(z)$ ist der Realteil und $\Im(z)$ der Imagin\"arteil von $z\in\C$). Sind $\Re(X)$ und $\Im(X)$ beide integrierbar bzgl. $\Pp$, dann nennt man $X$ integrierbar und setzt
+$$\int X\ d\Pp:=\int\Re(X)\ d\Pp+i\int\Im(X)\ d\Pp$$
+\paragraph{Bemerkung:} Es gilt $X\in L^1\iff |X|\in L^1$, denn
+$$\max(\Re(X),\Im(X))\leq|(\Re(X))^2+(\Im(X))^2|^{1/2}=|X|\leq|\Re(X)|+|\Im(X)|$$
+
+\paragraph{11.16. Lemma:} Das oben definierte Lebesgue-Integral ist linear und f\"ur $X\in L^1$ gilt die Dreiecksungleichung
+$$|\E X|\leq\E|X|$$
+
+\paragraph{Beweis:} Schreibe $f=\Re(X),g=\Im(X)$ und $z=a+ib$. Dann gilt
+\begin{align*}
+	\int zX\ d\Pp&=\int (a+ib)(f+ig)\ d\Pp\\
+	&=a\int f\ d\Pp+ia\int g\ d\Pp+ ib\int f\ d\Pp- b\int g\ d\Pp\\
+	&=(a+ib)\left(\int f\ d\Pp+i\int g\ d\Pp\right)=z\int X\ d\Pp.
+\end{align*} 
+Die Identit\"at $\int X+Y\ d\Pp=\int X\ d\Pp+\int Y\ d\Pp$ folgt trivial aus der Linearit\"at des reellen Integrals. Falls $\E X=0$, gilt die Ungleichung trivial. Sei also $\E X\neq0$ und setze $w:=|\E X|^{-1}\overline{\E X}\in\C$, sodass $|w|=1$ Dann gilt
+	$$\E[w X]=w\cdot \E X=\frac{\E X\overline{\E X}}{|\E X|}=|\E X|\in\R$$
+	und somit $w X\in\R$ und $wX\leq |wX|$. Mit Cauchy--Schwarz folgt nun
+	$$|\E X|=\E[wX]\leq\E|wX|= |w|\cdot \E|X|=\E |X|.$$
+\qed
+
+\paragraph{Bemerkung:} Es gilt
+\begin{gather*}
+    e^{ix}=\cos(x)+i\sin(x) \\
+    \dfrac{\del}{\del x}e^{ix}=ie^{ix}
+\end{gather*}
+ 
+\paragraph{11.17. Definition:} Die charakteristische Funktion (cf) einer Zufallsvariable $X:\Omega\to\R$ ist definiert als
+$$\varphi_X(t):=\E \left[e^{itX}\right],\forall t\in\R$$
+$\varphi:\R\to\C$ ist mit DOMK immer wohldefiniert, da $\left|e^{itX}\right|\leq1$.
+
+\paragraph{11.18. Proposition:} Seien $X,Y$ reellwertige, unabh\"angige Zufallsvariablen. Dann gilt
+$$\varphi_{X+Y}=\varphi_X(t)\varphi_Y(t)$$
+
+\paragraph{Beweis:}
+\begin{align*}
+    \varphi_{X+Y}(t)&=\E\left[e^{itX}e^{itY}\right] \\
+    &=\E\left[(\cos(tX)+i\sin(tX))(\cos(tY)+i\sin(tY))\right] \\
+    &=\E\left[\cos(tX)\cos(tY)+i\cos(tX)\sin(tY)+i\sin(tX)\cos(tY)-\sin(tX)\sin(tY)\right] \\
+    &\overset{\in\R}{=}\E\left[\cos(tX)+i\sin(tX)\right]\E\left[\cos(tY)+i\sin(tY)\right]=\varphi_X(t)\varphi_Y(t)
+\end{align*}\qed
+
+\paragraph{11.19. Lemma:} Die momenterzeugende Funktion (mgf) einer reellwertigen Zufallsvariable $X$
+$$M_X(t):=\E\left[e^{tX}\right]$$
+sei wohldefiniert in einer offenen Umgebung von $0$, i.e. 
+$$\exists t_0>0:M_X(t)\text{ exisitert f\"ur } t\in(-t_0,t_0)$$
+Dann folgt
+$$\forall k\geq0:X\in L^k \text{ und }\E X^k=\dfrac{\del^k}{\del t^k}M_X(t)\Bigg|_{t=0}$$
+
+\paragraph{Beweis:} Sei $M_X(t)$ wohldefiniert f\"ur $|t|<t_0$ mit $t_0>0$. Dann folgt mit
+$$0\leq e^{t|X|}\leq e^{tX}+e^{-tX}$$
+dass
+$$\forall |t|<t_0:e^{t|X|}\in L^1$$
+Sei also $t<t_0$. Per Definition ist 
+$$e^{tX}=\sum_{k\geq0}\dfrac{(tX)^k}{k!}$$
+wobei die Partialsummen im Betrag durch $e^{|tX|}\in L^1$ beschr\"ankt sind. Mit DOMK gilt damit 
+$$M_X(t)=\\E\left[e^{tX}\right]=\lim_{n\to\infty}\sum_{k=1}^n\dfrac{t^k\E X^k}{k^!}$$
+wobei die Reihe absolut konvergiert, da
+$$\sum_{k\geq0}\dfrac{|t^k\E X^k|}{k!}\leq\sum_{k\geq0}\dfrac{|t^k|\E |X|^k}{k!}\overset{\text{MONK}}{=}\E\left[\sum_{k\geq0}\dfrac{|t^k|X^k}{k!}\right]=\E\left[ e^{|tX|}\right]<\infty$$
+Differenzieren liefert dann
+$$\dfrac{\del^\ell}{\del t^\ell}M_X(t)=\sum_{k\geq\ell}\dfrac{k(k-1)\hdots(k-\ell+1)}{k!}t^{k-\ell}\E X^k$$
+und mit $t=0$ das gew\"unschte Ergebnis.\qed
+
+\paragraph{11.20. Satz (Inversions- und Eindeutigkeitssatz):} Sei $\varphi$ die cf und $F$ die cdf einer reelwertigen Zufallsvariable $X$. Dann gilt
+$$F(t)=\lim_{n\to\infty}\dfrac{1}{2\pi}\int\displaylimits_{-\infty}^t\int\displaylimits_{-\infty}^{+\infty}\exp\left(-\dfrac{w^2}{2n^2}+iwv\right)\varphi(-w)\ dw\ dv$$
+f\"ur jedes $t$ mit $\Pp(x=t)=0$. Wegen der rechtsstetigkeit von $F$ ist $F(t)$ damit f\"ur jedes $t\in\R$ eindeutig durch $\varphi$ definiert. 
+
+\paragraph{Bermerkung:} In der Literatur wird oft 
+$$\Pp(a\leq X<b)=\lim_{T\to\infty}\dfrac{1}{2\pi}\int\displaylimits_{-T}^T\dfrac{e^{-ita}-e^{-itb}}{it}\varphi(t))\ dt$$
+angegeben f\"ur $\Pp(X=a)=\Pp(x=b)=0$.
+
+\paragraph{Beweis:} Die Idee ist Folgende: \newline
+Sei $Z\sim\mathcal{N}(0,1)$ u.a. von $X$ und setze $X_n:=X+Z/n$. Dann gilt $X_n\nto{a.s.}{n\to\infty}X$ und als Konsequenz auch $F_n\nto{d}{n\to\infty}F$. F\"ur $t$ mit $\Pp(X=t)=0$, folgt dann $F_n(t)\nto{}{n\to\infty}F(t)$. Zeige nun: 
+\begin{enumerate}[label=\Roman*.]
+    \item $X_n$ hat eine Dichte $f_n$ bzgl. dem Lebesgue-Ma\ss{} $\lambda=\text{vol}$
+    \item Diese Dichte ist von der Form 
+    $$f_n(v)=\dfrac{1}{2\pi}\int\displaylimits_{-\infty}^{+\infty}\exp\left(-\dfrac{w^2}{2n^2}+iwv\right)\varphi(-w)\ dw$$
+\end{enumerate}
+\vspace{1ex}
+I. $Z/n$ hat eine Riemann-integrierbare Dichte $\phi_{0,1/n^2}=:\phi$ bzgl. $\lambda$ und somit folgt
+\begin{align*}
+    F_n(t)&=\Pp(X+Z/n\leq t)\\
+    &\overset{\text{Tonelli, u.a.}}{=}\int\displaylimits_{(X)}\int\displaylimits_{(Z)}\ind{(-\infty,t]}(x+v)\ d\Pp_{Z/n}(v)\ d\Pp_X(x) \\
+    &=\int\displaylimits_{(X)}\int\displaylimits_{-\infty}^{t-x}\phi(v)\ dv\ d\Pp_X(x) \\
+    &\overset{w:=v+x}{=}\int\displaylimits_{X}\int\displaylimits_{-\infty}^t \phi(w-x)\ dw\ d\Pp_X(x) \\
+    &=\int\displaylimits_{(X)}\int\displaylimits_{(W)}\ind{(-\infty,t]}(w)\phi(w-x)\ d\lambda(w)\ d\Pp_X(x) \\
+    &\overset{\text{Tonelli}}{=}\int\displaylimits_{(W)}\int\displaylimits_{(X)}\ind{(-\infty,t]}(w)\phi(w-x)\ d\Pp_X(x)\ d\lambda(w) \\
+    &=\int\displaylimits_{(W)}\ind{(-\infty,t]}(w)\left[\int\displaylimits_{(X)}\phi(w-x)\ d\Pp_X(x)\right]\ d\lambda(w) \\
+    &=\int\displaylimits_{-\infty}^t \E_X\left[\phi(w-X)\right]d\lambda(w)
+\end{align*}
+Damit ist $f_n(v):=\E_X\left[\phi(v-X)\right]$ eine Dichte von $X_n$.\newline\newline
+II. Es gilt 
+$$\phi(t)=\dfrac{n}{\sqrt{2\pi}}\exp\left(-\dfrac{t^2n^2}{2}\right)=\dfrac{n}{\sqrt{2\pi}}\varphi_Z(nt)$$
+und damit 
+\begin{align*}
+    f_n(v)&=\E_X\left[\phi(v-X)\right]\\
+    &=\E_X\left[\dfrac{n}{\sqrt{2\pi}}\varphi_Z[n(v-X)]\right] \\
+    &=\E_X\left[\dfrac{n}{\sqrt{2\pi}}\E_Z\left[e^{invZ-inXZ}\right]\right]\\
+    &\overset{\text{Fubini}}{=}\dfrac{n}{\sqrt{2\pi}}\E_Z\left[\E_X\left[e^{invZ}e^{-inXZ}\right]\right]\\
+    &=\dfrac{n}{\sqrt{2\pi}}\E_Z\left[e^{invZ}\E_X\left[e^{-inXZ}\right]\right] \\
+    &=\dfrac{n}{\sqrt{2\pi}}\int\displaylimits_{-\infty}^{+\infty}\dfrac{1}{n\sqrt{2\pi}}\exp\left(-\dfrac{w^2}{2n^2}\right)\exp\left(iwv\right)\E_X\left[e^{-iwX}\right] \ dw \\
+    &=\dfrac{1}{2\pi}\int\displaylimits_{-\infty}^{+\infty}\exp\left(-\dfrac{w^2}{2n^2}+iwv\right)\varphi(-w)\ dw
+\end{align*}
+wobei der vorletzte Schritt mit der Erwartung von $nZ\sim\mathcal{N}(0,n^2)$ folgt. \qed
+
+\paragraph{11.21. Satz (L\'evy Continuity Theorem/Stetigkeitssatz):} Betrachte eine Folge von reellwertigen Zufallsvariablen $X_n,n\geq1$ mit entsprechenden cdfs $F_n,n\geq1$ und cfs $\varphi_n,n\geq1$. Wenn
+\begin{enumerate}[label=(\roman*)]
+    \item $\forall t\in\R: \exists\lim_{n\to\infty}\varphi_n(t)=:\gamma(t)\in\C$
+    \item $\gamma(t)$ stetig im Punkt $t=0$
+\end{enumerate}
+dann folgt, dass $\gamma$ die cf einer cdf $F$ ist, und
+$$F_n\nto{d}{n\to\infty}F$$
+
+\paragraph{Beweis:}Zeige zuerst, dass $F_n,n\geq1$ straff sind. Beachte 
+$$\int_{-u}^u(1-e^{itx})\ dt=2u-\int_{-u}^u\cos(tx)+i\sin(tx)\ dt=2u-\dfrac{2\sin(ux)}{x},$$
+sodas mit Erwartungswert auf beiden Seiten und dem Satz von Fubini folgt
+$$\dfrac{1}{u}\int_{-u}^u(1-\varphi_n(t))\ dt=2\int1-\dfrac{\sin(uX_n)}{uX_n}\ d\Pp.$$
+Mit der Ungleichung $|\sin(x)|\leq |x|$ f\"ur alle $x\in\R$ folgt, dass der Integrand im rechten Integral nicht-negativ ist. F\"ur $|x|\in[2/u,u]$ gilt $|\sin(ux)|\leq1$ und damit 
+$$\dfrac{1}{u}\int_{-u}^u(1-\varphi_n(t))\ dt\geq2\int\left(1-\dfrac{1}{|ux|}\right)\ind{\{|X_n|\geq2/u\}}\ d\Pp\geq\Pp(|X_n|>2/u)$$
+Da $\gamma$ stetig in $t=0$ ist, gilt 
+$$\dfrac{1}{u}\int_{-u}^u(1-\gamma(t))\ dt\nto{}{u\to0}0$$
+Sei nun $\eps>0$ und $u_\eps$, sodass der obige Ausdruck kleiner als $\eps$ ist. Da $\varphi_n\nto{}{n\to\infty}\gamma$ folgt mit dem DOMK (f\"ur komplexwertige Integrale, da $|\varphi_n|\leq1$), dass f\"ur alle $u\geq0$
+$$\dfrac{1}{u}\int_{-u}^u(1-\varphi_n(t))\ dt\nto{}{n\to\infty}\dfrac{1}{u}\int_{-u}^u(1-\gamma(t))\ dt.$$
+W\"ahle nun $N\geq1$ so, dass 
+$$\left|\dfrac{1}{u}\int_{-u}^u(1-\varphi_n(t))\ dt-\dfrac{1}{u}\int_{-u}^u(1-\gamma(t))\ dt\right|<\eps$$
+f\"ur alle $n\geq N$. Damit folgt 
+$$\Pp(|X_n|>2/u_\eps)\leq\frac{1}{u_\eps}\int_{-u_\eps}^{u_\eps}(1-\varphi_n(t))\ dt<2\eps$$
+f\"ur alle $n\geq N$. Au\ss{}erdem gilt
+$$\sup_{n\geq1}\Pp(|X_n|>M)=\max\left\{\sup_{n\geq N}\Pp(|X_n|>M),\max_{n<N}\Pp(|X_n|>M)\right\}$$
+und damit folgt, dass $F_n,n\geq1$ straff sind. Mit Satz 11.14 hat jede Teilfolge $F_{n_k},k\geq1$ eine weitere Teilfolge $F_{n_{k_j}},j\geq1$, sodass $F_{n_{k_j}}\nto{d}{j\to\infty}F$ f\"ur eine cdf $F$ einer Zufallsvariable $X$. Da die Funktionen $\sin,\cos$ auf $\R$ stetig und beschr\"ankt sind folgt mit Satz 11.5
+$$\forall t\in\R:\varphi_{n_{k_j}}(t)\nto{}{j\to\infty}\varphi_X(t)$$
+f\"ur $\varphi_X$ die cf von $X$. Wegen Annahme (i) und weil der Grenzwert von $\varphi_{n_{k_j}}(t)$ derselbe wie von $\varphi_n(t)$ sein muss (cf. Analysis: wenn eine Folge konvergiert, dann konvergiert jede Teilfolge zum selben Grenzwert), folgt damit
+$$\forall t\in\R:\varphi_n(t)\nto{}{n\to\infty}\varphi_X(t)$$
+Zeige nun $F_n\nto{d}{n\to\infty}F$. Angenommen nicht: 
+$$\implies\exists\text{Teilfolge} (F_{n_k})_{k\geq1}:F_{n_k}\xcancel{\nto{d}{k\to\infty}}F$$
+Aber $F_{n_k},k\geq1$ ist straff, da $F_n,n\geq1$ straff ist und enth\"alt mit Helly (Satz 11.11) und Prokorov (Satz 11.14) daher eine weitere Teilfolge $F_{n_{k_\ell}},\ell\geq1$ mit 
+$$F_{n_{k_\ell}}\nto{d}{\ell\to\infty}G$$
+f\"ur eine cdf $G$. Damit gilt
+$$\forall t\in\R:\varphi_{n_{k_\ell}}(t)\nto{}{\ell\to\infty}\varphi_G(t)$$
+und damit (siehe oben) 
+$$\forall t\in\R\varphi_n(t)\nto{}{n\to\infty}\varphi_G(t)$$
+Wegen (ii) gilt aber $\varphi_X(t)=\varphi_G(t)$ und mit dem Inversion Theorem (Satz 11.20) folgt
+$$G\overset{d}{=}F$$
+ein Widerspruch. \qed
+
+\paragraph{11.22. Satz}Betrachte eine Folge von Zufallsvariablen $X_n,n\geq1$ mit cdfs $F_n,n\geq1$ und cfs $\varphi_n,n\geq1$. Es gilt
+$$X_n\nto{d}{n\to\infty}X\iff\varphi_n\nto{}{n\to\infty}\varphi$$
+
+\paragraph{Beweis:}Die Implikation $\implies$ folgt trivial mit PMT1, da $\cos,\sin$ stetig und beschr\"ankt auf $\R$ sind.
+Zeige also die Implikation $\impliedby$\newline
+ Dazu gen\"ugt es zu zeigen, dass $\varphi(\cdot)$ stetig im Punkt $t=0$ ist (dann folgt mit dem L\'evy Continuity Theorem, dass $F_n\nto{d}{n\to\infty}F$). Es gilt
+ $$\left|e^{itX}\right|\leq1 \text{ und }e^{itX}\nto{a.s.}{t\to0}1\text{ (sogar punktweise)}$$
+ Mit DOMK folgt daher
+ $$\varphi(t)=\E \left[e^{itX}\right]\nto{}{t\to0}1=\varphi(0)$$
+ und damit die Aussage.\qed
+ 
+ \section*{Zentrale Grenzwerts\"atze}
+ \addcontentsline{toc}{section}{Zentrale Grenzwerts\"atze}
+ \paragraph{11.23. Lemma:}Seien $z_i,w_i\in\C$ mit $|z_i|,|w_i|\leq1,i=1,\hdots,n$. dann gilt folgende Ungleichung
+ $$|z_1\cdot\hdots\cdot z_n-w_1\cdot\hdots\cdot w_n|\leq\sum_{i=1}^n|z_i-w_i|$$
+ 
+ \paragraph{Beweis:}Induktiv nach $n$.
+ \begin{enumerate}
+     \item Base ($P(1)$): $|z_1-w_1|\leq|z_1-w_1|$
+     \item Induktionsschritt ($P(n)\implies P(n+1)$): 
+     \begin{align*}
+         &|z_1\cdot\hdots\cdot z_n\cdot z_{n+1}-w_1\cdot\hdots\cdot w_n\cdot w_{n+1}|\\
+         =\ &|z_1\cdot\hdots\cdot z_n\cdot z_{n+1}-z_1\cdot\hdots\cdot z_nw_{n+1}+z_1\cdot\hdots\cdot z_nw_{n+1}-w_1\cdot\hdots\cdot w_n\cdot w_{n+1}|\\
+         =\ &|z_1\cdot\hdots\cdot z_n\cdot(z_{n+1}-w_{n+1})-w_{n+1}\cdot(z_1\cdot\hdots\cdot z_n-w_1\cdot\hdots\cdot w_n)| \\
+         \leq\ &|z_1\cdot\hdots\cdot z_n|\cdot|z_{n+1}-w_{n+1}|+|w_{n+1}||z_1\cdot\hdots\cdot z_n-w_1\cdot\hdots\cdot w_n| \\
+         \leq\ &\sum_{i=1}^{n+1}|z_i-w_i|  
+     \end{align*}
+     \qed
+ \end{enumerate}
+ 
+ \paragraph{11.24. Lemma:} F\"ur $x\in\R$ und $n\in\mathbb{N}_0$ ist 
+ $$e^{ix}=\sum_{k=0}^n\dfrac{(ix)^k}{k!}+R_n(x)$$
+ mit Rest
+ $$R_n(x)=\dfrac{i^{n+1}}{n!}\int\displaylimits_0^x(x-s)^ne^{is}\ ds$$
+ wobei insbesondere gilt
+ $$R_n(x)\leq\min\left(\dfrac{|x|^{n+1}}{(n+1)!},\dfrac{2|x|^n}{n!}\right)$$
+ (wobei uns sp\"ater im Beweis des Lindeberg-L\'evy CLT der Fall $n=2$ interessiert).
+ 
+ \paragraph{Beweis:} Induktiv nach $n$.
+ \begin{enumerate}
+     \item Base (P(0)):
+     \begin{align*}
+         \int\displaylimits_0^xe^{is}\ ds&=i^{-1}e^{is}\bigg|_{s=0}^{s=x}\\
+         &=-ie^{is}\bigg|_{s=0}^{s=x}\\
+         &=i-ie^{ix} \\
+         \implies ie^{ix}=i-&\int\displaylimits_0^xe^{is}\\
+         \implies e^{ix}=1+i\int\displaylimits_0^xe^{is}\ ds=&\sum_{k=0}^0\dfrac{(ix)^k}{k!}+\dfrac{i^{0+1}}{0!}\int\displaylimits_0^x(x-s)^0e^{is}\ ds
+     \end{align*}
+     \item Induktionsschritt ($P(n)\implies P(n+1)$): Laut Voraussetzung gilt 
+     $$e^{ix}=\sum_{k=0}^n\dfrac{(ix)^k}{k!}+R_n(X)$$
+     wobei 
+     $$R_n(x)=\dfrac{i^{n+1}}{n!}\int\displaylimits_0^x(x-s)^ne^{is}\ ds$$
+     Zeige also 
+     $$R_n(x)=\dfrac{(ix)^{n+1}}{(n+1)!}+R_{n+1}(x)$$
+     Mit partieller Integration ($f(s)=e^{is}, g'(s)=-\frac{(x-s)^{n+1}}{n+1}$) gilt
+     \begin{align*}
+         R_n(x)&=\dfrac{i^{n+1}}{n!}\int\displaylimits_0^x(x-s)^ne^{is}\ ds \\
+         &=\dfrac{i^{n+1}}{n!}\left(\left[-e^{is}\dfrac{(x-s)^{n+1}}{n+1}\right]_{s=0}^{s=x}+\int\displaylimits_0^xie^{is}\dfrac{(x-s)^{n+1}}{n+1}\ ds\right)\\ 
+         &=\dfrac{i^{n+1}}{n!}\left(\dfrac{x^{n+1}}{n+1}+\dfrac{i}{n+1}\int\displaylimits_0^x(x-s)^{n+1}e^{is}\ ds \right) \\
+         &=\dfrac{(ix)^{n+1}}{(n+1)!}+\dfrac{i^{n+2}}{(n+1)!}\int\displaylimits_0^x(x-s)^{n+1}e^{is}\ ds\\
+         &=\dfrac{(ix)^{n+1}}{(n+1)!}+R_{n+1}(x)
+     \end{align*}
+     Zur ersten Ungleichung: \newline
+     F\"ur $x\geq0$ und mit $|e^{ix}|\leq1, |i^\ell|=1,\forall\ell\geq1$ ist
+     \begin{align*}
+         |R_n(x)|&\leq\dfrac{1}{n!}\int\displaylimits_0^x|x-s|^n\ ds\\
+         &=\dfrac{1}{n!}\int\displaylimits_0^x(x-s)^n\ ds \\
+         &=\dfrac{x^{n+1}}{(n+1)!}\overset{x\geq0}{=}\dfrac{|x|^{n+1}}{(n+1)!}
+     \end{align*}
+     F\"ur $x<0$ ist
+     \begin{align*}
+         |R_n(x)|&\leq\dfrac{1}{n!}\left|\int\displaylimits_0^x(x-s)^ne^{is}\ ds\right|\\
+         &\dfrac{1}{n!}\left|\int\displaylimits_x^0(x-s)^ne^{is}\ ds\right| \\
+         &=\dfrac{1}{n!}\int\displaylimits_x^0(s-x)^n\ ds =\dfrac{(-x)^{n+1}}{(n+1)!}\overset{x<0}{=}\dfrac{|x|^{n+1}}{(n+1)!}
+     \end{align*}
+     womit die erste Ungleichung f\"ur alle $x\in\R$ gilt.
+ \end{enumerate}
+ Zur zweiten Ungleichung:\newline
+ \begin{align*}
+     R_n(x)&=\dfrac{i^{n+1}}{n!}\int\displaylimits_0^x(x-s)^ne^{is}\ ds\\
+     &=\dfrac{i^{n+1}}{n!}\left(\left[-ie^{is}(x-s)^n\right]_{s=0}^{s=x}-in\int\displaylimits_0^x(x-s)^{n-1}e^{is}\ ds\right) \\
+     &=\dfrac{i^{n+2}x^n}{n!}-\dfrac{i^{n+2}}{(n-1)!}\int\displaylimits_0^x(x-s)e^{is}\ ds
+ \end{align*}
+ wobei der erste Schritt wieder mit partieller Integration f\"ur $f(s)=(x-s)^n$ und $g'(s)=e^{is}$ folgt. \"Ahnlich wie f\"ur die erste Ungleichung folgt damit
+ $$|R_n(x)|\leq\dfrac{|x|^n}{n!}+\dfrac{1}{(n+1)!}\left|\int\displaylimits_0^x(x-s)^{n-1}e^{is}\right|\leq\dfrac{2|x|^n}{n!}$$
+ \qed
+ 
+ \paragraph{11.25. Satz (Lindeberg\textendash L\'evy CLT):} Es seien $X_i\overset{\text{i.i.d.}}{\sim} X,i\geq1$ quadratisch integrierbare Zufallsvariablen mit $\E X=\mu,\operatorname{Var}(X)=\sigma^2\in(0,\infty)$. F\"ur $\overline X_n:=\sum_{i=1}^n X_i$ gilt dann
+ $$\dfrac{\sqrt{n}(\overline X_n-\mu)}{\sigma}\nto{d}{n\to\infty}\mathcal{N}(0,1)$$
+ 
+ \paragraph{Beweis:}Seien o.B.d.A. $\mu=0,\sigma=1$. Sei im Folgenden $\psi$ die cf von $X$ und $\varphi_n$ die cf von $\sqrt{n}\overline X_n$. Zu zeigen ist dann
+ $$\varphi_n(t)\nto{}{n\to\infty}e^{-t^2/2}$$
+ Mit Lemma 11.23 gilt $e^{itX}=1+itX-\frac{(tX)^2}{2}+R_2(tX)$
+ wobei $|R_2(tX)|\leq\min\left(\frac{|tX|^3}{6},t^2X^2\right)$. Damit gilt also
+ $$\psi(t)=1+\E[itX]-\dfrac{t^2\E X^2}{2}+\E R_2(tX)$$
+ Sei $t>0$. Mit der zweiten Ungleichung aus Lemma 11.23 gilt $\left|\frac{R_2(tX)}{t^2}\right|\leq X^2\in L^1$ und mit der ersten Ungleichung gilt $\left|\frac{R_2(tX)}{t^2}\right|\nto{a.s.}{t\searrow0}0$. Mit DOMK folgt schlie\ss{}lich
+ $$\E\left|\frac{R_2(tX)}{t^2}\right|\nto{}{t\searrow0}0$$
+ Nun gilt
+ $$\varphi_n(t)=\E\left[e^{it\sqrt{n}\overline X_n}\right]\overset{\text{i.i.d.}}{=}\left[\psi\left(\frac{t}{\sqrt{n}}\right)\right]^n=\left(1-\frac{t^2}{2n}+\E[R_2(tX)]\right)^n$$
+ F\"ur $t=0$ gilt also $\varphi_n(0)=1=e^{-0^2/2}$.\newpage
+ F\"ur $t\neq0$ ist 
+ \begin{align*}
+     \left|\varphi_n(t)-e^{-t^2/2}\right|&=\left|\varphi_n(t)-\left(1-\dfrac{t^2}{2n}\right)^n+\left(1-\dfrac{t^2}{2n}\right)^n-e^{-t^2/2}\right|\\
+     &\leq\left|\varphi_n(t)-\left(1-\dfrac{t^2}{2n}\right)^n\right|+\left|\left(1-\dfrac{t^2}{2n}\right)^n-e^{-t^2/2}\right|\\
+     &=\left|\left[\psi\left(\dfrac{t}{\sqrt{n}}\right)\right]^n-\left(1-\dfrac{t^2}{2n}\right)^n\right|+\mathcal{O}(1)\\
+     &\overset{11.22}{\leq}\sum_{i=1}^n\left|\psi\left(\dfrac{t}{\sqrt{n}}\right)-\left(1-\dfrac{t^2}{2n}\right)\right|\\
+     &=n\left|\psi\left(\dfrac{t}{\sqrt{n}}\right)-\left(1-\dfrac{t^2}{2n}\right)\right|\\
+     &=n\left|\E \left[R_2\left(\dfrac{tX}{\sqrt{n}}\right)\right]\right|\\
+     &=\dfrac{nt^2}{n}\left|\dfrac{\E \left[R_2\left(\dfrac{tX}{\sqrt{n}}\right)\right]}{t^2/n}\right|\nto{}{n\to\infty}0
+ \end{align*}
+ \qed
+ 
+ \subsection*{Lindeberg- und Ljapunov-Bedingung}
+ Betrachte nun allgemeiner ein triangul\"ares Feld von quadratisch integrierbaren Zufallsvariablen $X_{n,i},i=1,\hdots,r_n,n\geq1$, sodass f\"ur $n\geq1$ die $X_{n,1},\hdots,X_{n,r_n}$ unabh\"angig sind. Definiere weiters
+ $$\sigma_{n_i}^2:=\Var(X_{n,i})\text{ und }s_n^2:=\sum_{i=1}^{r_n}\sigma_{n,i}^2$$
+ Eine Folge von quadratisch integrierbaren, unabh\"angigen Zufallsvariablen $Y_k,k\geq1$ erf\"ullt diese Eigenschaften nat\"urlich, da wir dann $X_{n,i}\sim Y_i$ f\"ur alle $n\geq1$ und $i=1,\hdots,r_n$ haben.
+
+ \paragraph{11.26. Definition (Lindeberg-Bedingung):}Wir sagen, dass die Lindeberg-Bedingung f\"ur $X_{n,i},i=1,\hdots,r_n,n\geq1$ gilt, falls
+ $$\forall\eps>0:\dfrac{1}{s_n^2}\sum_{i=1}^{r_n}\E\left[(X_{n,i}-\E X_{n,i})^2\ind{\{|X_{n,i}-\E X_{n,i}|>\eps\cdot s_n\}}\right]\nto{}{n\to\infty}0$$
+ 
+ \paragraph{11.27. Satz (Lindeberg CLT):}Unter der Lindeberg-Bedingung gilt f\"ur $\overline X_n=n^{-1}\sum_{i=1}^{r_n}X_{n,i}$, dass
+ $$\sqrt{n}\dfrac{\overline X_n-\E\overline X_n}{s_n}=\dfrac{\overline X_n-\E\overline X_n}{\sqrt{\Var(\overline X_n)}}\nto{d}{n\to\infty}\mathcal{N}(0,1)$$
+ 
+ \paragraph{Beweis:}siehe z.B. P. Billingsley, \textit{Probability and Measure} (3rd Ed.), p.360. \qed
+ 
+ \paragraph{11.28. Definition (Ljapunov-Bedingung):}Wir sagen, dass die Ljapunov-Bedingung f\"ur $X_{n,i},i=1,\hdots,r_n,n\geq1$ gilt, falls
+$$\exists\delta>0:\dfrac{1}{s_n^{2+\delta}}\sum_{i=1}^{r_n}\E\left|X_{n,i}-\E X_{n,i}\right|^{2+\delta}\nto{}{n\to\infty}0$$
+
+\paragraph{11.29. Lemma:} Die Ljapunov-Bedingung impliziert die Lindeberg-Bedingung.
+
+\paragraph{Beweis:}Sei o.B.d.A. $\E X_{n,i}=0$ f\"ur alle $i=1,\hdots,r_n,n\geq1$. Sei $\delta>0$ wie in der Ljapunov-Bedingung, die laut Annahme gilt. F\"ur $\eps>0$ gilt
+\begin{align*}
+    \dfrac{1}{s_n^2}\sum_{i=1}^{r_n}\E\left[X_{n,i}^2\ind{\{|X_{n,i}|>\eps\cdot s_n\}}\right]&\overset{1\leq\frac{|X_{n,i}|^\delta}{(\eps\cdot s_n)^\delta}}{\leq}\dfrac{1}{s_n^2}\sum_{i=1}^{r_n}\E\left[X_{n,i}^2\dfrac{|X_{n,i}|^\delta}{(\eps\cdot s_n)^\delta}\ind{\{|X_{n,i}|>\eps\cdot s_n\}}\right]\\
+    &\leq\dfrac{1}{\eps^\delta}\dfrac{1}{s_n^{2+\delta}}\sum_{i=1}^{r_n}\E|X_{n_i}|^{2+\delta}\nto{}{n\to\infty}0
+\end{align*}
+\qed

@@ -1,0 +1,191 @@
+
+\chapter*{1. Messbare R\"aume und Ma\ss{}e}
+\addcontentsline{toc}{chapter}{1. Messbare R\"aume und Ma\ss{}e}
+
+\section*{Algebra, $\sigma$-Algebra und Ma\ss{}}
+\addcontentsline{toc}{section}{Algebra, $\sigma$-Algebra und Ma\ss{}}
+
+Sei im folgenden Kapitel $\Omega$ jeweils eine nicht-leere Menge. Die Komplementbildung erfolgt jeweils bez\"uglich $\Omega$, also $A^c=\{\omega\in\Omega:\omega\notin A\}$.
+
+\paragraph{1.1. Definition:} Eine Familie von Teilmengen $\A\subseteq\mathcal{P}(\Omega)$ ist eine Algebra (Englisch \textit{field of sets}),falls:
+\begin{enumerate}[label=(\roman*)]
+    \item $\Omega\in\A$ 
+    \item $A\in\A\implies A^c\in\A$ (Abgeschlossenheit bzgl. Komplementbildung)
+    \item $A,B\in\A\implies A\cup B\in\A$ (Abgeschlossenheit bzgl. endlichen Vereinigungen)
+\end{enumerate}
+
+\paragraph{Bemerkung:} (iii) ist \"aquivalent zu $A,B\in\A\implies A\cap B\in\A$ (Abgeschlossenheit bzgl. endlichen Durchschnitten).
+
+\paragraph{1.2. Definition:} Eine Familie von Teilmengen $\A\subseteq\mathcal{P}(\Omega)$ ist eine $\sigma$-Algebra (Englisch \textit{$\sigma$-field}), wenn folgendes gilt:
+\begin{enumerate}[label=(\roman*)]
+    \item $\Omega\in\A$
+    \item $A\in\A\implies A^c\in\A$ (Abgeschlossenheit bzgl. Komplementbildung)
+    \item $A_n\in\A,n\geq1\implies\displaystyle\bigcup_{n\geq1}A_n\in\A$ (Abgeschlossenheit bzgl. abz\"ahlbaren Vereinigungen)
+\end{enumerate}
+
+\paragraph{Bemerkung:} (iii) ist \"aquivalent zu $A_n\in\A,n\geq1\implies\displaystyle\bigcap_{n\geq1}A_n\in\A$ (Abgeschlossenheit bzgl. abz\"ahlbaren Durchschnitten).
+
+\paragraph{1.3. Definition:} Ein messbarer Raum ist ein Paar $(\Omega,\A)$, wobei $\A$ eine $\sigma$-Algebra auf $\Omega$ bildet. Eine Menge $A\in\A$ hei\ss{}t messbar. 
+
+\paragraph{1.4. Beispiel:}
+\begin{itemize}
+    \item $\A:=\{\emptyset,\Omega\}$ ist die kleinste (triviale) $\sigma$-Algebra auf $\Omega$.
+    \item $\A:=\mathcal{P}(\Omega)$ ist die gr\"o\ss{}te $\sigma$-Algebra auf $\Omega$.
+    \item $\A:=\{A\in\mathcal{P}(\Omega):A\text{ oder }A^c\text{ endlich}\}$ ist eine $\sigma$-Algebra falls $\Omega$ endlich ist, aber nur eine Algebra falls $\Omega$ unendlich ist. Sei $\{\omega_1,\omega_2,\hdots\}\subseteq\Omega$ mit $\omega_i\neq\omega_j$ f\"ur $i\neq j$. Definiere $A_i:=\{\omega_{2i}\}$ f\"ur alle $i\geq1$. Dann gilt $A_i\in\A$ f\"ur alle $i\geq1$, aber $\bigcup_{i\geq1}A_i=\{\omega_2,\omega_4,\hdots\}$ und $\left(\bigcup_{i\geq1}A_i\right)^c=\{\omega_1,\omega_3,\hdots\}$ sind beide unendlich und damit nicht in $\A$.
+\end{itemize}
+
+\paragraph{1.5. Definition:}Sei $(\Omega,\A)$ ein messbarer Raum.
+Ein Ma\ss{} auf $(\Omega,\A)$ ist eine Abbildung $\mu:\A\to[0,\infty]$, sodass 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mu(\emptyset)=0$
+        \item F\"ur $A_n\in\A,n\geq1$ paarwise disjunkt gilt ($\sigma$-Additivit\"at)
+        $$\mu\left(\bigcup_{n\geq1}A_n\right)=\sum_{n\geq1}\mu(A_n)$$
+    \end{enumerate}
+Ein Ma\ss{} $\mu$ ist $\sigma$-endlich, falls es $A_n\in\A,n\geq1$ gibt, sodass $\Omega=\displaystyle\bigcup_{n\geq1}A_n$ und $\mu(A_n)<\infty$ f\"ur alle $n\geq1$. Ein Ma\ss{} $\mu$ ist endlich, falls $\mu(\Omega)<\infty$. Ein Wahrscheinlichkeitsma\ss{} ist ein Ma\ss{} $\Pp$ mit $\Pp(\Omega)=1$. 
+
+\paragraph{1.6. Definition:} Sei $(\Omega,\A)$ ein messbarer Raum und $\mu:\A\to[0,\infty]$ ein Ma\ss{} auf $(\Omega,\A)$. Dann nennt man $(\Omega,\A,\mu)$ einen Ma\ss{}raum. Falls $\mu=\Pp$ ein Wahrscheinlichkeitsma\ss{} ist, nennt man $\pspace$ einen Wahrscheinlichkeitsraum.
+
+\section*{Eigenschaften von Ma\ss{}en}
+\addcontentsline{toc}{section}{Eigenschaften von Ma\ss{}en}
+
+\paragraph{1.7. Satz:} Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raum. Dann gilt
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur $A_i\in\A,1\leq i\leq n$ paarweise disjunkt gilt (endliche Additivit\"at)
+    $$\mu\left(\bigcup_{i=1}^nA_i\right)=\sum_{i=1}^n\mu(A_i)$$
+    \item F\"ur $A,B\in\A$ mit $A\subseteq B$ gilt $\mu(A)\leq\mu(B)$ (Monotonie). 
+    \item F\"ur $A_n\in A,n\geq1$ gilt ($\sigma$-Subadditivit\"at)
+    $$\mu\left(\bigcup_{n\geq1}A_n\right)\leq\sum_{n\geq1}\mu(A_n)$$
+    \item Falls $\mu$ endlich ist, gilt f\"ur $A,B\in\A$, dass $\mu(A\cup B)=\mu(A)+\mu(B)-\mu(A\cap B)$ (Einschluss-Ausschluss-Prinzip)
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Setze $A_i:=\emptyset\in\A$ f\"ur $i>n$. Damit folgt die Aussage aus der $\sigma$-Additivit\"at.
+    \item Schreibe $B=(B\setminus A)\cup A$ als Vereinigung disjunkter Mengen. Damit folgt mit (i), dass $\mu(B)=\mu(A)+\mu(B\setminus A)\geq\mu(A)$.
+    \item Setze hier $B_1:=A_1$ und $B_k:=A_k\setminus\left(\bigcup_{j=1}^{k-1}A_j\right)$ f\"ur $k\geq2$. Dann gilt $B_k\in\A$ f\"ur alle $k\geq1$, $B_k$ sind paarweise disjunkt, $\bigcup_{k\geq1}B_k=\bigcup_{n\geq1}A_n$ und $B_k\subseteq A_k$ f\"ur alle $k\geq1$. Es folgt mit (ii)
+    $$\mu\left(\bigcup_{n\geq1}A_n\right)=\mu\left(\bigcup_{k\geq1}B_k\right)=\sum_{k\geq1}\mu(B_k)\leq\sum_{m\geq1}\mu(A_n)$$
+    \item Schreibe $A\cup B=(A\setminus B)\cup(A\cap B)\cup(B\setminus A)$. Dann gilt mit (i)
+    \begin{align*}
+        \mu(A\cup B)&=\mu(A\setminus B)+\mu(A\cap B)+\mu(B\setminus A)\\
+        &=\mu(A)+\mu(B\setminus A)\\
+        &=\mu(A)+\mu(B)-\mu(A\cap B)
+    \end{align*}
+    \qed
+\end{enumerate}
+
+\paragraph{Bemerkung:}In der Literatur ist das Einschluss-Ausschluss-Prinzip meist in der allgemeineren Form f\"ur endliche Vereinigungen $\mu\left(\bigcup_{i=1}^nA_n\right)$ zu finden.
+
+\paragraph{1.8. Korollar:}F\"ur $A,B\in/A$ mit $A\subseteq B$ und $\mu(B)<\infty$ gilt $\mu(B\setminus A)=\mu(B)-\mu(A)$. Damit folgt f\"ur endliche Ma\ss{}e $\mu(A^c)=\mu(\Omega)-\mu(A)$ und insbesondere f\"ur Wahrscheinlichkeitsma\ss{}e $\Pp(A^c)=1-\Pp(A)$.
+
+\paragraph{Beweis:}Folgt sofort aus Satz 1.7 (i) mit $B=A\cup (B\setminus A)$. \qed
+
+\paragraph{1.9. Satz (Stetigkeit von unten/oben):}Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $A_n\in\A,n\geq1$.
+\begin{enumerate}[label=(\roman*)]
+    \item Falls $A_1\subseteq A_2\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n$, dann gilt $\mu(A_n)\nto{}{n\to\infty}\mu\left(\bigcup_{n\geq1}A_n\right)$ (Stetigkeit von unten).
+    \item Falls $A_1\supseteq A_2\supseteq\hdots\supseteq\bigcap_{n\geq1}A_n$ und $\mu(A_1)<\infty$, dann gilt $\mu(A_n)\nto{}{n\to\infty}\mu\left(\bigcap_{n\geq1}A_n\right)$ (Stetigkeit von oben).
+\end{enumerate}
+Mit der Monotonie gen\"ugt es in (ii) $\mu(A_j)<\infty$ f\"ur zumindest ein $j\geq1$ vorauszusetzen, also $\limsup_{n\to\infty}\mu(A_n)<\infty$ .
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Setze $B_1:=A_1$ und $B_k:=A_k\setminus\left(\bigcup_{j=1}^{k-1}A_j\right)$. Damit ist $B_k$ f\"ur alle $k\geq1$ messbar und $B_k$ sind paarweise disjunkt. Weiters gilt $A_n=\bigcup_{k=1}^n B_k$, $B_n\subseteq A_n$ und $\bigcup_{n\geq1}A_n=\bigcup_{k\geq1}B_k$ (leicht nachzupr\"ufen). Es folgt
+    \begin{align*}
+        \mu\left(\bigcup_{n\geq1}A_n\right)&=\mu\left(\bigcup_{k\geq1}B_k\right)\\
+        &=\sum_{k\geq1}\mu(B_k)\\
+        &=\lim_{K\to\infty}\sum_{k=1}^K\mu(B_k)\\
+        &=\lim_{K\to\infty}\mu\left(\bigcup_{k=1}^K B_k\right)\\
+        &=\lim_{N\to\infty}\mu(A_N)
+    \end{align*}
+    \item Setze $B_k:=A_1\setminus A_k$. Dann gilt $B_1\subseteq B_2\subseteq\hdots\subseteq\bigcup_{k\geq1}B_k=A_1\setminus\left(\bigcap_{n\geq1}A_n\right)$. Mit (i) folgt
+    $$\mu(B_k)\nto{}{k\to\infty}\mu\left(A_1\setminus\left(\bigcap_{n\geq1}A_n\right)\right)$$
+    Es gilt $A_n\subseteq A_1$, $\bigcap_{n\geq1}A_n\subseteq A_1$ und damit $\mu\left(\bigcap_{n\geq1}A_n\right)<\infty$. Es folgt 
+    $$\lim_{k\to\infty}\mu(B_k)=\mu(A_1)-\lim_{n\to\infty}\mu(A_n)=\mu(A_1)-\lim_{n\to\infty}\mu\left(\bigcap_{n\geq1}A_n\right)$$
+    und damit die Aussage. \qed
+\end{enumerate}
+
+\paragraph{1.10. Definition:}Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $\omega\in\Omega$. Falls $\{\omega\}\in\A$ mit $\mu(\{\omega\})>0$, dann nennt man $\omega$ ein Atom von $\mu$.
+
+\paragraph{1.11. Proposition:}Sei $(\Omega,\A,\mu)$ ein $\sigma$-endlicher Ma\ss{}raum. Dann ist die Menge der Atome $A:=\{\omega\in\Omega:\{\omega\}\in\A,\mu(\{\omega\})>0\}$ h\"ochstens abz\"ahlbar.
+
+\paragraph{Beweis:}Schreibe
+$$A=\bigcup_{n\geq1}\left\{\omega\in\Omega:\{\omega\}\in\A,\mu(\{\omega\})>\frac{1}{n}\right\}$$
+Es gen\"ugt zu zeigen, dass jedes Element der Vereinigung h\"ochstens abz\"ahlbar ist (abz\"ahlbare Vereinigung abz\"ahlbarer Mengen ist abz\"ahlbar [ben\"otigt das Auswahlaxiom]). Sei also $A_n:=\left\{\omega\in\Omega:\{\omega\}\in\A,\mu(\{\omega\})>\frac{1}{n}\right\}$. W\"ahle au\ss{}erdem $B_n\in\A,n\geq1$, sodass $\bigcup_{n\geq1}B_n=\Omega$ und $\mu(B_n)<\infty$ ($\sigma$-Endlichkeit). Dann gilt
+$$A_n=\bigcup_{k\geq1}(B_k\cap A_n)$$
+Es gen\"ugt also zu zeigen, dass $A_n\cap B_k$ f\"ur alle $k,n\geq1$ h\"ochstens abz\"ahlbar ist. Wir zeigen sogar, dass $A_n\cap B_k$ f\"ur alle $k,n\geq1$ endlich ist:\newline
+ Angenommen $A_n\cap B_k$ ist abz\"ahlbar unendlich und schreibe $A_n\cap B_k=\{\omega_1,\omega_2,\hdots\}$ mit $\omega_i\neq\omega_j$ f\"ur $i\neq j$. Damit folgt
+ $$\mu(A_n\cap B_k)=\mu\left(\bigcup_{j\geq1}\{\omega_j\}\right)=\sum_{j\geq1}\mu(\{\omega_j\})=\infty$$
+Aber $\mu(A_n\cap B_k)\leq\mu(B_k)<\infty$ f\"ur alle $n,k\geq1$, ein Widerspruch. Es verbleibt zu zeigen, dass $A_n\cap B_k$ nicht \"uberabz\"ahlbar sein kann (einfache \"Uberlegung). \qed
+
+\section*{Erzeugung von $\sigma$-Algebren}
+\addcontentsline{toc}{section}{Erzeugung von $\sigma$-Algebren}
+\paragraph{1.12. Lemma:}Sei $I$ eine beliebige Indexmenge. Sei $\A_i$ f\"ur jedes $i\in I$ eine $\sigma$-Algebra auf $\Omega$. Dann ist $\A:=\bigcap_{i\in I}\A_i$ wieder eine $\sigma$-Algebra auf $\Omega$.
+
+\paragraph{Beweis:}Es gilt drei Eigenschaften zu zeigen:
+\begin{enumerate}[label=(\roman*)]
+    \item $\Omega\in\A$\newline
+    Es gilt laut Annahme $\Omega\in\A_i$ f\"ur alle $i\in I$, womit die Behauptung sofort folgt.
+    \item $A\in\A\implies A^c\in\A$\newline
+    $A\in\A\iff\forall i\in I:A\in\A_i\implies\forall i\in I:A^c\in\A_i\iff A^c\in\A$
+    \item $A_n\in\A,n\geq1\implies\bigcup_{n\geq1}A_n\in\A$\newline
+    wie (ii). \qed
+\end{enumerate}
+
+\paragraph{1.13. Definition:} Sei $\M\subseteq\mathcal{P}(\Omega)$. Dann definiert man die von $\M$ erzeute $\sigma$-Algebra als
+$$\sigma(\M):=\bigcap_{\substack{\A\ \sigma\text{-Algebra}\\\M\subseteq\A}}\A$$
+Mit Lemma 1.12 folgt sofort, dass $\sigma(\M)$ eine $\sigma$-Algebra bez\"uglich $\Omega$ ist. Weiters ist $\sigma(\M)$ die kleinste $\sigma$-Algebra, die $\M$ enth\"alt (i.e. ist $\mathcal{E}$ eine $\sigma$-Algebra mit $\M\subseteq\mathcal{E}$, dann folgt $\sigma(\M)\subseteq\mathcal{E}$). 
+
+\paragraph{1.14. Lemma:}Sei $\M_1\subseteq\M_2\subseteq\mathcal{P}(\Omega)$. Dann folgt $\sigma(\M_1)\subseteq\sigma(\M_2)$.
+
+\paragraph{Beweis:}$\sigma(\M_2)$ ist eine $\sigma$-Algebra, die $\M_2$ enth\"alt, und damit auch $\M_1$. Mit der Bemerkung in Definition 1.13 folgt die Aussage. \qed
+
+\paragraph{1.14.$\frac{1}{2}$. Definition:}Sei $K\subseteq\Omega$ und $\M\subseteq\mathcal{P}(\Omega)$. Dann definiert man die Spur (Englisch \textit{trace}) von $\M$ auf $K$ als
+$$\M\krestr{K}:=\{M\cap K:M\in\M\}$$
+
+\paragraph{1.15. Proposition:} Sei $\A$ eine $\sigma$-Algebra auf $\Omega$ und $K\subseteq\Omega$. Dann ist $\A\krestr{K}$ eine $\sigma$-Algebra auf $K$. Man nennt $\A\krestr{K}$ die Spur-$\sigma$-Algebra von $\A$ auf $K$. 
+
+\paragraph{Beweis:}Es gilt drei Eigenschaften zu zeigen:
+\begin{enumerate}[label=(\roman*)]
+    \item $K\in\A\krestr{K}$\newline
+    Es gilt $\Omega\in\A$ und damit $K=K\cap\Omega\in \A\krestr{K}$.
+    \item $A\in\A\krestr{K}\implies K\setminus A\in\A\krestr{K}$\newline
+    $A\in\A\krestr{K}\implies A=K\cap B,B\in\A$. Nun gilt aber 
+    \begin{align*}
+        K\setminus A&=(K\setminus A)\cap K=(K\setminus(K\cap B))\cap K\\
+        &=(K\cap(K\cap B)^c)\cap K\\
+        &=(K\setminus B)\cup(K\cap K^c)\\
+        &=K\cap B^c\in \A\krestr{K}
+    \end{align*}
+    da $B^c\in\A$.
+    \item $A_n\in\A\krestr{K},n\geq1\implies\bigcup_{n\geq1}A_n\in\A\krestr{K}$\newline
+    Es gilt $A_n=B_n\cap K$ f\"ur $B_n\in\A, n\geq1$ und damit
+    $$\bigcup_{n\geq1}A_n=\bigcup_{n\geq1}(B_n\cap K)=K\cap\bigcup_{n\geq1}B_n\in\A\krestr{K}$$
+    da $\bigcup_{n\geq1}B_n\in\A$. \qed
+\end{enumerate}
+
+\paragraph{1.16. Lemma:}Sei $\M\subseteq\mathcal{P}(\Omega)$ und $K\subseteq\Omega$. Dann gilt 
+$$\sigma(\M\krestr{K})=\sigma(\M)\krestr{K}$$
+
+\paragraph{Beweis:}
+Wir verwenden hier einige Ergebnisse aus der \"Ubung, z.B. $K\subseteq L\implies\M\krestr{K}\subseteq\M\krestr{L}$, $\M\subseteq\sigma(\M)$ und $\A\ \sigma\text{-Algebra}\implies\sigma(\A)=\A$ 
+\begin{enumerate}[label=\Roman*.]
+    \item \underline{$\sigma(\M\krestr{K})\subseteq\sigma(\M)\krestr{K}$}\newline
+    Es gilt $\M\subseteq\sigma(\M)$ und damit $\M\krestr{K}\subseteq\sigma(\M)\krestr{K}$. Damit folgt
+    $$\sigma(\M\krestr{K})\subseteq\sigma\left(\sigma(\M)\krestr{K}\right)=\sigma(\M)\krestr{K}$$ 
+    da $\sigma(\M)\krestr{K}$ mit Proposition 1.15 eine $\sigma$-Algebra ist.
+    
+    \item \underline{$\sigma(\M\krestr{K})\supseteq\sigma(\M)\krestr{K}$}\newline
+    Definiere hierf\"ur
+    $$\G:=\{A\in\sigma(\M):A\cap K\in\sigma(\M\krestr{K})\}\subseteq\sigma(\M)$$
+    Falls $\G$ eine $\sigma$-Algebra ist, die $\M$ enth\"alt, dann folgt $\sigma(\M)\subseteq\G$ und damit $\G=\sigma(\M)$. Daraus folgt schlie\ss{}lich
+    $$\forall A\in\sigma(\M):A\cap K\in\sigma(\M\krestr{K})$$
+    und damit $\sigma(\M)\krestr{K}\subseteq\sigma(\M\krestr{K})$.
+    
+    \item \underline{$\G$ ist eine $\sigma$-Algebra und $\M\subseteq\G$}\newline
+    $\M\subseteq\G$ folgt sofort aus $\M\subseteq\sigma(\M)$ und $\M\krestr{K}\subseteq\sigma(\M\krestr{K})$. Zeige also, dass $\G$ eine $\sigma$-Algebra ist.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\Omega\in\sigma(\M)$ und $\Omega\cap K=K\in\sigma(\M\krestr{K})$.
+        \item $A\in\G\iff A\in\sigma(\M)\land A\cap K\in\sigma(\M\krestr{K})$\newline
+            $\implies A^c\in\sigma(\M)\land K\setminus(A\cap K)=K\cap A^c\in\sigma(\M\krestr{K})$
+        \item $A_n\in\G,n\geq1\iff \forall n\geq1:A_n\in\sigma(\M)\land A_n\cap K\in\sigma(\M\krestr{K})$\newline$\implies\bigcup_{n\geq1}A_n\in\sigma(\M)\land\bigcup_{n\geq1}(A_n\cap K)=K\cap\bigcup_{n\geq1}A_n\in\sigma(\M\krestr{K})$ \qed
+    \end{enumerate}
+\end{enumerate}

@@ -1,0 +1,206 @@
+ \chapter*{6. Ungleichungen}
+ \addcontentsline{toc}{chapter}{6. Ungleichungen}
+
+Sei in diesem Kapitel $\pspace$ ein Wahrscheinlichkeitsraum, und $X,Y:(\Omega,\A)\to(\overline\R, \cB(\overline\R))$ Zufallsvariablen.
+
+
+\section*{Markov-Ungleichung}
+\addcontentsline{toc}{section}{Markov-Ungleichung}
+
+ 
+ \paragraph{6.1. Satz (Markov-Ungleichung):}Sei $X\geq0$ und $c>0$. Dann gilt
+ $$\Pp(X\geq c)\leq c^{-1}\cdot\E X$$
+ 
+ \paragraph{Beweis:}
+ \begin{align*}
+     \E X=\int\displaylimits_\Omega X\ d\Pp&=\int\displaylimits_{X\geq c}X\ d\Pp+\int\displaylimits_{X<c}X\ d\Pp\\
+     &\geq\int\displaylimits_{X\geq c}X\ d\Pp\\
+     &\geq \int\displaylimits_{X\geq c}c\ d\Pp=c\cdot \Pp(X\geq c)
+ \end{align*}
+\qed
+
+\paragraph{6.2. Korollar:}Sei $X\geq 0$ und $c>0$. Dann gilt sogar
+$$\Pp(X\geq c)\leq c^{-1}\cdot\E[X\cdot\ind{X\geq c}]$$
+
+\paragraph{Beweis:}wie 6.1. \qed
+
+\paragraph{6.3. Korollar (Chebyshev-Ungleichung):}Sei $X\in\mathcal{L}^1(\Pp)$ und $c>0$. Dann gilt
+$$\Pp\left(|X-\E X|\geq c\right)\leq c^{-2}\cdot\Var(X)$$
+ 
+ \paragraph{Beweis:} Mit der Markov-Ungleichung folgt
+ $$\Pp\left(|X-\E X|\geq c\right)=\Pp\left((X-\E X)^2\geq c^2\right)\overset{6.1}{\leq}c^{-2}\cdot\E[(X-\E X)^2]=c^{-2}\cdot\Var(X)$$
+ 
+ \paragraph{6.4. Korollar (Chernoff-Schranke):}Sei $X$ eine reellwertige Zufallsvariable und $c>0$. Dann gilt
+ $$\Pp(X\geq c)\leq\inf_{t>0}e^{-tc}\cdot M_X(t)$$
+ wobei $M_X(t)=\E[e^{tX}]$ die momenterzeugende Funktion von $X$ ist.
+ 
+ \paragraph{Beweis:} Sei $t>0$. Dann gilt mit der Markov-Ungleichung
+ $$\Pp(X\geq c)=\Pp\left(e^{tX}\geq e^{tc}\right)\overset{6.1}{\leq}e^{-tc}\cdot M_X(t)$$
+ Die Ungleichung gilt f\"ur alle $t>0$ und damit auch f\"ur das Infimum.\qed
+ 
+ \section*{Konvexit\"at und Jensen-Ungleichung}
+\addcontentsline{toc}{section}{Konvexit\"at und Jensen-Ungleichung}
+ 
+ \paragraph{6.5. Definition:}Sei $(a,b)\subseteq\R$ ein nicht-leeres Intervall. Dann ist eine Abbildung $f:(a,b)\to\R$ konvex, falls $\forall x,y\in(a,b),\forall\lambda\in(0,1):$ 
+ $$f(\lambda x+(1-\lambda)y)\leq\lambda f(x)+(1-\lambda)f(y)$$
+ 
+ \paragraph{6.6. Lemma:}Sei $f:(a,b)\to\R$. Dann ist $f$ genau dann konvex, wenn gilt
+ $$\forall s,t,u:a<s<t<u<b:\dfrac{f(t)-f(s)}{t-s}\leq\dfrac{f(u)-f(t)}{u-t}$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item Sei zun\"achst $f$ konvex (nach Definition 6.5)\newline
+     Setze $\lambda:=\dfrac{u-t}{u-s}$. Dann ist $1-\lambda=\dfrac{t-s}{u-s}$ und $\lambda s+(1-\lambda)u=t$. Aus der Konvexit\"at von $f$ folgt
+     \begin{gather}
+         f(\lambda s+(1-\lambda)u)=f(t)\leq\lambda f(s)+(1-\lambda)f(u)
+     \end{gather}
+     Damit gilt
+     $$f(t)-f(s)\leq(1-\lambda)[f(u)-f(s)]=\dfrac{t-s}{u-s}[f(u)-f(s)]$$
+     und
+     $$\dfrac{f(t)-f(s)}{t-s}\leq\dfrac{f(u)-f(s)}{u-s}$$
+     Aus (1) folgt ebenfalls
+     $$f(t)-f(u)\leq\lambda[f(s)-f(u)]$$
+     und damit 
+     $$\dfrac{f(u)-f(t)}{u-t}\geq\dfrac{f(u)-f(s)}{u-s}$$
+     \item Sei nun die Bedingung aus Lemma 6.6 erf\"ullt\newline
+     Falls $x<y$, setze 
+     $$s:=x,\ t:=\lambda x+(1-\lambda)y,\ u:= y$$ 
+     Dann ist
+     $$\lambda = \dfrac{u-t}{u-s},\ 1-\lambda=\dfrac{t-s}{u-s}$$
+     Laut Annahme gilt
+     $$f(t)\leq f(s)+\dfrac{t-s}{u-s}[f(u)-f(s)]=\lambda f(x)+(1-\lambda)f(y)$$
+     Falls $x>y$, setze
+     $$s:=y,\ t:=\lambda x+(1-\lambda)y,\ u:=x$$
+     Dann ist
+     $$\lambda=\dfrac{t-s}{u-s},\ 1-\lambda=\dfrac{u-t}{u-s}$$
+     und die Aussage folgt wie oben aus der Annahme. \qed
+ \end{enumerate}
+ 
+ \paragraph{6.7. Lemma:}Sei $f:(a,b)\to\R$. $f$ ist genau dann konvex, wenn gilt
+ $$\forall x\in(a,b),\exists\gamma\in\R,\forall y\in(a,b):f(y)\geq f(x)+\gamma(y-x)$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item Sei $f$ konvex (nach Definition 6.5)\newline
+     W\"ahle $a<x_-<x<b$ und setze
+     $$\gamma:=\inf_{y\in(x,b)}\dfrac{f(y)-f(x)}{y-x}\geq\dfrac{f(x)-f(x_-)}{x-x_-}>-\infty$$
+     F\"ur $x=y$ ist die Aussage trivial. F\"ur $x<y$ ist 
+     $$\dfrac{f(y)-f(x)}{y-x}\geq\gamma$$
+     sodass $f(y)\geq f(x)+\gamma(y-x)$. F\"ur $x>y$ ist 
+     $$\dfrac{f(x)-f(y)}{x-y}\leq \gamma$$
+    da $\gamma\geq \dfrac{f(x)-f(x_-)}{x-x_-}$ f\"ur alle $x_-\in(a,x)$, sodass auch $f(y) \geq\nobreak f(x)+\gamma(y-x)$.
+     \item Sei nun die Bedingung aus Lemma 6.7 erf\"ullt\newline
+     W\"ahle $a<s<t<u$. Aus der Annahme folgt $f(s)\geq f(t)+\gamma(s-t)$ und damit 
+     $$\gamma\geq\dfrac{f(t)-f(s)}{t-s}$$
+     Ebenfalls folgt aus der Annahme $f(u)\geq f(t)+\gamma(u-t)$ und damit 
+     $$\gamma\leq\dfrac{f(u)-f(t)}{u-t}$$
+     Die Konvexit\"at von $f$ folgt mit Lemma 6.6.\qed
+ \end{enumerate}
+ 
+ \paragraph{6.8. Korollar:}Sei $f:(a,b)\to\R$ differenzierbar auf $(a,b)$. Dann gilt
+ $$f\text{ konvex}\iff f'\text{ monoton nicht-fallend}$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item Sei $f$ konvex (nach Definition 6.5)\newline
+     Seien $a<s<u<b$ und w\"ahle $s_+,t_-,t_+,u_-$ so, dass
+     $$s<s_+<t_-<t_+<u_-<u$$
+     Mit Lemma 6.6 folgt
+     $$\dfrac{f(s_+)-f(s)}{s_+-s}\leq\dfrac{f(t_-)-f(s_+)}{t_--s_+}\leq\dfrac{f(t_+)-f(t_-)}{t_+-t_-}\leq\dfrac{f(u_-)-f(t_+)}{u_--t_+}\leq\dfrac{f(u)-f(u_-)}{u-u_-}$$
+     und 
+     $$f'(s)=\lim_{s_-\searrow s}\dfrac{f(s_+)-f(s)}{s_+-s}\leq\dfrac{f(t_+)-f(t_-)}{t_+-t_-}\leq\lim_{u_-\nearrow u}\dfrac{f(u)-f(u_-)}{u-u_-}=f'(u)$$
+     Also folgt f\"ur alle $u,s\in(a,b)$ mit $s<u$, dass $f'(s)\leq f'(u)$.
+     \item Sei $f'$ monoton nicht-fallend\newline
+     Seien $a<s<t<u<b$. Es gilt (Fundamentalsatz der Analysis, Mittelwertsatz)
+     $$f(t)=f(s)+\int_s^t f(z)\ dz\leq f(s)+(t-s)f'(t)$$
+     und damit 
+     $$\dfrac{f(t)-f(s)}{t-s}\leq f'(t)$$
+     Ebenfalls gilt (wie oben)
+     $$f(u)=f(t)+\int_t^uf(z)\ dz\geq f(t)+(u-t)f'(t)$$
+     und damit 
+     $$\dfrac{f(u)-f(u)}{u-t}\geq f'(t)$$
+     Die Aussage folgt mit Lemma 6.6. \qed
+ \end{enumerate}
+ 
+ \paragraph{6.9. Lemma:}Ist $f$ konvex auf $(a,b)$, dann ist $f$ stetig auf $(a,b)$.
+ 
+ \paragraph{Beweis:}Sei $x\in(a,b)$. F\"ur $s<y<x$ ist mit Lemma 6.7
+ $$f(y)\geq f(x)+\gamma (y-x)$$
+ und 
+ $$f(y)\leq \lambda f(x)+(1-\lambda)f(s)$$
+ f\"ur $\lambda=\dfrac{y-s}{x-s}$. Damit gilt $\displaystyle\lim_{y\nearrow x}=f(x)$. Analog folgt auch $\lim_{y\searrow x}f(y)=f(x)$. \qed
+ 
+ \paragraph{6.10. Satz (Jensen-Ungleichung):}Sei $X\in\mathcal{L}^1(\Pp)$ mit $X:(\Omega,\A)\to((a,b),\cB((a,b)))$, mit $(a,b)\subseteq\R$. Ist $f:(a,b)\to\R$ konvex, dann gilt
+ $$f(\E X)\leq \E f(X)$$
+ 
+ \paragraph{Beweis:}Es gilt $\E X\in (a,b)$ (Monotonie, $\Pp(\Omega)=1$). Mit Lemma 6.7 gibt es $\gamma\in\R$, sodass
+ $$f(X)\geq f(\E X)+(X-\E X)\cdot \gamma=:Z$$
+ Es gilt $Z\in\mathcal{L}^1(\Pp)$ (leicht nachzupr\"ufen) und 
+ $$\E Z=\E[f(\E X)]+\gamma\cdot \E[X-\E X]=f(\E X)$$
+ Da $f(X)\geq Z$, gilt $[f(X)]^-\leq Z^-\in\mathcal{L}^1(\Pp)$ und damit $f(X)\in\mathcal{L}(\Pp)$. Mit der Monotonie folgt 
+ $$f(\E X)=\E[f(\E X)]=\int Z\ d\Pp\leq\int f(X)\ d\Pp=\E f(X)$$
+ \qed
+ 
+\section*{H\"older-Ljapunov-Minkowski}
+\addcontentsline{toc}{section}{H\"older-Ljapunov-Minkowski}
+
+\paragraph{6.11. Lemma (Young-Ungleichung):} Es sei $p\in(1,\infty)$ und $\frac{1}{p}+\frac{1}{q}=1$. F\"ur $a,b\geq0$ gilt
+$$ab\leq\dfrac{a^p}{p}+\dfrac{b^q}{q}$$
+mit Gleichheit genau dann, wenn $a^p=b^q$.
+
+\paragraph{Beweis:}Falls $a=0$ oder $b=0$ gilt die Ungleichung trivial. Es gelte also $a,b>0$. Setze $t:=p^{-1}$ und damit $1-t=q^{-1}$. Da $x\mapsto \log x$ konkav ist gilt
+$$\log\left(ta^p+(1-t)b^q\right)\geq t\log\left(a^p\right)+(1-t)\log\left(b^q\right)=\log(ab)$$
+und die Ungleichung folgt mit Anwendung von $\exp$ auf beiden Seiten. \qed
+
+\paragraph{6.12. Satz (H\"older-Ungleichung):} Sei nun $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $f,g\in\mathcal{L}(\mu)$. Sei $p\in(1,\infty)$ und $q$ der konjugierte (duale) Index zu $p$, i.e. $\dfrac{1}{p}+\dfrac{1}{q}=1$. Dann gilt 
+$$\int |fg|\ d\mu\leq\left(\int |f|^p\ d\mu\right)^{1/p}\cdot\left(\int |g|^q\ d\mu\right)^{1/q}$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item Fall: $\int |f|^p\ d\mu=0$ oder $\int |g|^q\ d\mu=0$\newline
+    Sei o.B.d.A. der erste Fall zutreffend. Dann gilt $|f|=0$ a.e. und (mit der Konvention $0\cdot\infty=0$) folgt $|fg|=0$ a.e. und die Aussage ist trivial.
+    \item Fall: $\int |f|^p\ d\mu, \int |g|^q\ d\mu>0$\newline
+    Die Aussage ist trivial, falls eines der Integrale unendlich ist. Es seien also beide Integrale reellwertig. Setze
+    $$A:=\dfrac{|f|^p}{\displaystyle\int|f|^p\ d\mu},\ B:=\dfrac{|g|^q}{\displaystyle\int|g|^q\ d\mu}$$
+    Mit Lemma 6.11 gilt 
+    $$\dfrac{|fg|}{\displaystyle\left(\int|f|^p\ d\mu\right)^{1/p}\displaystyle\left(\int|g|^q\ d\mu\right)^{1/q}}\leq\dfrac{|f|^p}{p\cdot\left(\displaystyle\int |f|^p\ d\mu\right)}+\dfrac{|g|^q}{q\cdot\left(\displaystyle\int |g|^q\ d\mu\right)}$$
+    Die Ungleichung folgt mit der Monotonie. \qed
+\end{enumerate}
+
+\paragraph{Bemerkung:}Die Ungleichung h\"alt auch f\"ur $p=1$ und $p=\infty$ mit entsprechenden konjugierten Indizes $q=\infty$ und $q=1$. Au\ss{}erdem sei f\"ur $p\in(0,\infty)$
+$$\mathcal{L}^p(\Omega,\A,\mu):=\left\{f:(\Omega,\A)\to(\R,\borel):\int |f|^p\ d\mu<\infty\right\}$$
+
+\paragraph{6.13. Korollar (Cauchy\textendash Schwarz-Ungleichung):}
+$$\int |fg|\ d\mu\leq\left(\int |f|^{1/2}\ d\mu\right)^{1/2}\left(\int |g|^{1/2}\ d\mu\right)^{1/2}$$
+
+\paragraph{Bemerkung:}F\"ur Zufallsvariablen $X,Y\in\mathcal{L}^2(\Pp)$ mit $\Var(X),\Var(Y)>0$ definiere den Korrelationskoeffizienten
+$$\rho_{X,Y}:=\dfrac{\E\left[(X-\E X)(Y-\E Y)\right]}{\sqrt{\Var(X)\cdot\Var(Y)}}$$
+Dieser ist wegen Korollar 6.13 und Satz 6.12 wohldefiniert und es gilt $\rho_{X,Y}\in[-1,1]$.
+
+\paragraph{6.14. Korollar (Ljapunov-Ungleichung):}Betrachte einen endlichen Ma\ss{}raum $(\Omega,\A,\mu)$ mit $\mu(\Omega)=1$ und eine messbare Abbildung $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$. F\"ur $1\leq p\leq q<\infty$ gilt
+$$\left(\int |f|^p\ d\mu\right)^{1/p}\leq\left(\int |f|^q\ d\mu\right)^{1/q}$$
+ 
+ \paragraph{Beweis:}Setze $A:=|f|^p, B:=1, a:=q/p, b:=q/(q-p)=a/(a-1)$. Dann gilt $\frac{1}{a}+\frac{1}{b}=1$ und mit Satz 6.12 folgt
+ $$\int |f|^p\ d\mu=\int |AB|\ d\mu\leq\left(\int |A|^a\ d\mu\right)^{1/a}\cdot\left(\int |B|^b\ d\mu\right)^{1/b}=\left(\int |f|^q\ d\mu\right)^{p/q}$$
+ \qed
+ 
+ \paragraph{Bemerkung:} Die Ungleichung l\"asst sich nat\"urlich auf beliebige endliche Ma\ss{}r\"aume erweitern. In der englischsprachigen Literatur wird unter der Ljapunov-Ungleichung oft ein Korollar der H\"older-Ungleichung (Log-Konvexit\"at von $L^p$) angegeben, siehe z.B. Problem 3.12  und Problem 3.13 aus Teschl, G. (2024) \textit{Topics in Real Analysis}., p. 83. 
+ 
+ \paragraph{6.15. Satz (Minkowski-Ungleichung):}F\"ur $p\in[1,\infty)$ gilt
+ $$\left(\int|f+g|^p\ d\mu\right)^{1/p}\leq\left(\int |f|^p\ d\mu\right)^{1/p}+\left(\int |g|^p\ d\mu\right)^{1/p}$$
+ 
+ \paragraph{Beweis:}Der Beweis ist trivial, falls $\displaystyle\int |f+g|^p\ d\mu=0$ oder einer der Summanden auf der rechten Seite unendlich ist. Sei also $\displaystyle\int |f+g|^p\ d\mu>0$ und $f,g\in\mathcal{L}^p(\mu)$. Der Fall $p=1$ folgt aus der Dreiecksungleichung f\"ur Betrag und Monotonie. Sei also $p\in(0,\infty)$. Es gilt $|f+g|^p=|f+g|\cdot|f+g|^{p-1}\leq|f|\cdot|f+g|^{p-1}+|g|\cdot|f+g|^{p-1}$. Mit der Monotonie folgt
+ $$\int|f+g|\ d\mu\leq\int |f|\cdot|f+g|^{p-1}\ d\mu+\int |g|\cdot|f+g|^{p-1}\ d\mu$$
+ Wende nun die H\"older-Ungleichung mit $q:=p/(p-1)$ an. Dann gilt
+ \begin{align*}
+     \int|f+g|^p\ d\mu
+     \leq& \left(\int |f|^p\ d\mu\right)^{1/p}\cdot\left(\int |f+g|^{p-1\cdot\frac{p}{p-1}}\ d\mu\right)^{\frac{p-1}{p}}\\&+\left(\int |g|^p\ d\mu\right)^{1/p}\cdot\left(\int |f+g|^{p-1\cdot\frac{p}{p-1}}\ d\mu\right)^{\frac{p-1}{p}}\\
+     =&\left(\int |f+g|^p\ d\mu\right)^{\frac{p-1}{p}}\left[\left(\int |f|^p\ d\mu\right)^{1/p}+\left(\int |g|^p\ d\mu\right)^{1/p}\right]
+ \end{align*}
+ 
+ \qed
+ 
+ \paragraph{Bemerkung:}F\"ur $p\in[1,\infty)$ ist die Abbildung
+ $$\Vert f\Vert_p:=\left(\int |f|^p\ d\mu\right)^{1/p}$$
+eine Halbnorm auf $\mathcal{L}^p(\mu)$. F\"ur den Quotientenraum $L^p(\mu)$ bez\"uglich der \"Aquivalenzrelation $f\sim g\iff f=g$ a.e. bildet $\Vert\cdot \Vert_p$ eine Norm.
+ 

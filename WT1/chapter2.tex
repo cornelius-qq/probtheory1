@@ -1,0 +1,202 @@
+\chapter*{2. \"Au\ss{}ere und Innere Ma\ss{}e}
+\addcontentsline{toc}{chapter}{2. \"Au\ss{}ere und Innere Ma\ss{}e}
+
+\section*{$\lambda$- und $\pi$-Systeme}
+\addcontentsline{toc}{section}{$\lambda$- und $\pi$-Systeme}
+
+\paragraph{2.1. Definition:}Eine Mengenfamilie $\mathcal{D}\subseteq\mathcal{P}(\Omega)$ ist ein $\lambda$-System (auch Dynkin-System oder d-System), wenn gilt
+\begin{enumerate}[label=(\roman*)]
+    \item $\Omega\in\mathcal{D}$
+    \item $A,B\in\mathcal{D},A\subseteq B\implies B\setminus A\in\mathcal{D}$
+    \item $\forall n\geq1:A_n\in\mathcal{D},A_1\subseteq A_2\subseteq\hdots\implies\displaystyle\bigcup_{n\geq1}A_n\in\mathcal{D}$
+\end{enumerate}
+
+\paragraph{2.2. Lemma:}Sei $(\Omega,\A)$ ein messbarer Raum und seien $\mu,\nu$ endliche Ma\ss{}e auf $(\Omega,\A)$, sodass $\mu(\Omega)=\nu(\Omega)$. Dann ist 
+$$\mathcal{D}:=\{A\in\A:\mu(A)=\nu(A)\}$$
+ein $\lambda$-System.
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Laut Voraussetzung gilt $\mu(\Omega)=\nu(\Omega)$.
+    \item Seien $A,B\in\mathcal{D}$. Dann gilt $\mu(A)=\nu(A)$ und $\mu(B)=\nu(B)$ und es folgt
+    $$\mu(B\setminus A)=\mu(B)-\mu(A)=\nu(B)-\nu(A)=\nu(B\setminus A)$$
+    \item Seien $A_n\in\mathcal{D},n\geq1$ und $A_1\subseteq A_2\subseteq\hdots$. Dann gilt $\mu(A_n)=\nu(A_n)$ f\"ur alle $n\geq1$. Mit der Stetigkeit von unten folgt 
+    $$\mu\left(\bigcup_{n\geq1}A_n\right)=\lim_{n\to\infty}\mu(A_n)=\lim_{n\to\infty}\nu(A_n)=\nu\left(\bigcup_{n\geq1}A_n\right)$$
+    \qed
+\end{enumerate}
+
+\paragraph{2.3. Definition:}Eine durchschnittsstabile Mengenfamilie $\M\subseteq\mathcal{P}(\Omega)$ nennt man $\pi$-System.
+
+\paragraph{Bemerkung:}Jede $\sigma$-Algebra ist damit sowohl ein $\lambda$-System, als auch ein $\pi$-System.
+
+\paragraph{2.4. Lemma:}Sei $\M$ sowohl ein $\lambda$-System, als auch ein $\pi$-System. Dann ist $\M$ eine $\sigma$-Algebra.
+
+\paragraph{Beweis:}Die ersten beiden Eigenschaften einer $\sigma$-Algebra folgen sofort. Mit de Morgan folgt au\ss{}erdem die Abgeschlossenheit bez\"uglich endlicher Vereinigungen. Seien also $A_n\in\M,n\geq1$. Setze $B_N:=\displaystyle\bigcup_{n=1}^NA_n\in\M$ f\"ur alle $N\geq1$. Dann gilt $B_1\subseteq B_2\subseteq\hdots$ und damit $\displaystyle\bigcup_{N\geq1}B_N=\bigcup_{n\geq1}A_n\in\M$. \qed
+
+\paragraph{2.5. Definition:}F\"ur $\M\subseteq\mathcal{P}(\Omega)$ definiere das von $\M$ erzeugte $\lambda$-System als
+$$\lambda(\M):=\bigcap_{\substack{\mathcal{D}\ \lambda\text{-System}\\ \M\subseteq\mathcal{D}}}\mathcal{D}$$
+$\lambda(\M)$ ist wohldefiniert, da z.B. $\mathcal{P}(\Omega)$ oder $\sigma(\M)$ $\lambda$-Systeme sind, die $\M$ enthalten. 
+
+\paragraph{2.6. Proposition:}$\lambda(\M)$ ist das kleinste $\lambda$-System auf $\Omega$, das $\M$ enth\"alt. 
+
+\paragraph{Beweis:}Da der Durchschnitt beliebig vieler $\lambda$-Systeme wieder ein $\lambda$-System ist, ist $\lambda(\M)$ ein $\lambda$-System. Sei $\mathcal{D}$ ein $\lambda$-System, das $\M$ enth\"alt. Dann gilt $\lambda(\M)\subseteq\mathcal{D}$. \qed
+
+\paragraph{2.7. Satz (Sierpi\'{n}ski\textendash Dynkin's $\lambda\textendash\pi$ Theorem):}Ist $\M$ ein $\pi$-System, dann gilt 
+$$\lambda(\M)=\sigma(\M)$$
+
+\paragraph{Beweis:}Die Inklusion $\lambda(\M)\subseteq\sigma(\M)$ folgt sofort aus der Bemerkung zu Definition 2.3. Es verbleibt also die Inklusion $\sigma(\M)\subseteq\lambda(\M)$ zu zeigen. Dazu gen\"ugt es zu zeigen, dass $\lambda(\M)$ ein $\pi$-System ist. 
+\begin{enumerate}[label=\Roman*.]
+    \item Definiere $\mathcal{D}_1:=\left\{A\in\lambda(\M):\forall M\in\M:A\cap M\in\lambda(\M)\right\}$. Dann gilt $\M\subseteq\mathcal{D}_1$ (leicht nachzupr\"ufen) und per Konstruktion $\mathcal{D}_1\subseteq\lambda(\M)$. Falls $\mathcal{D}_1$ ein $\lambda$-System ist (Beweis \"Ubung), gilt $\lambda(\M)\subseteq\mathcal{D}_1$ und somit $\mathcal{D}_1=\lambda(\M)$.
+    \item Definiere $\mathcal{D}_2:=\left\{A\in\lambda(\M):\forall B\in\lambda(\M):A\cap B\in\lambda(\M)\right\}$. Es gilt $\M\subseteq\mathcal{D}_1\subseteq\mathcal{D}_2$ und $\mathcal{D}_2\subseteq\lambda(\M)$. Falls $\mathcal{D}_2$ ein $\lambda$-System ist (Beweis \"Ubung), gilt $\lambda(\M)\subseteq\mathcal{D}_2$ und damit $\mathcal{D}_2=\lambda(\M)$. 
+\end{enumerate}
+Damit folgt, dass $\lambda(\M)$ durchschnittsstabil ist. \qed
+
+\paragraph{2.8. Korollar:}Seien $\mu$ und $\nu$ endliche Ma\ss{}e auf einem messbaren Raum $(\Omega,\A)$, die auf einem $\pi$-System $\mathcal{M}\subseteq\A$ \"ubereinstimmen (i.e. $\forall M\in\M:\mu(M)=\nu(M)$). Falls $\mu(\Omega)=\nu(\Omega)$, dann stimmen $\mu$ und $\nu$ auch auf $\sigma(\M)$ \"uberein. 
+
+\paragraph{Beweis:}Sei $\mathcal{D}$ wie in Lemma 2.2. Dann gilt $\M\subseteq\mathcal{D}$ und mit Proposition 2.6 folgt $\lambda(\M)\subseteq\mathcal{D}$. Mit Satz 2.7 folgt schlie\ss{}lich $\lambda(\M)=\sigma(\M)\subseteq\mathcal{D}$. \qed
+
+\paragraph{2.9. Korollar:}Seien $\mu$ und $\nu$ Ma\ss{}e auf einem messbaren Raum $(\Omega,\A)$, die auf einem $\pi$-System $\M\subseteq\A$ \"ubereinstimmen und sei $\mu$ $\sigma$-endlich auf $\M$. Dann stimmen $\mu$ und $\nu$ auch auf $\sigma(\M)$ \"uberein. 
+
+\paragraph{Beweis:}Trivial, falls $\mu(\Omega)=0$. Sei also $\mu(\Omega)>0$. Mit der $\sigma$-Endlichkeit von $\mu$ auf $\M$, gibt es $A_n\in\M$, sodass $\mu(A_n)<\infty$ f\"ur $n$ hinreichend gro\ss{} ($\exists N\geq1,\forall n\geq N$, etc.). Sei o.B.d.A. $\mu(A_n)>0$ f\"ur alle $n\geq1$ und definiere
+$$\mu_n(\cdot):=\dfrac{\mu(A_n\cap\cdot)}{\mu(A_n)}\text{ und }\nu_n(\cdot):=\dfrac{\nu(A_n\cap\cdot)}{\nu(A_n)}$$
+Dann sind $\mu_n$ und $\nu_n$ endliche Ma\ss{}e auf $(\Omega,\A)$ und laut Voraussetzung stimmen $\mu_n$ und $\nu_n$ auf $\M$ \"uberein, da $A_n\cap M\in\M$ f\"ur alle $M\in\M$. Au\ss{}erdem gilt $\mu_n(\Omega)=\nu_n(\Omega)=1$. Mit Korollar 2.8 folgt, dass $\mu_n$ und $\nu_n$ auch auf $\sigma(\M)$ \"ubereinstimmen. Nun gilt f\"ur $A\in\sigma(\M)$
+\begin{align*}
+    \mu(A)&=\mu\left(A\cap\bigcup_{n\geq1}A_n\right)=\mu\left(\bigcup_{n\geq1}(A_n\cap A)\right)\\
+    &=\lim_{n\to\infty}\mu(A_n\cap A)=\lim_{n\to\infty}\mu_n(A)\cdot\mu(A_n)\\
+    &=\lim_{n\to\infty}\nu_n(A)\cdot\nu(A_n)=\nu(A)
+\end{align*}
+\qed
+
+\section*{Pr\"ama\ss{}e und \"au\ss{}ere Ma\ss{}e}
+\addcontentsline{toc}{section}{Pr\"ama\ss{}e und \"au\ss{}ere Ma\ss{}e}
+
+\paragraph{2.10. Definition:}Sei $\A_0$ eine Algebra auf $\Omega$. Ein Pr\"ama\ss{} auf $(\Omega,\A_0)$ ist eine Abbildung $\mu:\nobreak\A_0\to\nobreak [0,\infty]$ mit
+\begin{enumerate}[label=(\roman*)]
+    \item $\mu(\emptyset)=0$
+    \item F\"ur $A_i\in\A_0,i\geq1$ disjunkt mit $\displaystyle\bigcup_{i\geq1}A_i\in\A_0$ gilt $\displaystyle\mu\left(\bigcup_{i\geq1}A_i\right)=\sum_{i\geq1}\mu(A_i)$
+\end{enumerate}
+
+\paragraph{2.11. Definition:}Sei $\mu$ ein Pr\"ama\ss{} auf $(\Omega,\A_0)$. Das entsprechende \"au\ss{}ere Ma\ss{} ist die Abbildung $\mu^*:\mathcal{P}(\Omega)\to[0,\infty]$ mit 
+$$\mu^*(A):=\inf\left\{\sum_{i\geq1}\mu(A_i):\forall i\geq1,A_i\in\A_0, A\subseteq\bigcup_{i\geq1}A_i\right\}$$
+
+\paragraph{Bemerkung:}$\mu^*$ ist wohldefiniert, da $\Omega,\emptyset\in\A_0$ und der $\inf$ damit von unten durch $0$ beschr\"ankt ist. 
+
+\paragraph{2.12. Definition:}Sei $\mu$ ein Pr\"ama\ss{} auf $(\Omega,\A_0)$ und $\mu^*$ das entsprechende \"au\ss{}ere Ma\ss{}. Eine Menge $A\subseteq\Omega$ ist von au\ss{}en messbar (bzgl. $\mu^*$), falls
+$$\forall M\in\mathcal{P}(\Omega):\mu^*(M\cap A)+\mu^*(M\cap A^c)=\mu^*(M)$$
+Sei au\ss{}erdem $\A^*$ die Familie der von au\ss{}en messbaren Mengen.\newline \newline
+Betrachte im Folgenden jeweils ein Pr\"ama\ss{} $\mu$ auf $(\Omega,\A_0)$, das entsprechende \"au\ss{}ere Ma\ss{} $\mu^*$ und die von au\ss{}en messbaren Mengen $\A^*$.
+
+\paragraph{2.13. Lemma:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\mu^*(\emptyset)=0$
+    \item $\forall A\in\mathcal{P}(\Omega):\mu^*(A)\geq0$
+    \item $\forall A,B\in\mathcal{P}(\Omega),A\subseteq B:\mu^*(A)\leq\mu^*(B)$
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\mu^*(\emptyset)=\sum_{i\geq1}\mu(\emptyset)=0$, da $\emptyset\in\A_0$. Insbesondere ist $\emptyset$ von au\ss{}en messbar (einfach zu pr\"ufen).
+    \item siehe Bemerkung zu Definition 2.11. 
+    \item Zeige hierzu die $\sigma$-Subadditivit\"at, also 
+    $$\mu^*\left(\bigcup_{n\geq1}A_n\right)\leq\sum_{n\geq1}\mu^*(A_n)$$
+    f\"ur alle $A_n\in\mathcal{P}(\Omega),n\ge1$. Sei dazu $\eps>0$ und w\"ahle $B_{n,i}\in\A_0,i\geq1$, sodass $A_n\subseteq\bigcup_{i\geq1}B_{n,i}$. Dann gilt 
+    $$\bigcup_{n\geq1}A_n\subseteq\bigcup_{n\geq1}\bigcup_{i\geq1}B_{n,i}\text{ und }\sum_{i\geq1}\mu(B_{n,i})\leq\mu^*(A_n)+\dfrac{\eps}{2^n}$$
+Hinweis: $a\leq\left(\displaystyle\inf_{a\in A}a\right)+\eps$ f\"ur alle $a\in A$ und $\eps>0$. Es folgt
+$$\mu^*\left(\bigcup_{n\geq1}A_n\right)\leq\sum_{n\geq1}\sum_{i\geq1}\mu(B_{n,i})\leq\sum_{n\geq1}\mu^*(A_n)+\dfrac{\eps}{2^n}=\eps+\sum_{n\geq1}\mu^*(A_n)$$
+Die $\sigma$-Subadditivit\"at (und damit die Monotonie) folgt f\"ur $\eps\searrow0$. \qed
+\end{enumerate}
+
+\paragraph{2.14. Korollar:}$\mu^*$ ist damit auch endlich subadditiv, also
+$$\forall A,B\in\mathcal{P}(\Omega):\mu^*(A\cup B)\leq\mu^*(A)+\mu^*(B)$$
+Insbesondere ist eine Menge $A\in\mathcal{P}(\Omega)$ genau dann von au\ss{}en messbar, wenn
+$$\forall M\in\mathcal{P}(\Omega):\mu^*(M\cap A)+ \mu^*(M\cap A^c)\leq\mu^*(M)$$
+
+\paragraph{2.15. Lemma:}$A^*$ ist eine Algebra. 
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\Omega\in\A^*$: folgt \"ahnlich wie der Beweis von Lemma 2.13 (i) oder aus (ii) unten.
+    \item $A\in\A^*\implies A^c\in\A^*$: trivial.
+    \item $A,B\in\A^*\implies A\cap B\in\A^*$: Es gilt $\forall M\in\mathcal{P}(\Omega)$
+    \begin{align*}
+        \mu^*(M)&=\mu^*(M\cap A)+\mu^*(M\cap A^c)\\
+        &=\mu^*(M\cap A\cap B)+\mu^*(M\cap A^c\cap B)+\mu^*(M\cap A\cap B^c)+\mu^*(M\cap A^c\cap B^c)\\
+        &=\mu^*(M\cap A\cap B)+\mu^*\left((M\cap A\cap B^c)\cup(M\cap A^c\cap B^c)\cup(M\cap A^c\cap B)\right)\\
+        &=\mu^*(M\cap A\cap B)+\mu^*\left((M\cap A^c)\cup(M\cap A\cap B^c)\right)\\
+        &=\mu^*(M\cap(A\cap B))+\mu^*(M\cap(A\cap B)^c)
+    \end{align*}
+    Die Aussage folgt mit Korollar 2.14. \qed
+\end{enumerate}
+
+\paragraph{2.16. Lemma:}Seien $A_i,\in\A^*,i\geq1$ disjunkt. Dann gilt f\"ur alle $M\in\mathcal{P}(\Omega)$
+$$\mu^*\left(M\cap\bigcup_{i\geq1}A_i\right)=\sum_{i\geq1}\mu^*(M\cap A_i)$$
+
+\paragraph{Beweis:}Sei $N\in\mathbb{N}\cup\{\infty\}$ und sei $A_n=\emptyset$ f\"ur alle $n>N$. Induktion in $N$.
+\begin{itemize}
+    \item $N=1$: trivial
+    \item $N=2$: Hier gilt 
+    \begin{align*}
+        \mu^*(M\cap(A_1\cup A_2))&=\mu^*(M\cap(A_1\cup A_2)\cap A_1)+\mu^*(M\cap(A_1\cup A_2)\cap A_1^c)\\
+        &=\mu^*(M\cap A_1)+\mu^*(M\cap A_2)
+    \end{align*}
+    da $A_1\in\A^*$.
+    \item $P(N)\implies P(N+1)$: Da $\A^*$ eine Algebra ist, gilt $\displaystyle\bigcup_{i=1}^NA_i\in\A^*$ und damit
+    \begin{align*}
+        \mu^*\left(M\cap\bigcup_{i=1}^{N+1}A_i\right)&=\mu^*\left(M\cap\left(\bigcup_{i=1}^{N}A_i\cup A_{N+1}\right)\right)\\
+        &=\mu^*\left(M\cap \bigcup_{i=1}^N A_i\right)+\mu^*(M\cap A_{N+1})\\
+        &=\sum_{i=1}^N\mu^*(M\cap A_i)+\mu^*(M\cap A_{N+1})\\
+        &=\sum_{i=1}^{N+1}\mu^*(M\cap A_i)
+    \end{align*}
+    \item $N=\infty$: Mit der $\sigma$-Subadditivit\"at gilt
+    $$\mu^*\left(M\cap\bigcup_{i\geq1}A_i\right)=\mu^*\left(\bigcup_{i\geq1}(M\cap A_i)\right)\leq\sum_{i\geq1}\mu^*(M\cap A_i)$$
+    Aber f\"ur alle $m\geq1$ gilt mit der Monotonie
+    \begin{align*}
+        \mu^*\left(M\cap\bigcup_{i\geq1}A_i\right)&\geq\mu^*\left(M\cap\bigcup_{i=1}^mA_i\right)\\
+        &=\sum_{i=1}^m\mu^*(M\cap A_i)
+    \end{align*}
+    und die Aussage folgt f\"ur $m\to\infty$. \qed
+\end{itemize}
+
+\paragraph{2.17. Lemma:}$\A^*$ ist eine $\sigma$-Algebra. 
+
+\paragraph{Beweis:}Mit Lemma 2.15 gen\"ugt es die Abgeschlossenheit bzgl. abz\"ahlbarer Durchschnitte zu zeigen. Seien dazu zun\"achst $A_i\in\A^*,i\geq1$ disjunkt. Setze $B_n:=\displaystyle\bigcup_{i=1}^nA_i$ und $\displaystyle B:=\bigcup_{i\geq1}A_i$. Dann gilt f\"ur $M\in\mathcal{P}(\Omega)$ und alle $n\geq1$
+\begin{align*}
+    \mu^*(M)&=\mu^*(M\cap B_n)+\mu^*(M\cap B_n^c)\\
+    &=\mu^*\left(M\cap\bigcup_{i=1}^nA_i\right)+\mu^*\left(M\cap\left(\bigcup_{i=1}^nA_i\right)^c\right)\\
+    &=\sum_{i=1}^n\mu^*(M\cap A_i)+\mu^*\left(M\cap\left(\bigcup_{i=1}^nA_i\right)^c\right)\\
+    &\geq\sum_{i=1}^n\mu^*(M\cap A_i)+\mu^*\left(M\cap\left(\bigcup_{i\geq1}A_i\right)^c\right)
+\end{align*}
+da $B_n\in\A^*$ (Algebra). F\"ur $n\to\infty$ folgt 
+\begin{align*}
+    \mu^*(M)&\geq\sum_{i\geq1}\mu^*(M\cap A_i)+\mu^*\left(M\cap\left(\bigcup_{i\geq1}A_i\right)^c\right)\\
+    &\overset{2.16.}{=}\mu^*\left(M\cap\bigcup_{i\geq1}A_i\right)+\mu^*\left(M\cap\left(\bigcup_{i\geq1}A_i\right)^c\right)
+\end{align*}
+und damit schlie\ss{}lich $\displaystyle\bigcup_{i\geq1}A_i\in\A^*$.\newline\newline
+Seien nun $A_i\in\A^*,i\geq1$ allgemein (also nicht unbedingt disjunkt). Setze $B_1:=A_1$ und $\displaystyle B_n:=A_n\setminus\left(\bigcup_{i=1}^{n-1}A_i\right)$ f\"ur alle $n\geq2$. Mit Lemma 2.15 gilt $B_n\in\A^*$ f\"ur alle $n\geq1$ und insbesondere sind die $B_n,n\geq1$ disjunkt und $\displaystyle\bigcup_{n\geq1}B_n=\bigcup_{i\geq1}A_i$. Die Aussage folgt mit der ersten Fall. \qed
+
+\paragraph{2.18. Lemma:}F\"ur $A\in\A_0$ gilt $\mu(A)=\mu^*(A)$.
+
+\paragraph{Beweis:}Laut Konstruktion (siehe 2.11) gilt $\mu^*(A)\leq\mu(A)$. Sei also $\eps>0$ und w\"ahle $A_i\in\A_0,i\geq1$, sodass $A\displaystyle\subseteq\bigcup_{i\geq1}A_i$ und
+$$\sum_{i\geq1}\mu(A_i)\leq\mu^*(A)+\eps$$
+Da $\mu$ als Pr\"ama\ss{} monoton und $\sigma$-additiv (und damit auch $\sigma$-subadditiv, siehe \"Ubung) auf $\A_0$ ist, folgt
+\begin{align*}
+    \mu(A)&=\mu\left(A\cap\bigcup_{i\geq1}A_i\right)\\&=\mu\left(\bigcup_{i\geq1}(A\cap A_i)\right)\\&\leq\sum_{i\geq1}\mu(A\cap A_i)\\
+    &\leq\sum_{i=1}\mu(A_i)\leq\mu^*(A)+\eps
+\end{align*}
+und die Aussage folgt f\"ur $\eps\searrow0$. \qed
+
+\paragraph{2.19. Lemma:}$\A_0\subseteq \A^*$, also ist jede Menge in der Algebra $\A_0$ auch von au\ss{}en messbar. 
+
+\paragraph{Beweis:}Sei $A\in\A_0$ und $M\in\mathcal{P}(\Omega)$. Zu zeigen ist
+$$\mu^*(M\cap A)+\mu^*(M\cap A^c)\leq\mu^*(M)$$
+Sei dazu $\eps>0$ und w\"ahle $A_i\in\A_0,i\geq1$, sodass $M\subseteq\displaystyle\bigcup_{i\geq1}A_i$ und $\displaystyle\sum_{i\geq1}\mu(A_i)\leq\mu^*(M)+\eps$. Setze $B_i:=A\cap A_i$ und $C_i:=A^c\cap A_i$. Dann sind $B_i$ und $C_i$ disjunkt und $B_i,C_i\in\A_0$ f\"ur $i\geq1$. Au\ss{}erdem gilt $\displaystyle\bigcup_{i\geq1}B_i=A\cap\bigcup_{i\geq1}A_i$ und damit $A\cap M\subseteq \displaystyle\bigcup_{i\geq1}B_i$. \"ahnliches gilt f\"ur $C_i$. Damit gilt
+$$\mu^*(M\cap A)+\mu^*(M\cap A^c)\leq\sum_{i\geq1}\mu(B_i)+\mu(C_i)=\sum_{i\geq1}\mu(A_i)\leq\mu^*(M)+\eps$$
+und die Aussage folgt f\"ur $\eps\searrow 0$. \qed
+
+\paragraph{2.20. Satz:}Sei $\mu$ ein Pr\"ama\ss{} auf $(\Omega,\A_0)$ und seien $\mu^*$ das entsprechende \"au\ss{}ere Ma\ss{} und $\A^*$ die Familie der von au\ss{}en messbaren Mengen. Dann ist $(\Omega,\A^*,\mu^*)$ ein Ma\ss{}raum, $\A_0\subseteq\A^*$ und es gilt $\forall A\in\A_0:\mu(A)=\mu^*(A)$. 
+
+\paragraph{Beweis:}Mit Lemma 2.17 ist $\A^*$ eine $\sigma$-Algebra. Mit Lemma 2.13 und Lemma 2.16 ($M=\Omega$) folgt, dass $\mu^*$ alle Eigenschaften eines Ma\ss{}es auf $(\Omega,\A^*)$ erf\"ullt. Mit Lemma 2.19 gilt $\A_0\subseteq\A^*$ und mit Lemma 2.18 gilt $\mu=\mu^*$ auf $\A_0$. \qed
+
+\paragraph{2.21. Satz (Ma\ss{}erweiterungssatz von Carath\'eodory):}Sei $\mu$ ein Pr\"ama\ss{} auf einer Algebra $\A_0$, sodass $\exists A_n\in\A_0,n\geq1:\Omega=\displaystyle\bigcup_{n\geq1}A_n\text{ und }\forall n\geq1:\mu(A_n)<\infty$. Dann gibt es eine eindeutige Erweiterung $\mu^*$ auf $\sigma(\A_0)$ mit $\mu=\mu^*$ auf $\A_0$.
+
+\paragraph{Beweis:}Es gilt $\sigma(\A_0)\subseteq\A^*$. Mit Satz 2.20 ist $\mu^*$ ein Ma\ss{} auf $(\Omega,\A^*)$ und damit auch auf $(\Omega,\sigma(\A_0))$, das auf $\A_0$ mit $\mu$ \"ubereinstimmt. Sei $\nu$ ein weiteres Ma\ss{}, das auf $\A_0$ mit $\mu$ \"ubereinstimmt. Dann stimmt $\nu$ auf $\A_0$ auch mit $\mu^*$ \"uberein. Beachte, dass $\A_0$ durchschnittsstabil ist, und damit die Voraussetzungen von Korollar 2.9 erf\"ullt sind. Damit gilt $\forall A\in\sigma(\A_0):\nu(A)=\mu^*(A)$. \qed

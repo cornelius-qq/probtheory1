@@ -1,0 +1,291 @@
+\chapter*{3. Ma\ss{} auf $\R$}
+\addcontentsline{toc}{chapter}{3. Ma\ss{} auf $\R$}
+
+\section*{Motivation}
+\addcontentsline{toc}{section}{Motivation}
+
+\paragraph{3.1. Beispiel:}Betrachte den messbaren Raum $(\mathbb{N},\mathcal{P}(\mathbb{N}))$ und eine Folge nicht-negativer reeller Zahlen $(p_i)_{i\geq1}$ mit $\sum_{i\geq1}p_i=1$. Definiere die Abbildung $\Pp:\mathcal{P}(\mathbb{N})\to[0,1]$ mit $A\mapsto\sum_{i\in A}p_i$. Dann ist $\Pp$ ein Wahrscheinlichkeitsma\ss{}, da $\Pp(\emptyset)=0$ (leere Summe), $\Pp(\mathbb{N})=1$ (per Konstruktion), und f\"ur $A_n\in\mathcal{P}(\mathbb{N}), n\geq1$ disjunkt
+$$\Pp\left(\bigcup_{n\geq1}A_n\right)=\sum_{i\in\bigcup_{n\geq1}A_n}p_i\overset{\dagger}{=}\sum_{n\geq1}\sum_{i\in A_n}p_i=\sum_{n\geq1}\Pp(A_n)$$
+wobei der Schritt in $\dagger$ aus dem folgenden Satz (cf. Analysis I?) folgt. Dieses Beispiel deckt alle diskreten Verteilungen auf $\mathbb{N}$ ab. Unser Ziel ist es, dieses Beispiel auf stetige Verteilungen auf $\R$ zu erweitern.
+
+\paragraph{3.2. Satz (Umordnung absolut konvergenter Reihen):}Sei die Reihe von $a_n,n\geq1$ absolut konvergent und sei $b_n,n\geq1$ eine Umordnung der $a_n,n\geq1$ (i.e. es gibt eine Bijektion $f:\mathbb{N}\to\mathbb{N}$ mit $b_n=a_{f(n)}$). Dann ist die Reihe von $b_n,n\geq1$ absolut konvergent und es gilt
+$$\sum_{n\geq1}a_n=\sum_{n\geq1}b_n$$
+
+\paragraph{Beweis:} Sei $\eps>0$ und definiere
+$$s_N:=\sum_{n=1}^Na_n\text{ und }t_N:=\sum_{n=1}^Nb_n$$
+Dann gibt es $N\geq1$, sodass
+$$\left|\sum_{n\geq1}a_n-s_N\right|<\eps$$
+Da die Reihe von $a_n,n\geq1$ auch absolut konvergiert k\"onnen wir $N\geq1$ so w\"ahlen, dass auch
+$$\left|\sum_{n\geq1}|a_n|-(|a_1|+\hdots+|a_N|)\right|=\sum_{n\geq N+1}|a_n|<\eps$$
+W\"ahle nun $M\geq1$ gro\ss{} genug, dass unter den $b_n,n=1,\hdots,M$ die Werte $a_1,\hdots,a_N$ alle vorkommen. F\"ur alle $m\geq M$ ist $t_m-s_N$ damit eine Summe, in der die Werte $a_1,\hdots,a_N$ nicht vorkommen und mit der Dreiecksungleichung folgt 
+$$|t_m-s_N|\leq\sum_{n\geq N+1}a_n<\eps$$
+Damit gilt $\forall m\geq M$
+\begin{align*}
+    \left|\sum_{n\geq1}a_n-t_m\right|&=\left|\sum_{n\geq1}a_n-s_N+s_N-t_m\right|\\
+    &\leq\left|\sum_{n\geq1}a_n-s_N\right|+\left|s_N-t_m\right|<2\eps
+\end{align*}
+f\"ur $N$ hinreichend gro\ss{}. Da $\eps>0$ beliebig war, folgt die Aussage. \qed
+
+\paragraph{3.2.$\frac{1}{2}$. Satz (Riemann'scher Umordnungssatz):}Sei die Reihe von $a_n,n\geq1$ konvergent, aber nicht absolut konvergent. Dann gibt es f\"ur jede Zahl $a\in\R$ eine Umordnung $b_n,n\geq1$, sodass
+$$\sum_{n\geq1}b_n=a$$
+
+\paragraph{Beweis:}siehe z.B. Theorem 22.7, Spivak, M. \textit{Calculus}. \qed
+
+\section*{Messen von Intervallen}
+\addcontentsline{toc}{section}{Messen von Intervallen}
+Sei im Folgenden $F:\R\to\R$ eine beliebige monoton-nichtfallende und rechtsseitig stetige Funktion. Beachte, dass damit linksseitige Grenzwerte f\"ur $F$ existieren. G\"angige Beispiele sind z.B.: $F(x)=x$ oder $F(x)=\int_{-\infty}^xe^{-t^2/2}$. Wir suchen nun eine m\"oglichst "kleine" $\sigma$-Algebra $\A$ auf $\R$, die alle Intervalle der Form $[a,b]$ enth\"alt und ein Ma\ss{} $\mu:\A\to[0,\infty]$, sodass $\mu([a,b])=F(b)-F(a)$.
+
+\paragraph{3.3. Definition:}Sei $-\infty\leq a\leq b\leq\infty$. Definiere das halboffene Interval
+\begin{align*}
+    (a,b\rangle:=
+\begin{cases}
+    (a,b] &\text{falls }b<\infty \\
+    (a,\infty)&\text{falls }b=\infty
+\end{cases}
+\end{align*}
+sowie die Familie der halboffenen Intervalle
+$$\mathcal{J}:=\left\{(a,b\rangle:-\infty\leq a\leq b\leq\infty\right\}
+$$
+und die Mengenfunktion $\phi:\mathcal{J}\to[0,\infty]$ mit
+\begin{align*}
+    (a,b\rangle\mapsto
+    \begin{cases}
+        F(b)-F(a)&\text{falls }a<b\\
+        0&\text{falls }a=b
+    \end{cases}
+\end{align*}
+
+\paragraph{3.4. Lemma:}$\phi$ ist $\sigma$-additiv auf $\mathcal{J}$.
+
+\paragraph{Beweis:}Seien $J_n\in\mathcal{J},n\geq1$, disjunkt, sodass auch $\bigcup_{n\geq1}J_n\in\mathcal{J}$. Zeige 
+$$\phi\left(\bigcup_{n\geq1}J_n\right)=\sum_{n\geq1}\phi(J_n)$$
+Da $\bigcup_{n\geq1}J_n\in\mathcal{J}$, k\"onnen wir $\bigcup_{n\geq1}J_n=(a,b\rangle$ schreiben. Seien o.B.d.A. alle $J_n=(a_i,b_i\rangle$ nicht-leer und aufsteigend geordnet, sodass
+$$a=a_1<b_1=a_2<\hdots<b_{n-1}=a_n<b_n=b$$ 
+Dann gilt 
+$$\sum_{n\geq1}\phi(J_n)=\sum_{n\geq1}[F(b_n)-F(a_n)]=F(b_n)-F(a_1)=F(b)-F(a)=\phi\left(\bigcup_{n\geq1}J_n\right)$$
+\qed
+
+\paragraph{Bemerkung:}Beachte, dass $\bigcup_{n\geq1}J_n\in\mathcal{J}$ hier eine notwendige Voraussetzung ist, da $\mathcal{J}$ keine Algebra (bzw. $\sigma$-Algebra) ist. Wir erweitern $\mathcal{J}$ zun\"achst konstruktiv zu einer Algebra $\mathcal{J}^*$ und die Mengenfunktion $\phi:\mathcal{J}\to[0,\infty]$ zu einem Pr\"ama\ss{} $\phi^*:\mathcal{J}^*\to[0,\infty]$. Sp\"ater liefert uns dann ein (nicht-konstruktiver) Satz (Ma\ss{}erweiterungssatz von Carath\'eodory) eine Erweiterung von $\phi^*$ zu einem Ma\ss{} $\mu:\sigma(\mathcal{J}^*)\to[0,\infty]$.
+
+\paragraph{3.5. Definition:}Definiere die Mengenfamilie
+$$\mathcal{J}^*:=\left\{\bigcup_{i=1}^nJ_i:n\in\mathbb{N},J_i\in\mathcal{J},J_i\text{ disjunkt f\"ur }i=1,\hdots,n\right\}$$
+aller endlichen disjunkten Vereinigungen von halboffenen Intervallen. 
+
+\paragraph{3.6. Lemma:}$\mathcal{J}^*$ ist eine Algebra auf $\R$ mit $\mathcal{J}\subseteq\mathcal{J}^*$.
+
+\paragraph{Beweis:}Die Eigenschaften $\mathcal{J}\subseteq\mathcal{J}^*$ und $\R\in\mathcal{J}^*$ sind trivial. Zeige also die Abgeschlossenheit bez\"uglich Komplementbildung und endlichen Durchschnitten. \newline\newline
+F\"ur $(a,b\rangle\in\mathcal{J}$ gilt $(a,b\rangle^c=(-\infty,a\rangle\cup(b,\infty\rangle\in\mathcal{J}^*$. Sei also $A=\bigcup_{i=1}^n(a_i,b_i\rangle\in\mathcal{J}^*$ mit $(a_i,b_i\rangle$ disjunkt, nicht-leer und aufsteigend geordnet, d.h.
+$$-\infty\leq a_i<b_1\leq a_2<\hdots\leq a_n<b\leq\infty$$
+Dann gilt $A^c=(-\infty,a_1\rangle\cup(b_1,a_2\rangle\cup\hdots\cup(b_{n-1},a_n\rangle\cup(b_n,\infty\rangle\in\mathcal{J}^*$ per Definition von $\mathcal{J}^*$.\newline\newline
+Seien nun $A,B\in\mathcal{J}^*, A=\bigcup_{i=1}^n(a_i,b_i\rangle,B=\bigcup_{j=1}^m(c_j,d_j\rangle$ jeweils endliche Vereinigungen disjunkter, halboffener Intervalle, d.h. $(a_i,b_i\rangle$ paarweise disjunkt f\"ur $i=1,\hdots,n$ und $(c_j,d_j\rangle$ paarweise disjunkt f\"ur $j=1\hdots,m$. Dann gilt
+$$A\cap B=\bigcup_{i=1}^n\bigcup_{j=1}^m(a_i,b_i\rangle\cap (\alpha_i,d_i\rangle=\bigcup_{i=1}^n\bigcup_{j=1}^m\left(\max\{a_i,c_j\},\max\{b_i,d_j\}\right\rangle$$
+Die Disjunktheit der Intervalle $\left(\max\{a_i,c_j\},\max\{b_i,d_j\}\right\rangle$ f\"ur $i=1,\hdots,n$ und $j=1,\hdots,m$ ist leicht nachzupr\"ufen (Widerspruchsargument). \qed
+
+\paragraph{3.7. Definition:}Sei $A=\bigcup_{i=1}^n(a_i,b_i\rangle\in\mathcal{J}^*$ mit $(a_i,b_i\rangle$ disjunkt f\"ur $i=1,\hdots,n$. Definiere nun die Erweiterung $\phi^*:\mathcal{J}^*\to[0,\infty]$ mit $A\mapsto\sum_{i=1}^n\phi\left((a_i,b_i\rangle\right)$. Da $\mathcal{J}\subseteq\mathcal{J}^*$ gilt $\phi=\phi^*$ auf $\mathcal{J}$.
+
+\paragraph{3.8. Proposition:}$\phi^*(A)$ ist wohldefiniert f\"ur alle $A\in\mathcal{J}^*$ und insbesondere unabh\"angig von der Darstellung von $A$.
+ 
+ \paragraph{Beweis:}Sei $A=\bigcup_{i=1}^n(a_i,b_i\rangle=\bigcup_{j=1}^m(\alpha_i,d_i\rangle\in\mathcal{J}^*$. Schreibe f\"ur $i=1,\hdots,n$
+$$(a_i,b_i\rangle=(a_i,b_i\rangle\cap A=(a_i,b_i\rangle\cap\bigcup_{j=1}^m(c_j,d_j\rangle=\bigcup_{j=1}^m\left[(c_j,d_j\rangle\cap(a_i,b_i\rangle\right]$$
+ und analog f\"ur $j=1,\hdots,m$
+ $$(c_j,d_j\rangle=\bigcup_{i=1}^n\left[(c_j,d_j\rangle\cap(a_i,b_i\rangle\right]$$
+ Es folgt mit der $\sigma$-Additivit\"at von $\phi$ auf $\mathcal{J}$
+ \begin{align*}
+     \phi^*\left(\bigcup_{i=1}^n(a_i,b_i\rangle\right)&=\sum_{i=1}^n\phi((a_i,b_i\rangle)\\
+     &=\sum_{i=1}^n\phi\left(\bigcup_{j=1}^m\left[(c_j,d_j\rangle\cap(a_i,b_i\rangle\right]\right)\\
+     &=\sum_{i=1}^n\sum_{j=1}^m\phi((a_i,b_i\rangle\cap(c_j,d_j\rangle)\\
+     &=\sum_{j=1}^m\sum_{i=1}^n\phi((a_i,b_i\rangle\cap(c_j,d_j\rangle)\\
+     &=\sum_{j=1}^m\phi\left(\bigcup_{i=1}^n\left[(c_j,d_j\rangle\cap(a_i,b_i\rangle\right]\right)\\
+     &=\sum_{j=1}^m\phi((c_j,d_j\rangle)=\phi^*\left(\bigcup_{j=1}^m(c_j,d_j\rangle\right)
+ \end{align*}
+ \qed
+ 
+ \section*{Erzeugung von Ma\ss{}en auf $\R$}
+ \addcontentsline{toc}{section}{Erzeugung von Ma\ss{}en auf $\R$}
+ Wir m\"ochten $\phi^*:\mathcal{J}^*\to[0,\infty]$ nun zu einem Ma\ss{} $\mu:\sigma(\mathcal{J}^*)\to[0,\infty]$ erweitern. Wir fordern dazu folgende Eigenschaften von $\phi^*$:
+ 
+\paragraph{3.9. Lemma:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\phi^*(\emptyset)=0$
+    \item F\"ur $A_n\in\mathcal{J}^*,n\geq1$ disjunkt, mit $\bigcup_{n\geq1}A_n\in\mathcal{J}^*$ gilt $\phi^*\left(\bigcup_{n\geq1}A_n\right)=\sum_{n\geq1}\phi^*(A_n)$ ($\phi^*$ ist $\sigma$-additiv auf $\mathcal{J}^*$).
+    \item $\exists B_n\in\mathcal{J}^*,n\geq1$, sodass $\R=\bigcup_{n\geq1}B_n$ und $\phi^*(B_n)<\infty$ f\"ur $n\geq1$ (Das Pr\"ama\ss{} $\phi^*$ ist $\sigma$-endlich auf $(\R,\mathcal{J}^*) $).
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\phi(\emptyset)=\phi^*((1,1\rangle)=\phi((1,1\rangle)=0$ per Definition von $\phi$.
+    \item Setze $A:=\bigcup_{n\geq1}A_n$. Da $A\in\mathcal{J}^*$ k\"onnen wir $A=\bigcup_{j=1}^k(c_j,d_j\rangle$ schreiben mit $(c_j,d_j\rangle$ disjunkt f\"ur $j=1,\hdots,k$. Schreibe weiters $A_n=\bigcup_{i=1}^{m_n}(a_i^{(n)},b_i^{(n)}\rangle$ mit $(a_i^{(n)},b_i^{(n)}\rangle$ disjunkt f\"ur $i=1,\hdots,m_n$ und alle $n\geq1$. Es gilt 
+    $$(c_j,d_j\rangle=(c_j,d_j\rangle\cap A=\bigcup_{n\geq1}\left(A_n\cap(c_j,d_j\rangle\right)$$
+    und
+    $$A_n=A_n\cap A=\bigcup_{i=1}^{m_n}\bigcup_{j=1}^k\left((a_i^{(n)},b_i^{(n)}\rangle\cap(c_j,d_j\rangle\right)$$
+    und mit Lemma 3.4 folgt (mit der Eigenschaft, dass $\mathcal{J}$ durchschnittsstabil ist)
+    $$\phi((c_j,d_j\rangle)=\sum_{n\geq1}\sum_{i=1}^{m_n}\phi\left((a_i^{(n)},b_i^{(n)}\rangle\cap(c_j,d_j\rangle\right)$$
+    und per Definition von $\phi^*$ gilt
+    $$\phi^*(A_n)=\sum_{i=1}^{m_n}\sum_{j=1}^k\phi\left((a_i^{(n)},b_i^{(n)}\rangle\cap(c_j,d_j\rangle\right)$$
+    Mit Satz 3.2 (??, und $\sigma$-Endlichkeit?) folgt 
+    \begin{align*}
+        \phi^*(A)&=\sum_{i=1}^k\phi((c_j,d_j\rangle)\\
+        &=\sum_{j=1}^k\sum_{n\geq1}\sum_{i=1}^{m_n}\phi\left((a_i^{(n)},b_i^{(n)}\rangle\cap(c_j,d_j\rangle\right)\\
+        &\overset{\text{Satz 3.2}}{=}\sum_{n\geq1}\sum_{i=1}^{m_n}\sum_{j=1}^k\phi\left((a_i^{(n)},b_i^{(n)}\rangle\cap(c_j,d_j\rangle\right)\\
+        &=\sum_{n\geq1}\phi^*(A_n)
+    \end{align*}
+    \item W\"ahle hier $B_n:=(-n,n\rangle\in\mathcal{J}^*$. Dann gilt $\R=\bigcup_{n\geq1}(-n,n\rangle$ und $\phi^*(B_n)=F(n)-F(-n)<\infty$ f\"ur alle $n\geq1$. \qed
+\end{enumerate}
+
+\paragraph{3.10. Lemma:}Folgende Aussagen sind \"aquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur $A_n\in\mathcal{J},n\geq1$ disjunkt, mit $A=\bigcup_{n\geq1}A_n\in\mathcal{J}$ gilt $\phi\left(\bigcup_{n\geq1}A_n\right)=\sum_{n\geq1}\phi(A_n)$
+    \item F\"ur $A_n\in\mathcal{J}^*,n\geq1$ disjunkt, mit $A=\bigcup_{n\geq1}A_n\in\mathcal{J}^*$ gilt $\phi^*\left(\bigcup_{n\geq1}A_n\right)=\sum_{n\geq1}\phi^*(A_n)$
+\end{enumerate}
+
+\paragraph{Beweis:} folgt. Ich denke (ii)$\implies$(i) folgt mit der Inklusion $\mathcal{J}\subseteq\mathcal{J}^*$ und $\phi(A)=\phi^*(A)$ f\"ur $A\in\mathcal{J}$. (i)$\implies$(ii) folgt aus dem Beweis von Lemma 3.9 (insofern dieser stimmt)?
+
+\paragraph{3.11. Lemma:}Sei $I\subseteq\mathbb{N}$ nicht-leer und seien $(a_i,b_i\rangle\in\mathcal{J},i\in I$ nicht-leer und disjunkt, sodass $\bigcup_{i\in I}(a_i,b_i\rangle\subseteq(a,b\rangle\in\mathcal{J}$. Dann folgt 
+$$\sum_{i\in I}F(b_i)-F(a_i)\leq F(b)-F(a)$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $I$ endlich\newline
+    Da $I$ in Bijektion zu $\{1,\hdots,n\}$ steht, setze o.B.d.A. $I=\{1,\hdots,n\}$ und ordne die Intervalle aufsteigend, also
+    $$a\leq a_1<b_1\leq\hdots\leq a_n<b_n\leq b$$
+    Dann gilt
+    $$\sum_{i=1}^nF(b_i)-F(a_i)=-F(a_1)+F(b_1)-\hdots-F(a_n)+F(b_n)\leq F(b_n)-F(a_1)\leq F(b)-F(a)$$
+    da $F(b_k)\leq F(a_{k+1})$ f\"ur $k=1,\hdots,n-1$. 
+    \item $I$ abz\"ahlbar unendlich\newline
+    Da $I$ in Bijektion zu $\mathbb{N}$ steht, setze o.B.d.A $I=\mathbb{N}$. Dann gilt
+    $$\sum_{i\geq1}F(b_i)-F(a_i)=\lim_{n\to\infty}\sum_{i=1}^nF(b_i)-F(a_i)\leq\lim_{n\to\infty}F(b)-F(a)=F(b)-F(a)$$
+    mit dem I. Teil. \qed
+\end{enumerate}
+
+\paragraph{3.12. Lemma:} Sei $I\subseteq\mathbb{N}$ nicht-leer und seien $(a_i,b_i\rangle\in\mathcal{J},i\in I$ nicht-leer, sodass $\bigcup_{i\in I}(a_i,b_i\rangle\supseteq(a,b\rangle\in\mathcal{J}$. Dann folgt
+$$F(b)-F(a)\leq\sum_{i\in I}F(b_i)-F(a_i)$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $I$ endlich\newline
+    Sei wie im Beweis von Lemma 3.11 o.B.d.A $I=\{1,\hdots,n\}$. Seien au\ss{}erdem die Intervalle $(a_i,b_i\rangle$ disjunkt und aufsteigend geordnet. Dann gilt $a\in(a_k,b_k\rangle$ und $b\in(a_\ell,b_\ell\rangle$ f\"ur $1\leq k\leq\ell\leq n$ und $b_i=a_{i+1}$ f\"ur alle $i=k,\hdots,\ell-1$. Es folgt
+    \begin{align*}
+        \sum_{i=1}^nF(b_i)-F(a_i)&\geq\sum_{i=k}^\ell F(b_i)-F(a_i)\\
+        &=-F(a_k)+F(b_\ell)\\&\geq F(b)-F(a)
+    \end{align*}
+    \item $I$ abz\"ahlbar unendlich, $a,b<\infty$\newline
+    Sei wie im Beweis von Lemma 3.11 o.B.d.A. $I=\mathbb{N}$. Sei $\eps>0$. Da $F$ rechtsstetig ist, gibt es $\delta,\delta_i>0,i\geq1$, sodass
+    $$F(a+\delta)<F(a)+\eps,\ F(b_i+\delta_i)<F(b_i)+\frac{\eps}{2^i}$$
+    Beachte, dass $(a+\delta,b\rangle\bigcup_{i\geq1}(a_i,b_i+\delta_i\rangle$. Nun existiert eine endliche Menge $J\subseteq\mathbb{N}$ (einfache \"Uberlegung), sodass
+    $$(a+\delta,b\rangle\subseteq\bigcup_{j\in J}(a_j,b_j+\delta_j\rangle$$
+    Damit folgt
+    \begin{align*}
+        F(b)-F(a+\delta)&\leq\sum_{j\in J}F(b_j+\delta_j)-F(a_j)\\
+        &\leq\eps+\sum_{i\geq1}F(b_i)-F(a_i)
+    \end{align*}
+    Die Aussage folgt f\"ur $\eps\searrow0$.
+    \item $I$ abz\"ahlbar unendlich, $a$ oder $b$ unendlich\newline
+    Es gibt hier drei F\"alle:
+    $$(a,b\rangle=
+    \begin{cases}
+        (-\infty,b] \\
+        (a,\infty) \\
+        (-\infty,\infty)
+    \end{cases}$$
+    Sei $\eps>0$. Wegen den Eigenschaften von $F$ gibt es $s,t\in\R$, sodass $a\leq s\leq t\leq b$ und 
+    $$F(s)\leq F(a)+\eps,\ F(t)\leq F(b)-\eps$$
+    Es folgt weiters
+    \begin{gather*}
+        (s,t\rangle\subseteq(a,b\rangle\subseteq\bigcup_{i\geq1}(a_i,b_i\rangle\\
+        F(b)-F(a)\geq F(t)-F(s)\geq F(b)-F(a)-2\eps
+    \end{gather*}
+    Die Aussage folgt f\"ur $\eps\searrow0$. \qed
+\end{enumerate}
+
+\paragraph{Bemerkung:} Damit k\"onnen wir $\phi^*$ eindeutig zu einem Ma\ss{} $\mu$ auf $\sigma(\mathcal{J}^*)$ erweitern. Beachte (einfache \"Uberlegung)
+$$\mathcal{J}\subseteq\mathcal{J}^*,\ \mathcal{J}^*\subseteq\sigma(\mathcal{J})\implies\sigma(\mathcal{J})=\sigma(\mathcal{J}^*)$$
+
+\paragraph{3.13. Definition:}Definiere die Borel'sche $\sigma$-Algebra auf $\R$ durch
+$$\borel:=\sigma(\mathcal{J}^*)$$
+
+\paragraph{3.14. Proposition:}Es gilt $\borel=\sigma(\mathcal{J}_i)$ f\"ur $i=1,\hdots,n$ und
+\begin{align*}
+    &\mathcal{J}_1:=\{(a,b):-\infty\leq a\leq b\leq\infty\}\\
+    &\mathcal{J}_2:=\{[a,b]:-\infty< a\leq b<\infty\}\\
+    &\mathcal{J}_3:=\{(-\infty,b]:b\in\R\}\\
+    &\mathcal{J}_4:=\{(-\infty,b):b\in\R\}
+\end{align*}
+
+\paragraph{Beweis:} nur f\"ur $\mathcal{J}_1$, Rest \"Ubung!
+\begin{enumerate}[label=\Roman*.]
+    \item $\mathcal{J}_1\subseteq\sigma(\mathcal{J})$\newline
+    $(a,b)=\bigcup_{n\geq1}\left(a,b-\frac{1}{n}\right]\in\sigma(\mathcal{J})$, da $\left(a,b-\frac{1}{n}\right]=\left(a,b-\frac{1}{n}\right\rangle\in\mathcal{J}$ f\"ur alle $n\geq1$.
+    \item $\mathcal{J}_1\supseteq\sigma(\mathcal{J})$
+    \begin{enumerate}[label=(\alph*)]
+        \item $a,b<\infty$: $(a,b\rangle=(a,b]=\bigcap_{n\geq1}\left(a,b+\frac{1}{n}\right)\in\sigma(\mathcal{J}_1)$.
+        \item $a=-\infty,b<\infty$: $(a,b\rangle=(-\infty,b]=\bigcap_{n\geq1}\left(-\infty,b+\frac{1}{n}\right)\sigma(\mathcal{J}_1)$
+        \item $a<\infty,b=\infty$: $(a,b\rangle=(a,\infty)\in\mathcal{J}_1\subseteq\sigma(\mathcal{J}_1)$
+        \item $a=-\infty,b=\infty$: $(a,b\rangle=\R\in\mathcal{J}_1\subseteq\sigma(\mathcal{J}_1)$ \qed
+    \end{enumerate} 
+\end{enumerate}
+
+\paragraph{3.15. Proposition:}Es gilt $\borel=\sigma(\mathcal{O})$, mit $\mathcal{O}=\{O\subseteq\R:O\text{ offen}\}$.
+
+\paragraph{Beweis:} Es gilt $\mathcal{J}_1\subseteq\mathcal{O}$ und mit Proposition 3.14 folgt $\mathcal{B}(\R)\subseteq\sigma(\mathcal{O})$. Au\ss{}erdem ist jede offene Teilmenge in $\R$ eine abz\"ahlbare Vereinigung disjunkter, offener Intervalle, womit $\mathcal{O}\subseteq\mathcal{B}(\R)$ folgt. \qed 
+
+\paragraph{3.16. Korollar:}$\borel$ enth\"alt alle einpunktigen, offenen und abgeschlossenen Teilmengen von $\R$.
+
+\paragraph{Beweis:}Die Inklusion der offenen und abgeschlossenen Teilmengen folgt aus Proposition 3.15 und der Abgeschlossenheit bez\"uglich Komplementbildung. \newline
+Au\ss{}erdem gilt 
+$$\{x\}=\bigcap_{n\geq1}\left(x-\frac{1}{n},x+\frac{1}{n}\right)\in\borel$$
+mit Proposition 3.14. \qed
+
+\paragraph{3.17. Satz:}Sei $F:\R\to\R$ monoton nicht-fallend und rechtsstetig. Dann existiert genau ein $\sigma$-endliches Ma\ss{} $\mu_F:\borel\to[0,\infty]$ mit $\mu_F((a,b\rangle)=F(b)-F(a)$.
+
+\paragraph{Beweis:}Existenz und Eindeutigkeit folgen aus dem Ma\ss{}erweiterungssatz von Carath\'eodory. Au\ss{}erdem gilt $\R=\bigcup_{n\geq1}(-n,n\rangle$ und $\forall n\geq1:\mu_F((-n,n\rangle)=F(n)-F(-n)<\infty$. \qed
+
+\paragraph{3.18. Definition:}Das Lebesgue-Ma\ss{} $\lambda:\mathcal{B}(\R)\to[0,\infty]$ auf $\R$ ist definiert durch das von der Funktion $F(x)=x$ induzierte Ma\ss{} (gem\"a\ss{} Satz 3.17).
+
+\paragraph{3.19. Definition:}Sei $F:\R\to[0,1]$ monoton nicht-fallend und rechtsstetig, sodass zus\"atzlich $\lim_{x\to-\infty}F(x)=0$ und $\lim_{x\to\infty}F(x)=1$. Dann nennt man $F$ eine Verteilungsfunktion (cdf). Mit Satz 3.17 induziert jede Verteilungsfunktion ein Wahrscheinlichkeitsma\ss{} $\Pp$ auf $\R$.
+
+\paragraph{3.20. Satz} Sei $\varphi$ ein $\sigma$-endliches Ma\ss{} auf $(\R,\borel)$. Dann existiert eine Funktion $F:\R\to\R$, sodass
+\begin{itemize}
+    \item $F$ ist monoton nichtfallend.
+    \item $F$ ist rechtsseitig stetig.
+    \item F\"ur $\displaystyle F(-\infty)=\lim_{x\to-\infty}F(x)$ und $F(\infty)=\displaystyle\lim_{x\to\infty}F(x)$ gilt f\"ur alle $-\infty\leq a<b\leq\infty$.
+    $$\varphi\left((a,b\rangle\right)=F(b)-F(a)$$
+\end{itemize}
+\paragraph{Beweis:} 
+\begin{enumerate}[label=\Roman*.]
+    \item Fall: $\varphi$ endlich.\newline
+    Setze $F(x):=\varphi\left((-\infty,x]\right)$ f\"ur $x\in\R$. Da $\varphi$ endlich ist, ist $F$ reellwertig. Die Monotonie von $F$ folgt aus der Monotonie von $\varphi$ (siehe Satz 1.7). Die Rechtsstetigkeit von $F$ folgt der Stetigkeit von oben (siehe Satz 1.9). Schlie\ss{}lich gilt f\"ur $-\infty<a<b<\infty$
+    \begin{align*}
+        \varphi\left((a,b]\right)&=\varphi\left((-\infty,b]\setminus(-\infty,a]\right)\\
+        &=\varphi((-\infty,b])-\varphi((-\infty,a])=F(b)-F(a)\\ \\
+        \varphi((-\infty,b))&\overset{\text{S.V.U.}}{=}\lim_{x\to-\infty}\varphi((x,b])\\
+        &=\lim_{x\to-\infty}F(b)-F(x)=F(b)-F(-\infty)\\ \\
+        \varphi((a,\infty))&\overset{\text{S.V.U.}}{=}\lim_{x\to\infty}\varphi((a,x])\\
+        &=\lim_{x\to\infty}F(x)-F(a)=F(\infty)-F(a) \\ \\
+        \varphi((-\infty,\infty))&\overset{\text{S.V.U.}}{=}\lim_{x\to\infty}\varphi((-x,x])\\
+        &=\lim_{x\to\infty}F(x)-F(-x)=F(\infty)-F(-\infty)
+    \end{align*}
+    \item Fall: $\varphi(\R)=\infty$.\newline
+    Setze hier
+    \begin{align*}
+        F(x):=
+        \begin{cases}
+            \varphi((0,x])&\text{ falls }x\geq0 \\
+            -\varphi((x,0])&\text{ falls }x<0
+        \end{cases}
+    \end{align*}
+    Die Monotonie und Rechtssteitgkeit folgen wie im I. Fall. F\"ur die dritte Eigenschaft argumentiere wie im I. Fall und betrachte jeweils die F\"alle
+    \begin{align*}
+        0\leq a\leq b<\infty \\ 
+        -\infty<a<0\leq b<\infty \\ 
+        -\infty<a<b\leq 0
+    \end{align*}
+    \qed
+\end{enumerate}
+
+\paragraph{3.21. Korollar:}Sei $(\R,\borel,\mu)$ ein $\sigma$-endlicher Ma\ss{}raum und $\mu((a,b\rangle)=F(b)-F(a)$ f\"ur eine monoton nicht-fallende, rechtsstetige Funktion $F:\R\to\R$. Dann gilt f\"ur $a\in\R$:
+$$\mu(\{a\})=F(a)-\lim_{x\nearrow a}F(x)$$
+Insbesondere ist $\{a\}$ ein Atom von $\mu$, wenn $F$ eine Sprungstelle bei $a$ hat.
+
+\paragraph{Beweis:}Schreibe $\{a\}=\bigcap_{n\geq1}\left(a-\frac{1}{n},a\right\rangle$ und beachte, dass $\mu((a-1,a\rangle)=F(a)-F(a-1)<\infty$. Mit der Stetigkeit von oben (Satz 1.9) gilt
+$$\mu(\{a\})=\lim_{n\to\infty}\mu\left(\left(a-\frac{1}{n},a\right\rangle\right)=\lim_{n\to\infty}\left[F(a)-F\left(a-\frac{1}{n}\right)\right]=F(a)-\lim_{x\nearrow a}F(x)$$
+wobei die letze Gleichung aus der Definition eines einseitigen Grenzwertes folgt (cf. Analysis). \qed

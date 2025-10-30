@@ -1,0 +1,187 @@
+\chapter*{12. Radon-Nikodym-Ableitungen}
+\addcontentsline{toc}{chapter}{12. Radon-Nikodym-Ableitungen}
+In diesem Kapitel sei $(\Omega,\mathcal{A})$ ein messbarer Raum und $\nu,\mu$ generische Ma\ss{}e auf diesem Raum.
+\section*{Signierte Ma\ss{}e}
+ \addcontentsline{toc}{section}{12.1 Signierte Ma\ss{}e}
+ 
+ \paragraph{12.1. Definition:} Ein signiertes Ma\ss{} ist eine Abbildung $\varphi:\mathcal{A}\to\R$, die $\sigma$-additiv ist, i.e. f\"ur $A_n\in\mathcal{A},n\geq1$ disjunkt gilt
+ $$\varphi\left(\bigcup_{n\geq1}A_n\right)=\sum_{n\geq1}\varphi(A_n)$$
+ In unserem Kontext seien signierte Ma\ss{}e immer endlich und bilden $\emptyset$ auf $0$ ab.
+ 
+ \paragraph{12.2. Beispiel:} Einige Beispiele f\"ur signierte Ma\ss{}e sind
+ \begin{enumerate}[label=(\roman*)]
+     \item $\phi(A):=\mu(A)$, wenn $\mu$ endlich ist.
+     \item $\varphi(A):=\mu(A)-\nu(A)$, wenn $\mu,\nu$ endlich sind.
+     \item $\varphi(A):=\int_A f\ d\mu$, wenn $f\in L^1(\mu)$
+ \end{enumerate}
+ 
+ \paragraph{12.3. Lemma:} Seien $A_n\in\mathcal{A},n\geq1$, sodass entweder
+ \begin{enumerate}[label=(\roman*)]
+     \item $A_1\subseteq A_2\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n:=A$, oder
+     \item $A_1\supseteq A_2\supseteq\hdots\supseteq\bigcap_{n\geq1}A_n:=A$
+ \end{enumerate}
+ Dann ist in beiden F\"allen 
+ $$\lim_{n\to\infty}\varphi(A_n)=\varphi(A)$$
+ i.e. signierte Ma\ss{}e sind von unten/oben stetig.
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=(\roman*)]
+     \item
+     \begin{align*}
+     \varphi(A)&=\varphi(A_1\cup\bigcup_{n\geq1}(A_{n+1}\setminus A_n))\\
+     &=\varphi(A_1)+\sum_{n\geq1}\varphi(A_{n+1}\setminus A_n)\\
+     &=\lim_{N\to\infty}\left[\varphi(A_1)+\sum_{n=1}^N\varphi(A_{n+1}\setminus A_n)\right]\\
+     &=\lim_{N\to\infty}\varphi(A_{N+1})=\lim_{N\to\infty}\varphi(A_N)
+     \end{align*}
+     \item Hier gilt $A_1^c\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n^c=:A^c$
+     \begin{flalign*}
+         \overset{\text{(i)}}{\implies}&\varphi(A^c)=\lim_{n\to\infty}\varphi(A_n^c) &&\\
+         \implies &\varphi(\Omega)-\varphi(A)=\lim_{n\to\infty}[\varphi(\Omega)-\varphi(A_n)] =\varphi(\Omega)-\lim_{n\to\infty}\varphi(A_n) &&\\
+         \implies &\varphi(A)=\lim_{n\to\infty}\varphi(A_n)
+     \end{flalign*}
+     \end{enumerate}
+     \qed
+     
+     \paragraph{4. Satz (Hahn/Jordan Decomposition Theorem):} Sei $\varphi$ ein signiertes Ma\ss{} auf $(\Omega,\mathcal{A})$. Dann gibt es eine Partition (Hahn-Zerlegung) von $\Omega$
+     $$\Omega=\Omega_+\cup\Omega_-$$
+     mit $\Omega_+,\Omega_-\in\mathcal{A}$, sodass
+     $$\forall A\in\mathcal{A}:\varphi(A\cap\Omega_+)=:\varphi_+(A)\geq0, \ \varphi(A\cap\Omega_-)=:\varphi_-(A)\leq0$$
+     Daraus folgt sofort die Jordan-Zerlegung
+     $$\forall A\in\mathcal{A}:\varphi(A)=\varphi_+(A)+\varphi_-(A)$$
+     
+     \paragraph{Beweis:}Sei $\alpha:=\displaystyle\sup_{A\in\mathcal{A}}\varphi(A)$. Dann gibt es eine Menge $D\in\mathcal{A}$, sodass dieses Supremum angenommen wird, i.e. $\varphi(D)=\alpha$ (Details zur Konstruktion siehe unten).
+     Setze nun $\Omega_+:=D$ und $\Omega_-:=D^c$. Dann gilt
+     \begin{itemize}
+         \item Angenommen es gibt $A\in\mathcal{A}$ mit $\varphi(A\cap D)<0$. Dann ist $D=(D\cap A)\cup(D\setminus A)$ und 
+         $$\alpha=\varphi(D)=\varphi(D\cap A)+\varphi(D\setminus A)<\varphi(D\setminus A)$$
+         ein Widerspruch, da $D\setminus A\in\mathcal{A}$ und $\alpha=\displaystyle\sup_{A\in\mathcal{A}}\varphi(A)$.
+         \item Angenommen es gibt $A\in\mathcal{A}$ mit $\varphi(A\cap D^c)>0$. Dann ist 
+         $$\varphi(D\cup(A\cap D^c))=\varphi(D)+\varphi(A\cap D^c)>\varphi(D)=/\alpha$$
+         ein Widerspruch, da $D\cup(A\cap D^c)\in\mathcal{A}$ und $\alpha=\displaystyle\sup_{A\in\mathcal{A}}\varphi(A)$.
+     \end{itemize}
+     Zur Konstruktion von $D$:\newline
+     W\"ahle $A_n,n\geq1$, sodass $\displaystyle\lim_{n\to\infty}\varphi(A_n)=\alpha$ und definiere f\"ur $n\geq1$
+     $$\mathcal{B}_n:=\left\{B_I=\left(\bigcap_{I_i=1}A_i\right)\cup\left(\bigcap_{I_i=0}A_i\right):I\in\{0,1\}^n\right\}$$
+     sukzessive feiner werdende Partitionen von $\Omega$. Setze nun 
+     $$C_n:=\bigcup_{\substack{B_I\in\mathcal{B}_n\\ \varphi(B_I)>0}}B_I$$
+     Nun ist 
+     $$A_n=\bigcup_{\substack{B_I\in\mathcal{B}_n\\ I_n=1}}B_I$$
+     sodass $\varphi(A_n)\leq\varphi(C_n)\ (*)$. Au\ss{}erdem ist 
+     $$\varphi\left(\bigcup_{m=n}^NC_m\right)\leq\varphi\left(\bigcup_{m=n}^{N+1}C_m\right)$$
+     da $\displaystyle\left(\bigcup_{m=n}^{N+1}C_m\right)\setminus \left(\bigcup_{m=n}^NC_m\right)$ eine Vereinigung von Mengen $B_I$ aus $\mathcal{B}_{N+1}$ mit $\varphi(B_I)>0$ ist. $(**)$\newline\newline 
+     Setze nun $D_i:=\displaystyle\limsup_{n\to\infty}C_n$
+     Dann folgt
+     \begin{align*}
+         \alpha&=\lim_{n\to\infty}\varphi(A_n) \\
+         &\overset{(*)}{\leq}\liminf_{n\to\infty}\varphi(C_n)\\
+         &\overset{(**)}{\leq}\liminf_{n\to\infty}\limsup_{N\to\infty}\varphi\left(\bigcup_{m=n}^NC_m\right)\\
+         &\overset{\text{S.v.U.}}{=}\liminf_{n\to\infty}\varphi\left(\bigcup_{m=n}^\infty C_m\right)\\
+         &\overset{\text{S.v.O.}}{=}\varphi\left(\bigcap_{n=1}^\infty \bigcup_{m=n}^\infty C_m\right)\\
+         &=\varphi\left(\limsup_{n\to\infty}C_n\right)=\varphi(D)\leq\alpha
+     \end{align*}
+     \qed
+     
+     \paragraph{12.5. Definition:} 
+     \begin{enumerate}[label=(\roman*)]
+         \item $\mu$ und $\nu$ sind gegenseitig singular (kurz $\mu\perp\nu$), wenn
+         $$\exists M\in\mathcal{A}:\mu(M)=0, \nu(M^c)=0$$
+         Die Relation $\perp$ ist symmetrisch, i.e. $\mu\perp\nu\iff\nu\perp\mu$.
+         \item $\nu$ ist absolut stetig bez\"uglich $\mu$, (kurz $\nu\ll\mu$) wenn
+         $$\forall A\in\mathcal{A}: \mu(A)=0\implies\nu(A)=0$$
+         Die Relation $\ll$ ist transitiv, i.e. $\nu\ll\mu,\mu\ll\lambda\implies\nu\ll\lambda$.
+     \end{enumerate}
+     
+     \paragraph{12.6. Lemma:} Seien $\mu$ und $\nu$ zwei endliche Ma\ss{}e, die NICHT gegenseitig singular sind. Dann gibt es ein $\eps>0$ und $N\in\mathcal{A}$ mit $\mu(B)>0$, sodass
+     $$\forall A\in\mathcal{A}:\eps\cdot\mu(A\cap B)\leq\nu(A\cap B)$$
+     
+     \paragraph{Beweis: }F\"ur $n\geq1$ definiere ein signiertes Ma\ss{} $\varphi_n:=\nu-\mu/n$. Seien nun $\Omega^{(n)}_+$ und $\Omega^{(n)}_-$ die Hahn-Zerlegung von $\varphi_n$. Setze $M:=\bigcup_{n\geq1}\Omega^{(n)}_+$ und $M^c=\bigcap_{n\geq1}\Omega^{(n)}_-$. Da $\varphi_1\leq\hdots\leq\displaystyle\lim_{n\to\infty}\varphi_n=\nu$, gilt $\Omega^{(1)}_+\supseteq\hdots\supseteq M^c$ und mit der S.v.O. f\"ur signierte Ma\ss{}e $\forall n\geq1:\varphi_n(M^c)\leq0$. \newline Damit folgtper Definition f\"ur alle $n\geq1$
+     \begin{align*}
+         \nu(M^c)-\dfrac{1}{n}\mu(M^c)\leq0 \iff \nu(M^c)\leq\dfrac{1}{n}\mu(M^c)
+     \end{align*}
+     und damit $\nu(M^c)=0$. Laut Annahme git aber $\nu\xcancel{\perp}\mu$ und damit $\mu(M)>0$. Also folgt
+     $$0<\mu(M)\leq\sum_{n\geq1}\mu(\Omega^{(n)}_+)$$
+     und damit gibt es ein $m\geq1$, sodass $\mu(\Omega^{(m)}_+)>0\ (*)$. Mit der Definition von $\varphi_m$ gilt aber
+     $$\forall A\in\mathcal{A}:\nu(A\cap \Omega^{(m)}_+)-\dfrac{1}{m}\mu(A\cap \Omega^{(m)}_+)\geq0\iff\nu(A\cap \Omega^{(m)}_+)\geq\dfrac{1}{m}\mu(A\cap \Omega^{(m)}_+)$$
+     Setze also $B:=\Omega^{(m)}_+$ mit $\eps:=m^{-1}$. Dann gilt wegen $(*)$ auch $\mu(B)=\mu(\Omega^{(m)}_+)>0$. \qed
+     
+     \paragraph{12.7. Satz (Radon\textendash Nikodym Theorem f\"ur $\sigma$-endliche Ma\ss{}e):} Seien $\mu$ und $\nu$ zwei $\sigma$-endliche Ma\ss{}e, sodass $\nu\ll\mu$. Dann hat $\nu$ eine Dichte bez\"uglich $\mu$, i.e. es gibt ein $f:\Omega\to\R$ messbar, sodass
+     \begin{equation}
+         \forall A\in\mathcal{A}: \nu(A)=\int_A f \ d\mu
+     \end{equation}
+     Wir schreiben $f=\dfrac{d\nu}{d\mu}$. Falls insbesondere $g:\Omega\to\R$ eine weitere messbare Abbildung ist, die (7) erf\"ullt, dann gilt $f=g$ $\mu$-a.e.
+     
+     \paragraph{Beweis:} Unterscheide hier die F\"alle, wo $\mu,\nu$ beide endlich sind, und den allgemeinen Fall ($\mu,\nu$ beide $\sigma$-endlich).\newline\newline
+     1. Fall ($\mu,\nu$ beide endlich): Betrachte die Menge
+     $$\mathcal{G}:=\left\{g\geq0:g \text{ messbar und } \forall A\in\mathcal{A}:\int_A g\ d\mu\leq\nu(A)\right\}$$
+     Da die konstante Nullfunktion $0\in\mathcal{G}$, gilt $\mathcal{G}\neq\emptyset$ und es gibt ein $f\in\mathcal{G}$, sodass
+     \begin{equation}
+         \int f\ d\mu=\sup_{g\in\mathcal{G}}\int g\ d\mu
+     \end{equation}
+     Zerlege nun $\nu(\cdot)$ als $\nu(A)=\displaystyle\int_A f\ d\mu+\nu_s(A)$ f\"ur $A\in\mathcal{A}$
+     mit Rest $\nu_s(\cdot)$. Dann ist $\nu_s$ ein endliches Ma\ss{} und
+     \begin{equation}
+         \nu_s\perp\mu
+     \end{equation}
+     Zeige also (8) und (9):\newline
+     (8): F\"ur $g,h\in\mathcal{G}$ ist $\max(g,h)\in\mathcal{G}$, denn f\"ur $A\in\mathcal{A}$ gilt
+     $$\int_A \max(g,h)\ d\mu=\int\displaylimits_{A\cap\{g\geq h\}}g\ d\mu+\int\displaylimits_{A\cap\{g<h\}}h\ d\mu\overset{g,h,\in\mathcal{G}}{\leq}\nu(A\cap\{g\geq h\})+\nu(A\cap\{g<h\})=\nu(A)$$
+     F\"ur $g_n\in\mathcal{G},n\geq1$ mit $0\leq g_1\leq\hdots\leq\lim_{n\to\infty}g_n=:g$ ist $g\in\mathcal{G}$, denn f\"ur $A\in\mathcal{A}$ gilt
+     $$\int_A g \ d\mu\overset{\text{MONK}}{=}\lim_{n\to\infty}\int_A g_n\ d\mu\leq\nu(A)$$
+     wobei die letze Ungleichung folgt, da jedes Element der Folge $\int_A g_n \ d\mu$ durch $\nu(A)$ beschr\"ankt ist.\newline\newline
+     (9): Angenommen (9) gilt nicht. Mit Lemma 12.6 gibt es $\eps>0,b\in\mathcal{A}$ mit $\mu(B)>0$, sodass $\forall A\in\mathcal{A}:\eps\cdot \mu(A\cap B)\leq\nu_s(A\cap B)$. Damit folgt f\"ur $A\in\mathcal{A}$
+     \begin{align*}
+         \int_A (f+\eps\cdot\ind{B})\ d\mu&=\int_A f\ d\mu+\eps\cdot\mu(A\cap B)\\
+         &\leq\int_A f\ d\mu+\nu_s(A\cap B) \\
+         &\leq\int_A f\ d\mu+\nu_s(A)=\nu(A)
+     \end{align*}
+     Damit folgt $f+\eps\cdot\ind{B}\in\mathcal{G}$ und 
+     $$\sup_{g\in\mathcal{G}}\int g\ d\mu\geq\int(f+\eps\cdot\ind{B})\ d\mu=\int f\ d\mu\eps\cdot\mu(B)>\int f\ d\mu=\sup_{g\in\mathcal{G}}\int g\ d\mu$$
+     ein Widerspruch.
+     \newline\newline
+     Mit (9) folgt per Definition von gegenseitiger Singularit\"at
+     $$\exists M\in\mathcal{A}:\mu(M)=0,\ \nu_s(M^c)=0$$. Da aber $\nu\ll\mu$ ist $\nu(M)=0$ und
+     $$0=\nu(M)\overset{\text{per const.}}{\geq}\nu_s(M)\geq0$$
+     und damit 
+     $$\nu_s(\Omega)=\nu_s(M)+\nu(M^c)=0$$
+     Also ist $\nu_s$ das Nullma\ss{} und $\nu(A)=\int_A f\ d\mu$, womit die erste Aussage folgt.\newline
+     Sei nun $g$ eine weitere Dichte von $\nu$ bzgl. $\mu$ (also eine messbare Abbildung, die (7) erf\"ullt). Setze $A:=\{f>g\}$. Dann ist
+     \begin{align*}
+         0&=\nu(A)-\nu(A)\\
+         &=\int_A f\ d\mu-\int_A g\ d\mu\\
+         &=\int_A f-g\ d\mu \\
+         &=\int\ind{\{f-g>0\}}(f-g)\ d\mu
+     \end{align*}
+     und da im Integral $f-g>0$, gilt $\ind{A}\overset{a.e.}{=}0$ und $\mu(A)=0$
+     Ein \"ahnliches Argument folgt f\"ur $B:=\{f<g\}$ und die Aussage folgt schlie\ss{}lich mit der $\sigma$-Subadditivit\"at.\newline\newline
+     2. Fall: ($\mu,\nu$ beide $\sigma$-endlich): W\"ahle $A_n\in\mathcal{A},n\geq1$ mit $A_1\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n=\Omega$, sodass $\mu(A_n)<\infty$ f\"ur alle $n\geq1$. W\"ahle $B_n\in\mathcal{A}$ mit denselben Eigenschaften f\"ur $\nu$. Setze nun $C_n:=A_n\cap B_n$ f\"ur $n\geq1$, sodass $C_n\in\mathcal{A}$ und $C_1\subseteq\hdots\subseteq\bigcup_{n\geq1}C_n=\Omega$ und $\mu(C_n),\nu(C_n)<\infty$ f\"ur alle $n\geq1$. Disjunktisiere nun $C_n$ durch $M_1:=C_1$ und $M_{n+1}:=C_{n+1}\setminus C_n$ f\"ur alle $n\geq1$. Dann gilt $\Omega=\bigsqcup_{n\geq1}M_n$ und $\mu(M_n),\nu(M_n)<\infty$ f\"ur alle $n\geq1$. Definiere nun endlich Ma\ss{}e $\nu_n$ und $\mu_n$ wie folgt:
+     \begin{gather*}
+         \nu_n(A):=\nu(A\cap M_n) \\
+         \mu_n(A):=\mu(A\cap M_n)
+     \end{gather*}
+     f\"ur alle $n\geq1$ und $A\in\mathcal{A}$. Laut Voraussetzung ist $\nu\ll\mu$ und daher auch $\nu_n\ll\mu_n$ f\"ur alle $n\geq1$. Mit dem 1. Fall hat also f\"ur jedes $n\geq1$ $\nu_n$ eine Dichte $f_n$ bzgl. $\mu_n$. Setze nun 
+     $$f:=\sum_{n\geq1}f_n\cdot\ind{M_n}$$
+     Dann ist $f\geq0$ und messbar und f\"ur $A\in\mathcal{A}$ gilt
+     \begin{align*}
+         \int_A f\ d\mu&=\int\sum_{n\geq1}f_n\cdot\ind{M_n}\cdot\ind{A}\ d\mu\\
+         &\overset{\text{MONK}}{=}\sum_{n\geq1}\int f_n\cdot\ind{M_n}\cdot\ind{A}\ d\mu \\
+         &=\sum_{n\geq1}\int_A f_n\cdot\ind{M_n}\ d\mu \\
+         &=\sum_{n\geq1}\int_A f_n\ d\mu_n\\
+         &=\sum_{n\geq1}\nu_n(A)\\
+         &=\sum_{n\geq1}\nu(A\cap M_n)=\nu(A)
+     \end{align*}
+     Die Eindeutigkeit folgt wie im endlichen Fall. \qed
+     
+     \paragraph{12.8. Satz (Radon\textendash Nikodym Theorem f\"ur signierte Ma\ss{}e)} folgt.
+     Sei $\varphi$ ein signiertes Maß und $\mu$ ein $\sigma$-endliches Maß, sodass $\varphi\ll\mu$.Dann hat $\varphi$ eine Dichte bez\"uglich $\mu$, i.e. es gibt ein $f:\Omega\to\R$ messbar, sodass
+     \begin{equation*}
+         \forall A\in\mathcal{A}: \varphi(A)=\int_A f \ d\mu
+     \end{equation*}
+     Wir schreiben $f=\dfrac{d\varphi}{d\mu}$. Falls insbesondere $g:\Omega\to\R$ eine weitere messbare Abbildung ist, die (7) erf\"ullt, dann gilt $f=g$ $\mu$-a.e.
+     
+     \paragraph{Beweis:}Betrachte die Hahn-Zerlegung $\Omega=\Omega_+\cup\Omega_-$ und die Jordan-Zerlegung $\varphi=\varphi_+-\varphi_-$. Dann sind $\varphi_+$ und $\varphi_-$ beide endliche Maße und $\varphi_+\ll\mu$, $\varphi_-\ll\mu$. Setze also 
+     $$f_{(+)}:=\dfrac{d\varphi_+}{d\mu},\ f_{(-)}:=\dfrac{d\varphi_-}{d\mu},\ f:=f_{(+)}-f_{(-)}$$
+     Die Messbarkeit von $f$ folgt sofort aus der Messbarkeit von $f_{(+)},f_{(-)}$ laut Satz 12.7. Weiters gilt $f_{(+)},f_{(-)}\in L^1(\mu)$ und damit auch $f\in L^1(\mu)$. Dass $f$ eine Dichte von $\varphi$ bez\"uglich $\mu$ ist folgt mit
+     $$\varphi(A)=\varphi_+(A)-\varphi_-(A)=\int_A f_{(+)}\ d\mu-\int f_{(-)}\ d\mu=\int_A f\ d\mu$$
+     Ist $g$ eine weitere Dichte von $\varphi$ bez\"uglich $\mu$, dann ist $g\cdot\ind{\Omega_+}$ eine Dichte von $\varphi_+$ bez\"uglich $\mu$ und mit Satz 12.7 gilt $g\cdot\ind{\Omega_+}\overset{a.e.}{=}f_{(+)}$. Dasselbe folgt f\"ur $g\cdot\ind{\Omega_-}$ und $f_{(-)}$. Da die Vereinigung zweier Nullmengen wieder eine Nullmenge ist folgt
+     $$g\overset{a.e.}{=}f$$
+     \qed

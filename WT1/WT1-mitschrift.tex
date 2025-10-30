@@ -1,0 +1,80 @@
+\documentclass[12pt]{report}
+\title{Wahrscheinlichkeitstheorie 1}
+\author{Cornelius Hanel}
+\usepackage{geometry}
+\geometry{margin=2.51cm} % 2.51 default
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage[makeroom]{cancel}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{ulem}
+\pgfplotsset{compat=1.15}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+\date{\parbox{\linewidth}{\centering%
+  Last updated: \today\endgraf\bigskip\bigskip\bigskip
+Studentische Mitschrift aus dem Wintersemester 2023/24. Fehler oder Erg\"anzungen gerne an \texttt{corneliush99@univie.ac.at}.
+\endgraf
+}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\makeatletter
+%\renewcommand{\paragraph}{
+%    \@startsection {paragraph}{4}
+%    {\z@ }{3.25ex \@plus 1ex \@minus .2ex}{-1em} % change the 3.25ex to some different value maybe
+%    {\normalfont \normalsize \bfseries }
+%}
+%\makeatother
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\del}{\partial}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\pspace}{(\Omega, \mathcal{A}, \Pp)}
+\newcommand{\borel}{\mathcal{B}(\R)}
+\newcommand{\ind}[1]{\mathds{1}_{#1}}
+\newcommand{\nto}[2]{\xrightarrow[#2]{\makebox[1.5em][c]{$\scriptstyle#1$}}}‌
+\newcommand{\krestr}[1]{%
+  \sbox{0}{\raisebox{\dimexpr\fontcharht\font`A-\height\relax}{$\big|$}}%
+  \usebox{0}%
+  \raisebox{\dimexpr-\dp0+\depth\relax}{$\scriptstyle#1$}%
+}
+
+
+
+% 
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+\include{chapter6}
+\include{chapter7} 
+
+
+\end{document}

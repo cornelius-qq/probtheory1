@@ -1,0 +1,283 @@
+\chapter*{4. Messbare Abbildungen und Zufallsvariablen}
+\addcontentsline{toc}{chapter}{4. Messbare Abbildungen und Zufallsvariablen}
+
+Betrache im folgenden Kapitel jeweils einen Ma\ss{}raum $(\Omega,\A,\mu)$ und eine Abbildung $f:\Omega\to\Omega'$.
+
+ \section*{Urbildoperator und Messbarkeit}
+ \addcontentsline{toc}{section}{Urbildoperator und Messbarkeit}
+\paragraph{4.1. Definition:}Sei $f:\Omega\to\Omega'$. F\"ur $A'\subseteq\Omega'$ definiere das Urbild von $A'$ unter $f$ als
+$$f^{-1}(A'):=\{\omega\in\Omega:f(\omega)\in A'\}\subseteq\Omega$$
+Kurschreibweise: $f^{-1}(A')=f^{-1}A'=\{f\in A'\}$. Beachte, dass der Urbild-Operator nicht die inverse Funktion ist (im Gegensatz zur Inversen ist das Urbild immer definiert).
+
+\paragraph{4.1.$\frac{1}{2}$. Proposition :}Der Urbild-Operator kommutiert mit Mengenoperationen, i.e.
+\begin{enumerate}[label=(\roman*)]
+    \item $\displaystyle f^{-1}\left(\bigcup_{n\geq1}A_n'\right)=\bigcup_{n\geq1}f^{-1}(A_n')$
+    \item $\displaystyle f^{-1}(A'^c)=\left(f^{-1}(A')\right)^c$
+    \item $\displaystyle f^{-1}\left(\bigcap_{n\geq1}A_n'\right)=\bigcap_{n\geq1}f^{-1}(A_n')$
+\end{enumerate}
+
+\paragraph{Beweis:} \"Ubung! (iii) folgt aus (i), (ii) und de Morgan.
+
+\paragraph{4.2. Definition:}Betrachte zwei messbare R\"aume $(\Omega,\A)$ und $(\Omega',\A')$. Eine Abbildung $f$ hei\ss{}t $\A\textendash\A'$-messbar, falls 
+$$\forall A'\in\A':f^{-1}(A')\in\A$$
+Falls $X:\pspace\to(\Omega',\A')$ eine messbare Abbildung von einem Wahrscheinlichkeitsraum nach $\Omega'$ ist, nennt man $X$ eine $\Omega'$-wertige Zufallsvariable (e.g. $\Omega'=\R$ oder $\Omega'=\mathbb{C}$). F\"ur $\A\textendash\A'$-messbare Abbildungen schreibe $f:(\Omega,\A)\to(\Omega',\A')$.
+
+\paragraph{4.3. Definition:}Sei $I$ eine beliebige, nicht-leere Indexmenge und seien $f_i:\Omega\to\Omega',i\in I$. Definiere die von den $f_i,i\in I$ erzeugte $\sigma$-Algebra als
+$$\sigma(f_i,i\in I):=\sigma\left(\left\{f_i^{-1}(A'):A'\in\A',i\in I\right\}\right)$$
+ 
+ \paragraph{Bemerkung:}
+ \begin{enumerate}[label=(\roman*)]
+     \item $\sigma(f_i,i\in I)$ ist die kleinste $\sigma$-Algebra auf $\Omega$ f\"ur die alle $f_i,i\in I$ messbar sind.
+     \item Ist $\A$ eine $\sigma$-Algebra auf $\Omega$, dann gilt: $\forall i\in I:f_i$ ist $\A\textendash\A'$-messbar $\iff$ $\sigma(f_i,i\in I)\subseteq\A$
+     \item $\sigma(f)=\{f^{-1}(A'):A'\in\A'\}$, da der Urbild-Operator mit Mengenoperationen kommutiert. 
+ \end{enumerate}
+ 
+ \paragraph{4.4. Proposition:}Betrachte zwei messbare R\"aume $(\Omega,\A)$, $(\Omega',\A')$, wobei $\A'=\sigma(\mathcal{M'})$ f\"ur eine Mengenfamilie $\mathcal{M'}\subseteq\mathcal{P}(\Omega')$, sowie eine Abbildung $f:\Omega\to\Omega'$. Setze $\M:=\{f^{-1}(M'):M'\in\M'\}$. Dann gilt $\sigma(f)=\sigma(\M)$ und insbesondere ist $f$ genau dann $\A\textendash\A'$-messbar, wenn $\M\subseteq\A$.
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item $\sigma(\M)\subseteq\sigma(f)$\newline
+     Es gilt $\M'\subseteq\sigma(\M')$ und damit 
+     $$\M=\{f^{-1}(M'):M'\in\M'\}\subseteq\{f^{-1}(M'):M'\in\sigma(\M')\}=\sigma(f)$$
+     Damit folgt $\sigma(\M)\subseteq\sigma(\sigma(f))=\sigma(f)$.
+     \item $\sigma(\M)\supseteq\sigma(f)$\newline
+     Setze $\G':=\{M'\in\sigma(\M'):f^{-1}(M')\in\sigma(\M)\}$ und zeige $\G'=\sigma(\M')$. Die Inklusion $\G'\subseteq\nobreak\sigma(\M')$ folgt sofort aus der Konstruktion. Es gen\"ugt also zu zeigen, dass $\G'$ eine $\sigma$-Algebra ist und $\M'\subseteq\G'$.
+     \begin{enumerate}[label=(\roman*)]
+         \item Sei $M'\in\M'$. Dann gilt $M'\in\sigma(\M')$ und $f^{-1}(M')\in\M$ per Definition von $\M$. Es folgt $f^{-1}(M')\in\sigma(\M')$ und damit $M'\in\G'$.
+         \item Zeige, dass $\G'$ eine $\sigma$-Algebra ist.
+         \begin{itemize}
+             \item Es gilt $\Omega'\in\sigma(\M')$ und $f^{-1}(\Omega')=\Omega\in\sigma(\M)$.
+             \item Abgeschlossenheit bez\"uglich Komplementbildung und abz\"ahlbaren Vereinigungen folgt aus Bemerkung (iii) oben.
+         \end{itemize}
+     \end{enumerate}
+     \item Zur Messbarkeit.
+     \begin{enumerate}[label=(\roman*)]
+        \item Sei $f$ $\A\textendash\A'$-messbar. Es gilt mit Bemerkung (ii) oben
+        $$\M=\{f^{-1}(M'):M'\in\M'\}\subseteq\{f^{-1}(M'):M'\in\sigma(\M')\}=\sigma(f)\subseteq\A$$
+        \item Sei $\M\subseteq\A$. Damit gilt $\sigma(\M)=\sigma(f)\subseteq\sigma(\A)=\A$ und mit Bemerkung (ii) oben folgt die Aussage. \qed
+     \end{enumerate}
+ \end{enumerate}
+ 
+ \paragraph{4.5. Lemma:}
+ $$\sigma(f_i:i\in I)=\sigma\left(\left\{\bigcap_{j\in J}f_j^{-1}(A_j'):J\subseteq I, J\text{ endlich},A_j'\in\A'\text{ f\"ur }j\in J\right\}\right)$$
+ 
+ \paragraph{Beweis:}
+ \begin{enumerate}[label=\Roman*.]
+     \item $\subseteq$\newline
+     Es gilt $\{f_i^{-1}(A'):A'\in\A, i\in I\}\subseteq\left\{\bigcap_{j\in J}f_j^{-1}(A_j'):J\subseteq I, J\text{ endlich},A_j'\in\A'\text{ f\"ur }j\in J\right\}$.
+     \item $\supseteq$\newline
+     folgt aus der Abgeschlossenheit bez\"uglich endlicher Durchschnitte und der Kommutativit\"at des Urbildoperators mit dem Durchschnittsoperator. \qed
+ \end{enumerate}
+ 
+ \paragraph{4.6. Proposition:}Betrachte messbare R\"aume $(\Omega_i,\A_i),i=1,2,3$ sowie messbare Abbildungen 
+ \begin{align*}
+     &f:(\Omega_1,\A_1)\to(\Omega_2,\A_2)\\
+     &g:(\Omega_2,\A_2)\to(\Omega_3,\A_3)
+ \end{align*} 
+ Dann ist $g\circ f:\Omega_1\to\Omega_3$ auch $\A_1\textendash\A_3$-messbar.
+ 
+ \paragraph{Beweis:}Sei $A_3\in\A_3$. Dann gilt
+ \begin{align*}
+     (g\circ f)^{-1}(A_3)&=\{\omega_1\in\Omega_1:(g\circ f)(\omega_1)\in A_3\}\\
+     &=\{\omega_1\in\Omega_1:g(f(\omega_1))\in A_3\}\\
+     &=\{\omega_1\in\Omega_1:f(\omega_1)\in g^{-1}(A_3)\}
+ \end{align*}
+ Laut Annahme gilt $g^{-1}(A_3)\in\A_2$ f\"ur alle $A_3\in\A_3$ und mit der Messbarkeit von $f$ folgt die Aussage. \qed
+ 
+ \section*{Messbare Funktionen mit Werten in $\R$}
+ \addcontentsline{toc}{section}{Messbare Funktionen mit Werten in $\R$}
+ 
+ \paragraph{4.7. Lemma:}Seien $(X,d_X)$ und $(Y,d_Y)$ jeweils metrische R\"aume. Dann ist eine Abbildung $f:X\to Y$ genau dann stetig (bez\"uglich $d_X,d_Y$), wenn Urbilder offener Mengen offen sind.
+ 
+ \paragraph{Beweis:}cf. H\"ohere Analysis, siehe z.B. Theorem 4.8 in Rudin, W. (1976) \textit{Principles of Mathematical Analysis}. 3rd edn., pp. 86-87. \qed
+ 
+ \paragraph{4.8. Proposition:}Ist $f:\R\to\R$ stetig, dann ist $f$ $\borel\textendash\borel$-messbar. 
+ 
+ \paragraph{Beweis:}folgt sofort aus Lemma 4.7 und Proposition 2.15. \qedsymbol
+ 
+ \paragraph{Bemerkung:}Proposition 4.8 l\"asst sich auf beliebige metrische R\"aume ausweiten. Die Gegenrichtung gilt trivialerweise nicht: Die Indikatorfunktion (siehe Definition 4.16) $\ind{A}:(\R, \mathcal{B}(\R))\to(\R, \mathcal{B}(\R))$ ist messbar aber nicht stetig in $\partial A$. 
+ 
+ \paragraph{4.9. Proposition:}Sei $(\Omega,\A)$ ein messbarer Raum und seien $f,g:(\Omega,\A)\to(\R,\borel)$ messbar. Sei $c\in\R$. Dann gilt:
+ \begin{enumerate}[label=(\roman*)]
+     \item $cf$ mit $(cf)(\omega):=cf(\omega)$ ist messbar.
+     \item $f+g$ mit $(f+g)(\omega):=f(\omega)+g(\omega)$ ist messbar.
+     \item $fg$ mit $(fg)(\omega):=f(\omega)g(\omega)$ ist messbar.
+     \item F\"ur alle $\omega\in\Omega$ mit $g(\omega)\neq0$ ist $\frac{f}{g}$ mit $\left(\frac{f}{g}\right)(\omega):=\frac{f(\omega)}{g(\omega)}$ messbar.
+  \end{enumerate}
+  
+  \paragraph{Beweis:}
+  \begin{enumerate}[label=(\roman*)]
+      \item Da die konstante Abbildung messbar ist, gilt (iii)$\implies$(i).
+      \item Fixiere $t\in\R$. Da der Urbildoperator mit Mengenoperationen kommutiert (und mit Proposition 3.14), gen\"ugt es zu zeigen, dass Mengen der Form
+      $$A=\{\omega\in\Omega:f(\omega)+g(\omega)\in(-\infty,t)\}$$
+      in $\A$ messbar sind. Dazu gen\"ugt es zu zeigen, dass
+      $$A=\bigcup_{\substack{q,r\in\mathbb{Q}\\q+r<t}}\{\omega\in\Omega:f(\omega)<q\}\cap\{\omega\in\Omega:g(\omega)<r\}=:B$$
+      Sei $\omega\in B$. Dann gibt es rationale Zahlen $q,r$ mit $q+r<t$, sodass $f(\omega)<q$ und $g(\omega)<r$ und somit $f(\omega)+g(\omega)<q+r<t$, also $\omega\in A$.\newline
+      Sei $\omega\in A$. Dann gilt $f(\omega)+g(\omega)<t$ und damit $\delta:=t-(f(\omega)+g(\omega))>0$. Da $\mathbb{Q}$ dicht in $\R$ ist, gibt es $q,r\in\mathbb{Q}$, sodass $f(\omega)<q$, $g(\omega)<r$ und $q+r<f(\omega)+g(\omega)+\delta=t$. Damit folgt $\omega\in B$.
+      \item $fg=\frac{1}{2}(f+g)^2-f^2-g^2$ wobei $t\mapsto \frac{1}{2}t^2$ und $t\mapsto -t^2$ stetig und damit messbar sind. Die Aussage folgt mit (ii).
+      \item Fixiere $t\in\R$. Mit (iii) gen\"ugt es zu zeigen, dass $\{1/g<t,g\neq0\}$ messbar ist. Setze z.B. 
+      \begin{align*}
+          (1/g)(\omega):=
+        \begin{cases}
+          1/g(\omega)&\text{ falls }g(\omega)\neq0\\
+          0&\text{ falls }g(\omega)=0
+        \end{cases}
+      \end{align*}
+      Es gilt
+      $$\{1/g<t\}=\{1/g<t, g<0\}\cup\{1/g<t,g>0\}\cup\{1/g<t,g=0\}$$
+      Die Menge $\{1/g<t,g=0\}$ ist trivial ($\Omega$ oder $\emptyset$) messbar. \newline
+      F\"ur $t>0$ gilt 
+      $$\{1/g<t,g>0\}=\{g>1/t,g>0\},\ \{1/g<t, g<0\}=\{g<1/t,g<0\} $$
+      F\"ur $t<0$ gilt
+      $$\{1/g<t,g>0\}=\{g<1/t,g>0\},\ \{1/g<t, g<0\}=\{g>1/t,g<0\} $$
+      F\"ur $t=0$ gilt
+      $$\{1/g<t,g>0\}=\{g<0,g>0\}=\emptyset,\ \{1/g<t, g<0\}=\{g<0,g<0\}=\{g<0\}$$
+      Die Aussage folgt mit Abgeschlossenheit von $\A$ bez\"uglich Vereinigungen, Durchschnitten und Komplementen. \qed
+  \end{enumerate}
+  
+  \section*{Messbare Funktionen mit Werten in $\overline\R$}
+  \addcontentsline{toc}{section}{Messbare Funktionen mit Werten in $\overline{\mathbb{R}}$}
+  
+  
+  \paragraph{4.10. Definition:}Definiere die erweiterten reellen Zahlen als
+  $$\overline\R:=\R\cup\{-\infty,\infty\}$$
+  und analog zum reellen Fall die Mengenfamilie
+  $$\mathcal{K}:=\{[-\infty,t]:t\in\overline\R\}$$
+  sowie die Borel-$\sigma$-Algebra
+  $$\cB(\overline\R):=\sigma(\mathcal{K})$$
+  
+  \paragraph{4.11. Definition (Rechenregeln in $\overline\R$):}
+  \begin{align*}
+      &a+\infty=\infty+a:=\infty\text{ f\"ur }a>-\infty\\
+      &a-\infty=-\infty+a:=-\infty\text{ f\"ur }a<\infty\\
+      &a\cdot\infty=\infty\cdot a:=\infty\text{ f\"ur }a>0\\
+      &a\cdot\infty=\infty\cdot a:=-\infty\text{ f\"ur }a<0\\
+      &a\cdot(-\infty)=(-\infty)\cdot a:=-\infty\text{ f\"ur }a>0\\
+      &a\cdot(-\infty)=(-\infty)\cdot a:=\infty\text{ f\"ur }a<0\\
+      &0\cdot\infty=0\cdot(-\infty):=0
+  \end{align*}
+  Beachte, dass $\infty-\infty$ nicht definiert ist.
+  
+  \paragraph{4.12. Lemma:} Es gilt $\cB(\overline\R)\krestr{\R}=\borel$. Au\ss{}erdem ist $\R\in\cB(\overline\R)$, sodass insbesondere $\borel\subseteq\cB(\overline\R)$.
+ 
+ \paragraph{Beweis:}
+ $$\cB(\overline\R)\krestr{\R}=\sigma(\mathcal{K})\krestr{\R}\overset{1.16}{=}\sigma(\mathcal{K}\krestr{\R})=\sigma(\mathcal{J})=\borel$$
+ Au\ss{}erdem gilt $\{-\infty\}=\bigcap_{n\geq1}[-\infty,-n]\in\cB(\overline\R)$ und $\{\infty\}=\bigcap_{n\geq1}[n,\infty]\in\cB(\overline\R)$ und damit 
+ $$\R=\overline\R\setminus(\{-\infty\}\cup\{\infty\})\in\cB(\overline\R)$$
+ \qed
+ 
+ \paragraph{4.13. Korollar:}Sei $(\Omega,\A)$ ein messbarer Raum und $f:(\Omega,\A)\to(\R,\borel)$ messbar. Dann ist $f$ auch $\A\textendash\cB(\overline\R)$-messbar.
+ 
+ \paragraph{Beweis:}folgt sofort aus Lemma 4.12. \qed
+ 
+ \paragraph{Bemerkung:}Damit gelten alle Aussagen in diesem Abschnitt auch f\"ur $\R$-wertige Funktionen.
+ 
+ \paragraph{4.14. Korollar:}Sei $A\in\cB(\overline\R)$. Dann gilt
+ $$A=B\cup\{\infty\} \text{ oder } A=B\cup\{-\infty\} \text{ oder } A=B \text{ oder } A=B\cup\{-\infty,\infty\}$$
+ f\"ur ein $B\in\borel$.
+ 
+ \paragraph{Beweis:}$B\in\borel=\cB(\overline\R)\krestr{\R}\implies B=A\cap\R$ mit $A\in\cB(\overline\R)$. Nun gilt $A=(A\setminus\R)\cup(A\cap\R)$, wobei $A\setminus\R=\{\infty\}$ oder $\{-\infty\}$ oder $\{-\infty,\infty\}$. \qed
+ 
+ \paragraph{4.15. Korollar:}Sei $(\Omega,\A)$ ein messbarer Raum. Eine Abbildung $f:\Omega\to\overline\R$ ist $\A\textendash\cB(\overline\R)$-messbar, genau dann wenn:
+ \begin{align*}
+     \forall B\in\borel:f^{-1}(B)&\in\A\\
+     f^{-1}(\{-\infty\})&\in\A\\
+     f^{-1}(\{\infty\})&\in\A
+ \end{align*}
+ 
+ \paragraph{Beweis:}folgt sofort aus Kommutativit\"at des Urbildoperators mit Mengenoperationen und Korollar 4.14. \qed
+ 
+ \paragraph{4.16. Definition:}Sei $A\subseteq\Omega$. Die Indikatorfunktion $\ind{A}:\Omega\to\{0,1\}$ auf $A$ (auch: charakteristische Funktion) ist definiert als
+ \begin{align*}
+     \ind{A}(\omega):=
+     \begin{cases}
+         1&\text{ falls }\omega\in A \\
+         0&\text{ falls }\omega\notin A
+     \end{cases}
+ \end{align*}
+ 
+ \paragraph{Bemerkung:}Jede Funktion $f:\Omega\to\{0,1\}$ mit $f(\Omega)=\{0,1\}$ ist eine Indikatorfunktion auf der Menge $A=\{\omega\in\Omega:f(\omega)=1\}$.
+ 
+ \paragraph{4.17. Lemma:}Sei $(\Omega,\A)$ ein messbarer Raum. F\"ur $A\subseteq\Omega$ ist $\ind{A}$ genau dann $\A\textendash\borel$-messbar, wenn $A\in\A$.
+ 
+ \paragraph{Beweis:}Es gilt
+ \begin{align*}
+     \ind{A}^{-1}(B)=
+     \begin{cases}
+         \emptyset&\text{ falls }0,1\notin B\\
+         A&\text{ falls }0\notin B, 1\in B \\
+         A^c&\text{ falls }0\in B, 1\notin B \\
+         \Omega&\text{ falls }0,1\in B
+     \end{cases}
+ \end{align*}
+ f\"ur alle $B\in\borel$. \qed
+ 
+ \paragraph{4.18. Proposition:}Sei $(\Omega,\A)$ ein messbarer Raum und $f_n:\Omega\to\overline\R,n\geq1$ alle $\A\textendash\cB(\overline\R)$-messbar. Dann sind die Funktionen 
+ $$\sup_{n\geq1}f_n,\ \inf_{n\geq1}f_n,\ \limsup_{n\to\infty}f_n,\ \liminf_{n\to\infty}f_n$$
+ auch $\A\textendash\cB(\overline\R)$-messbar und insbesondere ist die Menge $\{\omega\in\Omega:\lim_{n\to\infty}f_n(\omega)\text{ existiert in }\overline\R\}$ messbar.
+ 
+ \paragraph{Beweis:}Betrachte zun\"achst die Messbarkeitseigenschaften:
+ \begin{gather*}
+     \left\{\sup_{n\geq1}f_n<c\right\}=\bigcup_{n\geq1}\{f_n>c\}\in\A\implies\forall B\in\borel:\left\{\sup_{n\geq1}f_n\in B\right\}\in\A \\
+     \left\{\sup_{n\geq1}f_n=\infty\right\}=\bigcap_{k\geq1}\{\sup_{n\geq1}f_n>k\}\in\A\\
+     \left\{\sup_{n\geq1}f_n=-\infty\right\}=\left\{-\sup_{n\geq1}f_n=\infty\right\} \\ 
+     \inf_{n\geq1}f_n=-\sup_{n\geq1}(-f_n) \\
+     \limsup_{n\to\infty}f_n=\inf_{N\geq1}\left(\sup_{n\geq N}f_n\right) \\
+     \liminf_{n\to\infty}f_n=-\limsup_{n\to\infty}(-f_n)
+ \end{gather*}
+ Die Messbarkeit folgt mit Korollar 4.15 und Proposition 4.9
+ Weiters gilt
+ $$\left\{\lim_{n\to\infty}f_n\in\overline\R\right\}=\left\{\limsup_{n\to\infty}f_n=\liminf_{n\to\infty}f_n\right\}\cup\left\{\liminf_{n\to\infty}f_n=\infty\right\}\cup\left\{\limsup_{n\to\infty}f_n=-\infty\right\}$$
+ \qed
+ 
+ \paragraph{4.19. Definition:}Sei $(\Omega,\A)$ ein messbarer Raum. Seien $A_i\in\A$ und $\alpha_i\in\R$ f\"ur $i=1,\hdots,n$. Dann nennt man $f:\Omega\to\R$ mit $f(\omega)=\sum_{i=1}^n \alpha_i\ind{A_i}(\omega)$ eine einfache Funktion. 
+ 
+ \paragraph{4.20. Korollar:}Jede einfache Funktion ist $\A\textendash\borel$ und $\A\textendash\cB(\overline\R)$-messbar.
+ 
+ \paragraph{Beweis:}Folgt sofort aus Lemma 4.17, Korollar 4.13 und Proposition 4.9. \qed
+ 
+ \paragraph{4.21. Proposition:}Sei $(\Omega,\A)$ ein messbarer Raum.
+\begin{enumerate}[label=(\roman*)]
+    \item Eine Funktion $f:\Omega\to\R$ ist genau dann einfach, wenn $f$ messbar ist und endlich viele Werte annimmt (i.e. $|f(\Omega)|<\infty$). 
+    \item Jede einfache Funktion $f:\Omega\to\R$ l\"asst sich schreiben als $f=\sum_{i=1}^n \alpha_i\ind{A_i}$ mit $A_i,i=1\hdots,n$ disjunkt.
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item $\implies$: Die Messbarkeit folgt aus Korollar 4.20. Weiters gilt $|f(\Omega)|\leq2^n$.\newline
+    $\impliedby$: Sei $f$ messbar und $f(\Omega)=\{\gamma_1,\hdots,\gamma_n\}$ mit $\gamma_i\neq\gamma_j$ f\"ur $i\neq j$. Sei $A_i:=\{f=\gamma_i\}$.
+    \item folgt aus dem zweiten Teil im Beweis von (i). \qed
+\end{enumerate}
+ 
+ \paragraph{4.22. Satz:}Sei $(\Omega,\A)$ ein messbarer Raum und $f:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$ nicht-negativ und messbar. Dann gibt es eine Folge einfacher Funktionen $f_n,n\geq1$, sodass
+ $$\forall\omega\in\Omega:0\leq f_1(\omega)\leq f_2(\omega)\leq\hdots\leq \lim_{n\to\infty}f_n(\omega)=f(\omega)$$
+ Wir schreiben oft kurz $0\leq f_n\uparrow f$. Ist $f$ zus\"atzlich beschr\"ankt, i.e. $\exists C\in\R\forall\omega\in\Omega:f(\omega)\leq C$, dann ist die Konvergenz gleichm\"a\ss{}ig, also
+ $$\sup_{\omega\in\Omega}\left|f_n(\omega)-f(\omega)\right|\nto{}{n\to\infty}0$$
+ 
+ \paragraph{Beweis:}Setze $\forall n\geq1$
+ $$f_n(\omega):=\sum_{k=0}^{n\cdot2^n-1}\dfrac{k}{2^n}\cdot\ind{\left\{f\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)\right\}}(\omega)+n\cdot\ind{\{f\geq n\}}$$
+ $f_n\geq 0$ und $f_n$ einfach folgen aus der Konstruktion. Zeige also Monotonie und Konvergenz.
+ \begin{itemize}
+     \item Zeige $\forall\omega\in\Omega:\lim_{n\to\infty}f_n(\omega)=f(\omega)$\newline
+        Falls $f(\omega)<\infty$ gibt es $n_0$, sodass $f(\omega)<n_0$ und damit 
+        $$\forall n\geq n_0\exists k\in\{0,\hdots, n\cdot2^n-1\}:f(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$$
+        sodass $f_n(\omega)=\frac{k}{2^n}$. Insbesondere gilt damit
+        $$0\leq f(\omega)-f_n(\omega)\leq\frac{1}{2^n}\nto{}{n\to\infty}0$$
+        Falls $f(\omega)=\infty$ gilt $\forall n\geq1:f_n(\omega)=n\nto{}{n\to\infty}\infty=f(\omega)$.
+        Falls $f$ beschr\"ankt ist, gibt es $n_0\geq1$, sodass $f(\omega)<n_o$ f\"ur alle $\omega\in\Omega$ und damit 
+        $$\forall\omega\in\Omega:0\leq f(\omega)-f_(\omega)<\frac{1}{2^n}$$
+        Da die obere Schranke unabh\"angig von $\omega$ ist, folgt die gleichm\"a\ss{}ige Konvergenz. 
+        \item Zeige $\forall\omega\in\Omega:f_n(\omega)\leq f_{n+1}(\omega)$\newline
+        Sei $f_n(\omega)=\frac{k}{2^n}$ f\"ur $k\in\{0,\hdots,n\cdot2^n-1\}$. Dann gilt
+        $$f(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)=\left[\frac{2k}{2^{n+1}},\frac{2k+1}{2^{n+1}}\right)\cup\left[\frac{2k+1}{2^{n+1}},\frac{2k+2}{2^{n+1}}\right)$$
+        Falls $f(\omega)\in \left[\frac{2k}{2^{n+1}},\frac{2k+1}{2^{n+1}}\right)$, dann ist $f_{n+1}(\omega)=\frac{2k}{2^{n+1}}=\frac{k}{2^n}=f_n(\omega)$. \newline
+        Falls $f(\omega)\in\left[\frac{2k+1}{2^{n+1}},\frac{2k+2}{2^{n+1}}\right)$, dann ist $f_{n+1}(\omega)=\frac{2k+1}{2^{n+1}}>\frac{k}{2^n}=f_n(\omega)$.\newline\newline
+        Sei $f_n(\omega)=n$. Dann gilt 
+        $$f(\omega)\in [n,\infty]=[n,n+1)\cup[n+1,\infty]$$
+        Falls $f(\omega)\in[n+1,\infty]$, dann ist $f_{n+1}(\omega)=n+1>n=f_n(\omega)$.\newline
+        Falls $f(\omega)\in[n,n+1)$, dann ist 
+        \begin{align*}
+            f_{n+1}(\omega)&=\sum_{k=0}^{(n+1)\cdot2^{n+1}-1}\dfrac{k}{2^{n+1}}\cdot\ind{\left\{f\in\left[\frac{k}{2^{n+1}},\frac{k+1}{2^{n+1}}\right)\right\}}+(n+1)\cdot\ind{\{f\geq n+1\}}\\&=\dfrac{(n+1)\cdot2^{n+1}-1}{2^{n+1}}>n=f_n(\omega)\
+        \end{align*}
+        \qed
+ \end{itemize}

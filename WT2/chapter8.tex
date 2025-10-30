@@ -1,0 +1,559 @@
+\chapter*{8. Produktr\"aume und Produktma\ss{}e}
+\addcontentsline{toc}{chapter}{8. Produktr\"aume und Produktma\ss{}e}
+Seien im Folgenden $(\Omega_i,\A_i,\mu_i),i=1,\dots,n$ jeweils $\sigma$-endliche Ma\ss{}r\"aume. Setze $[n]:=\{1,\hdots,n\}$.
+
+\section*{Erzeugung von Produktma\ss{}en}
+\addcontentsline{toc}{section}{Erzeugung von Produktma\ss{}en}
+
+Wir m\"ochten eine $\sigma$-Algebra $\A$ und Ma\ss{} $\mu$ auf $\Omega=\Omega_1\times\dots\times\Omega_n$ finden, sodass
+$$A_1\times\dots\times A_n\in\A, \ \mu(A_1\times\dots\times A_n)=\prod_{i\in[n]}\mu_i(A_i)$$
+f\"ur $A_i\in\A_i,i\in[n]$.
+
+\paragraph{8.1. Definition:} Setze
+$$\mathcal{R}:=\left\{A_1\times\hdots\times A_n:A_i\in\A_i,i\in[n]\right\}$$
+die Familie der messbare Rechtecke, i.e. eine Menge $A\in\mathcal{R}$ hei\ss{}en messbares Rechteck. Man nennt 
+$$\bigotimes_{i\in[n]}\A_i:=\sigma(\mathcal{R})$$
+ die Produkt-$\sigma$-Algebra auf $\Omega$.
+ 
+ \paragraph{Bemerkung:}
+ \begin{itemize}
+ 	\item Messbares Rechteck $\neq$ geometrisches Rechteck, e.g. $\R^2$ mit Borelmengen und $\mathbb{Q}\times\mathbb{Q}$.
+ 	\item $\mathcal{R}$ ist ein $\pi$-System, da $\prod_{i\in[n]}A_i\cap\prod_{i\in[n]}B_i=\prod_{i\in[n]}(A_i\cap B_i)$ und $\A_i,i\in[n]$ als $\sigma$-Algebren durchschnittsstabil sind. 
+ 	\item $\bigotimes_{i\in[n]}\A_i\neq\prod_{i\in[n]}\A_i$. 
+ \end{itemize}
+
+\paragraph{8.2. Proposition:}Betrachte die Koordinatenabbildungen
+$$\Omega\ni\omega=(\omega_1,\hdots,\omega_n)\mapsto\omega_i=\pi_i(\omega)\in\Omega_i,i\in[n].$$
+Dann gilt $\bigotimes_{i\in[n]}\A_n=\sigma\left(\pi_i,i\in[n]\right)$.
+
+\paragraph{Beweis:} Mit Lemma 4.5 gilt
+\begin{align*}
+	\sigma(\pi_i,i\in[n])&=\sigma\left(\left\{\bigcap_{i\in I}\pi_i^{-1}(A_i):I\subseteq[n]\text{ endlich},A_i\in\A_i, i\in I\right\}\right)\\
+	&=\sigma\left(\left\{\bigcap_{i\in[n]}\pi_i^{-1}(A_i):A_i\in\A_i, i\in [n]\right\}\right),
+\end{align*}
+da $\bigcap_{i\in I}\pi_i^{-1}(A_i)=\left(\bigcap_{i\in I}\pi_i^{-1}(A_i)\right)\cap \left(\bigcap_{i\notin I}\pi_i^{-1}(\Omega_i)\right)$. Au\ss{}erdem gilt $\bigcap_{i\in[n]}\pi_i^{-1}(A_i)=\prod_{i\in[n]}A_i$.\qed
+
+\paragraph{8.3. Lemma}Definiere 
+$$\mathcal{R}\ni A=A_1\times\hdots\times A_n\mapsto\mu(A):=\prod_{i\in[n]}\mu_i(A_i)\in[0,\infty]$$
+Dann ist $\mu$ eine $\sigma$-additive Mengenfunktion auf $\mathcal{R}$ und damit insbesondere auch endlich additiv. 
+
+\paragraph{Beweis:}Seien $R_j\in\mathcal{R},j\in[m]$ disjunkt, sodass auch $R=\bigcup_{j\in[m]}R_j\in\mathcal{R}$ (da $\mathcal{R}$ keine Algebra ist, ist dies nicht zwingend der Fall). Schreibe $R_j=A_j^{(1)}\times\hdots\times A_j^{(n)}$ und $R=A^{(1)}\times\hdots\times A^{(n)}$. Es gilt $\ind{R}(\omega)=\sum_{j\geq1}\ind{R_j}(\omega)$ (\"Uberlegung!) und damit
+\begin{align*}
+	\ind{R}(\omega)=\prod_{i\in[n]}\ind{A^{(i)}}(\omega_i)=\sum_{j\geq1}\prod_{i\in[n]}\ind{A_j^{(i)}}(\omega_i).
+\end{align*}
+Integriere nun beide Seiten bez\"uglich $d\mu_n$ und erhalte mit MONK
+$$\mu_n\left(A^{(n)}\right)\prod_{i\in[n-1]}\ind{A^{(i)}}(\omega_i)=\sum_{j\geq1}\mu_n\left(A_j^{(n)}\right)\prod_{i\in[n-1]}\ind{A_j^{(i)}}(\omega_i).$$
+Integriere induktiv bez\"uglich $\mu_{n-1},\hdots,\mu_1$ und erhalte schlie\ss{}lich
+$$\mu(R)=\prod_{i\in[n]}\mu_i\left(A^{(i)}\right)=\sum_{j\geq1}\prod_
+{i\in[n]}\mu_i\left(A_j^{(i)}\right)=\sum_{j\geq1}\mu(R_j)$$
+wobei die erste und letzte Gleichung per Definition von $\mu$ folgen. \qed
+
+
+\paragraph{8.4. Lemma:} Die Mengenfamilie
+$$\cR^*:=\left\{\bigcup_{m=1}^MR_m:M\in\mathbb{N} , R_m\in\cR,m\in [M]\text{ disjunkt}\right\}\supseteq\cR$$ 
+ist eine Algebra.
+
+\paragraph{Beweis:}
+\begin{itemize}
+    \item $\Omega\in\cR^*$: folgt sofort aus $\Omega=\Omega_1\times\Omega_2$ und $\Omega_1\in\A_1,\Omega_2\in\A_2$.
+    \item $A,B\in\cR^*\implies A\cap B\in\cR^*$: Schreibe $A=\bigcup_{i=1}^kA_{i,1}\times\hdots\times A_{i,d}$ und $B=\bigcup_{j=1}^\ell B_{j,1}\times\hdots\times B_{j,d}$. Dann gilt
+    \begin{align*}
+        A\cap B&=\left(\bigcup_{i=1}^kA_{i,1}\times\hdots\times A_{i,d}\right)\cap\left(\bigcup_{j=1}^\ell B_{j,1}\times\hdots\times B_{j,d}\right)\\
+        &=\bigcup_{i=1}^k\bigcup_{j=1}^\ell\left(A_{i,1}\times\hdots\times A_{i,d}\cap B_{j,1}\times\hdots\times B_{j,d}\right)
+    \end{align*}
+    Wir wissen, dass eine Vereinigung zweier messbarer Rechtecke wieder ein messbares Rechteck ist. Damit gilt $A\cap B\in\cR^*$.
+    \item $A\in\cR^*\implies A^c\in\cR^*$: Sei hier auch wieder $A=\bigcup_{i=1}^kA_{i,1}\times\hdots\times A_{i,d}$. Dann gilt mit de Morgan $A^c=\bigcap_{i=1}^k(A_{i,1}\times\hdots\times A_{i,d})^c$. Zeige also, dass das Komplement eines messbaren Rechtecks eine endliche Vereinigung messbarer Rechtecke ist (dann folgt mit Abgeschlossenheit bez\"uglich endlicher Durchschnitte die Aussage). Zeige also
+    $$A_1\times\hdots\times A_d\in\cR\implies(A_1\times\hdots\times A_d)^c\in\cR^*$$
+    Definiere dazu f\"ur $i=1,\hdots,d$ die Koordinatenabbildungen
+    $$\pi_i:\Omega\to\Omega_i,\ (\omega_1,\hdots,\omega_d)\mapsto\omega_i$$
+    Dann gilt
+    $$A_1\times\hdots\times A_d=\bigcap_{i=1}^d\left\{\pi_i\in A\right\}$$
+    und es folgt
+    $$(A_1\times\hdots\times A_d)^c=\bigcup_{j=1}^d\bigcup_{\substack{J\subseteq\{1,\hdots,d\}\\|J|=j}}\left[\left(\bigcap_{i\in J}\{\pi_i\notin A_i\}\right)\cap\left(\bigcap_{i\notin J}\{\pi_i\in A_i\}\right)\right]$$
+    wobei $\left(\bigcap_{i\in J}\{\pi_i\notin A_i\}\right)\cap\left(\bigcap_{i\notin J}\{\pi_i\in A_i\}\right)\in\cR$ disjunkt sind. Da die Vereinigung endlich ist, folgt die Aussage. \qed
+\end{itemize}
+
+\paragraph{Bemerkung:} Bisher ist $\mu:\cR\to[0,\infty]$ definiert als $\mu(A_1\times\hdots\times A_d):=\mu(A_1)\cdot\hdots\cdot\mu(A_d)$. Wir erweitern $\mu$ nun zu einer Abbildung $\mu^*:\cR^*    \to[0,\infty]$ mit 
+$$\displaystyle\mu^*\left(\bigcup_{i=1}^k R_i\right):=\sum_{i=1}^k\mu(R_i)$$ f\"ur $R_i\in\cR,i=1,\hdots,k$ disjunkt.
+
+\paragraph{8.5. Lemma:} F\"ur $R=\bigcup_{j=1}^mR_j\in\cR^*$, definiere 
+$$\mu^*;\cR^*\to[0,\infty],R\mapsto\sum_{j=1}^k\mu(R_j).$$
+Dann ist $\mu^*$ wohldefiniert, d.h. unabh\"angig von der Darstellung von $R\in\cR^*$.
+
+\paragraph{Beweis:}Sei $A=\bigcup_{i=1}^n R_i=\bigcup_{j=1}^mS_j$ mit $R_i,S_j\in\cR$ f\"ur $i=1,\hdots,n$ und $j=1,\hdots,m$. Dann gilt
+\begin{align*}
+    \mu^*\left(\bigcup_{i=1}^nR_i\right)&\overset{\text{Def.}}{=}\sum_{i=1}^n\mu(R_i)\\
+    &=\sum_{i=1}^n\mu(R_i\cap A)
+    =\sum_{i=1}^n\mu\left(R_i\cap \bigcup_{j=1}^mS_j\right) \\
+    &=\sum_{i=1}^n\mu\left(\bigcup_{j=1}^m(S_j\cap R_i)\right)
+    =\sum_{i=1}^n\sum_{j=1}^m\mu\left(S_j\cap R_i\right)\\
+    &=\sum_{j=1}^m\mu\left(S_j\cap \bigcup_{i=1}^nR_i\right)=\sum_{j=1}^m\mu(S_j)\\
+    &=\mu^*\left(\bigcup_{j=1}^mS_j\right)
+\end{align*}
+\qed
+
+\paragraph{Bemerkung:}Um $\mu^*$ nun zu einem Ma\ss{} auf $(\prod_{i=1}^n\Omega_i,\sigma(\cR^*))$ zu erweitern, sind mit dem Ma\ss{}erweiterungssatz von Carath\'eodory folgende Voraussetzungen notwendig:
+\begin{enumerate}[label=(\roman*)]
+    \item $\mu^*(\emptyset)=0$.
+    \item $\sigma$-Additivit\"at: F\"ur $A_i\in\cR^*$ disjunkt mit $\bigcup_{i\geq1}A_i\in\cR^*$ gilt 
+    $$\mu^*\left(\bigcup_{i\geq1}A_i\right)=\sum_{i\geq1}\mu^*(A_i)$$
+    \item $\sigma$-Endlichkeit: $\exists B_j\in\cR^*,j\geq1:\Omega=\bigcup_{j\geq1}B_j$ und $\forall j\geq1:\mu^*(B_j)<\infty$.
+\end{enumerate}
+
+\paragraph{8.6. Lemma:} $\mu^*$ erf\"ullt die Eigenschaften (i) bis (iii) aus der obigen Bemerkung.
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+	\item $\mu^*(\emptyset)=\mu^*\left(\prod_{i=1}^n\emptyset\right)=\prod_{i=1}^n\mu_i(\emptyset)=0$.
+	\item F\"ur $i\in[n]$, seien $(B_j^{(i)})_{j\geq1}$ so, dass $\Omega_i=\bigcup_{j\geq1}B_j^{(i)}$ und $\mu_i(B_j^{(i)})<\infty$ f\"ur alle $j\geq1$. Dann erf\"ullt $B_j:=\prod_{i=1}^nB_j^{(i)}$ die gew\"unschten Eigenschaften.
+	\item Mit Lemma 3.10. gen\"ugt es hier zu zeigen, dass $\mu^*$ auf $\cR$ $\sigma$-additiv ist, was sofort aus $\mu=\mu^*\krestr{\cR}$ und Lemma 8.4. folgt. \qed 
+\end{enumerate}
+
+\paragraph{8.7. Satz:}Seien $(\Omega_i,\A_i,\mu_i)$ jeweils $\sigma$-endliche Ma\ss{}r\"aume f\"ur $i=1,\hdots,d$. Dann exisitert mit dem Ma\ss{}erweiterungssatz von Carath\'eodory ein eindeutiges $\sigma$-endliches Ma\ss{} $\mu$ auf dem Produktraum $(\prod_{i=1}^d\Omega_i,\bigotimes_{i=1}^d\A_i)$ mit der Eigenschaft, dass
+$$\forall A_i\in\A_i,i=1,\hdots,d:\mu(A_1\times\hdots\times A_d)=\prod_{i=1}^d\mu_i(A_i)$$
+Man nennt $\mu$ das Produktma\ss{}.
+
+\paragraph{Beweis:}Folgt sofort aus dem Ma\ss{}erweiterungssatz von Carath\'eodory. 
+
+\paragraph{8.8. Korollar:}Seien $F_1,\hdots,F_d$ Verteilungsfunktionen auf $\R$. Dann gibt es einen Wahrscheinlichkeitsraum $\pspace$ und Zufallsvariablen $X_i:\Omega\to\R,i=1,\hdots,d$, sodass $X_i\sim F_i$ und die $X_i$ unabh\"angig sind.
+
+\paragraph{Beweis:}Jedes $F_i$ definiert ein Wahrscheinlichkeitsma\ss{} $\Pp_i$ auf $(\R,\borel)$ mit
+$$\Pp_i((-\infty,t]):=F_i(t)$$
+(cf. Satz 3.17). Definiere $\Omega:=\R^d,\A:=\bigotimes_{i=1}^d\borel=\mathcal{B}(\R^d),\Pp:=\bigotimes_{i=1}^d\Pp_i,X_i:=\pi_i$. Dann sind die $X_i,i=1,\hdots,d$ alle messbar und f\"ur $t\in\R$ und $i=1,\hdots,d$ gilt
+$$\Pp(X_i\leq t)=\Pp(\R\times\hdots\times(-\infty,t]\times\hdots\times\R)=1\cdot\hdots\cdot\Pp_i((-\infty,t])\cdot\hdots\cdot1=F_i(t)$$
+Schlie\ss{}lich gilt f\"ur $t\in\R^d$ und $i=1,\hdots,d$
+$$\Pp(X_1\leq t_1,\hdots,X_d\leq t_d)=\Pp((\infty,t_1]\times\hdots\times(-\infty,d_t])=\prod_{i=1}^d\Pp_i(-\infty,t_i]$$
+sodass die $X_i$ unabh\"angig sind. \qed
+
+\section*{Produktma\ss{} und Integral}
+\addcontentsline{toc}{section}{Produktma\ss{} und Integral}
+Betrachte in diesem Abschnitt zwei $\sigma$-endliche Ma\ss{}r\"aume $(\Omega_i,\A_i,\mu_i),i=1,2$, den entsprechenden Produktaum $(\Omega_1\times\Omega_2,\A_1\otimes\A_2,\mu_1\otimes\mu_2)$, sowie einen weiteren messbaren Raum $(\Omega',\A')$.
+
+\paragraph{8.9. Definition:}Sei $\omega_1\in\Omega_1$ fixiert.
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur $A\subseteq\Omega_1\times\Omega_2$ sei
+    $$A_{\omega_1}:=\left\{\omega_2\in\Omega_2:(\omega_1,\omega_2)\in A\right\}$$
+    der $\omega_1$-Schnitt ($\omega_1$-section) von $A$.
+    \item F\"ur $f:\Omega_1\times\Omega_2\to\Omega'$ sei
+    $$f_{\omega_1}:\Omega_2\to\Omega',\omega_2\mapsto f(\omega_1,\omega_2)$$
+    der $\omega_1$-Schnitt ($\omega_1$ section) von $f$.
+\end{enumerate}
+
+\paragraph{Bemerkung:}Es gilt (einfacher Beweis, siehe \"Ubung)
+\begin{enumerate}[label=(\roman*)]
+    \item $(\ind{A})_{\omega_1}=\ind{A_{\omega_1}}$
+    \item F\"ur $A'\subseteq\Omega'$ ist $f^{-1}_{\omega_1}(A')=(f^{-1}(A'))_{\omega_1}$
+\end{enumerate}
+
+\paragraph{8.10. Proposition:}Sei $\omega_1\in\Omega_1$ fixiert. Dann gilt
+\begin{enumerate}[label=(\roman*)]
+    \item Ist $A\in\A_1\otimes A_2$, dann ist $A_{\omega_1}\in\A_2$
+    \item Ist $f:\Omega_1\times\Omega_2\to\Omega'$ $\A_1\otimes\A_2\textendash\A'$-messbar, dann ist $f_{\omega_1}:\Omega_2\to\Omega'$ $\A_2\textendash\A'$-messbar.
+\end{enumerate}
+Analoges gilt nat\"urlich f\"ur die entsprechenden $\omega_2$-Schnitte.
+
+\paragraph{Beweis:}Betrachte f\"ur $\omega_1\in\Omega_1$ fixiert die Abbildung $g_{\omega_1}:\Omega_2\to\Omega_1\times\Omega_2,\omega_2\mapsto(\omega_1,\omega_2)$. Dann gilt
+\begin{align*}
+    \forall A=(A_1\times A_2)\in\cR:g_{\omega_1}^{-1}(A)=
+    \begin{cases}
+        A_2&\text{ falls }\omega_1\in\A_1\\
+        \emptyset&\text{ falls }\omega_1\in\A_1
+    \end{cases}
+\end{align*}
+Damit ist $g_{\omega_1}$ $\A_2\textendash\A_1\otimes\A_2$-messbar (Da Messbarkeit im Erzeugendensystem eine hinreichende Bedingung ist). Damit folgt nun
+\begin{enumerate}[label=(\roman*)]
+    \item $A_{\omega_1}=\left\{\omega_2\in\Omega_2:(\omega_1,\omega_2)\in A\right\}=g_{\omega_1}^{-1}(A)\in\A_2$
+    \item $f_{\omega_1}(\omega_2)=f(\omega_1,\omega_2)=f(g(\omega_1,\omega_2))=(f\circ g)(\omega_2)$
+\end{enumerate}
+womit die Messbarkeit von $f_{\omega_1}$ aus der Messbarkeit von Zusammemsetzungen messbarer Funktionen folgt. \qed
+
+\paragraph{8.11. Satz (Tonelli's Theorem):}Sei $f:\Omega_1\times\Omega_2\to\overline\R$ nicht-negativ und messbar. Dann ist die Abbildung
+$$s_1:\Omega_1\to\overline\R\text{ mit }\omega_1\mapsto\int_{\Omega_2}f_{\omega_1}\ d\mu_2$$
+nicht-negativ und messbar und es gilt
+$$\int_{\Omega_1\times\Omega_2}f \ d(\mu_1\otimes\mu_2)=\int_{\Omega_1}s_1\ d\mu_1=\int_{\Omega_1}\left(\int_{\Omega_2}f_{\omega_1}\ d\mu_2\right)\ d\mu_1$$
+
+\paragraph{Bemerkung:}Die $\sigma$-Endlichkeit von $\mu_1$ und $\mu_2$ ist hier notwendig. Ein analoges Ergebnis gilt auch wenn die Reihenfolge der Integrale ge\"andert wird.
+
+\paragraph{Beweis:}Betrachte zun\"achst den Fall wo $\mu_1$ und $\mu_2$ (und damit auch das Produktma\ss{} $\mu_1\otimes\mu_2$) endlich sind.
+\begin{enumerate}[label=\Roman*.]
+    \item \textbf{$f$ Indikatorfunktion auf messbarem Rechteck, $f=\ind{A_1\times A_2}$ mit $A_1\times A_2\in\cR$}\newline
+    Hier gilt $f_{\omega_1}(\omega_2)=\ind{A_1}(\omega_1)\cdot\ind{A_2}(\omega_2)$ und damit 
+    $$s_1(\omega_1)=\ind{A_1}(\omega_1)\int_{\Omega_2}\ind{A_2}\ d\mu_2=\ind{A_1}(\omega_1)\cdot\mu_2(A_2)\geq0$$
+    und als einfache Funktion auf einer $\A_1$-messbaren Menge auch $\A_1\textendash\mathcal{B}(\overline\R)$-messbar. Au\ss{}erdem gilt
+    \begin{align*}
+        \int s_1\ d\mu_1&=\int\ind{A_1}\mu_2(A_2)\ d\mu_1=\mu_1(A_1)\cdot\mu_2(A_2)\\
+        &=(\mu_1\otimes\mu_2)(A_1\times A_2)=\int\ind{A_1\times A_2}\ d(\mu_1\otimes\mu_")
+    \end{align*}
+    \item \textbf{$f$ Indikatorfunktion auf endl. Vereinigung messbarer Rechtecke, $f=\ind{A}$ mit $A\in\cR^*$}\newline
+    Hier gilt $f_{\omega_1}(\omega_2)=(\ind{A})_{\omega_1}(\omega_2)=\ind{A_{\omega_1}}(\omega_2)$ und da $A_{\omega_1}\in\A_2$, ist $f_{\omega_1}$ $\A_2\textendash\mathcal{B}(\overline\R)$-messbar. Es gilt
+    $$s_1(\omega_1)=\int\ind{A_{\omega_1}}\ d\mu_2=\mu_2(A_{\omega_1})\geq0$$
+    Zeige nun die Messbarkeit von $s_1$: Definiere dazu
+    $$\mathcal{L}:=\left\{A\in\A_1\otimes\A_2:s_1(\cdot)=\int\ind{A}(\cdot,\omega_2)\ d\mu_2(\omega_2) \text{ ist }A_1\textendash\mathcal{B}(\overline\R)\text{-messbar}\right\}$$
+    und zeige $\mathcal{L}=\A_1\otimes\A_2$. Es gilt nat\"urlich $\cR\subseteq\mathcal{L}\subseteq\A_1\otimes\A_2=\sigma(\cR)$
+    wobei die erste Inklusion mit dem I. Fall und die zweite Inklusion laut Konstruktion gilt. Wir wissen, dass $\cR$ ein $\pi$-System ist. Mit dem $\lambda\textendash\pi$-Theorem gen\"ugt es also zu zeigen, dass $\mathcal{L}$ ein $\lambda$-System ist (einfache \"Uberlegung). Es gilt also zu zeigen
+    \begin{itemize}
+        \item $\Omega_1\times\Omega_2\in\mathcal{L}$: Gilt, da $\Omega_1\times\Omega_2\in\cR\subseteq\mathcal{L}$.
+        \item $A,B\in\mathcal{L},A\subseteq B\implies B\setminus A\in\mathcal{L}$: Hier gilt $\ind{B\setminus A}=\ind{B}-\ind{A}$, sodass
+        $$\int\ind{B\setminus A}\ d\mu_2=\int\ind{B}\ d\mu_2-\int\ind{A}\ d\mu_2$$
+        als Differenz zweier messbarer Funktionen (da $A,B\in\mathcal{L}$) wieder messbar ist.
+        \item $A_1\subseteq A_2\subseteq\hdots,A_i\in\mathcal{L},\forall i\geq1\implies\bigcup_{i\geq1}A_i\in\mathcal{L}$: Setze $A:=\bigcup_{i\geq1}A_i$, sodass $0\leq\ind{A_i}\nearrow\ind{A}$ punktweise. Damit gilt
+        $$\forall\omega_1\in\Omega_1,\forall\omega_2\in\Omega_2:0\leq(\ind{A_i})_{\omega_1}(\omega_2)\nearrow(\ind{A})_{\omega_1}(\omega_2)$$
+        und mit MONK folgt
+        $$\forall\omega_1\in\Omega_1:\int(\ind{A})_{\omega_1}\ d\mu_2=\lim_{i\to\infty}\int(\ind{A_i})_{\omega_1}\ d\mu_2$$
+        Das Integral ist als Grenzwert messbarer Funktionen damit messbar (da der Grenzwert laut MONK auch existiert).
+    \end{itemize} 
+    Damit ist $\mathcal{L}$ ein $\lambda$-System. Zeige nun $\int \ind{A}\ d(\mu_1\otimes\mu_2)=\int s_1\ d\mu_1$: Es gilt 
+    $$\int\ind{A}\ d(\mu_1\otimes\mu_2)=(\mu_1\otimes\mu_2)(A)$$
+    Definiere
+    $$\nu(A):=\int\left(\int\ind{A}(\cdot,\omega_2)\ d\mu_2(\omega_2)\right)d \mu_1(\omega_1)$$
+    Wegen dem I. Fall wissen wir, dass $\nu(R)=(\mu_1\otimes\mu_2)(R)$ f\"ur $R\in\cR$ gilt. Falls $\nu$ ein Ma\ss{} auf $\sigma(\cR)=\A_1\otimes\A_2$ ist, folgt mit Korollar 2.8, dass $\nu$ und $(\mu_1\otimes\mu_2)$ auf $\A_1\otimes\A_2\supseteq\cR^*$ \"ubereinstimmen und damit die Aussage. $\nu(\emptyset)$ und $\nu\geq0$ ergeben sich sofort aus den Eigenschaften vom Lebesgue-Integral. Zeige also die $\sigma$-Additivit\"at:\newline
+    Seien $A_i\in\A,i\geq1$ disjunkt und definiere $B_n:=\bigcup_{i=1}^nA_i$, $B:=\bigcup_{i\geq1}A_i$. Dann gilt
+    $B_1\subseteq B_2\subseteq\hdots\subseteq B$ und damit $0\leq\ind{B_n}\nearrow \ind{B}$. Folglich gilt auch $\forall\omega_1\in\Omega_1:0\leq(\ind{B_n})_{\omega_1}\nearrow (\ind{B})_{\omega_1}$. Mit MONK folgt
+    $$\forall\omega_1\in\Omega_1:0\leq\int(\ind{B_n})_{\omega_1}\ d\mu_2\nto{}{n\to\infty}\int(\ind{B})_{\omega_1}\ d\mu_2$$
+    und (nochmal MONK)
+    $$0\leq\int_{\Omega_1}\left(\int_{\Omega_2}(\ind{B_n})_{\omega_1}\ d\mu_2\right)\ d\mu_1\nto{}{n\to\infty}\int_{\Omega_1}\left(\int_{\Omega_2}(\ind{B})_{\omega_1}\ d\mu_2\right)\ d\mu_1$$
+    Also gilt
+    \begin{align*}
+        \nu(B)&=\nu\left(\bigcup_{i\geq1}A_i\right)=\lim_{n\to\infty}\nu(B_n)=\lim_{n\to\infty}\nu\left(\bigcup_{i=1}^nA_i\right)\\
+        &=\lim_{n\to\infty}\int_{\Omega_1}\left(\int_{\Omega_2}\ind{\bigcup_{i=1}^nA_i}\ d\mu_2\right)\ d\mu_1\\
+        &=\lim_{n\to\infty}\int_{\Omega_1}\left(\int_{\Omega_2}\sum_{i=1}^n\ind{A_i}\ d\mu_2\right)\ d\mu_1\\
+        &=\lim_{n\to\infty}\sum_{i=1}^n\int_{\Omega_1}\left(\int_{\Omega_2}\ind{A_i}\ d\mu_2\right)\ d\mu_1\\
+        &=\sum_{i\geq1}\int_{\Omega_1}\left(\int_{\Omega_2}\ind{A_i}\ d\mu_2\right)\ d\mu_1=\sum_{i\geq1}\nu(A_i)
+    \end{align*}
+    wobei die inneren Integrale jeweils \"uber den $\omega_1$-Schnitt der jeweiligen Funktionen zu verstehen sind.
+    \item \textbf{$f$ einfache Funktion, $f=\sum_{i=1}^n\alpha_i\cdot\ind{A_i}$ mit $A_i\in\A_1\otimes\A_2$ disjunkt}\newline
+    $$s_1(\omega_1)=\int f_{\omega_1}\ d\mu_2=\int\left(\sum_{i=1}^n\alpha_i\cdot\ind{A_i}\right)_{\omega_1}\ d\mu_2=\sum_{i=1}^n\alpha_i\cdot\int\ind{A_i}\ d\mu_2\geq0$$
+    und $s_1$ ist als Linearkombination messbarer Funktionen wieder messbar. Weiters gilt
+    \begin{align*}
+        \int f \ d(\mu_1\otimes\mu_2)&=\int\sum_{i=1}^n\alpha_i\cdot\ind{A_i}\ d(\mu_1\otimes\mu_2)\\
+        &=\sum_{i=1}^n\alpha_i\cdot\int\ind{A_i}\ d(\mu_1\otimes\mu_2)\\
+        &=\sum_{i=1}^n\alpha_i\cdot(\mu_1\otimes\mu_2)(A_i)\\
+        &=\sum_{i=1}^n\alpha_i\cdot\nu(A_i)\\
+        &=\sum_{i=1}^n\alpha_i\cdot\int_{\Omega_1}\left(\int_{\Omega_2}\ind{A_i}\ d\mu_2\right)\ d\mu_1\\
+    &=\int_{\Omega_1}\left(\int_{\Omega_2}\sum_{i=1}^n\alpha_i\cdot\ind{A_i}\ d\mu_2\right)\ d\mu_1\\
+        &=\int_{\Omega_1}\left(\int_{\Omega_2}f\ d\mu_2\right)\ d\mu_1
+    \end{align*}
+    \item \textbf{$f$ nicht-negativ, messbar}\newline
+    W\"ahle eine Folge einfacher Funktionen $f_n,n\geq1$, sodass $0\leq f_n\nearrow f$. Seien die $f_n$ o.B.d.A. wie im III. Fall. Dann gilt $\forall\omega_1\in\Omega_1:0\leq(f_n)_{\omega_1}\nearrow f_{\omega_1}$ und mit MONK folgt
+    $$\forall\omega_1\in\Omega_1:0\leq\int_{\Omega_2}(f_n)_{\omega_1}\ d\mu_2\nto{}{n\to\infty}\int_{\Omega_2}f_{\omega_1}\ d\mu_2$$
+    wobei die Integrale der $f_n$ mit dem III. Fall messbar sind und der Grenzwert damit auch. Weiters gilt
+    \begin{align*}
+        \int f\ d(\mu_1\otimes\mu_2)&\overset{\text{Def.}}{=}\lim_{n\to\infty}\int f_n\ d(\mu_1\otimes\mu_2)\\
+        &\overset{\text{III.}}{=}\lim_{n\to\infty}\int_{\Omega_1}\left(\int_{\Omega_2}f_n\ d\mu_2\right)\ d\mu_1\\
+        &\overset{\text{MONK}}{=}\int_{\Omega_1}\left(\int_{\Omega_2}f\ d\mu_2\right)\ d\mu_1=\int_{\Omega_1}s_1\ d\mu_1
+    \end{align*}
+\end{enumerate}
+    Betrachte nun den allgemeinen Fall, wo $\mu_1$ und $\mu_2$ beide $\sigma$-endlich sind.\newline
+    F\"ur $i=1,2$ gibt es Mengenfolgen $B_{i,n}\in\A_i,n\geq1$, sodass $B_{i,1}\subseteq B_{i,2}\subseteq\hdots\subseteq\bigcup_{n\geq1}B_{i,n}$ und $\forall n\geq1:\mu_i(B_{i,n})<\infty$. F\"ur $B_n:=B_{1,n}\times B_{2,n}\in\A_1\otimes\A_2$ ist $\Omega_1\times\Omega_2=\bigcup_{n\geq1}B_n$ und $\forall n\geq1:(\mu_1\otimes\mu_2)(B_n)=\mu_1(B_{1,n})\cdot\mu_2(B_{2,n})<\infty$. Damit ist auch $\mu_1\otimes\mu_2$ ein $\sigma$-endliches Ma\ss{}. Definiere nun f\"ur $n\geq1$ die folgenden Ma\ss{}e f\"ur messbare Mengen $A$:
+    \begin{align*}
+        \mu_{1,n}(A)&:=\mu_1(A\cap B_{1,n}) \\
+        \mu_{2,n}(A)&:=\mu_2(A\cap B_{2,n}) \\
+        \pi_n(A)&:=(\mu_1\otimes\mu_2)(A\cap B_n)
+    \end{align*}
+    Dann gelten folgende Eigenschaften (leicht zu pr\"ufen):
+    \begin{itemize}
+        \item $\mu_{2,n}$, $\mu_{1,n}$ und $\pi_n$ sind endliche Ma\ss{}e f\"ur alle $n\geq1$.
+        \item $\pi_n=\mu_{1,n}\otimes\mu_{2,n}$
+        \item Es gilt f\"ur $i=1,2$, dass 
+        \begin{equation*}
+            \int_{\Omega_i}f\ d\mu_{i,n}=\int_{\Omega_i}f\cdot\ind{B_{i,n}}\ d\mu_i
+        \end{equation*}
+        f\"ur $f:\Omega_i\to\overline\R$ nicht-negativ und messbar und
+        \begin{equation*}
+            \int f\ d\pi_n=\int f\cdot\ind{B_n}\ d(\mu_1\otimes\mu_2)
+        \end{equation*}
+        f\"ur $f:\Omega_1\times\Omega_2\to\overline\R$ nicht-negativ und messbar
+        \item Der Satz von Tonelli gilt f\"ur $\mu_{1,n}$ und $\mu_{2,n}$ wie bereits bewiesen.
+    \end{itemize}
+    Sei also $f:\Omega_1\times\Omega_2\to\overline\R$ nicht-negativ und messbar. Dann gilt $0\leq f\cdot\ind{B_n}\nearrow f$ und $\forall\omega_1\in\Omega_1:0\leq(f\cdot\ind{B_n})_{\omega_1}\nearrow f_{\omega_1}$. Mit MONK folgt also
+    \begin{align*}
+        s_1(\omega_1)&=\int_{\Omega_2}f_{\omega_1}\ d\mu_2=\lim_{n\to\infty}\int_{\Omega_2}(f\cdot\ind{B_n})_{\omega_1}\ d\mu_2\\
+        &=\begin{cases}
+            \displaystyle\lim_{n\to\infty}\int_{\Omega_2}f_{\omega_1}\ d\mu_{2,n}&\text{ falls }\omega_1\in B_{1,n}\\
+            0&\text{ falls }\omega_1\notin B_{1,n}
+        \end{cases}
+        \\ &=\ind{B_{1,n}}(\omega_1)\int_{\Omega_2}f_{\omega_1}\ d\mu_{2,n}\geq0
+    \end{align*}
+    und messbar (IV. Fall und Produkt mit Indikatorfunktion auf messbarer Menge). Weiters gilt
+    \begin{align*}
+        \int f\ d(\mu_1\otimes\mu_2)&=\lim_{n\to\infty}\int\ind{B_n}\cdot f\ d(\mu_1\otimes\mu_2)\\
+        &\overset{\text{s.o.}}{=}\lim_{n\to\infty}\int f\ d\pi_n\\
+        &=\lim_{n\to\infty}\int f\ d(\mu_{1,n}\otimes\mu_{2,n})\\
+        &\overset{\text{IV.}}{=}\lim_{n\to\infty}\int_{\Omega_1}\left(\int_{\Omega_2} f_{\omega_1}\ d\mu_{2,n}\right)\ d\mu_{1,n}\\
+        &\overset{\text{s.o.}}{=}\lim_{n\to\infty}\int_{\Omega_1}\left(\ind{B_{1,n}}\int_{\Omega_2}f_{\omega_1}\cdot\ind{B_{2,n}}\ d\mu_2\right)\ d\mu_1 \\
+        &\overset{\text{2x MONK}}{=}\int_{\Omega_1}\left(\int_{\Omega_2}f_{\omega_1}\ d\mu_2\right)\ d\mu_1=\int_{\Omega_1}s_1\ d\mu_1
+    \end{align*}
+    wobei der vorletzte Schritt mit den nicht-negativen monotonen Folgen $\left(f_{\omega_1}\cdot\ind{B_{2,n}}\right),n\geq1$ und 
+    $\left(\ind{B_{1,n}}\cdot\int_{\Omega_2}f_{\omega_1}\ind{B_{2,n}}\ d\mu_2\right),n\geq1$
+    und MONK folgt. \qed
+    
+\paragraph{8.12. Satz (Fubini's Theorem):}Sei $f:\Omega_1\times\Omega_2\to\overline\R$ absolut $\mu_1\otimes\mu_2$-integrierbar. Dann gibt es eine messbare Menge $N_1\in\A_1$ mit folgenden Eigenschaften
+\begin{enumerate}[label=(\roman*)]
+    \item $\mu_1(N_1)=0$ und $\forall\omega_1\notin N_1:f_{\omega_1}\in L^1(\mu_2)$
+    \item Die Abbildung $s_1:\Omega_1\to\overline\R$ mit
+    \begin{align*}
+        s_1(\omega_1):=
+    \begin{cases}
+       \displaystyle \int_{\Omega_2} f_{\omega_1}\ d\mu_2&\text{ falls }\omega_1\notin N_1 \\
+       0&\text{ falls }\omega_1\in N_1
+    \end{cases}
+    \end{align*}
+    ist absolut $\mu_1$-integrierbar.
+    \item $$\int f\ d(\mu_1\otimes\mu_2)=\int_{\Omega_1}s_1\ d\mu_1$$
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item $|f|$ ist nicht-negativ und messbar. Laut Annahme und mit Tonelli (Satz 8.11) gilt
+    $$\int_{\Omega_1}\left(\int_{\Omega_2}|f|\ d\mu_2\right)\ d\mu_1=\int |f|\ d(\mu_1\otimes\mu_2)<\infty$$
+    wobei das innere Integral auf der linken Seite f\"ur alle $\omega_a\in\Omega_1$ eine nicht-negative Funktion mit endlichem $\mu_1$-Integral ist und damit $<\infty$ f.\"u. ist. Definiere also
+    $$N_1:=\left\{\omega_1\in\Omega_1:\int_{\Omega_2}|f|_{\omega_1}\ d\mu_2=\infty\right\}$$
+    Dann gilt wegen der Messbarkeit von $s_1$ laut Tonelli $N_1\in\A_1$ und trivial die gesuchten Eigenschaften (da $|f_{\omega_1}|=|f|_{\omega_1}$).
+    \item Schreibe $f=f_+-f_-$ und wende jeweils Tonelli auf den Positiv- und Negativteil an. Schreibe
+    \begin{align*}
+        s_1(\omega_1)=
+        \begin{cases}
+            \displaystyle\int_{\Omega_2}(f_{\omega_1})_+\ d\mu_2-\int_{\Omega_2}(f_{\omega_1})_-\ d\mu_2&\text{ falls }\omega_1\notin N_1 \\
+            0&\text{ falls }\omega_1\in N_1
+        \end{cases}\\
+        =\begin{cases}
+            \displaystyle\int_{\Omega_2}(f_+)_{\omega_1}\ d\mu_2-\int_{\Omega_2}(f_-)_{\omega_1}\ d\mu_2&\text{ falls }\omega_1\notin N_1 \\
+            0&\text{ falls }\omega_1\in N_1
+        \end{cases}
+    \end{align*}
+    Damit ist $s_1$ als Produkt und Summe messbarer Funktionen und mit Tonelli messbar. Weiters gilt
+    \begin{align*}
+        \int_{\Omega_1}|s_1|\ d\mu_1&=\int_{\Omega_1}\ind{N_1^c}\left|\int_{\Omega_2}(f_{\omega_1})_+\ d\mu_2-\int_{\Omega_2}(f_{\omega_1})_-\ d\mu_2\right|\ d\mu_1\\
+        &\overset{\text{DUG}}{\leq}\int_{\Omega_1}\ind{N_1^c}\left(\left|\int_{\Omega_2}(f_{\omega_1})_+\ d\mu_2\right|+\left|\int_{\Omega_2}(f_{\omega_1})_-\ d\mu_2\right|\right)\ d\mu_1\\
+        &=\int_{\Omega_1}\ind{N_1^c}\int_{\Omega_2}(f_{\omega_1})_+\ d\mu_2\ d\mu_1+\int_{\Omega_1}\ind{N_1^c}\int_{\Omega_2}(f_{\omega_1})_-  \ d\mu_2\ d\mu_1\\
+        &\leq\int_{\Omega_1}\int_{\Omega_2}(f_{\omega_1})_+\ d\mu_2\ d\mu_1+\int_{\Omega_1}\int_{\Omega_2}(f_{\omega_1})_-  \ d\mu_2\ d\mu_1\\
+        &\overset{\text{Tonelli}}{=}\int f_+\ d(\mu_1\otimes\mu_2)+\int f_-\ d(\mu_1\otimes\mu_2)\\&=\int f\ d(\mu_1\otimes\mu_2)<\infty
+    \end{align*}
+    Damit ist $s_1$ absolut $\mu_1$-integrierbar.
+    \item Mit Tonelli f\"ur $f_+$ und $f_-$ gilt
+    \begin{align*}
+        \int_{\Omega_1}\ d\mu_1&    \overset{\text{Def.}}{=}\int_{\Omega_1}\ind{N_1^c}\left(\int_{\Omega_2}f_{\omega_1}\ d\mu_2\right)\ d\mu_1\\
+        &=\int_{\Omega_1}\ind{N_1^c}\left(\int_{\Omega_2}(f_+)_{\omega_1}\ d\mu_2\right)\ d\mu_1-\int_{\Omega_1}\ind{N_1^c}\left(\int_{\Omega_2}(f_-)_{\omega_1}\ d\mu_2\right)\ d\mu_1\\
+        &=\int_{\Omega_1}\left(\int_{\Omega_2}(f_+)_{\omega_1}\ d\mu_2\right)\ d\mu_1-\int_{\Omega_1}\left(\int_{\Omega_2}(f_-)_{\omega_1}\ d\mu_2\right)\ d\mu_1\\
+        &\overset{\text{Tonelli}}{=}\int f_+\ d(\mu_1\otimes\mu_2)-\int f_-\ d(\mu_1\otimes\mu_2)=\int f\ d(\mu_1\otimes\mu_2)
+    \end{align*}
+    wobei der vorletzte Schritt aus $\mu_1(N_1)=0$ und $f\overset{a.e.}{=}g\implies\int f\ d\mu=\int g\ d\mu$ folgt. \qed.
+\end{enumerate}
+
+\paragraph{8.13. Beispiel:}Betrachte unabh\"angige Zufallsvariablen $X,Y:\Omega\to\mathbb{N}$ mit gemeinsamer pmf $p_{X,Y}(x,y)=\Pp(X=x,Y=y)$, marginal pmfs $p_X=\Pp(X=x)$, $p_Y(y)=\Pp(Y=y)$ und eine messbare Funktion $f:\mathbb{N}\times\mathbb{N}\to\mathbb{Q}$ mit 
+$$(x,y)\mapsto\dfrac{1}{p_{X,Y}(x,y)}\dfrac{(-1)^{x+1}}{x+y}=\dfrac{1}{p_X(x)\cdot p_Y(y)}\dfrac{(-1)^{x+1}}{x+y}$$
+Gesucht ist $\E f(X,Y)$. Betrachte dazu folgende Tabelle\newline
+\begin{center}
+\begin{tabular}{l|lllll|l}
+$\downarrow$ y / x $\rightarrow$ & 1 & 2 & 3 & 4 & $\hdots$ & Summe \\
+\hline
+1   & 1/2  & -1/3  & 1/4  & -1/5  &  $\hdots$  &  $1-\log 2=:c$   \\
+2   &  1/3 & -1/4  & 1/5  & -1/6  &  $\hdots$   &  $-c+1/2$   \\
+3   &  1/4 & -1/5  & 1/6  & -1/7  &  $\hdots$   & $c-1/2+1/3$    \\
+4   &  1/5 &  -1/6 & 1/7  &  -1/8 &  $\hdots$   &  $c+1/2-1/3+1/4$   \\
+$\vdots$ &  $\vdots$  & $\vdots$   &  $\vdots$  & $\vdots$   &  $\ddots$   &  $\vdots$    \\
+\hline
+Summe &  $+\infty$ & $-\infty$  & $+\infty$  & $-\infty$  &  $\hdots$   &    
+\end{tabular}
+\end{center}
+Damit gelten folgende Eigenschaften
+\begin{enumerate}[label=(\roman*)]
+    \item $\displaystyle\sum_{x\geq1}\sum_{y\geq1}f(x,y)\cdot p_{X,Y}(x,y)=\sum_{x\geq1}(\infty-\infty+\infty-\hdots)$ existiert nicht!
+    \item $\displaystyle\sum_{y\geq1}\sum_{x\geq1}f(x,y)\cdot p_{X,Y}(x,y)=\sum_{y\geq1}\left(\lim_{n\to\infty}\begin{aligned}\begin{cases}
+        1/2+1/4+\hdots+1/n&\text{ falls }n\text{ gerade}\\
+        c+1/3+1/5+\hdots+1/n&\text{ falls }n\text{ ungerade}
+    \end{cases}\end{aligned}\right)=\infty$
+\end{enumerate}
+Mit dem Kontrapositiv von Fubini (Satz 8.12) gilt also $\E|f(X,Y)|=\infty$.
+
+\section*{Messbarkeit $\mathbb{R}^d$-wertiger Funktionen}
+\addcontentsline{toc}{section}{Messbarkeit $\mathbb{R}^d$-wertiger Funktionen}
+Betrachte in diesem Abschnitt $\R^d$-wertige Abbildungen und die euklidische Norm $\Vert x\Vert_2=\left(\sum_{i=1}^dx_i^2\right)^{1/2}$ f\"ur $x\in\R^d,x=(x_1,\hdots,x_d)'$.
+
+\paragraph{8.14. Definition:}
+\begin{enumerate}[label=(\roman*)]
+    \item Sei $\mathcal{O}_d:=\left\{O\subseteq\R^d:O \text{ offen}\right\}$ die Familie aller offenen Mengen in $\R^d$. Die Borel-$\sigma$-Algebra auf $\R^d$ ist definiert als
+    $$\mathcal{B}(\R^d):=\sigma(\mathcal{O}_d)$$
+    \item Ist $\pspace$ ein Wahrscheinlichkeitsraum und $X:(\Omega,\A)\to(\R^d,\mathcal{B}(\R^d))$ messbar, dann nennt man $X$ einen $d$-dimensionalen Zufallsvektor. Man nennt die Funktion $F:\R^d\to[0,1]$ mit $t\to\Pp(X\leq t)$ (komponentenweise) die Verteilungsfunktion (cdf) von $X$.
+ \end{enumerate}
+ 
+ \paragraph{8.15. Lemma}F\"ur $\R^d$ und $\R^\ell$ mit euklidischer Metrik gilt
+ $$f:\R^d\to\R^\ell\text{ stetig }\iff\forall O\in\mathcal{O}_\ell: f^{-1}(O)\in\mathcal{O}_d,$$
+ also ist $f$ genau dann stetig, wenn Urbilder offener Mengen unter $f$ offen sind.
+ 
+ \paragraph{Beweis:}\"Ubung! (cf. H\"ohere Analysis) \qed
+ 
+ \paragraph{8.16. Proposition:} Sei $f:(\R^d,\mathcal{B}(\R^d))\to(\R^\ell,\mathcal{B}(\R^\ell))$ stetig. Dann ist $f$ auch messbar. 
+ 
+\paragraph{Beweis:} Mit Lemma 8.15 folgt unmittelbar die Messbarkeit im Erzeugendensystem und damit auch die Messbarkeit in $\mathcal{B}(\R^d)$. \qed
+
+\paragraph{8.17. Proposition:}
+$$\mathcal{B}(\R^d)=\bigotimes_{i=1}^d\borel$$
+
+\paragraph{Bemerkung:}Allgemeiner gilt 
+$$\mathcal{B}(X^d)=\bigotimes_{i=1}^d\mathcal{B}(X)$$
+f\"ur alle separablen metrischen R\"aume $X$ (oder noch allgemeiner alle zweitabz\"ahlbaren topologischen R\"aume $X$).
+
+\paragraph{Beweis:}Um die Notation \"ubersichtlich zu halten, betrachte hier nur den Fall $d=2$. Betrachte zuerst die Richtung $\supseteq$, die auch ohne Annahmen an $X$ auskommt. Setze
+$$\A:=\{A\subset X:A\times X\in\cB(X^2)\},\ \A':=\{A\subset X:X\times A\in\cB(X^2)\},$$
+sodass $\cB(X)\subseteq\A,\A'$ und $\A,\A'$ beide $\sigma$-Algebren sind (pr\"ufe!). Nun gilt f\"ur $A,B\in\borel$, dass $A\times B=(A\times X)\cap(X\times B)\in\cB(X^2)$ und damit 
+$$\borel\otimes\borel=\sigma(\cR)=\sigma\left(\{A\times B:A,B\in\borel\}\right)\subseteq\sigma(\cB(X^2))=\cB(X^2).$$
+Zeige nun die Richtung $\subseteq$. Beachte, dass $X^2$ in der Produktmetrik separabel ist und damit jede offene Menge $O\in\mathcal{O}:=\{O\subseteq X^2:O\text{ offen}\}$ von der Form
+ $$O=\bigcup_{i\geq1}(O_i^{(1)}\times O_i^{(2)})$$ 
+ ist, wobei $O_i^{(1)}, O_i^{(2)}$ offen sind f\"ur alle $i\geq1$. Nun gilt $O_i^{(1)}, O_i^{(2)}\in\borel$ und damit $O_i^{(1)}\times O_i^{(2)}\in\cR$. Es folgt, dass
+$\cB(X^2)=\sigma(\mathcal{O})\subseteq\sigma(\cR)=\borel\otimes\borel$. \qed
+
+\paragraph{8.18 Korollar:}Betrachte folgende Mengenfamilien
+\begin{align*}
+    &\mathcal{J}_1:=\left\{(-\infty,t_1]\times\hdots\times(-\infty,t_d]:t\in\R^d\right\} \\
+    &\mathcal{J}_2:=\left\{(s_1,t_1)\times\hdots\times(s_d,t_d):s,t\in\R^d\right\} \\
+    &\mathcal{J}_3:=\left\{(s_1,t_1\rangle\times\hdots\times(s_d,t_d\rangle:s,t\in\overline\R^d,s_i\leq t_i\text{ f\"ur }i=1,\hdots,d\right\} \\
+\end{align*}
+Dann gilt $\sigma(\mathcal{J}_1)=\sigma(\mathcal{J}_2)=\sigma(\mathcal{J}_3)=\mathcal{B}(\R^k)$
+
+\paragraph{Beweis:}\"Ubung! Hinweis: Mit $\borel=\sigma(\mathcal{O}_1)$ und $\R=\bigcup_{k\geq1}(-k,k)$, wobei $(-k,k)\in\mathcal{O}_1$ gilt f\"ur $\mathcal{M}:=\left\{A_1\times\hdots\times A_n:A_i\in\mathcal{O}_1\text{ f\"ur }i=1,\hdots,d\right\}$, dass $\sigma(\mathcal{M})=\bigotimes_{i=1}^d\sigma(\mathcal{O}_1)=\bigotimes_{i=1}^d\borel$. \qed
+
+\paragraph{8.19. Korollar:}Sei $(\Omega,\A)$ ein messbarer Raum und $f:\Omega\to\R^d,\omega\mapsto(f_1(\omega),\hdots,f_d(\omega))'$ mit $f_i:\Omega\to\R$. Dann ist $f$ genau dann $\A\textendash\mathcal{B}(\R^d)$-messbar, wenn die Koordinatenfunktionen $f_i$ f\"ur $i=1,\hdots,d$ jeweils $\A\textendash\borel$-messbar sind.
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $\implies$\newline
+    Die Koordinatenprojektionen $\pi_i:\R^d\to\R$ sind stetig und damit $\mathcal{B}(\R^d)\textendash\borel$-messbar. Damit ist $f_i=(\pi_i\circ f)$ auch messbar.
+    \item $\impliedby$\newline
+    Mit Korollar 8.18 gen\"ugt es die Messbarkeit f\"ur Urbilder unter $f$ aus $\mathcal{J_1}$ zu zeigen. Es gilt
+    $$f^{-1}((-\infty,t_1]\times\hdots\times(-\infty,t_d])=\bigcap_{i=1}^d\{f_i\leq t_i\}\in\A$$
+    da ein endlicher Durchschnitt messbarer Mengen wieder messbar ist. \qed
+\end{enumerate}
+
+\paragraph{8.20. Korollar:}Sei $(\Omega,\A)$ ein messbarer Raum und seien $f,g:(\Omega,\A)\to(\R^d,\mathcal{B}(\R^d))$ und $h:\Omega\to\R$ messbar. Sei weiters $M\in\R^{\ell\times d}$ eine deterministische Matrix. Dann gilt
+\begin{enumerate}[label=(\roman*)]
+    \item $f+g$ ist $\A\textendash\mathcal{B}(\R^d)$-messbar.
+    \item $\langle f,g\rangle=\displaystyle\sum_{i=1}^d f_i g_i$ ist $\A\textendash\borel$-messbar.
+    \item $Mf$ ist $\A\textendash\mathcal{B}(\R^\ell)$-messbar.
+    \item $hf$ ist $\A\textendash\mathcal{B}(\R^d)$-messbar.
+\end{enumerate}
+
+\paragraph{Beweis:}Folgt aus der Messbarkeit der Komponentenfunktionen und der Messbarkeit von Summen und Produkten messbarer Funktionen. \qed
+
+\paragraph{8.21. Proposition:}Die Verteilungsfunktion  $F:\R^d\to[0,1]$ einer Zufallsvariable $X:(\Omega,\A)\to(\R^d,\mathcal{B}(\R^d))$ hat folgende Eigenschaften:
+\begin{enumerate}[label=(\roman*)]
+    \item F\"ur eine Folge $t_n=(t_n^{(1)},\hdots,t_n^{(d)})'\in\R^d,n\geq1$ mit $\displaystyle\min_{1\leq i\leq d}t_n^{(i)}\searrow-\infty$ gilt $\displaystyle\lim_{n\to\infty}F(t_n)=0$
+    und f\"ur eine Folge $s_n=(s_n^{(1)},\hdots,s_n^{(d)})'\in\R^d,n\geq1$ mit $\displaystyle\min_{1\leq i\leq d}s_n^{(i)}\nearrow\infty$ gilt $\displaystyle\lim_{n\to\infty}F(s_n)=1$.
+    \item F\"ur $t_n\in\R^d,n\geq1$ mit $t_n\searrow t_0$ komponentenweise gilt $\displaystyle\lim_{n\to\infty}F(t_n)=F(t_0)$. \textbf{(Rechtsstetigkeit)}
+    \item F\"ur $t_n\in\R^d,n\geq1$ mit $t_n\nearrow t_0$ komponentenweise existiert $\displaystyle\lim_{n\to\infty}F(t_n)$.
+    \item F\"ur $s,t\in\R^d$ mit $s\leq d$ komponentenweise gilt
+    $$0\leq\sum_{k=0}^d(-1)^k\sum_{x\in I_k}F(x)$$
+    wobei $I_k=\displaystyle\left\{x\in\R^d:\sum_{i=1}^d\delta_{x_i,s_i}=k,\sum_{i=1}^d\delta_{x_i,t_i}=d-k\right\}$, also die Menge der der $x$, sodass $x$ in $k$ Komponenten mit $s$ \"ubereinstimmt und in den restlichen Komponenten mit $t$ \"ubereinstimmt.
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Sei $m_n:=\displaystyle\min_{1\leq i\leq d}t_n^{(i)}$ und sei $i_n$ so, dass $m_n=t_n^{(i_n)}$ (also, dass das Minimum in der $i_n$-ten Koordinate angenommen wird). 
+    \begin{itemize}
+        \item Falls $m_n\searrow-\infty$
+        \begin{align*}
+            F(t_n)&=\Pp(X_1\leq t_n^{(1)},\hdots,X_d\leq t_n^{(d)})\\
+            &\leq\Pp(X_{i_n}\leq m_n)\\
+            &\leq\sum_{i=1}^d\Pp(X_i\leq m_n)\nto{}{n\to\infty}0
+        \end{align*}
+        \item Falls $m_n\nearrow\infty$
+        \begin{align*}
+            F(t_n)&=\Pp(X_1\leq t_n^{(1)},\hdots,X_d\leq t_n^{(d)})\\
+            &\geq\Pp(X_1\leq m_n,\hdots,X_d\leq m_n)\nto{\text{S.V.U.}}{n\to\infty}\Pp(X\in\R^d)=1
+        \end{align*}
+        wobei die Stetigkeit von unten mit den Mengen $(-\infty,t_n^{(i)}]\supseteq(-\infty,m_n],i=1,\hdots,d$ gilt. 
+    \end{itemize}
+    \item Setze $A_n:=\{X\leq t_n\}$. Dann gilt $A_1\supseteq A_2\supseteq\hdots\supseteq\bigcap_{n\geq1}A_n$. Mit der Stetigkeit von oben folgt $\Pp(A)=\lim_{n\to\infty}\Pp(A_n)$ und damit $F(t_0)=\lim_{n\to\infty}F(t_n)$.
+    \item F\"ur $A_n$ wie in (ii) gilt hier $A_1\subseteq A_2\subseteq\hdots\subseteq\bigcup_{n\geq1}A_n=:A$. Mit der Stetigkeit von unten folgt $\lim_{n\to\infty}F(t_n)=\Pp(A)\in[0,1]$, sodass der Grenzwert exisitiert. 
+    \item Es gilt
+    \begin{align*}
+        0&\leq\Pp(X\in(s_1,t_1]\times\hdots\times(s_d,t_d])\\
+        &=\Pp(\{X\leq t\}\setminus\{\exists i\leq d: X_i\leq s_i\})\\
+        &=\Pp(\{X\leq t\}\setminus\{\forall i\leq d:X_i\leq t_i,\exists i\leq d: X_i\leq s_i\})=:(*)
+    \end{align*}
+    Setze $A_j:=\{X\leq t,X_j\leq s_j\}$ f\"ur $j=1,\hdots,d$. Dann gilt
+    \begin{align*}
+        (*)&=F(t)-\Pp\left(\bigcup_{j=1}^d A_j\right)\overset{\text{In-Ex}}{=}F(t)+\sum_{\ell=1}^d(-1)^\ell\sum_{\substack{I\subseteq\{1,\hdots,d\}\\|I|=\ell}}\Pp\left(\bigcap_{j\in I}A_j\right)\\
+        &=F(t)+\sum_{\ell=1}^d(-1)^\ell\sum_{x\in I_k}F(x)=\sum_{\ell=0}^d(-1)^\ell\sum_{x\in I_k}F(x)
+    \end{align*}
+    \qed
+\end{enumerate}
+
+\paragraph{8.22. Proposition:}Sei $F:\R^d\to[0,1]$ eine Funktion mit den Eigenschaften (i)-(iv) aus Proposition 8.21. Dann gibt es einen Wahrscheinlichkeitsraum $\pspace$ und einen Zufallsvektor $X:\Omega\to\R^d$, sodass $F$ die cf von $X$ ist.
+
+\paragraph{Beweis:}Nur Beweisidee: Konstruiere ein Wahrscheinlichkeitsma\ss{} $\Pp$ auf $(\R^d,\mathcal{B}(\R^d))$, sodass 
+$$\Pp((-\infty,t_1]\times\hdots\times(-\infty,t_d])=F(t)$$
+und setze $X(\omega):=\omega$ f\"ur $\omega\in\R^d$. \qed
+
+\paragraph{8.23. Definition:}Sei $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $f:(\Omega,\A)\to(\R^d,\mathcal{B}(\R^d))$ messbar. Sind alle Komponentenfunktionen $f_i:(\Omega,\A)\to(\R,\borel),i=1,\hdots,d$ (quasi-)integrierbar, dann nennt man $f$ (quasi-)integrierbar und setzt
+$$\int f\ d\mu:=\left(\int f_1\ d\mu,\hdots,\int f_d\ d\mu\right)'$$
+
+% Hier habe ich die Reihenfolge ver\"andert, da sie so mehr Sinn macht.
+
+\paragraph{8.24. Definition:}Sei $V$ ein Vektorraum \"uber einen K\"orper $K$. Eine Abbildung $\Vert\cdot\Vert:V\to[0,\infty)$ ist eine Norm auf $V$, falls f\"ur $x,y\in V$ und $\lambda\in K$ gilt:
+\begin{itemize}
+    \item $\Vert x\Vert=0\iff x=0$
+    \item $\Vert\lambda x\Vert=|\lambda|\Vert x\Vert$
+    \item $\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert$
+\end{itemize}
+
+\paragraph{Bemerkung:}Eine Norm $\Vert\cdot\Vert$ erf\"ullt auch die umgekehrte Dreiecksungleichung
+$$\left|\Vert x\Vert-\Vert y\Vert\right|\leq\Vert x-y\Vert$$
+
+\paragraph{8.25. Lemma:}Alle Normen auf $\R^d$ sind Lipschitz-\"aquivalent, i.e. f\"ur eine beliebige Norm $\Vert\cdot\Vert$ auf $\R^d$ gibt es Konstanten $\alpha,\beta>0$, sodass
+$$\forall x\in\R^d:\alpha\Vert x\Vert_\infty\leq\Vert x\Vert\leq\beta\Vert x\Vert_\infty$$
+f\"ur $\displaystyle\Vert x\Vert_\infty=\max_{1\leq i\leq d}x_i$. Insbesondere sind damit alle Normen auf $\R^d$ topologisch \"aquivalent und erzeugen dieselben offenen Mengen.
+
+\paragraph{Beweis:}Betrachte die kanonische Basis $\{e_1,\hdots,e_d\}$ und setze $\displaystyle\mu:=\max_{1\leq i\leq d}\Vert e_i\Vert$. Dann gilt
+$$\Vert x\Vert=\left\Vert\sum_{i=1}^d x_ie_i\right\Vert\leq\sum_{i=1}^d\Vert x_ie_i\Vert=\sum_{i=1}^d|x_i|\Vert e_i\Vert\leq\mu\sum_{i=1}^d|x_i|\leq k\mu\Vert x\Vert_\infty=:\beta\Vert x\Vert_\infty$$
+Damit ist die Abbildung $f:\R^d\to[0,\infty)$ mit $x\mapsto\Vert x\Vert$ stetig, denn
+$$\left|\Vert x\Vert-\Vert y\Vert\right|\leq\Vert x-y\Vert\leq\beta\Vert x-y\Vert_\infty$$ und f\"ur $\eps>0$, setze $\delta:=\eps/\beta$. Betrachte nun $S:=\left\{s\in\R^d:\Vert x\Vert_\infty=1\right\}$. Dann ist $S$ mit Heine\textendash Borel kompakt und f\"ur $f$ gilt der Extremwertsatz. Sei also $p\in\arg\min_{x\in S}\Vert x\Vert$. Dann gilt $\Vert p\Vert \neq0$ und f\"ur alle $x\neq0$ gilt
+$$\Vert x\Vert=\left\Vert\ \Vert x\Vert_\infty\cdot\dfrac{x}{\Vert x\Vert_\infty} \right\Vert=\Vert x\Vert_\infty\cdot\left\Vert \dfrac{x}{\Vert x\Vert_\infty} \right\Vert\geq\Vert x\Vert_\infty\cdot\Vert p\Vert=:\alpha\Vert x\Vert_\infty$$
+\qed
+
+\paragraph{Bemerkung:}Sei $\Vert\cdot\Vert$ eine beliebige Norm auf $\R^d$. Dann gilt
+$$f\in L^1\iff\Vert f\Vert\in L^1$$
+da f\"ur $i=1,\hdots,d$ gilt
+$$|f_i|\leq\Vert f\Vert_2\leq\sum_{j=1}^d|f_j|$$
+und alle Normen auf $\R^d$ Lipschitz-\"aquivalent sind (cf. Lemma 8.25).
+
+
+\section*{Unendliche Produktr\"aume}
+Dieser Abschnitt behandelt die Konstruktion unendlicher Folgen von Zufallsvariablen und wird in Wahrscheinlichkeitstheorie 2 nicht behandelt, kann aber vor allem f\"ur die LV Stochastische Prozesse interessant sein. 
+
+\paragraph{8.26. Definition:}Sei $\Omega:=\{(\omega_1,\omega_2,\dots):\omega_i\in\R,i\geq1\}$. Sei $n\in\mathbb{N}$ und $B_1,\dots,B_n\in\borel$. Man nennt Mengen der Form
+$$E=\left(\prod_{i=1}^nB_i\right)\times\left(\prod_{i>n}\R\right)$$
+Zylindermengen. Sei $\mathcal{C}$ die Familie aller Zylindermengen $E$. Dann nennt man $\A:=\sigma(\mathcal{C})$ die Zylinder-$\sigma$-Algebra. F\"ur $B_1,\hdots,B_n\in\borel$, setze au\ss{}erdem 
+$$\operatorname{cyl}(B_1,\dots,B_n):=\left(\prod_{i=1}^nB_i\right)\times\left(\prod_{i>n}\R\right)\in\mathcal{C}.$$
+
+\paragraph{8.27. Satz (Erweiterungssatz von Kolmogorov):} Sei $(\Omega,\A)$ wie oben. F\"ur $n\geq1$ sei $\rho_n$ ein Wahrscheinlichkeitsma\ss{} auf $(\R^n,\mathcal{B}(\R^n))$, sodass
+$$\forall B_1,\hdots,B_n\in\borel:\rho_{n+1}(B_1\times\hdots\times B_n\times\R)=\rho_n(B_1\times\hdots\times B_n).$$
+Dann existiert ein eindeutiges Wahrscheinlichkeitsma\ss{} $\rho$ auf $(\Omega,\A)$, sodass
+$$\forall n\geq1,\forall B_1,\hdots,B_n\in\borel:\rho\left(\operatorname{cyl}(B_1,\hdots, B_n)\right)=\rho_n(B_1\times\hdots\times B_n).$$
+
+\paragraph{Beweis:}siehe z.B. P. Billingsley, \textit{Probability and Measure} (2nd Ed.), Theorems 36.1, 36.2 \qed
+
+
+\paragraph{8.28. Korollar:}
+Seien $\Pp_1,\Pp_2,\hdots$ Wahrscheinlichkeitsma\ss{}e auf $(\R,\borel)$. Dann existiert ein Wahrscheinlichkeitsraum $\pspace$ mit u.a. Zufallsvariablen $X_i:(\Omega,\A)\to(\R,\borel),i\geq1$, sodass $X_i\sim \Pp_i$ f\"ur alle $i\geq1$.
+\paragraph{Beweis:} Setze $\rho_n:=\bigotimes_{i=1}^n\Pp_i$ f\"ur alle $i\geq1$. Dann gilt 
+\begin{align*}
+	\rho_{n+1}(B_1\times\hdots\times B_n\times\R)&=\Pp_1(B_1)\cdot\hdots\cdot\Pp_n(B_n)\cdot\Pp_{n+1}(\R)\\
+	&=\prod_{i=1}^n \Pp_i(B_i)\\
+	&=\rho_n(B_1\times\hdots\times B_n)
+\end{align*}
+f\"ur alle $n\geq1$ und $B_1,\dots,B_n\in\borel$. Sei also $\Pp:=\rho$ das Wahrscheinlichkeitsma\ss{} auf $(\Omega,\A)$ aus Satz 8.27. Dann gilt 
+$$\Pp(\operatorname{cyl}(B_1,\hdots,B_n))=\prod_{i=1}^n\Pp_i(B_i)$$
+f\"ur alle $n\geq1$ und $B_1,\dots,B_n\in\borel$. Setze nun $X_i:=\pi_i$ die $i$-te Koordinatenabbildung, sodass $X_i^{-1}B=\{\omega\in\Omega:\omega_i\in B\}\in\mathcal{C}\subseteq\A$, i.e. $X_i$ ist eine Zufallsvariable f\"ur alle $i\geq1$. Sei nun f\"ur $n\geq1$ beliebig $i:[n]\to\mathbb{N}$ eine monoton steigende Funktion. F\"ur $k\notin i([n])$, setze $B_k:=\R$ und sonst seien $B_{i(j)}\in\borel,j\in[n]$ beliebig. Dann gilt
+\begin{align*}
+	\Pp(X_{i(1)}\in B_{i(1)},\hdots, X_{i(n)}\in B_{i(n)})&=\Pp(\operatorname{cyl}(B_1,\hdots, B_{i(n)}))\\
+	&=\prod_{k=1}^{i(n)}\Pp_k(B_k)\\
+	&=\left(\prod_{k\in i([n])}\Pp_k(B_k)\right)\cdot\left(\prod_{k\notin i([n])}\Pp_k(\R)\right)\\
+	&=\prod_{j=1}^n\Pp_{i(j)}\left(B_{i(j)}\right)=\prod_{j=1}^n \Pp\left(X_{i(j)}\in B_{i(j)}\right),
+\end{align*}
+womit $X_i,i\geq1$ u.a. sind. \qed
+
+\paragraph{Bemerkung:}Die obige Konstruktion l\"asst sich auf den Fall mit Zufallsvariablen Werte in einem separablem, vollst\"andigen metrischen Raum annehmen und in einer geordneten Menge indexiert sind, also z.B. euklidische Prozesse $X_t:(\Omega,\A)\to(\R^d,\mathcal{B}(\R^d)),t\in\R$. 
+
+
+
+

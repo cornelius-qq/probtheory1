@@ -1,0 +1,184 @@
+
+\chapter*{7. Unabh\"angigkeit}
+\addcontentsline{toc}{chapter}{7. Unabh\"angigkeit}
+
+In diesem Kapitel sei $\pspace$ ein Wahrscheinlichkeitsraum und $X,Y:(\Omega,\A)\to(\Omega',\A')$ Zufallsvariablen. Sei au\ss{}erdem $I\neq\emptyset$ eine beliebige Indexmenge. 
+ 
+\section*{Unabh\"angigkeit von Ereignissen und Zufallsvariablen}
+\addcontentsline{toc}{section}{Unabh\"angigkeit von Ereignissen und Zufallsvariablen}
+ 
+\paragraph{7.1. Definition:}Ereignisse $A_i\in\A_i,i\in I$ sind unabh\"angig, falls gilt
+$$\forall J\subseteq I\text{ mit }|J|<\infty:\Pp\left(\bigcap_{j\in J}A_j\right)=\prod_{j\in J}\Pp(A_j)$$ 
+Kurz $A_i,i\in I$ u.a.
+
+\paragraph{7.2. Beispiel:}Paarweise Unabh\"angigkeit impliziert nicht unbedingt Unabh\"angigkeit. Betrachte zum Beispiel $X,Y\in \mathcal{U}\{0,1\}$ unabh\"angig diskret-gleichverteilt und setze $Z:=(X+Y)\bmod 2$
+ 
+\paragraph{Bemerkung:}Betrachte unabh\"angige Eregnisse $A,B$. Dann sind auch folgende Ereignisse u.a.:
+$$A,B^c\ \ \ \ A^c,B\ \ \ \ A^c,B^c\ \ \ \ A,\emptyset\ \ \ \ A,\Omega\ \ \ \ \text{etc.}$$
+Also ist jedes Ereignis in $\sigma(\{A\})=\{\emptyset,\Omega,A,A^c\}$ von jedem Ereignis in $\sigma(\{B\})=\{\emptyset,\Omega,B,B^c\}$ u.a.
+
+\paragraph{7.3. Definition:}Familien von Ereignissen $\G_i\subseteq\A,i\in I$ sind unabh\"angig, wenn f\"ur jede Auswahl von Mengen $G_i\in\G_i$ die entsprechenden Ereignisse unabh\"angig sind. Insbesondere folgt damit aus der Unabh\"angigkeit eines Mengensystems auch die Unabh\"angigkeit aller gr\"oberen Mengensysteme, i.e.
+$$\forall i\in I:\G_i,i\in I\text{ u.a. und }\mathcal{F}_i\subseteq\G_i\implies \mathcal{F}_i,i\in I\text{ u.a.}$$
+
+\paragraph{7.4. Definition:}Zufallsvariablen $X_i,i\in I$ sind unabh\"angig, wenn die $\sigma$-Algebren $\sigma(X_i),i\in I$ unabh\"angig sind.
+
+\paragraph{7.5. Proposition:}Seien $(X_i,\mathcal{X}_i)$ und $(Y_i,\mathcal{Y}_i)$ messbare R\"aume und $X_i:(\Omega,\A)\to(X_i,\mathcal{X}_i)$ unabh\"angige Zufallsvariablen f\"ur $i\in I$. Seien au\ss{}erdem $g_i:(X_i,\mathcal{X}_i)\to(Y_i,\mathcal{Y}_i)$ messbare Abbildungen f\"ur $i\in I$. Dann sind auch die Zufallsvariablen $(g_i\circ X_i):(\Omega,\A)\to(Y_i,\mathcal{Y}_i), i\in I$ unabh\"angig. 
+
+\paragraph{Beweis:}F\"ur $i\in I$ gilt
+\begin{align*}
+    \sigma(g_i\circ X_i)&=\sigma\left(\left\{(g_i\circ X_i)^{-1}(A_i):A_i\in\mathcal{Y}_i\right\}\right)\\
+    &=\sigma\left(\left\{X_i^{-1}\left(g_i^{-1}(A_i)\right):A_i\in\mathcal{Y}_i\right\}\right)\\
+    &\subseteq\sigma\left(\left\{X_i^{-1}\left(B_i\right):B_i\in\mathcal{X}_i\right\}\right)
+\end{align*}
+wobei die letze Inklusion aus der Messbarkeit von $g_i$ folgt. Die Aussage folgt aus Definitionen 7.3 und 7.4. \qed
+
+\paragraph{7.6. Proposition:}Betrachte unabh\"angige Zufallsvariablen $X,Y:(\Omega,\A)\to(\overline\R,\cB(\overline\R))$, sodass $X,Y\in\mathcal{L}^1(\Pp)$. Dann gilt $XY\in\mathcal{L}^1(\Pp)$ und $\E[XY]=(\E X)\cdot (\E Y)$.
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $X,Y$ Indikatorfunktionen\newline
+    Seien hier $X=\ind{A},Y=\ind{B}$ mit $A,B\in\A$. Dann gilt $A=\{X=1\},B=\{Y=1\}$ und $A,B$ sind unabh\"angig. Es gilt $XY=\ind{A\cap B}\in\mathcal{L}^1(\Pp)$ (einfache \"Uberlegung) und 
+    $$\E [XY]=\int \ind{A\cap B}\ d\Pp=\Pp(A\cap B)=\Pp(A)\cdot \Pp(B)=(\E X)\cdot(\E Y)$$
+    \item $X,Y$ einfache Funktionen\newline
+    Seien $X=\displaystyle\sum_{i=1}^n\alpha_i\cdot\ind{A_i},Y=\sum_{j=1}^m\beta_j\cdot\ind{B_j}$ mit $A_i$ disjunkt und $\alpha_i$ alle verschieden f\"ur $i=1,\hdots,n$ und $B_j$ disjunkt und $\beta_j$ alle verschieden f\"ur $j=1\hdots,m$. Dann sind $A_i=\{X=\alpha_i\}$ und $B_j=\{Y=\beta_j\}$ u.a. f\"ur $i=1,\hdots,n$ und $j=1\hdots,m$. Au\ss{}erdem ist $XY$ wieder einfach und damit $XY\in\mathcal{L}^1(\Pp)$ und es gilt
+    \begin{align*}
+        \E[XY]&=\int \sum_{i=1}^n\sum_{j=1}^m\alpha_i\beta_j\cdot\ind{A_i}\ind{B_j}\ d\Pp\\
+        &=\sum_{i=1}^n\sum_{j=1}^m\alpha_i\beta_j\cdot\Pp(A_i\cap B_j)\\
+        &=\sum_{i=1}^n\sum_{j=1}^m\alpha_i\beta_j\cdot\Pp(nA_i)\Pp(B_j)\\
+        &=\left(\sum_{i=1}^n\alpha_i\cdot\Pp(A_i)\right)\cdot \left(\sum_{j=1}^m\beta_j\cdot\Pp(B_j)\right)=(\E X)\cdot(\E Y)
+    \end{align*}
+    \item $X,Y$ nicht negativ, messbar\newline
+    W\"ahle einfache Funktionen $X_n,Y_n,n\geq1$, sodass $0\leq X_n\uparrow X$ und $0\leq Y_n\uparrow Y$. Dann gilt auch $0\leq X_nY_n\uparrow XY$. F\"ur $X_n,Y_n,n\geq1$ wie \"ublich ist $X_n$ eine messbare Funktion von $X$ und $Y_n$ eine messbare Funktion von $Y$. Da $XY\geq0$, gilt $XY\in\mathcal{L}(\Pp)$ und $\E[XY]$ ist wohldefiniert in $\overline\R$. Es gilt
+    $$\E [XY]=\lim_{n\to\infty}\E[X_nY_n]=\lim_{n\to\infty}(\E X_n)\cdot(\E Y_n)=(\E X)\cdot(\E Y)$$
+    und damit $XY\in\mathcal{L}^1(\Pp)$. 
+    \item $X,Y$ messbar\newline
+    Schreibe $X=X^+-X^-$ und $Y=Y^+-Y^-$. Mit Proposition sind $X^-,Y^-$ u.a., $X^+,Y^+$ u.a., $X^-,Y^+$ u.a. und $X^+,Y^-$ u.a. Ebenfalls gilt
+    $$|XY|\leq|X^+Y^+-X^-Y^++X^-Y^--X^+Y^-|\leq X^+Y^++X^-Y^++X^-Y^-+X^+Y^-$$
+    wobei alle Summanden auf der rechten Seite integrierbar sind. Damit gilt $XY\in\mathcal{L}^1(\Pp)$.
+    \begin{align*}
+        \E[XY]&=\E[X^+Y^+]+\E[X^-Y^-]-\E[X^-Y^+]-\E[X^+Y^-]\\
+        &=(\E X^+)\cdot(\E Y^+)+(\E X^-)\cdot(\E Y^-)-(\E X^-)\cdot(\E Y^+)-(\E X^+)\cdot(\E Y^-)\\
+        &=(\E X)\cdot(\E Y)
+    \end{align*}
+    \qed
+\end{enumerate}
+
+\section*{Borel\textendash Cantelli Lemmata}
+\addcontentsline{toc}{section}{Borel\textendash Cantelli Lemmata}
+
+\paragraph{7.7. Definition:}Seien $A_n\subseteq\Omega, n\geq1$. Definiere
+$$\limsup_{n\to\infty}A_n:=\bigcap_{n\geq1}\bigcup_{m\geq n}A_m\text{ und }\liminf_{n\to\infty}A_n:=\bigcup_{n\geq1}\bigcap_{m\geq n}A_m$$
+Intuitiv macht diese Definition Sinn, da f\"ur $\displaystyle\limsup_{n\to\infty}\ind{A_n}=\ind{M}$ gilt, dass $M=\displaystyle\limsup_{n\to\infty}A_n$ und \"ahnliches f\"ur den $\liminf$. Kurz $\displaystyle\limsup_{n\to\infty}A_n=\{\omega\in\Omega:\omega\in A_n\text{ unendlich oft}\}$ (englisch: $A_n$ \textit{infinitely often}) und $\displaystyle\liminf_{n\to\infty}A_n=\{\omega\in\Omega:\omega\in A_n \text{ letzendlich}\}$ (englisch: $A_n$ \textit{eventually}). 
+
+\paragraph{Bemerkung:}Es gilt
+\begin{itemize}
+    \item $\displaystyle\left(\limsup_{n\to\infty}A_n\right)^c=\liminf_{n\to\infty}A_n^c$ (De Morgan)
+    \item $\displaystyle\liminf_{n\to\infty}A_n\subseteq\limsup_{n\to\infty}A_n$
+    \item $A_n$ messbar f\"ur $n\geq1\implies\displaystyle\limsup_{n\to\infty}A_n,\liminf_{n\to\infty}A_n$ messbar
+\end{itemize}
+
+\paragraph{7.8. Lemma (I. Borel\textendash Cantelli Lemma)}Betrachte einen allgemeinen Ma\ss{}raum $(\Omega,\A,\mu)$. Seien $A_n\in\A,n\geq1$, sodass $\sum_{n\geq1}\mu(A_n)<\infty$. Dann folgt $\mu\left(\limsup_{n\to\infty}A_n\right)=0$.
+
+\paragraph{Beweis:}Es gilt f\"ur alle $N\geq1$
+$$\mu\left(\limsup_{n\to\infty}A_n\right)=\mu\left(\bigcap_{n\geq1}\bigcup_{k\geq n}A_n\right)\leq\mu\left(\bigcup_{k\geq N}A_k\right)\leq\sum_{k\geq N}\mu(A_k)\nto{}{N\to\infty}0$$
+\qed
+
+\paragraph{7.9. Lemma (II. Borel\textendash Cantelli Lemma)}Sei  $\pspace$ ein Wahrscheinlichkeitsraum und $A_n\in\A,n\geq1$ unabh\"angig, sodass $\sum_{n\geq1}\Pp(A_n)=\infty$. Dann gilt $\Pp\left(\limsup_{n\to\infty}A_n\right)=1$. 
+
+\paragraph{Beweis:}Die Abbildung $x\mapsto f(x)=e^x$ ist konvex auf $\R$ und mit Lemma 6.7 gilt f\"ur $y=0$ und alle $x\in\R$, dass
+$e^x\geq1+\gamma x$, wobei mit einer kurzen \"Uberlegung folgt, dass man $\gamma=\gamma(x)=f'(x)=e^x$ w\"ahlen kann. Es folgt also
+$$\forall x\in\R:1+x\leq e^x$$
+Zeige $\Pp\left(\liminf_{n\to\infty}A_n^c\right)=0$. Fixiere $N>n\geq1$. Mit Unabh\"angigkeit der $A_n,n\geq1$ und der obigen Ungleichung folgt
+    $$\Pp\left(\bigcap_{k=n}^NA_k^c\right)=\prod_{k=n}^N\Pp(A_k^c)=\prod_{k=n}^N1-\Pp(A_k)\leq \prod_{k=n}^Ne^{-\Pp(A_k)}=e^{-\sum_{k=n}^N\Pp(A_k)}\nto{}{N\to\infty}0$$
+    Nun  gilt $\bigcap_{k=n}^NA_k^c\supseteq \bigcap_{k=n}^{N+1}A_k^c$ und mit der Stetigkeit von oben folgt f\"ur alle $n\geq1$
+    $$\Pp\left(\bigcap_{k\geq n}A_k^c\right)=\lim_{N\to\infty}\Pp\left(\bigcap_{k=n}^NA_k^c\right)=0$$
+    und mit Subadditivit\"at gilt $\Pp(\liminf_{n\to\infty}A_n^c)\leq\sum_{n\geq1}\Pp\left(\bigcap_{k\geq n}A_k^c\right)=0$.
+\qed
+
+\paragraph{7.10. Korollar:}Seien $X_n:(\Omega,\A)\to(\overline\R,\cB(\overline\R)),n\geq1$ nicht-negative Zufallsvariablen und sei 
+$$\forall\eps>0:\sum_{n\geq1}\Pp(X_n>\eps)<\infty$$
+Dann gilt $\displaystyle\Pp\left(\lim_{n\to\infty}X_n=0\right)$.
+
+\paragraph{Beweis:}Da $X_n\geq0$ f\"ur $n\geq1$ gilt
+$$\left\{\lim_{n\to\infty}X_n=0\right\}=\left\{\limsup_{n\to\infty}X_n=0\right\}=\bigcap_{k\geq1}\left\{\limsup_{n\to\infty}X_n\leq\frac{1}{k}\right\}$$
+Aus der Voraussetzung folgt nun 
+$$\forall k\geq1:\sum_{n\geq1}\Pp\left(X_n> k^{-1}\right)<\infty$$
+und mit Lemma 7.8 gilt $\displaystyle\Pp\left(\limsup_{n\to\infty}\{X_n>k^{-1}\}\right)=0$. Es gilt
+\begin{align*}
+    1=\Pp\left(\liminf_{n\to\infty}\{X_n\leq k^{-1}\}\right)\leq\Pp\left(\limsup_{n\to\infty}X_n\leq k^{-1}\right)\leq1
+\end{align*}
+und damit $\displaystyle\Pp\left(\limsup_{n\to\infty}X_n>k^{-1}\right)=0$ f\"ur alle $k\geq1$. Schlie\ss{}lich folgt
+$$\Pp\left(\bigcap_{k\geq1}\left\{\limsup_{n\to\infty}X_n\leq k^{-1}\right\}\right)=1-\Pp\left(\bigcup_{k\geq1}\left\{\limsup_{n\to\infty}X_n> k^{-1}\right\}\right)\geq 1-\sum_{k\geq1}\Pp\left(\limsup_{n\to\infty}X_n> k^{-1}\right)=1$$
+\qed
+
+\paragraph{7.11. Lemma:}Sei $\M\subseteq\A$ ein $\pi$-System und $A\in\A$. Sind $\M$ und $\{A\}$ unabh\"angig, dann sind auch $\sigma(\M)$ und $\{A\}$ unabh\"angig. 
+
+\paragraph{Beweis:}Trivial, falls $\Pp(A)\in\{0,1\}$. Sei also $\Pp(A)\in(0,1)$ und zeige $\forall M\in\sigma(\M):\Pp(A\cap M)=\Pp(A)\cdot\Pp(M)$. Setze daf\"ur 
+$$\Pp(\ \cdot\ | A):=\dfrac{\Pp(\ \cdot \ \cap A)}{\Pp(A)}$$
+f\"ur $\Pp(A)\neq0$ (laut Annahme erf\"ullt). Zeige also $\Pp(M|A)=\Pp(M)$ f\"ur alle $M\in\sigma(\M)$. $\Pp(\ \cdot \ |A)$ ist ein Wahrscheinlichkeitsma\ss{} auf $(\Omega,\A)$ und es gilt laut Annahme
+$$\forall M\in\M:\Pp(M|A)=\Pp(M)$$
+Mit dem $\lambda\textendash\pi$-Theorem folgt, dass $\Pp(\ \cdot\ |A)$ und $\Pp(\cdot)$ auch auf $\sigma(\M)$ \"ubereinstimmen m\"ussen. \qed
+
+\paragraph{7.12. Satz:}Sei f\"ur $i\in I$, $\M_i\subseteq\A$ ein $\pi$-System. Dann gilt
+$$\M_i,i\in I\text{ u.a.}\iff\sigma(\M_i),i\in I\text{ u.a.}$$
+
+\paragraph{Beweis:}Die Richtung $\impliedby$ ist trivial. Sei also $J\subseteq I,J=\{1,\hdots,k\}$ endlich und zeige, dass $\sigma(\M_j),j\in J$ unabh\"angig sind. 
+\begin{enumerate}[label=\arabic*.]
+    \item Schritt: W\"ahle $M_j\in\M_j$ beliebig f\"ur $j=2, \hdots,k$. Laut Annahme sind $\M_1$ und $\{M_2\cap\hdots\cap M_k\}$ unabh\"angig, sodass mit Lemma 7.11. auch $\sigma(\M_1)$ und $\{M_2\cap\hdots\cap M_k\}$ unabh\"angig sind. Es folgt, dass $\sigma(\M_1),\M_2,\hdots,\M_k$ unabh\"angig sind.
+    \item Schritt: W\"ahle $M_1\in\sigma(\M_1)$ und $M_j\in\M_j,j=3,\hdots,k$. Wegen dem 1. Schritt sind $\M_2$ und $\{M_1\cap M_3\cap\hdots\cap M_k\}$ unabh\"angig. Mit Lemma 7.11 folgt, dass $\sigma(\M_2)$ und $\{M_1\cap M_3\cap\hdots\cap M_k\}$ unabh\"angig sind und damit $\sigma(\M_2),\sigma(\M_1),\M_3,\hdots,\M_k$ unabh\"angig sind. 
+\end{enumerate}
+Nach $k-2$ weiteren Schritten ist die Unabh\"angigkeit von $\sigma(\M_1),\hdots,\sigma(\M_k)$ bewiesen. \qed
+
+\paragraph{7.13. Korollar:}Seien $X_i:(\Omega,\A)\to(\overline\R,\cB(\overline\R)),i\in I$ Zufallsvariablen. Dann sind die $X_i,i\in I$ genau dann unabh\"angig, wenn gilt
+$$\forall J\subseteq I,|J|<\infty:\forall t_j\in\overline\R,j\in J:\Pp(X_j\leq t_j,j\in J)=\prod_{j\in J}\Pp(X_j\leq t_j)$$
+Falls $X_i,i\in I$  reelwertig sind, k\"onnen die $t_j\in\R$ gew\"ahlt werden. 
+
+\paragraph{Beweis:}Die Richtung $\implies$ ist trivial. Es gilt (cf. Kapitel 3) $\cB(\overline\R)=\sigma(\mathcal{K})=\sigma\left(\{[-\infty,t]:t\in\overline\R\}\right)$. F\"ur $i\in I$ setze $\M_i:=\left\{X_i^{-1}\left([-\infty,t]\right):t\in\overline\R\right\}$. Mit Proposition 3.4 gilt $\sigma(\M_i)=\sigma(X_i)$ f\"ur alle $i\in I$. Da der Durchschnitt zweier abgeschlossener Intervalle wieder ein abgeschlossenes Intervall ist, ist $\M_i$ f\"ur $i\in I$ ein $\pi$-System. Laut Annahme sind $\M_i,i\in I$ unabh\"angig. Mit Satz 7.12 folgt die Unabh\"angigkeit der $\sigma(X_i),i\in I$ und damit per Definition die Unabh\"angigkeit der $X_i,i\in I$. \qed
+
+\paragraph{7.14. Proposition:}Seien $X_i:(\Omega,\A)\to(\Omega',\A'),i\in I$ unabh\"angige Zufallsvariablen. F\"ur eine Partition $I=K\cup L$ mit $K,L\neq\emptyset$ sind auch $\sigma(X_k,k\in K)$ und $\sigma(X_\ell,\ell\in L)$ unabh\"angig. 
+
+\paragraph{Beweis:}Mit Lemma 3.5 gilt
+$$\sigma(X_k,k\in K)=\sigma\left(\bigcap_{j\in J}\{X_j\in A_j'\}:J\subseteq K,|J|<\infty,A_j'\in\A' \text{ f\"ur }j\in J\right)=\sigma(\mathcal{E}_1)$$
+und $\sigma(X_\ell,\ell\in L)=\sigma(\mathcal{E}_2)$, wobei $\mathcal{E}_1,\mathcal{E}_2$ $\pi$-Systeme sind (einfach nachzupr\"ufen). Au\ss{}erdem sind $\mathcal{E}_1,\mathcal{E}_2$ unabh\"angig, denn f\"ur $\displaystyle A=\bigcap_{j\in J}\{X_j\in A_j'\}\in \mathcal{E}_1$ f\"ur $J\subseteq K$ endlich und $\displaystyle B=\bigcap_{m\in M}\{X_m\in A_m'\}$ f\"ur $M\subseteq L$ endlich gilt
+\begin{align*}
+    \Pp(A\cap B)&=\Pp\left(\bigcap_{j\in J\cup M}\{X_j\in A_j'\}\right)\overset{J\cup M\subseteq I}{=}\prod_{j\in J\cup M}\Pp(X_j\in A_j')\\
+    &=\Pp\left(\bigcap_{j\in J}\{X_j\in A_j'\}\right)\cdot\Pp\left(\bigcap_{m\in M}\{X_m\in A_m'\}\right)=\Pp(A)\cdot\Pp(B)
+\end{align*}
+da $K,L$ disjunkt sind und damit auch alle endlichen Teilmengen $J,M$ disjunkt sind. Mit Satz 7.12 folgt nun, dass $\sigma(\mathcal{E}_1)$ und $\sigma(\mathcal{E}_2)$ unabh\"angig sind und damit die Aussage. \qed
+
+\section*{Asymptotische $\sigma$-Algebra}
+\addcontentsline{toc}{section}{Asymptotische $\sigma$-Algebra}
+
+\paragraph{7.15. Definition:}Seien $X_n,n\geq1$ Zufallsvariablen. Setze 
+$$\cB_n:=\sigma(X_1,\hdots,X_n)\text{ und }\mathcal{T}_n:=\sigma(X_{n+1},X_{n+2},\hdots)$$
+Dann gilt $\cB_n\subseteq\cB_{n+1}$ und $\mathcal{T}_n\supseteq\mathcal{T}_{n+1}$ f\"ur alle $n\geq1$. Definiere weiters
+$$\cB:=\bigcup_{n\geq1}\cB_n\text{ und }\mathcal{T}_\infty:=\bigcap_{n\geq1}\mathcal{T}_n$$
+Dann sind $\sigma(\cB)$ und $\mathcal{T}_\infty$ $\sigma$-Algebren und mann nennt $\mathcal{T}_\infty$ die asymptotische $\sigma$-Algebra (englisch \textit{tail $\sigma$-algebra}) der $X_n,n\geq1$. 
+
+\paragraph{7.16. Satz (0\textendash 1-Gesetz von Kolmogorov):}Betrachte unabh\"angige Zufallsvariablen $X_n,n\geq1$ sowie deren asymptotische $\sigma$-Algebra $\mathcal{T}_\infty$. Dann gilt $\forall A\in\mathcal{T}_\infty:\Pp(A)\in\{0,1\}$.
+
+\paragraph{Beweis:}Mit Lemma 7.14 sind $\cB_n$ und $\mathcal{T}_n$ unbah\"angig f\"ur alle $n\geq1$. Da $\mathcal{T}_\infty\subseteq\mathcal{T}_n$ sind $\cB_n$ und $\mathcal{T}_\infty$ f\"ur alle $n\geq1$ unabh\"angig. Damit sind auch $\cB$ und $\mathcal{T}_\infty$ unabh\"angig. Da $\cB$ ein $\pi$-System ist (leicht nachzupr\"ufen), folgt mit Satz 7.12, dass $\sigma(\cB)$ und $\mathcal{T}_\infty$ unabh\"angig sind. Nun ist
+$$\mathcal{T}_\infty\subseteq\mathcal{T}_n=\sigma(X_{n+1},X_{n+2},\hdots)\subseteq\sigma(X_1,X_2,\hdots)=\sigma(\cB)$$
+und damit sind $\mathcal{T}_\infty$ und $\mathcal{T}_\infty$ unabh\"angig und 
+$$\forall A\in\mathcal{T}_\infty:\Pp(A)=\Pp(A\cap A)=(\Pp(A))^2$$
+und damit $\Pp(A)\in\{0,1\}$. \qed
+
+\paragraph{7.17. Beispiel (Ereignisse aus $\mathcal{T}$):}Betrachte unabh\"angige, rellwertige Zufallsvariablen $X_n,n\geq\nobreak1$.
+\begin{enumerate}[label=(\roman*)]
+    \item $\left\{\displaystyle\limsup_{n\to\infty}X_n\geq c\right\},\left\{\displaystyle\liminf_{n\to\infty}X_n\geq c\right\}\in\mathcal{T}_\infty$ f\"ur $c\in\R$.\newline
+    Es gilt
+    $$\left\{\displaystyle\limsup_{n\to\infty}X_n\geq c\right\}=\left\{\limsup_{\substack{n\to\infty\\n\geq N}}X_n\geq c\right\}\in\mathcal{T}_N$$
+    f\"ur alle $N\geq1$ und damit $\left\{\displaystyle\limsup_{n\to\infty}X_n\geq c\right\}\in\displaystyle\bigcap_{N\geq1}\mathcal{T}_N=\mathcal{T}_\infty$. \"Ahnliches gilt f\"ur den $\liminf$. 
+    \item $\displaystyle\left\{\lim_{n\to\infty}X_n\in\R\right\}\in\mathcal{T}_\infty$ folgt aus Proposition 3.18.
+    \item $\left\{\displaystyle\limsup_{n\to\infty}\frac{1}{n}\sum_{i=1}^nX_n > c\right\},\left\{\displaystyle\liminf_{n\to\infty}\frac{1}{n}\sum_{i=1}^nX_n > c\right\}\in\mathcal{T}_\infty$\newline
+    Sei $\omega\in\left\{\displaystyle\limsup_{n\to\infty}\frac{1}{n}\sum_{i=1}^nX_n > c\right\}$. Dann gibt es eine Teilfolge $n'$, sodass 
+    $$\lim_{n'\to\infty}\frac{1}{n'}\sum_{i=1}^{n'}X_i(\omega)>c$$
+    Aber $\forall N\geq1$ gilt
+    $$\frac{1}{n'}\sum_{i=1}^{n'}X_i(\omega)=\frac{1}{n'}\sum_{\substack{i=1\\i\leq N}}^{n'}X_i(\omega)+\frac{1}{n'}\sum_{\substack{i=1\\i> N}}^{n'}X_i(\omega)$$
+    wobei der erste Summand f\"ur $n'\to\infty$ gegen 0 konvergiert (einfache \"Uberlegung). Damit gilt
+    $$\lim_{n'\to\infty}\frac{1}{n'}\sum_{\substack{i=1\\i> N}}^{n'}X_i(\omega)=c'>c$$
+    f\"ur alle $N\geq1$ und es folgt
+    $$\omega\in \left\{\displaystyle\limsup_{n\to\infty}\frac{1}{n}\sum_{\substack{i=1\\i>N}}^nX_n > c\right\}\in\mathcal{T}_N$$
+    f\"ur alle $N\geq1$. \"Ahnliches gilt f\"ur den $\liminf$. 
+    \item $\left\{\displaystyle\frac{1}{n}\sum_{i=1}^nX_n \text{ konvergiert in }\overline\R\right\}\in\mathcal{T}_\infty$ folgt ebenfalls aus Proposition 3.18. 
+\end{enumerate}

@@ -1,0 +1,326 @@
+\chapter*{9. Konvergenz von messbaren Abbildungen}
+\addcontentsline{toc}{chapter}{9. Konvergenz von messbaren Abbildungen}
+Sei in diesem Kapitel $(\Omega,\A,\mu)$ immer ein generischer Ma\ss{}raum.
+\section*{Konvergenz von $\overline\R$-wertigen Funktionen}
+\addcontentsline{toc}{section}{Konvergenz von $\overline{\mathbb{R}}$-wertigen Funktionen}
+Seien in diesem Abschnitt $f_n,f,g_n,g:(\Omega,\A)\to(\overline\R,\mathbb{B}(\overline\R))$ messbare Funktionen. Weiters setze hier $\infty-\infty=-\infty+\infty:=0$.
+
+\paragraph{9.1. Definition:} Eine Funktionenfolge $f_n,n\geq1$ konvergiert $\mu$-fast-\"uberall (kurz f.\"u.) gegen $f$, falls
+$$\mu\left(\left\{\omega\in\Omega:\lim_{n\to\infty}f_n(\omega)=f(\omega)\right\}^c\right)=0$$
+Wir schreiben dann $f_n\nto{a.e.}{n\to\infty}f$ (almost everywhere) oder im Falle eines Wahrscheinlichkeitsraumes $a.s.$ (amost surely).
+
+\paragraph{9.2. Lemma:} Es gilt $f_n\nto{a.e.}{n\to\infty}f$ genau dann, wenn
+\begin{enumerate}[label=(\roman*)]
+    \item $\forall\eps>0:\mu\left(\displaystyle\limsup_{n\to\infty}\left\{|f_n-f|\geq\eps\right\}\right)=0$
+    \item Falls $\mu$ endlich ist, dann ist (i) \"aquivalent zu $\forall\eps>0:\displaystyle\lim_{N\to\infty}\mu\left(|f_n-f|>\eps\text{ f\"ur alle }n\geq N\right)=0$
+\end{enumerate}
+
+\paragraph{Beweis:}Mit der archimedischen Eigenschaft  von $\R$ gen\"ugt es jeweils den Fall $\eps=1/k$ f\"ur alle $k\geq1$ zu betrachten. 
+\begin{enumerate}[label=\Roman*.]
+    \item $f_n\nto{a.e.}{n\to\infty}f\implies$(i):
+\begin{align*}
+    \left\{\lim_{n\to\infty}f_n=f\right\}&=\left\{\forall k\geq1\exists N\geq1\forall n\geq N:|f_n-f|<\dfrac{1}{k}\right\} \\
+    &=\bigcap_{k\geq1}\bigcup_{N\geq1}\bigcap_{n\geq N}\left\{|f_n-f|<\dfrac{1}{k}\right\}\\
+    &=\bigcap_{k\geq1}\liminf_{n\to\infty}\left\{|f_n-f|>\dfrac{1}{k}\right\}
+\end{align*}
+Also gilt mit de Morgan und den Gesetzen zu $\limsup$ und $\liminf$ von Mengen
+$$\left\{\lim_{n\to\infty}f_n=f\right\}^c=\bigcup_{k\geq1}\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}$$
+und laut Annahme damit
+$$\mu\left(\bigcup_{k\geq1}\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}\right)=0$$
+und damit insbesondere
+$$\mu\left(\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}\right)=0$$
+f\"ur jedes $k\geq1$ (da $A_k\subseteq\cup_{k\geq1}A_k$ f\"ur alle $k\geq1$).
+    \item (i)$\implies f_n\nto{a.e.}{n\to\infty}f$:
+\begin{align*}
+    \mu\left(\lim_{n\to\infty}f_n\neq f\right)&\overset{\text{s.o.}}{=}\mu\left(\bigcup_{k\geq1}\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}\right)\\
+    &\overset{\sigma\text{-Subadd.}}{\leq}\sum_{k\geq1}\mu\left(\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}\right)=0
+\end{align*}
+wobei der letzte Schritt aus der Annahme folgt.
+    \item $\mu$ endlich $\implies$((i)$\iff$(ii)):\newline
+\begin{align*}
+    \limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}&=\bigcap_{N\geq1}\bigcup_{n\geq N}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}=:\bigcap_{N\geq1}A_N
+\end{align*}
+Dann gilt $A_1\supseteq A_2\supseteq\hdots\supseteq\bigcap_{N\geq1}A_N$ und mit der Stetigkeit von oben gilt
+\begin{align*}
+    \mu\left(\limsup_{n\to\infty}\left\{|f_n-f|\geq\dfrac{1}{k}\right\}\right)&=\lim_{N\to\infty}\mu(A_N)\\
+    &=\lim_{N\to\infty}\mu\left(|f_n-f|>\dfrac{1}{k}\text{ f\"ur alle }n\geq N\right)=0
+\end{align*}
+f\"ur alle $k\geq1$. \qed
+\end{enumerate}
+
+\paragraph{9.3. Lemma:}
+$$\forall\eps>0:\sum_{n\geq1}\mu\left(|f_n-f|>\eps\right)<\infty\implies f_n\nto{a.e.}{n\to\infty}f$$
+
+\paragraph{Beweis:}Mit dem 1. Borel\textendash Cantelli-Lemma f\"ur allgemeine Ma\ss{}e (Lemma 7.8, Bemerkung 2) gilt 
+$$\mu\left(\limsup_{n\to\infty}{|f_n-f|>\eps}\right)=0$$
+und mit Lemma 9.2 folgt die Behauptung. \qed
+
+\paragraph{9.4. Definition:}Eine Funktionenfolge $f_n,n\geq1$ konvergiert im Ma\ss{} $\mu$ gegen $f$, falls
+$$\forall\eps>0:\lim_{n\to\infty}\mu\left(|f_n-f|>\eps\right)=0$$
+Wir schreiben dann $f_n\nto{\mu}{n\to\infty}f$.
+
+\paragraph{9.5. Proposition:}Ist $\mu$ endlich, dann gilt $f_n\nto{a.e.}{n\to\infty}f\implies f_n\nto{\mu}{n\to\infty}f$.
+
+\paragraph{Beweis:}Es gelte $f_n\nto{a.e.}{n\to\infty}f$. Mit Lemma 9.2 (ii) folgt
+$$\forall\eps>0\lim_{N\to\infty}\mu\left(|f_n-f|>\eps\text{ f\"ur alle }n\geq N\right)=0$$
+Aber $\{|f_n-f|>\eps\}\subseteq \left\{|f_n-f|>\eps\text{ f\"ur alle }n\geq N\right\}$
+und damit folgt per Definition von Konvergenz im Ma\ss{} die Aussage. \qed
+
+\paragraph{9.6. Proposition:} Sei $\mu$ endlich. Dann ist $f_n\nto{\mu}{n\to\infty}f$ \"aquivalent zu folgender Aussage:\newline
+Jede Teilfolge $f_{n_k},k\geq1$ von $f_n,n\geq1$ enth\"alt eine weitere Teilfolge $f_{n_{k_j}},j\geq1$, sodass 
+$$f_{n_{k_j}}\nto{a.e.}{j\to\infty}f$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item $\implies$\newline
+    Sei $0<\eps<1$. Da $\mu(|f_n-f|>\eps)\nto{}{n\to\infty}0$, kann man o.B.d.A. annehmen, dass $\mu(|f_n-f|>\eps)\leq1$ f\"ur alle $n\geq1$ (w\"ahle einfach einen Index $N\geq1$ f\"ur den die Aussage wahr ist, das Argument \"andert sich dadurch nicht). Sei nun eine beliebige Teilfolge $f_{n_k},k\geq1$ gegeben. W\"ahle nun eine weitere Teilfolge $f_{n_{k_j}},j\geq1$ (einfache \"Uberlegung), sodass 
+    $$\mu\left(|f_{n_{k_j}}-f|>\dfrac{1}{j}\right)<2^{-j}$$
+    Dann gilt 
+    $$\sum_{j\geq1}\mu(|f_{n_{k_j}}-f|>\eps)=\sum_{\substack{j\geq1\\ j\leq 1/\eps}}\mu(|f_{n_{k_j}}-f|>\eps)+\sum_{\substack{j\geq1\\ j\geq 1/\eps}}\mu(|f_{n_{k_j}}-f|>\eps)$$
+    Die erste Summe ist endlich, und jeder Term ist nach oben durch $1$ beschr\"ankt. Eine Absch\"atzung der Terme in der zweiten Summe erfolgt mit obigem Argument.
+    Damit gilt
+    $$\sum_{j\geq1}\mu(|f_{n_{k_j}}-f|>\eps)\leq\dfrac{1}{\eps}+\sum_{j\geq1}2^{-j}=\dfrac{1}{\eps}+2<\infty$$
+    und mit Lemma 9.3 folgt $f_{n_{k_j}}\nto{a.e.}{j\to\infty}f$.
+    \item $\impliedby$\newline
+    Angenommen $f_n\xcancel{\nto{\mu}{n\to\infty}}f$. Dann gibt es $\eps>0$, sodass $\mu(|f_n-f|>\eps)$ nicht gegen $0$ geht. Da $\mu$ aber endlich ist, ist die Folge $\left(\mu(|f_n-f|>\eps)\right)_{n\geq1}$ beschr\"ankt  und mit Bolzano\textendash Weierstra\ss{} existiert eine Teilfolge $f_{n_k},k\geq1$, die konvergiert, also 
+    $$\lim_{k\to\infty}\mu(|f_{n_k}-f|>\eps)=\alpha>0.$$ 
+    Da alle Teilfolgen von konvergenten Folgen gegen denselben Grenzwert konvergieren, folgt f\"ur die Teilfolge $f_{n_{k_j}},j\geq1$ aus der Annahme
+    $$\lim_{j\to\infty}\mu(|f_{n_{k_j}}-f|>\eps)=\alpha$$
+    Mit Proposition 9.5 gilt aber $f_{n_{k_j}}\nto{\mu}{j\to\infty}f$ und damit erhalten wir einen Widerspruch. \qed
+\end{enumerate}
+
+\paragraph{Bemerkung:}Die Richtung $\implies$ gilt sogar f\"ur allgemeine Ma\ss{}r\"aume, da Lemma 9.3. keine Annahmen an Endlichkeit macht.  
+
+\paragraph{9.7. Definition:} Sei $p\geq1$. Eine Funktionenfolge $f_n,n\geq1$ konvergiert in $L^p$ (bzw. im $p$-ten Mittel) gegen $f$, falls
+$$\int|f_n-f|^p\ d\mu\nto{}{n\to\infty}0$$
+Wir schreiben dann $f_n\nto{L^p}{n\to\infty}f$
+
+\paragraph{9.8. Proposition:}
+$$f_n\nto{L^p}{n\to\infty}f\implies f_n\nto{\mu}{n\to\infty}f$$
+
+\paragraph{Beweis:}Sei $\eps>0$. Es gilt
+\begin{align*}
+    \int|f_n-f|^p\ d\mu&\geq \int|f_n-f|^p\cdot\ind{\{|f_n-f|^p>\eps^p\}}\ d\mu\\
+    &\geq \int \eps^p\cdot\ind{\{|f_n-f|^p>\eps^p\}}\ d\mu \\
+    &=\eps^p\cdot\mu(|f_n-f|^p>\eps^p)
+\end{align*}
+Teile beide Seiten durch $\eps^p$ und die linke Seite konvergiert noch immer gegen $0$, und damit auch die rechte Seite. Damit folgt per Definiton von Konvergenz im Ma\ss{} die Aussage. \qed
+
+\paragraph{Bemerkung:} Der Beweis liefert auch eine allgemeine Form der Markov-Ungleichung: F\"ur $g\geq0$ und $\eps>0$ gilt
+$$\mu(g\geq\eps)\leq\dfrac{1}{\eps}\int f\ d\mu$$
+
+\paragraph{9.9. Proposition:} F\"ur $1\leq p\leq q<\infty$ gilt 
+$$f_n\nto{L^q}{n\to\infty}f\implies f_n\nto{L^p}{n\to\infty}f$$
+\paragraph{Beweis:}Mit der Ljapunov-Ungleichung gilt
+$$\left(\int|f_n-f|^p\ d\mu\right)^{1/p}\leq\left(\int|f_n-f|^q\ d\mu \right)^{1/q}$$
+wobei die rechte Seite laut Annahme gegen $0$ konvergiert. Die Aussage folgt mit dem continuous mapping theorem f\"ur konvergente Folgen reeller Zahlen. \qed
+
+\paragraph{9.10. Proposition:}Sei $f_n,n\geq1$ eine Funktionenfolge, sodass $f_n\nto{L^1}{n\to\infty}f$ f\"ur eine absolut integrierbare Funktion $f$, i.e. $f\in L^1$. Dann folgt
+$$\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$$
+
+\paragraph{Beweis:}Es gilt $f_n\in L^1$ f\"ur hinreichend gro\ss{}e $n$ (also $\exists N\geq1\forall n\geq N:f_n\in L^1$), denn mit der Dreiecksungleichung gilt
+$$\limsup_{n\to\infty}\int|f_n|\ d\mu\leq\limsup_{n\to\infty}\left(\int|f_n-f|\ d\mu+\int|f|\ d\mu\right)<\infty$$
+Weiters ist 
+$$\limsup_{n\to\infty}\left|\int f_n\ d\mu-\int f\ d\mu\right|\leq\limsup_{n\to\infty}\int|f_n-f|\ d\mu=0$$
+womit die Aussage folgt. \qed
+
+\paragraph{9.12. Proposition:}Sei $\mu$ ein endliches Ma\ss{} und $f_n,g_n,f,g$ alle reellwertig f\"ur alle $n\geq1$, sodass $f_n\nto{\mu/a.e.}{n\to\infty}f$ und $g_n\nto{\mu/a.e.}{n\to\infty}g$. Dann gilt
+\begin{enumerate}[label=(\roman*)]
+    \item $f_n\pm g_n\nto{\mu/a.e.}{n\to\infty}f\pm g$
+    \item $f_n\cdot g_n\nto{\mu/a.e.}{n\to\infty}f\cdot g$
+    \item Falls $\mu(g=0)$, dann $\dfrac{f_n}{g_n}\nto{\mu/a.e.}{n\to\infty}\dfrac{f}{g}$
+\end{enumerate}
+
+\paragraph{Beweis:} Der Fall f\"ur Konvergenz f.\"u. folgt sofort aus der Tatsache, dass die Vereinigung zweier Nullmengen wieder eine Nullmenge ist. Zeige also die Aussage f\"ur Konvergenz im Ma\ss{}.\newline\newline
+Sei $n_k,k\geq1$ eine Teilfolge von $n,n\geq1$. Weil $f_n\nto{\mu}{n\to\infty}f$, gibt es eine wegen Proposition 9.6 eine weitere Teilfolge $n_{k_j},j\geq1$ von $n_k,k\geq1$, sodass $f_{n_{k_j}}\nto{a.e.}{j\to\infty}f$. Da $n_{k_j},j\geq1$ aber auch eine Teilfolge der urspr\"unglichen Folge $n,n\geq1$ ist, gibt es eine weitere Teilfolge $n_{k_{j_\ell}},\ell\geq1$, sodass $g_{n_{k_{j_\ell}}}\nto{a.e.}{\ell\to\infty}g$. Es gilt aber auch $f_{n_{k_{j_\ell}}}\nto{a.e.}{\ell\to\infty}f$ und damit $f_{n_{k_{j_\ell}}}\pm g_{n_{k_{j_\ell}}}\nto{a.e.}{\ell\to\infty}f\pm g$ und $f_{n_{k_{j_\ell}}}\cdot g_{n_{k_{j_\ell}}}\nto{a.e.}{\ell\to\infty}f\cdot g$. Damit gibt es f\"ur jede Teilfolge $n_k,k\geq1$ von $n,n\geq1$ eine weitere Teilfolge $n_{k_{j_\ell}},\ell\geq1$, sodass Summe/Differenz/Produkt konvergieren und mit Proposition 9.6 folgt die Aussage f\"ur Konvergenz im Ma\ss{}. F\"ur (iii) siehe \"Ubung! \qed
+
+\paragraph{9.13. Satz (Continuous Mapping Theorem, CMT):}Sei $\mu$ endlich und sei $f_n,n\geq1$ eine reellwertige Funktionenfolge, sodass $f_n\nto{\mu/a.e.}{n\to\infty}f$. Sei weiters $h:\R\to\R$ eine Abbildung, die stetig auf einer Menge $H\subseteq N$, mit $\mu(f\notin N)=0$ ist. Dann gilt
+$$h(f_n)\nto{\mu/a.e.}{n\to\infty}h(f)$$
+
+\paragraph{Beweis:}Zeige den Fall mit Konvergenz f.\"u. Sei $A:=\{\lim_{n\to\infty}f_n\neq f\}\cup\{f\notin N\}$. Dann gilt mit der $\sigma$-Subadditivit\"at $\mu(A)=0$ und f\"ur $\omega\notin A$ gilt $f_n(\omega)\nto{}{n\to\infty} f(\omega)$ und $f(\omega)\in H$. Mit dem Continuous Mapping Theorem f\"ur punktweise Konvergenz folgt $h(f_n(\omega))\nto{}{n\to\infty}h(f(\omega))$. Damit folgt 
+$$h(f_n)\nto{a.e.}{n\to\infty}h(f)$$
+Die Aussage f\"ur Konvergenz im Ma\ss{} folgt mit Proposition 9.6. \qed
+
+
+\section*{Konvergenz von $\mathbb{R}^d$-wertigen Funktionen}
+\addcontentsline{toc}{section}{Konvergenz von $\mathbb{R}^d$-wertigen Funktionen}
+In diesem Abschnitt seien $f_n,f:\Omega\to\R^d$ $\A\textendash \mathcal{B}(R^d)$-messbar und $\Vert\cdot\Vert$ die euklidische Norm auf $\R^d$.
+
+\paragraph{9.14. Definition:}
+$$f_n\nto{\mu/a.e./L^p}{n\to\infty}f\iff\Vert f_n-f\Vert\xrightarrow[n\to\infty]{\makebox[3.5em][c]{$\scriptstyle\mu/a.e./L^p$}}0$$
+
+\paragraph{9.15. Proposition:}F\"ur $f_n=\left(f_n^{(1)},\hdots,f_n^{(d)}\right)'$ und $f=\left(f^{(1)},\hdots,f^{(d)}\right)'$ gilt
+$$f_n\nto{\mu/a.e./L^p}{n\to\infty}f\iff\forall i=1,\hdots,d:f_n^{(i)}\xrightarrow[n\to\infty]{\makebox[3.5em][c]{$\scriptstyle\mu/a.e./L^p$}}f^{(i)}$$
+
+\paragraph{Beweis:} F\"ur $x=(x_1,\hdots,x_d)'$ gilt die folgende Ungleichung f\"ur alle $j=1,\hdots,d$
+$$|x_j|=\sqrt{x_j^2}\leq\sqrt{\sum_{j=1}^dx_j^2}=\Vert x\Vert\leq\sqrt{d\cdot\max_{1\leq j\leq d}x_j^2}=\sqrt{d}\max_{1\leq j\leq d}|x_j|\leq\sqrt{d}\sum_{j=1}^d|x_j|$$
+und damit
+$$|f_n^{(i)}-f^{(i)}|\leq\Vert f_n-f\Vert\leq\sqrt{d}\sum_{j=1}^d|f_n^{(j)}-f^{(j)}|$$
+womit die Behauptung folgt. \qed
+
+\paragraph{Bermekung:} Damit gelten die Resultate aus dem vorherigen Abschnitt auch f\"ur vektorwertige rationale Operationen, soweit diese definiert sind.
+
+\section*{Konvergenz von Integralen}
+Seien in diesem Abschnitt $(\Omega,\A,\mu)$ ein Ma\ss{}raum und $f_n,f:(\Omega,\A)\to(\overline\R,\mathcal{B}(\overline\R))$ messbar.
+
+\paragraph{9.16. Lemma (von Fatou, 1.Version):}Sei $f_n,n\geq1$ eine Folge nicht-negativer Funktionen. Dann gilt
+$$\int\liminf_{n\to\infty}f_n\ d\mu\leq\liminf_{n\to\infty}\int f_n\ d\mu$$
+
+\paragraph{Beweis:}Setze $g_n:=\inf_{k\geq n}f_k$, sodass $\liminf_{n\to\infty}=\lim_{n\to\infty}g_n$ und $0\leq g_1\leq\hdots\leq \lim_{n\to\infty}g_n$. Dann gilt mit MONK
+$$\int\lim_{n\to\infty}g_n=\int\liminf_{n\to\infty}f_n\ d\mu=\lim_{n\to\infty}\int g_n\ d\mu$$
+Da aber $g_n=\inf_{k\geq n}f_k\leq f_n$ gilt f\"ur alle $n\geq1:\int g_n\ d\mu\leq\int f_n\ d\mu$
+und damit 
+$$\int\liminf_{n\to\infty}f_n\ d\mu=\lim_{n\to\infty}\int g_n\ d\mu\leq\liminf_{n\to\infty}\int f_n\ d\mu$$
+\qed
+
+\paragraph{9.17. Lemma (von Fatou, 2.Version):}Sei $f_n,n\geq1$ eine Folge von Funktionen, sodass $g\leq f_n$ f\"ur alle $n\geq1$ und $g_-\in L^1$. Sei weiters $f_n$ quasi-integrierbar f\"ur alle $n\geq1$. Dann gilt
+$$\int\liminf_{n\to\infty}f_n\ d\mu\leq\liminf_{n\to\infty}\int f_n\ d\mu$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item Fall ($\int g_+\ d\mu=\infty$)\newline
+    Weil $f\leq f_n$ f\"ur alle $n\geq1$ und damit $g\leq\liminf_{n\to\infty}f_n$, folgt $\int f_n\ d\mu=\infty$ f\"ur alle $n\geq1$. Damit gilt auch $\liminf_{n\to\infty}\int f_n\ d\mu=\infty$ und die Aussage folgt trivial.
+    \item Fall ($\int g_+\ d\mu<\infty$)\newline
+    Damit gilt laut Voraussetzung $g\in L^1$ und damit $g<\infty$ f.\"u., sodass f\"ur alle $n\geq1$ $(f_n-g)$ f.\"u. wohldefiniert und  f.\"u. nicht-negativ ist. Mit Lemma 9.16 folgt
+    $$\int\liminf_{n\to\infty}(f_n-g)\ d\mu\leq\liminf_{n\to\infty}\int f_n-g\ d\mu$$
+    und mit der Linearit\"at des Integrals und der Tatsache, dass $g$ nicht von $n$ abh\"angt folgt die Aussage. \qed
+\end{enumerate}
+
+\paragraph{9.18. Satz (Dominated Convergence Theorem, DOMK):} Sei $f_n,n\geq1$ eine Funktionenfolge, sodas $f_n\nto{\mu}{n\to\infty}f$ und $|f_n|\leq g$ f\"ur alle $n\geq1$ und eine integrierbare Funktion $g$. Dann folgt
+\begin{enumerate}[label=(\roman*)]
+    \item $f\in L^1$
+    \item $\displaystyle\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$
+    \item $f_n\nto{L^1}{n\to\infty}f$
+\end{enumerate}
+
+\paragraph{Beweis:}In zwei Schritten: Zeige das Resultat zuna\"achst unter der st\"arkeren Annahme $f_n\nto{a.e.}{n\to\infty}f$ und erweitere den Beweis dann um ein Teil-Teilfolgen-Argument. Beachte, dass $|f|\leq g$ f.\"u. und mit der Monotonie $f_n,f\in L^1$ f\"ur alle $n\geq1$. Es gilt f.\"u. $f_n\geq -g\in L^1$ und Lemma 9.17 liefert
+$$\int f\ d\mu=\int\liminf_{n\to\infty}f_n\ d\mu \leq \liminf_{n\to\infty}\int f_n\ d \mu.$$
+Ebenso gilt $-f_n\geq -g$ f.\"u und mit Lemma 9.17 folgt
+$$-\int f\ d\mu=\int\liminf_{n\to\infty}(-f_n)\ d\mu\leq\liminf_{n\to\infty}\int (-f_n)\ d\mu=-\limsup_{n\to\infty}\int f_n\ d\mu$$
+und damit
+$$\int f\ d\mu\geq \limsup_{n\to\infty}\int f_n\ d\mu.$$
+Zusammengefasst
+$$ \limsup_{n\to\infty}\int f_n\ d\mu\leq\int f\ d\mu\leq  \liminf_{n\to\infty}\int f_n\ d\mu$$
+und damit $\int f\ d\mu=\lim_{n\to\infty}\int f_n\ d\mu$. Es gelte nun die schw\"achere Annahme $f_n\nto{\mu}{n\to\infty}f$. Setze
+$$I_n:=\int f_n\ d\mu,\ I:=\int f\ d\mu.$$
+Sei $(f_{n_k})_{k\geq1}$ eine Teilfolge von $(f_n)_{n\geq1}$. Dann gibt es eine Teil-Teilfolge $(f_{n_{k_j}})_{j\geq1}$ von $(f_{n_k})_{k\geq1}$, sodass $f_{n_{k_j}}\nto{a.e.}{n\to\infty}f$ und da $|f_{n_{k_j}}|\leq g$ f.\"u., folgt mit dem ersten Teil $I_{n_{k_j}}\nto{}{j\to\infty}I$ und insbesondere $|I_n|\leq\int|g|\ d\mu<\infty$ f\"ur alle $n\geq1$. Angenommen $I_n$ konvergiert nicht. Da $I_n$ beschr\"ankt ist, folgt
+$$-\infty<m:=\liminf_{n\to\infty}I_n<\limsup_{n\to\infty}=:M<\infty.$$ 
+Damit existieren Teilfolgen $(I_{n_{k^{(m)}}})_{k^{(m)}\geq1}$ und $(I_{n_{k^{(M)}}})_{k^{(M)}\geq1}$, sodass
+$$I_{n_{k^{(m)}}}\nto{}{k^{(m)}\to\infty}m, \ I_{n_{k^{(M)}}}\nto{}{k^{(M)}\to\infty}M,$$ 
+ein Widerspruch, da jede Teil-Teilfolge denselben Grenzwert $I$ haben muss. Ebenso l\"asst sich zeigen, dass $I_n$ nur gegen $I$ konvergieren kann. \qed
+
+\paragraph{9.19. Korollar (Bounded Convergence Theorem):}Sei $\mu$ ein endliches Ma\ss{} und $f_n,n\geq1$ eine Funktionenfolge, sodass $f_n\nto{\mu}{n\to\infty}f$ und $|f_n|\leq K$ f\"ur ein $K\in[0,\infty)$. Dann folgt (i), (ii) und (iii) aus Satz 9.18.
+
+\paragraph{Beweis:}Folgt sofort aus DOMK (Satz 9.18) und $\int K\ d\mu=K\cdot\mu(\Omega)<\infty$ f\"ur endliche Ma\ss{}e. \qed
+
+\paragraph{9.20. Lemma (Scheff\'e's Lemma):}Seien $f_n,n\geq1,f$ nicht-negative, integrierbare Funktionen, sodass $f_n\nto{\mu}{n\to\infty}f$. Falls zus\"atzlich $\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$, dann folgt $f_n\nto{L^1}{n\to\infty}f$.
+
+\paragraph{Beweis:}Setze $h_n:=f-f_n$ und wende DOMK (Satz 9.18) auf die Folgen $(h_n)_+,n\geq1$ und $(h_n)_-,n\geq1$ an. \qed
+
+\paragraph{9.21. Proposition:}Falls $f_n\nto{L^p}{n\to\infty}f$ und $f\in L^p$ f\"ur ein $p\geq1$, dann folgt
+\begin{enumerate}[label=(\roman*)]
+    \item $\displaystyle\int|f_n|^p\ d\mu\nto{}{n\to\infty}\int|f|^p\ d\mu$
+    \item $\displaystyle\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$
+\end{enumerate} 
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=(\roman*)]
+    \item Mit der Minkowski-Ungleichung gilt
+    $$\left(\int|f_n|^p\ d\mu\right)^{1/p}=\left(\int|f_n-f+f|^p\ d\mu\right)^{1/p}\leq\left(\int|f_n-f|^p\ d\mu\right)^{1/p}+\left(\int|f|^p\ d\mu\right)^{1/p}$$
+    wobei der erste Summand laut Annahme gegen $0$ konvergiert (und damit insbesondere ab einem Index $N\geq1$ endlich ist) und der zweite Summand laut Annahme endlich ist. Es gilt also $f_n\in L^p$ f\"ur hinreichend gro\ss{}e $n$. Weiters folgt
+    $$\limsup_{n\to\infty}\int|f_n|^p\ d\mu\leq\int|f|^p\ d\mu$$
+    da der erste Summand nicht-negativ ist.
+    Aber mit der Minkowski-Ungleichung gilt auch
+    $$\left(\int|f|^p\ d\mu\right)^{1/p}=\left(\int|f-f_n+f_n|^p\ d\mu\right)^{1/p}\leq\left(\int|f-f_n|^p\ d\mu\right)^{1/p}+\left(\int|f_n|^p\ d\mu\right)^{1/p}$$
+    sodass 
+    $$\liminf_{n\to\infty}\int|f_n|^p\ d\mu\geq\int|f|^p\ d\mu$$
+    und daher $$\lim_{n\to\infty}\int|f_n|^p\ d\mu=\int|f|\ d\mu$$
+    \item Es gilt $|(f_n)_+-f_+|\leq|f_n-f|$ und $|(f_n)_--f_-|\leq|f_n-f|$ (einfache \"Uberlegung). Laut Annahme gilt $f_n\nto{L^p}{n\to\infty}f$ und mit Proposition 9.9 auch $f_n\nto{L^1}{n\to\infty}f$. Mit den beiden Ungleichung oben folgt also
+    $$(f_n)_+\nto{L^1}{n\to\infty}f_+\text{ und }(f_n)_-\nto{L^1}{n\to\infty}f_-$$
+    Da $f\in L^p$ gilt auch $f\in L^1$ und damit $f_+,f_-\in L^1$. Mit Teil (i) folgt
+    $$\int(f_n)_+\ d\mu\nto{}{n\to\infty}\int f_+\ d\mu\text{ und }\int(f_n)_-\ d\mu\nto{}{n\to\infty}\int f_-\ d\mu$$
+    und mit den Rechenregeln f\"ur Konvergenz von Folgen reeller Zahlen die Aussage. \qed
+\end{enumerate}
+
+\section*{Gleichgradige Integrierbarkeit}
+\addcontentsline{toc}{section}{Gleichgradige Integrierbarkeit}
+Seien in diesem Abschnitt $f_n:(\Omega,\A)\to(\overline\R,\mathcal{B}(\overline\R))$ messbare Funktionen f\"ur alle $n\geq1$.
+
+\paragraph{9.22. Definition:} Sei $\mu$ endlich. Eine Folge messbarer Funktionen $f_n,n\geq1$ ist gleichgradig integrierbar ("uniformly integrable", g.i.), falls
+$$\lim_{\alpha\to\infty}\limsup_{n\to\infty}\int\displaylimits_{|f_n|\geq\alpha}|f_n|\ d\mu=0$$
+
+\paragraph{Bemerkung:}Eine konstante Folge absolut integrierbarer, reellwertiger Funktionen ist gleichgradig integrierbar, da
+$$\lim_{\alpha\to\infty}\int\displaylimits_{\{|f|\geq\alpha\}}|f|\ d\mu=\lim_{\alpha\to\infty}\int|f|\cdot\ind{\{|f|\geq\alpha\}}\ d\mu$$
+wobei $|f|<\infty$ f.\"u., da $f\in L^1$ und damit 
+$$|f|\cdot\ind{\{|f|\geq\alpha\}}\nto{a.e.}{\alpha\to\infty}|f|\cdot0\overset{a.e.}{=}\ind{\{|f|=\infty\}}$$
+Da $|f|\cdot\ind{\{|f|\geq\alpha\}}\leq f\in L^1$ folgt mit DOMK
+$$\int\displaylimits_{\{|f|\geq\alpha\}}|f|\ d\mu\nto{}{\alpha\to\infty}\mu(|f|=\infty)=0$$
+
+\paragraph{9.23. Lemma:}Sei $\mu$ endlich und $f_n,n\geq1$ gleichgradig integrierbar. Dann folgt
+$$\limsup_{n\to\infty}\int|f_n|\ d\mu<\infty$$
+i.e. $f_n\in L^1$ f\"ur hinreichend gro\ss{}e $n$.
+
+\paragraph{Beweis:}W\"ahle $\alpha>0$, sodass $\limsup_{n\to\infty}\int_{\{|f_n|\geq\alpha\}}|f_n|<\infty$. Dann gilt
+$$\limsup_{n\to\infty}\int|f_n|\ d\mu=\limsup_{n\to\infty}\left(\int\displaylimits_{\{|f_n|\geq\alpha\}}|f_n|\ d\mu+\int\displaylimits_{\{|f_n|\geq\alpha\}}|f_n|\ d\mu\right)<\infty$$
+wobei der erste Summand laut Annahme endlich ist und der zweite Summand $\leq\alpha\cdot\mu(\Omega)$ ist. \qed
+
+\paragraph{9.24. Lemma:}Sei $\mu$ endlich und seien $f_n,n\geq1$ und $g_n,n\geq1$ gleichgradig integrierbar. Dann ist $f_n+g_n$ f.\"u. wohldefiniert f\"ur hinreichend gro\ss{}e $n$ und $f_n+g_n,n\geq1$ ist gleichgradig integrierbar.
+
+\paragraph{Beweis:}Es ist $\int|f_n|\ d\mu<\infty$ f\"ur $n\geq n_f$ und $\int|g_n|\ d\mu<\infty$ f\"ur $n\geq n_g$. Damit ist 
+$$\int f_n+g_n\ d\mu\leq\int|f_n|+|g_n|\ d\mu<\infty$$
+und damit $f_n+g_n<\infty$ fast \"uberall f\"ur $n\geq\max(n_f,n_g)$. \newline\newline
+Setze nun $h_n:=\max(|f_n|,|g_n|),n\geq1$. Dann gilt $|f_n+g_n|\leq 2h_n$ und 
+\begin{align*}
+    h_n\cdot\ind{\{h_n\geq\alpha/2\}}&=h_n\cdot\ind{\{|f_n|\geq\alpha/2\}}\cdot\ind{\{f_n\geq g_n\}}+h_n\cdot\ind{\{|g_n|\geq\alpha/2\}}\cdot\ind{\{f_n< g_n\}}\\
+    &\leq|f_n|\cdot\ind{\{|f_n|\geq\alpha/2\}}+|g_n|\cdot\ind{\{|g_n|\geq\alpha/2\}}
+\end{align*}
+und damit f\"ur $\alpha>0$
+\begin{align*}
+    \int\displaylimits_{\{|f_n+g_n|\geq\alpha\}}|f_n+g_n|\ d\mu&\leq2\int\displaylimits_{\{h_n\geq\alpha/2\}}h_n\ d\mu\\
+    &\leq2\int\displaylimits_{\{|f_n|\geq\alpha/2\}}|f_n|\ d\mu+2\int\displaylimits_{\{|g_n|\geq\alpha/2\}}|g_n|\ d\mu
+\end{align*} 
+wobei der $\limsup$ f\"ur $n\to\infty$ beider Summanden f\"ur $\alpha\to\infty$ gegen $0$ geht, womit $f_n+g_n,n\geq1$ gleichgradig integrierbar sind. \qed
+
+\paragraph{9.25. Satz:}Sei $\mu$ endlich. Dann ist folgendes \"aquivalent
+\begin{enumerate}[label=(\roman*)]
+    \item $f_n\nto{L^1}{n\to\infty}f$ und $f\in L^1 $
+    \item $f_n\nto{\mu}{n\to\infty}f$ und $f_n,n\geq1$ gleichgradig integrierbar
+\end{enumerate}
+
+\paragraph{Bemerkung:}Aus (i) folgt mit Proposition 9.10, dass 
+$$\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$$
+
+\paragraph{Beweis:}
+\begin{enumerate}[label=\Roman*.]
+    \item (i)$\implies$(ii)\newline
+    Aus (i) folgt mit Proposition 9.8, dass $f_n\nto{\mu}{n\to\infty}f$. Weiters ist f\"ur $\alpha>0$
+    $$0=\lim_{n\to\infty}\int|f_n-f|\ d\mu\geq\int\displaylimits_{\{|f_n-f|\geq\alpha\}}|f_n-f|\ d\mu\geq0$$
+    Damit ist $f_n-f,n\geq1$ gleichgradig integrierbar. Da $f\in L^1$ ist die konstante Folge $f,n\geq1$ gleichgradig integrierbar und mit Satz 9.24 auch die Summe $f_n=(f_n-f)+f,n\geq1$
+    \item (ii)$\implies$(i)\newline
+     Mit Proposition 9.6 gen\"ugt es, die Aussage unter der st\"arkeren Annahme $f_n\nto{a.e.}{n\to\infty}f$ zu zeigen. Mit Fatou I gilt
+     $$\int|f|\ d\mu=\int\liminf_{n\to\infty}f_n\ d\mu\leq\liminf_{n\to\infty}\int|f_n|\ d\mu\leq\limsup_{n\to\infty}\int|f_n|\ d\mu<\infty$$
+     wobei die Endlichkeit des Integrals f\"ur große $n$ aus der Annahme der gleichgradigen Integrierbarkeit folgt. Damit gilt $f\in L^1$.
+     F\"ur $\alpha>0$ gilt
+     $$\int|f_n-f|\ d\mu=\int\displaylimits_{\{|f_n-f|\geq\alpha\}}|f_n-f|\ d\mu+\int\displaylimits_{\{|f_n-f|<\alpha\}}|f_n-f|\ d\mu$$
+     wobei mit Korollar 9.19 gilt
+     $$\int\displaylimits_{\{|f_n-f|<\alpha\}}|f_n-f|\ d\mu\nto{}{n\to\infty}0$$
+     und damit
+     $$\limsup_{n\to\infty}\int|f_n-f|\ d\mu=\limsup_{n\to\infty}\int\displaylimits_{\{|f_n-f|\geq\alpha\}}|f_n-f|\ d\mu$$
+     Da aber $f\in L^1$ ist die konstante Folge $f,n\geq1$ gleichgradig integrierbar, womit die Aussage mit der Dreiecksungleichung f\"ur $\alpha\searrow0$ folgt. \qed
+\end{enumerate}
+
+\paragraph{9.26. Proposition:}Sei $\mu$ endlich. Angenommen $f_n\nto{\mu}{n\to\infty}f$ und $\limsup_{n\to\infty}\int|f_n|^{1+\delta}\ d\mu<\infty$ f\"ur ein $\delta>0$. Dann folgt
+\begin{enumerate}[label=(\roman*)]
+    \item $f\in L^1$
+    \item $\displaystyle\int f_n\ d\mu\nto{}{n\to\infty}\int f\ d\mu$
+    \item $f_n\nto{L^1}{n\to\infty}f$
+\end{enumerate}
+
+\paragraph{Beweis:}Unter der Annahme $f_n\nto{\mu}{n\to\infty}$ gen\"ugt es mit Satz 9.25 zu zeigen, dass $f_n,n\geq1$ gleichgradig integrierbar ist.
+\begin{align*}
+    \limsup_{n\to\infty}\int\displaylimits_{\{|f_n|\geq\alpha\}}|f_n|\ d\mu&= \limsup_{n\to\infty}\int\displaylimits_{\{|f_n|^\delta\geq\alpha^\delta\}}|f_n|\cdot\dfrac{\alpha^\delta}{\alpha^\delta}\ d\mu\\ 
+    &\leq\dfrac{1}{\alpha^\delta}\limsup_{n\to\infty}\int\displaylimits_{\{|f_n|^\delta\geq\alpha^\delta\}}|f_n||f_n|^\delta\ d\mu \\
+    &=\dfrac{1}{\alpha^\delta}\limsup_{n\to\infty}\int\displaylimits_{\{|f_n|\geq\alpha\}}|f_n||f_n|^\delta\ d\mu\nto{}{\alpha\to\infty}0
+\end{align*}
+da der $\limsup$ im letzten Ausdruck endlich ist und $\alpha^{-\delta}\nto{}{\alpha\to\infty}0$. \qed
+

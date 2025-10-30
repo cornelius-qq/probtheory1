@@ -1,4 +1,4 @@
-# Skriptum zu WKT1 (WiSe24)
+# Skriptum zu Wahrscheinlichkeitstheorie (Magister Statistik)
 
-LaTeX-Mitschrift zu Wahrscheinlichkeitstheorie 1 aus dem Winteremester 2024. Viel Spass damit ;) Fehler, Verbesserungsvorschläge und Ergänzungen bitte an 
-```corneliush99@univie.ac.at``` senden.
+LaTeX-Mitschrift zu Wahrscheinlichkeitstheorie 1 (Kapitel 1 bis inklusive 7) und Wahrscheinlichkeitstheorie 2 (ab Kapitel 8) aus 2024. Fehler, Verbesserungsvorschläge und Ergänzungen bitte an 
+```corneliush99@univie.ac.at``` senden. Viel Spass damit ;)
